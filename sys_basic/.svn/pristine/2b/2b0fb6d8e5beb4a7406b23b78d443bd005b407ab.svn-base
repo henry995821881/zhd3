@@ -1,0 +1,1162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.WarehouseGoodsMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.WarehouseGoods" >
+    <id column="GOODS_ID" property="goodsId" jdbcType="DECIMAL" />
+    <result column="GOODS_CODEBILL" property="goodsCodebill" jdbcType="VARCHAR" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="GOODS_DATE" property="goodsDate" jdbcType="TIMESTAMP" />
+    <result column="SCONTRACT_BILLCODE" property="scontractBillcode" jdbcType="VARCHAR" />
+    <result column="SCONTRACT_BILLBATCH" property="scontractBillbatch" jdbcType="VARCHAR" />
+    <result column="DATAS_BALCORP" property="datasBalcorp" jdbcType="VARCHAR" />
+    <result column="DATAS_BALCORPNAME" property="datasBalcorpname" jdbcType="VARCHAR" />
+    <result column="DATAS_ORDERCORP" property="datasOrdercorp" jdbcType="VARCHAR" />
+    <result column="DATAS_ORDERCORPNAME" property="datasOrdercorpname" jdbcType="VARCHAR" />
+    <result column="GOODS_MINNUM" property="goodsMinnum" jdbcType="DECIMAL" />
+    <result column="GOODS_INPRICE" property="goodsInprice" jdbcType="DECIMAL" />
+    <result column="GOODS_INFEEPRICE" property="goodsInfeeprice" jdbcType="DECIMAL" />
+    <result column="GOODS_NEWINPRICE" property="goodsNewinprice" jdbcType="DECIMAL" />
+    <result column="GOODS_NEWINFEEPRICE" property="goodsNewinfeeprice" jdbcType="DECIMAL" />
+    <result column="GOODS_TAXRATE" property="goodsTaxrate" jdbcType="DECIMAL" />
+    <result column="GOODS_FULFILL" property="goodsFulfill" jdbcType="DECIMAL" />
+    <result column="DATA_INNERFLAG" property="dataInnerflag" jdbcType="DECIMAL" />
+    <result column="GOODS_REMARK" property="goodsRemark" jdbcType="VARCHAR" />
+    <result column="DATA_VERNUM" property="dataVernum" jdbcType="DECIMAL" />
+    <result column="BILLTYPE_CODE" property="billtypeCode" jdbcType="VARCHAR" />
+    <result column="SUMGOODS_BATCH" property="sumgoodsBatch" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_CODE" property="warehouseCode" jdbcType="VARCHAR" />
+    <result column="GOODSTREE_CODE" property="goodstreeCode" jdbcType="VARCHAR" />
+    <result column="PNTREE_NAME" property="pntreeName" jdbcType="VARCHAR" />
+    <result column="PRODUCTAREA_NAME" property="productareaName" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_NAME" property="partsnameName" jdbcType="VARCHAR" />
+    <result column="GOODS_MATERIAL" property="goodsMaterial" jdbcType="VARCHAR" />
+    <result column="GOODS_SPEC" property="goodsSpec" jdbcType="VARCHAR" />
+    <result column="GOODS_SPEC1" property="goodsSpec1" jdbcType="DECIMAL" />
+    <result column="GOODS_SPEC2" property="goodsSpec2" jdbcType="DECIMAL" />
+    <result column="GOODS_SPEC3" property="goodsSpec3" jdbcType="DECIMAL" />
+    <result column="GOODS_SPEC4" property="goodsSpec4" jdbcType="DECIMAL" />
+    <result column="GOODS_PROPERTY1" property="goodsProperty1" jdbcType="VARCHAR" />
+    <result column="GOODS_PROPERTY2" property="goodsProperty2" jdbcType="VARCHAR" />
+    <result column="GOODS_PROPERTY3" property="goodsProperty3" jdbcType="VARCHAR" />
+    <result column="GOODS_PROPERTY4" property="goodsProperty4" jdbcType="VARCHAR" />
+    <result column="GOODS_PROPERTY5" property="goodsProperty5" jdbcType="VARCHAR" />
+    <result column="GOODS_NUMPROPERTY1" property="goodsNumproperty1" jdbcType="DECIMAL" />
+    <result column="GOODS_NUMPROPERTY2" property="goodsNumproperty2" jdbcType="DECIMAL" />
+    <result column="GOODS_CONTRACT" property="goodsContract" jdbcType="VARCHAR" />
+    <result column="GOODS_CONTRACTBATCH" property="goodsContractbatch" jdbcType="VARCHAR" />
+    <result column="GOODS_CONTRACTSTR1" property="goodsContractstr1" jdbcType="VARCHAR" />
+    <result column="GOODS_CONTRACTSTR2" property="goodsContractstr2" jdbcType="VARCHAR" />
+    <result column="GOODS_CONTRACTSTR3" property="goodsContractstr3" jdbcType="VARCHAR" />
+    <result column="GOODS_CONTRACTSTR4" property="goodsContractstr4" jdbcType="VARCHAR" />
+    <result column="GOODS_CONTRACTSTR5" property="goodsContractstr5" jdbcType="VARCHAR" />
+    <result column="GOODS_ENTRYBATCH" property="goodsEntrybatch" jdbcType="VARCHAR" />
+    <result column="GOODS_ENTRYBATCHOLD" property="goodsEntrybatchold" jdbcType="VARCHAR" />
+    <result column="GOODS_ENTRYSTR1" property="goodsEntrystr1" jdbcType="VARCHAR" />
+    <result column="GOODS_ENTRYSTR2" property="goodsEntrystr2" jdbcType="VARCHAR" />
+    <result column="GOODS_ENTRYSTR3" property="goodsEntrystr3" jdbcType="VARCHAR" />
+    <result column="GOODS_ENTRYSTR4" property="goodsEntrystr4" jdbcType="VARCHAR" />
+    <result column="GOODS_ENTRYSTR5" property="goodsEntrystr5" jdbcType="VARCHAR" />
+    <result column="GOODS_CODEBILLOLD" property="goodsCodebillold" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR1" property="goodsCodestr1" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR2" property="goodsCodestr2" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR3" property="goodsCodestr3" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR4" property="goodsCodestr4" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR5" property="goodsCodestr5" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR6" property="goodsCodestr6" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR7" property="goodsCodestr7" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR8" property="goodsCodestr8" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR9" property="goodsCodestr9" jdbcType="VARCHAR" />
+    <result column="GOODS_CODESTR10" property="goodsCodestr10" jdbcType="VARCHAR" />
+    <result column="GOODS_CODENUM1" property="goodsCodenum1" jdbcType="DECIMAL" />
+    <result column="GOODS_CODENUM2" property="goodsCodenum2" jdbcType="DECIMAL" />
+    <result column="GOODS_CODENUM3" property="goodsCodenum3" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_SPLIT" property="partsnameSplit" jdbcType="DECIMAL" />
+    <result column="GOODS_PROPERTY" property="goodsProperty" jdbcType="VARCHAR" />
+    <result column="GOODS_PARTSBRANCH" property="goodsPartsbranch" jdbcType="DECIMAL" />
+    <result column="GOODS_WETPERCENTAGE" property="goodsWetpercentage" jdbcType="DECIMAL" />
+    <result column="GOODS_ORG" property="goodsOrg" jdbcType="VARCHAR" />
+    <result column="GOODS_DEPT" property="goodsDept" jdbcType="VARCHAR" />
+    <result column="GOODS_CURRENCY" property="goodsCurrency" jdbcType="VARCHAR" />
+    <result column="GOODS_EXRATE" property="goodsExrate" jdbcType="DECIMAL" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_NUMUNIT" property="partsnameNumunit" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_WEIGHTUNIT" property="partsnameWeightunit" jdbcType="VARCHAR" />
+    <result column="GOODS_METERING" property="goodsMetering" jdbcType="VARCHAR" />
+    <result column="GOODS_PRICEUN" property="goodsPriceun" jdbcType="DECIMAL" />
+    <result column="GOODS_PIECEMODE" property="goodsPiecemode" jdbcType="DECIMAL" />
+    <result column="GOODS_WEIGHTMODE" property="goodsWeightmode" jdbcType="DECIMAL" />
+    <result column="GOODS_CUSTOMSCODE" property="goodsCustomscode" jdbcType="VARCHAR" />
+    <result column="GOODS_ENNAME" property="goodsEnname" jdbcType="VARCHAR" />
+    <result column="GOODS_ENDESCRIBE" property="goodsEndescribe" jdbcType="VARCHAR" />
+    <result column="GOODS_BATCH" property="goodsBatch" jdbcType="VARCHAR" />
+    <result column="GOODS_INDUSTRY" property="goodsIndustry" jdbcType="VARCHAR" />
+    <result column="GOODS_NUM" property="goodsNum" jdbcType="DECIMAL" />
+    <result column="GOODS_PIECENUM" property="goodsPiecenum" jdbcType="DECIMAL" />
+    <result column="GOODS_SINGERNUM" property="goodsSingernum" jdbcType="DECIMAL" />
+    <result column="GOODS_WEIGHT" property="goodsWeight" jdbcType="DECIMAL" />
+    <result column="GOODS_ASSISTWEIGHT" property="goodsAssistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_WMSCODEBILL" property="goodsWmscodebill" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    GOODS_ID, GOODS_CODEBILL, MEMBER_CODE, GOODS_DATE, SCONTRACT_BILLCODE, SCONTRACT_BILLBATCH, 
+    DATAS_BALCORP, DATAS_BALCORPNAME, DATAS_ORDERCORP, DATAS_ORDERCORPNAME, GOODS_MINNUM, 
+    GOODS_INPRICE, GOODS_INFEEPRICE, GOODS_NEWINPRICE, GOODS_NEWINFEEPRICE, GOODS_TAXRATE, 
+    GOODS_FULFILL, DATA_INNERFLAG, GOODS_REMARK, DATA_VERNUM, BILLTYPE_CODE, SUMGOODS_BATCH, 
+    WAREHOUSE_CODE, GOODSTREE_CODE, PNTREE_NAME, PRODUCTAREA_NAME, PARTSNAME_NAME, GOODS_MATERIAL, 
+    GOODS_SPEC, GOODS_SPEC1, GOODS_SPEC2, GOODS_SPEC3, GOODS_SPEC4, GOODS_PROPERTY1, 
+    GOODS_PROPERTY2, GOODS_PROPERTY3, GOODS_PROPERTY4, GOODS_PROPERTY5, GOODS_NUMPROPERTY1, 
+    GOODS_NUMPROPERTY2, GOODS_CONTRACT, GOODS_CONTRACTBATCH, GOODS_CONTRACTSTR1, GOODS_CONTRACTSTR2, 
+    GOODS_CONTRACTSTR3, GOODS_CONTRACTSTR4, GOODS_CONTRACTSTR5, GOODS_ENTRYBATCH, GOODS_ENTRYBATCHOLD, 
+    GOODS_ENTRYSTR1, GOODS_ENTRYSTR2, GOODS_ENTRYSTR3, GOODS_ENTRYSTR4, GOODS_ENTRYSTR5, 
+    GOODS_CODEBILLOLD, GOODS_CODESTR1, GOODS_CODESTR2, GOODS_CODESTR3, GOODS_CODESTR4, 
+    GOODS_CODESTR5, GOODS_CODESTR6, GOODS_CODESTR7, GOODS_CODESTR8, GOODS_CODESTR9, GOODS_CODESTR10, 
+    GOODS_CODENUM1, GOODS_CODENUM2, GOODS_CODENUM3, PARTSNAME_SPLIT, GOODS_PROPERTY, 
+    GOODS_PARTSBRANCH, GOODS_WETPERCENTAGE, GOODS_ORG, GOODS_DEPT, GOODS_CURRENCY, GOODS_EXRATE, 
+    COMPANY_CODE, COMPANY_NAME, PARTSNAME_NUMUNIT, PARTSNAME_WEIGHTUNIT, GOODS_METERING, 
+    GOODS_PRICEUN, GOODS_PIECEMODE, GOODS_WEIGHTMODE, GOODS_CUSTOMSCODE, GOODS_ENNAME, 
+    GOODS_ENDESCRIBE, GOODS_BATCH, GOODS_INDUSTRY, GOODS_NUM, GOODS_PIECENUM, GOODS_SINGERNUM, 
+    GOODS_WEIGHT, GOODS_ASSISTWEIGHT, GOODS_WMSCODEBILL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  WAREHOUSE_GOODS
+    where GOODS_ID = #{goodsId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  WAREHOUSE_GOODS
+    where GOODS_ID = #{goodsId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.WarehouseGoods" >
+    insert into  WAREHOUSE_GOODS (GOODS_ID, GOODS_CODEBILL, MEMBER_CODE, 
+      GOODS_DATE, SCONTRACT_BILLCODE, SCONTRACT_BILLBATCH, 
+      DATAS_BALCORP, DATAS_BALCORPNAME, DATAS_ORDERCORP, 
+      DATAS_ORDERCORPNAME, GOODS_MINNUM, GOODS_INPRICE, 
+      GOODS_INFEEPRICE, GOODS_NEWINPRICE, GOODS_NEWINFEEPRICE, 
+      GOODS_TAXRATE, GOODS_FULFILL, DATA_INNERFLAG, 
+      GOODS_REMARK, DATA_VERNUM, BILLTYPE_CODE, 
+      SUMGOODS_BATCH, WAREHOUSE_CODE, GOODSTREE_CODE, 
+      PNTREE_NAME, PRODUCTAREA_NAME, PARTSNAME_NAME, 
+      GOODS_MATERIAL, GOODS_SPEC, GOODS_SPEC1, 
+      GOODS_SPEC2, GOODS_SPEC3, GOODS_SPEC4, 
+      GOODS_PROPERTY1, GOODS_PROPERTY2, GOODS_PROPERTY3, 
+      GOODS_PROPERTY4, GOODS_PROPERTY5, GOODS_NUMPROPERTY1, 
+      GOODS_NUMPROPERTY2, GOODS_CONTRACT, GOODS_CONTRACTBATCH, 
+      GOODS_CONTRACTSTR1, GOODS_CONTRACTSTR2, GOODS_CONTRACTSTR3, 
+      GOODS_CONTRACTSTR4, GOODS_CONTRACTSTR5, GOODS_ENTRYBATCH, 
+      GOODS_ENTRYBATCHOLD, GOODS_ENTRYSTR1, GOODS_ENTRYSTR2, 
+      GOODS_ENTRYSTR3, GOODS_ENTRYSTR4, GOODS_ENTRYSTR5, 
+      GOODS_CODEBILLOLD, GOODS_CODESTR1, GOODS_CODESTR2, 
+      GOODS_CODESTR3, GOODS_CODESTR4, GOODS_CODESTR5, 
+      GOODS_CODESTR6, GOODS_CODESTR7, GOODS_CODESTR8, 
+      GOODS_CODESTR9, GOODS_CODESTR10, GOODS_CODENUM1, 
+      GOODS_CODENUM2, GOODS_CODENUM3, PARTSNAME_SPLIT, 
+      GOODS_PROPERTY, GOODS_PARTSBRANCH, GOODS_WETPERCENTAGE, 
+      GOODS_ORG, GOODS_DEPT, GOODS_CURRENCY, 
+      GOODS_EXRATE, COMPANY_CODE, COMPANY_NAME, 
+      PARTSNAME_NUMUNIT, PARTSNAME_WEIGHTUNIT, 
+      GOODS_METERING, GOODS_PRICEUN, GOODS_PIECEMODE, 
+      GOODS_WEIGHTMODE, GOODS_CUSTOMSCODE, GOODS_ENNAME, 
+      GOODS_ENDESCRIBE, GOODS_BATCH, GOODS_INDUSTRY, 
+      GOODS_NUM, GOODS_PIECENUM, GOODS_SINGERNUM, 
+      GOODS_WEIGHT, GOODS_ASSISTWEIGHT, GOODS_WMSCODEBILL
+      )
+    values (#{goodsId,jdbcType=DECIMAL}, #{goodsCodebill,jdbcType=VARCHAR}, #{memberCode,jdbcType=VARCHAR}, 
+      #{goodsDate,jdbcType=TIMESTAMP}, #{scontractBillcode,jdbcType=VARCHAR}, #{scontractBillbatch,jdbcType=VARCHAR}, 
+      #{datasBalcorp,jdbcType=VARCHAR}, #{datasBalcorpname,jdbcType=VARCHAR}, #{datasOrdercorp,jdbcType=VARCHAR}, 
+      #{datasOrdercorpname,jdbcType=VARCHAR}, #{goodsMinnum,jdbcType=DECIMAL}, #{goodsInprice,jdbcType=DECIMAL}, 
+      #{goodsInfeeprice,jdbcType=DECIMAL}, #{goodsNewinprice,jdbcType=DECIMAL}, #{goodsNewinfeeprice,jdbcType=DECIMAL}, 
+      #{goodsTaxrate,jdbcType=DECIMAL}, #{goodsFulfill,jdbcType=DECIMAL}, #{dataInnerflag,jdbcType=DECIMAL}, 
+      #{goodsRemark,jdbcType=VARCHAR}, #{dataVernum,jdbcType=DECIMAL}, #{billtypeCode,jdbcType=VARCHAR}, 
+      #{sumgoodsBatch,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, #{goodstreeCode,jdbcType=VARCHAR}, 
+      #{pntreeName,jdbcType=VARCHAR}, #{productareaName,jdbcType=VARCHAR}, #{partsnameName,jdbcType=VARCHAR}, 
+      #{goodsMaterial,jdbcType=VARCHAR}, #{goodsSpec,jdbcType=VARCHAR}, #{goodsSpec1,jdbcType=DECIMAL}, 
+      #{goodsSpec2,jdbcType=DECIMAL}, #{goodsSpec3,jdbcType=DECIMAL}, #{goodsSpec4,jdbcType=DECIMAL}, 
+      #{goodsProperty1,jdbcType=VARCHAR}, #{goodsProperty2,jdbcType=VARCHAR}, #{goodsProperty3,jdbcType=VARCHAR}, 
+      #{goodsProperty4,jdbcType=VARCHAR}, #{goodsProperty5,jdbcType=VARCHAR}, #{goodsNumproperty1,jdbcType=DECIMAL}, 
+      #{goodsNumproperty2,jdbcType=DECIMAL}, #{goodsContract,jdbcType=VARCHAR}, #{goodsContractbatch,jdbcType=VARCHAR}, 
+      #{goodsContractstr1,jdbcType=VARCHAR}, #{goodsContractstr2,jdbcType=VARCHAR}, #{goodsContractstr3,jdbcType=VARCHAR}, 
+      #{goodsContractstr4,jdbcType=VARCHAR}, #{goodsContractstr5,jdbcType=VARCHAR}, #{goodsEntrybatch,jdbcType=VARCHAR}, 
+      #{goodsEntrybatchold,jdbcType=VARCHAR}, #{goodsEntrystr1,jdbcType=VARCHAR}, #{goodsEntrystr2,jdbcType=VARCHAR}, 
+      #{goodsEntrystr3,jdbcType=VARCHAR}, #{goodsEntrystr4,jdbcType=VARCHAR}, #{goodsEntrystr5,jdbcType=VARCHAR}, 
+      #{goodsCodebillold,jdbcType=VARCHAR}, #{goodsCodestr1,jdbcType=VARCHAR}, #{goodsCodestr2,jdbcType=VARCHAR}, 
+      #{goodsCodestr3,jdbcType=VARCHAR}, #{goodsCodestr4,jdbcType=VARCHAR}, #{goodsCodestr5,jdbcType=VARCHAR}, 
+      #{goodsCodestr6,jdbcType=VARCHAR}, #{goodsCodestr7,jdbcType=VARCHAR}, #{goodsCodestr8,jdbcType=VARCHAR}, 
+      #{goodsCodestr9,jdbcType=VARCHAR}, #{goodsCodestr10,jdbcType=VARCHAR}, #{goodsCodenum1,jdbcType=DECIMAL}, 
+      #{goodsCodenum2,jdbcType=DECIMAL}, #{goodsCodenum3,jdbcType=DECIMAL}, #{partsnameSplit,jdbcType=DECIMAL}, 
+      #{goodsProperty,jdbcType=VARCHAR}, #{goodsPartsbranch,jdbcType=DECIMAL}, #{goodsWetpercentage,jdbcType=DECIMAL}, 
+      #{goodsOrg,jdbcType=VARCHAR}, #{goodsDept,jdbcType=VARCHAR}, #{goodsCurrency,jdbcType=VARCHAR}, 
+      #{goodsExrate,jdbcType=DECIMAL}, #{companyCode,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{partsnameNumunit,jdbcType=VARCHAR}, #{partsnameWeightunit,jdbcType=VARCHAR}, 
+      #{goodsMetering,jdbcType=VARCHAR}, #{goodsPriceun,jdbcType=DECIMAL}, #{goodsPiecemode,jdbcType=DECIMAL}, 
+      #{goodsWeightmode,jdbcType=DECIMAL}, #{goodsCustomscode,jdbcType=VARCHAR}, #{goodsEnname,jdbcType=VARCHAR}, 
+      #{goodsEndescribe,jdbcType=VARCHAR}, #{goodsBatch,jdbcType=VARCHAR}, #{goodsIndustry,jdbcType=VARCHAR}, 
+      #{goodsNum,jdbcType=DECIMAL}, #{goodsPiecenum,jdbcType=DECIMAL}, #{goodsSingernum,jdbcType=DECIMAL}, 
+      #{goodsWeight,jdbcType=DECIMAL}, #{goodsAssistweight,jdbcType=DECIMAL}, #{goodsWmscodebill,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.WarehouseGoods" >
+    insert into  WAREHOUSE_GOODS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        GOODS_ID,
+      </if>
+      <if test="goodsCodebill != null" >
+        GOODS_CODEBILL,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="goodsDate != null" >
+        GOODS_DATE,
+      </if>
+      <if test="scontractBillcode != null" >
+        SCONTRACT_BILLCODE,
+      </if>
+      <if test="scontractBillbatch != null" >
+        SCONTRACT_BILLBATCH,
+      </if>
+      <if test="datasBalcorp != null" >
+        DATAS_BALCORP,
+      </if>
+      <if test="datasBalcorpname != null" >
+        DATAS_BALCORPNAME,
+      </if>
+      <if test="datasOrdercorp != null" >
+        DATAS_ORDERCORP,
+      </if>
+      <if test="datasOrdercorpname != null" >
+        DATAS_ORDERCORPNAME,
+      </if>
+      <if test="goodsMinnum != null" >
+        GOODS_MINNUM,
+      </if>
+      <if test="goodsInprice != null" >
+        GOODS_INPRICE,
+      </if>
+      <if test="goodsInfeeprice != null" >
+        GOODS_INFEEPRICE,
+      </if>
+      <if test="goodsNewinprice != null" >
+        GOODS_NEWINPRICE,
+      </if>
+      <if test="goodsNewinfeeprice != null" >
+        GOODS_NEWINFEEPRICE,
+      </if>
+      <if test="goodsTaxrate != null" >
+        GOODS_TAXRATE,
+      </if>
+      <if test="goodsFulfill != null" >
+        GOODS_FULFILL,
+      </if>
+      <if test="dataInnerflag != null" >
+        DATA_INNERFLAG,
+      </if>
+      <if test="goodsRemark != null" >
+        GOODS_REMARK,
+      </if>
+      <if test="dataVernum != null" >
+        DATA_VERNUM,
+      </if>
+      <if test="billtypeCode != null" >
+        BILLTYPE_CODE,
+      </if>
+      <if test="sumgoodsBatch != null" >
+        SUMGOODS_BATCH,
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE,
+      </if>
+      <if test="goodstreeCode != null" >
+        GOODSTREE_CODE,
+      </if>
+      <if test="pntreeName != null" >
+        PNTREE_NAME,
+      </if>
+      <if test="productareaName != null" >
+        PRODUCTAREA_NAME,
+      </if>
+      <if test="partsnameName != null" >
+        PARTSNAME_NAME,
+      </if>
+      <if test="goodsMaterial != null" >
+        GOODS_MATERIAL,
+      </if>
+      <if test="goodsSpec != null" >
+        GOODS_SPEC,
+      </if>
+      <if test="goodsSpec1 != null" >
+        GOODS_SPEC1,
+      </if>
+      <if test="goodsSpec2 != null" >
+        GOODS_SPEC2,
+      </if>
+      <if test="goodsSpec3 != null" >
+        GOODS_SPEC3,
+      </if>
+      <if test="goodsSpec4 != null" >
+        GOODS_SPEC4,
+      </if>
+      <if test="goodsProperty1 != null" >
+        GOODS_PROPERTY1,
+      </if>
+      <if test="goodsProperty2 != null" >
+        GOODS_PROPERTY2,
+      </if>
+      <if test="goodsProperty3 != null" >
+        GOODS_PROPERTY3,
+      </if>
+      <if test="goodsProperty4 != null" >
+        GOODS_PROPERTY4,
+      </if>
+      <if test="goodsProperty5 != null" >
+        GOODS_PROPERTY5,
+      </if>
+      <if test="goodsNumproperty1 != null" >
+        GOODS_NUMPROPERTY1,
+      </if>
+      <if test="goodsNumproperty2 != null" >
+        GOODS_NUMPROPERTY2,
+      </if>
+      <if test="goodsContract != null" >
+        GOODS_CONTRACT,
+      </if>
+      <if test="goodsContractbatch != null" >
+        GOODS_CONTRACTBATCH,
+      </if>
+      <if test="goodsContractstr1 != null" >
+        GOODS_CONTRACTSTR1,
+      </if>
+      <if test="goodsContractstr2 != null" >
+        GOODS_CONTRACTSTR2,
+      </if>
+      <if test="goodsContractstr3 != null" >
+        GOODS_CONTRACTSTR3,
+      </if>
+      <if test="goodsContractstr4 != null" >
+        GOODS_CONTRACTSTR4,
+      </if>
+      <if test="goodsContractstr5 != null" >
+        GOODS_CONTRACTSTR5,
+      </if>
+      <if test="goodsEntrybatch != null" >
+        GOODS_ENTRYBATCH,
+      </if>
+      <if test="goodsEntrybatchold != null" >
+        GOODS_ENTRYBATCHOLD,
+      </if>
+      <if test="goodsEntrystr1 != null" >
+        GOODS_ENTRYSTR1,
+      </if>
+      <if test="goodsEntrystr2 != null" >
+        GOODS_ENTRYSTR2,
+      </if>
+      <if test="goodsEntrystr3 != null" >
+        GOODS_ENTRYSTR3,
+      </if>
+      <if test="goodsEntrystr4 != null" >
+        GOODS_ENTRYSTR4,
+      </if>
+      <if test="goodsEntrystr5 != null" >
+        GOODS_ENTRYSTR5,
+      </if>
+      <if test="goodsCodebillold != null" >
+        GOODS_CODEBILLOLD,
+      </if>
+      <if test="goodsCodestr1 != null" >
+        GOODS_CODESTR1,
+      </if>
+      <if test="goodsCodestr2 != null" >
+        GOODS_CODESTR2,
+      </if>
+      <if test="goodsCodestr3 != null" >
+        GOODS_CODESTR3,
+      </if>
+      <if test="goodsCodestr4 != null" >
+        GOODS_CODESTR4,
+      </if>
+      <if test="goodsCodestr5 != null" >
+        GOODS_CODESTR5,
+      </if>
+      <if test="goodsCodestr6 != null" >
+        GOODS_CODESTR6,
+      </if>
+      <if test="goodsCodestr7 != null" >
+        GOODS_CODESTR7,
+      </if>
+      <if test="goodsCodestr8 != null" >
+        GOODS_CODESTR8,
+      </if>
+      <if test="goodsCodestr9 != null" >
+        GOODS_CODESTR9,
+      </if>
+      <if test="goodsCodestr10 != null" >
+        GOODS_CODESTR10,
+      </if>
+      <if test="goodsCodenum1 != null" >
+        GOODS_CODENUM1,
+      </if>
+      <if test="goodsCodenum2 != null" >
+        GOODS_CODENUM2,
+      </if>
+      <if test="goodsCodenum3 != null" >
+        GOODS_CODENUM3,
+      </if>
+      <if test="partsnameSplit != null" >
+        PARTSNAME_SPLIT,
+      </if>
+      <if test="goodsProperty != null" >
+        GOODS_PROPERTY,
+      </if>
+      <if test="goodsPartsbranch != null" >
+        GOODS_PARTSBRANCH,
+      </if>
+      <if test="goodsWetpercentage != null" >
+        GOODS_WETPERCENTAGE,
+      </if>
+      <if test="goodsOrg != null" >
+        GOODS_ORG,
+      </if>
+      <if test="goodsDept != null" >
+        GOODS_DEPT,
+      </if>
+      <if test="goodsCurrency != null" >
+        GOODS_CURRENCY,
+      </if>
+      <if test="goodsExrate != null" >
+        GOODS_EXRATE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
+      </if>
+      <if test="partsnameNumunit != null" >
+        PARTSNAME_NUMUNIT,
+      </if>
+      <if test="partsnameWeightunit != null" >
+        PARTSNAME_WEIGHTUNIT,
+      </if>
+      <if test="goodsMetering != null" >
+        GOODS_METERING,
+      </if>
+      <if test="goodsPriceun != null" >
+        GOODS_PRICEUN,
+      </if>
+      <if test="goodsPiecemode != null" >
+        GOODS_PIECEMODE,
+      </if>
+      <if test="goodsWeightmode != null" >
+        GOODS_WEIGHTMODE,
+      </if>
+      <if test="goodsCustomscode != null" >
+        GOODS_CUSTOMSCODE,
+      </if>
+      <if test="goodsEnname != null" >
+        GOODS_ENNAME,
+      </if>
+      <if test="goodsEndescribe != null" >
+        GOODS_ENDESCRIBE,
+      </if>
+      <if test="goodsBatch != null" >
+        GOODS_BATCH,
+      </if>
+      <if test="goodsIndustry != null" >
+        GOODS_INDUSTRY,
+      </if>
+      <if test="goodsNum != null" >
+        GOODS_NUM,
+      </if>
+      <if test="goodsPiecenum != null" >
+        GOODS_PIECENUM,
+      </if>
+      <if test="goodsSingernum != null" >
+        GOODS_SINGERNUM,
+      </if>
+      <if test="goodsWeight != null" >
+        GOODS_WEIGHT,
+      </if>
+      <if test="goodsAssistweight != null" >
+        GOODS_ASSISTWEIGHT,
+      </if>
+      <if test="goodsWmscodebill != null" >
+        GOODS_WMSCODEBILL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCodebill != null" >
+        #{goodsCodebill,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDate != null" >
+        #{goodsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scontractBillcode != null" >
+        #{scontractBillcode,jdbcType=VARCHAR},
+      </if>
+      <if test="scontractBillbatch != null" >
+        #{scontractBillbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="datasBalcorp != null" >
+        #{datasBalcorp,jdbcType=VARCHAR},
+      </if>
+      <if test="datasBalcorpname != null" >
+        #{datasBalcorpname,jdbcType=VARCHAR},
+      </if>
+      <if test="datasOrdercorp != null" >
+        #{datasOrdercorp,jdbcType=VARCHAR},
+      </if>
+      <if test="datasOrdercorpname != null" >
+        #{datasOrdercorpname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsMinnum != null" >
+        #{goodsMinnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsInprice != null" >
+        #{goodsInprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsInfeeprice != null" >
+        #{goodsInfeeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNewinprice != null" >
+        #{goodsNewinprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNewinfeeprice != null" >
+        #{goodsNewinfeeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsTaxrate != null" >
+        #{goodsTaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFulfill != null" >
+        #{goodsFulfill,jdbcType=DECIMAL},
+      </if>
+      <if test="dataInnerflag != null" >
+        #{dataInnerflag,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsRemark != null" >
+        #{goodsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="dataVernum != null" >
+        #{dataVernum,jdbcType=DECIMAL},
+      </if>
+      <if test="billtypeCode != null" >
+        #{billtypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sumgoodsBatch != null" >
+        #{sumgoodsBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstreeCode != null" >
+        #{goodstreeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeName != null" >
+        #{pntreeName,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaName != null" >
+        #{productareaName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameName != null" >
+        #{partsnameName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsMaterial != null" >
+        #{goodsMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSpec != null" >
+        #{goodsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSpec1 != null" >
+        #{goodsSpec1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSpec2 != null" >
+        #{goodsSpec2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSpec3 != null" >
+        #{goodsSpec3,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSpec4 != null" >
+        #{goodsSpec4,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty1 != null" >
+        #{goodsProperty1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsProperty2 != null" >
+        #{goodsProperty2,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsProperty3 != null" >
+        #{goodsProperty3,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsProperty4 != null" >
+        #{goodsProperty4,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsProperty5 != null" >
+        #{goodsProperty5,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNumproperty1 != null" >
+        #{goodsNumproperty1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNumproperty2 != null" >
+        #{goodsNumproperty2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsContract != null" >
+        #{goodsContract,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractbatch != null" >
+        #{goodsContractbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr1 != null" >
+        #{goodsContractstr1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr2 != null" >
+        #{goodsContractstr2,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr3 != null" >
+        #{goodsContractstr3,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr4 != null" >
+        #{goodsContractstr4,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr5 != null" >
+        #{goodsContractstr5,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrybatch != null" >
+        #{goodsEntrybatch,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrybatchold != null" >
+        #{goodsEntrybatchold,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr1 != null" >
+        #{goodsEntrystr1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr2 != null" >
+        #{goodsEntrystr2,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr3 != null" >
+        #{goodsEntrystr3,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr4 != null" >
+        #{goodsEntrystr4,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr5 != null" >
+        #{goodsEntrystr5,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodebillold != null" >
+        #{goodsCodebillold,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr1 != null" >
+        #{goodsCodestr1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr2 != null" >
+        #{goodsCodestr2,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr3 != null" >
+        #{goodsCodestr3,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr4 != null" >
+        #{goodsCodestr4,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr5 != null" >
+        #{goodsCodestr5,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr6 != null" >
+        #{goodsCodestr6,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr7 != null" >
+        #{goodsCodestr7,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr8 != null" >
+        #{goodsCodestr8,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr9 != null" >
+        #{goodsCodestr9,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr10 != null" >
+        #{goodsCodestr10,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodenum1 != null" >
+        #{goodsCodenum1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCodenum2 != null" >
+        #{goodsCodenum2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCodenum3 != null" >
+        #{goodsCodenum3,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameSplit != null" >
+        #{partsnameSplit,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty != null" >
+        #{goodsProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPartsbranch != null" >
+        #{goodsPartsbranch,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWetpercentage != null" >
+        #{goodsWetpercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOrg != null" >
+        #{goodsOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDept != null" >
+        #{goodsDept,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCurrency != null" >
+        #{goodsCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsExrate != null" >
+        #{goodsExrate,jdbcType=DECIMAL},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameNumunit != null" >
+        #{partsnameNumunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameWeightunit != null" >
+        #{partsnameWeightunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsMetering != null" >
+        #{goodsMetering,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPriceun != null" >
+        #{goodsPriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPiecemode != null" >
+        #{goodsPiecemode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeightmode != null" >
+        #{goodsWeightmode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCustomscode != null" >
+        #{goodsCustomscode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEnname != null" >
+        #{goodsEnname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEndescribe != null" >
+        #{goodsEndescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBatch != null" >
+        #{goodsBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsIndustry != null" >
+        #{goodsIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNum != null" >
+        #{goodsNum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPiecenum != null" >
+        #{goodsPiecenum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSingernum != null" >
+        #{goodsSingernum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeight != null" >
+        #{goodsWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsAssistweight != null" >
+        #{goodsAssistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWmscodebill != null" >
+        #{goodsWmscodebill,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.WarehouseGoods" >
+    update  WAREHOUSE_GOODS
+    <set >
+      <if test="goodsCodebill != null" >
+        GOODS_CODEBILL = #{goodsCodebill,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDate != null" >
+        GOODS_DATE = #{goodsDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scontractBillcode != null" >
+        SCONTRACT_BILLCODE = #{scontractBillcode,jdbcType=VARCHAR},
+      </if>
+      <if test="scontractBillbatch != null" >
+        SCONTRACT_BILLBATCH = #{scontractBillbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="datasBalcorp != null" >
+        DATAS_BALCORP = #{datasBalcorp,jdbcType=VARCHAR},
+      </if>
+      <if test="datasBalcorpname != null" >
+        DATAS_BALCORPNAME = #{datasBalcorpname,jdbcType=VARCHAR},
+      </if>
+      <if test="datasOrdercorp != null" >
+        DATAS_ORDERCORP = #{datasOrdercorp,jdbcType=VARCHAR},
+      </if>
+      <if test="datasOrdercorpname != null" >
+        DATAS_ORDERCORPNAME = #{datasOrdercorpname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsMinnum != null" >
+        GOODS_MINNUM = #{goodsMinnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsInprice != null" >
+        GOODS_INPRICE = #{goodsInprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsInfeeprice != null" >
+        GOODS_INFEEPRICE = #{goodsInfeeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNewinprice != null" >
+        GOODS_NEWINPRICE = #{goodsNewinprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNewinfeeprice != null" >
+        GOODS_NEWINFEEPRICE = #{goodsNewinfeeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsTaxrate != null" >
+        GOODS_TAXRATE = #{goodsTaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFulfill != null" >
+        GOODS_FULFILL = #{goodsFulfill,jdbcType=DECIMAL},
+      </if>
+      <if test="dataInnerflag != null" >
+        DATA_INNERFLAG = #{dataInnerflag,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsRemark != null" >
+        GOODS_REMARK = #{goodsRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="dataVernum != null" >
+        DATA_VERNUM = #{dataVernum,jdbcType=DECIMAL},
+      </if>
+      <if test="billtypeCode != null" >
+        BILLTYPE_CODE = #{billtypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="sumgoodsBatch != null" >
+        SUMGOODS_BATCH = #{sumgoodsBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodstreeCode != null" >
+        GOODSTREE_CODE = #{goodstreeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeName != null" >
+        PNTREE_NAME = #{pntreeName,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaName != null" >
+        PRODUCTAREA_NAME = #{productareaName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameName != null" >
+        PARTSNAME_NAME = #{partsnameName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsMaterial != null" >
+        GOODS_MATERIAL = #{goodsMaterial,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSpec != null" >
+        GOODS_SPEC = #{goodsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsSpec1 != null" >
+        GOODS_SPEC1 = #{goodsSpec1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSpec2 != null" >
+        GOODS_SPEC2 = #{goodsSpec2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSpec3 != null" >
+        GOODS_SPEC3 = #{goodsSpec3,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSpec4 != null" >
+        GOODS_SPEC4 = #{goodsSpec4,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty1 != null" >
+        GOODS_PROPERTY1 = #{goodsProperty1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsProperty2 != null" >
+        GOODS_PROPERTY2 = #{goodsProperty2,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsProperty3 != null" >
+        GOODS_PROPERTY3 = #{goodsProperty3,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsProperty4 != null" >
+        GOODS_PROPERTY4 = #{goodsProperty4,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsProperty5 != null" >
+        GOODS_PROPERTY5 = #{goodsProperty5,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNumproperty1 != null" >
+        GOODS_NUMPROPERTY1 = #{goodsNumproperty1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNumproperty2 != null" >
+        GOODS_NUMPROPERTY2 = #{goodsNumproperty2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsContract != null" >
+        GOODS_CONTRACT = #{goodsContract,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractbatch != null" >
+        GOODS_CONTRACTBATCH = #{goodsContractbatch,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr1 != null" >
+        GOODS_CONTRACTSTR1 = #{goodsContractstr1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr2 != null" >
+        GOODS_CONTRACTSTR2 = #{goodsContractstr2,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr3 != null" >
+        GOODS_CONTRACTSTR3 = #{goodsContractstr3,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr4 != null" >
+        GOODS_CONTRACTSTR4 = #{goodsContractstr4,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsContractstr5 != null" >
+        GOODS_CONTRACTSTR5 = #{goodsContractstr5,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrybatch != null" >
+        GOODS_ENTRYBATCH = #{goodsEntrybatch,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrybatchold != null" >
+        GOODS_ENTRYBATCHOLD = #{goodsEntrybatchold,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr1 != null" >
+        GOODS_ENTRYSTR1 = #{goodsEntrystr1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr2 != null" >
+        GOODS_ENTRYSTR2 = #{goodsEntrystr2,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr3 != null" >
+        GOODS_ENTRYSTR3 = #{goodsEntrystr3,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr4 != null" >
+        GOODS_ENTRYSTR4 = #{goodsEntrystr4,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEntrystr5 != null" >
+        GOODS_ENTRYSTR5 = #{goodsEntrystr5,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodebillold != null" >
+        GOODS_CODEBILLOLD = #{goodsCodebillold,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr1 != null" >
+        GOODS_CODESTR1 = #{goodsCodestr1,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr2 != null" >
+        GOODS_CODESTR2 = #{goodsCodestr2,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr3 != null" >
+        GOODS_CODESTR3 = #{goodsCodestr3,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr4 != null" >
+        GOODS_CODESTR4 = #{goodsCodestr4,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr5 != null" >
+        GOODS_CODESTR5 = #{goodsCodestr5,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr6 != null" >
+        GOODS_CODESTR6 = #{goodsCodestr6,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr7 != null" >
+        GOODS_CODESTR7 = #{goodsCodestr7,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr8 != null" >
+        GOODS_CODESTR8 = #{goodsCodestr8,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr9 != null" >
+        GOODS_CODESTR9 = #{goodsCodestr9,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodestr10 != null" >
+        GOODS_CODESTR10 = #{goodsCodestr10,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCodenum1 != null" >
+        GOODS_CODENUM1 = #{goodsCodenum1,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCodenum2 != null" >
+        GOODS_CODENUM2 = #{goodsCodenum2,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCodenum3 != null" >
+        GOODS_CODENUM3 = #{goodsCodenum3,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameSplit != null" >
+        PARTSNAME_SPLIT = #{partsnameSplit,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty != null" >
+        GOODS_PROPERTY = #{goodsProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPartsbranch != null" >
+        GOODS_PARTSBRANCH = #{goodsPartsbranch,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWetpercentage != null" >
+        GOODS_WETPERCENTAGE = #{goodsWetpercentage,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOrg != null" >
+        GOODS_ORG = #{goodsOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsDept != null" >
+        GOODS_DEPT = #{goodsDept,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsCurrency != null" >
+        GOODS_CURRENCY = #{goodsCurrency,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsExrate != null" >
+        GOODS_EXRATE = #{goodsExrate,jdbcType=DECIMAL},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameNumunit != null" >
+        PARTSNAME_NUMUNIT = #{partsnameNumunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameWeightunit != null" >
+        PARTSNAME_WEIGHTUNIT = #{partsnameWeightunit,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsMetering != null" >
+        GOODS_METERING = #{goodsMetering,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPriceun != null" >
+        GOODS_PRICEUN = #{goodsPriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPiecemode != null" >
+        GOODS_PIECEMODE = #{goodsPiecemode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeightmode != null" >
+        GOODS_WEIGHTMODE = #{goodsWeightmode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCustomscode != null" >
+        GOODS_CUSTOMSCODE = #{goodsCustomscode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEnname != null" >
+        GOODS_ENNAME = #{goodsEnname,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsEndescribe != null" >
+        GOODS_ENDESCRIBE = #{goodsEndescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsBatch != null" >
+        GOODS_BATCH = #{goodsBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsIndustry != null" >
+        GOODS_INDUSTRY = #{goodsIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNum != null" >
+        GOODS_NUM = #{goodsNum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPiecenum != null" >
+        GOODS_PIECENUM = #{goodsPiecenum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSingernum != null" >
+        GOODS_SINGERNUM = #{goodsSingernum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeight != null" >
+        GOODS_WEIGHT = #{goodsWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsAssistweight != null" >
+        GOODS_ASSISTWEIGHT = #{goodsAssistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWmscodebill != null" >
+        GOODS_WMSCODEBILL = #{goodsWmscodebill,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GOODS_ID = #{goodsId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.WarehouseGoods" >
+    update  WAREHOUSE_GOODS
+    set GOODS_CODEBILL = #{goodsCodebill,jdbcType=VARCHAR},
+      MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      GOODS_DATE = #{goodsDate,jdbcType=TIMESTAMP},
+      SCONTRACT_BILLCODE = #{scontractBillcode,jdbcType=VARCHAR},
+      SCONTRACT_BILLBATCH = #{scontractBillbatch,jdbcType=VARCHAR},
+      DATAS_BALCORP = #{datasBalcorp,jdbcType=VARCHAR},
+      DATAS_BALCORPNAME = #{datasBalcorpname,jdbcType=VARCHAR},
+      DATAS_ORDERCORP = #{datasOrdercorp,jdbcType=VARCHAR},
+      DATAS_ORDERCORPNAME = #{datasOrdercorpname,jdbcType=VARCHAR},
+      GOODS_MINNUM = #{goodsMinnum,jdbcType=DECIMAL},
+      GOODS_INPRICE = #{goodsInprice,jdbcType=DECIMAL},
+      GOODS_INFEEPRICE = #{goodsInfeeprice,jdbcType=DECIMAL},
+      GOODS_NEWINPRICE = #{goodsNewinprice,jdbcType=DECIMAL},
+      GOODS_NEWINFEEPRICE = #{goodsNewinfeeprice,jdbcType=DECIMAL},
+      GOODS_TAXRATE = #{goodsTaxrate,jdbcType=DECIMAL},
+      GOODS_FULFILL = #{goodsFulfill,jdbcType=DECIMAL},
+      DATA_INNERFLAG = #{dataInnerflag,jdbcType=DECIMAL},
+      GOODS_REMARK = #{goodsRemark,jdbcType=VARCHAR},
+      DATA_VERNUM = #{dataVernum,jdbcType=DECIMAL},
+      BILLTYPE_CODE = #{billtypeCode,jdbcType=VARCHAR},
+      SUMGOODS_BATCH = #{sumgoodsBatch,jdbcType=VARCHAR},
+      WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      GOODSTREE_CODE = #{goodstreeCode,jdbcType=VARCHAR},
+      PNTREE_NAME = #{pntreeName,jdbcType=VARCHAR},
+      PRODUCTAREA_NAME = #{productareaName,jdbcType=VARCHAR},
+      PARTSNAME_NAME = #{partsnameName,jdbcType=VARCHAR},
+      GOODS_MATERIAL = #{goodsMaterial,jdbcType=VARCHAR},
+      GOODS_SPEC = #{goodsSpec,jdbcType=VARCHAR},
+      GOODS_SPEC1 = #{goodsSpec1,jdbcType=DECIMAL},
+      GOODS_SPEC2 = #{goodsSpec2,jdbcType=DECIMAL},
+      GOODS_SPEC3 = #{goodsSpec3,jdbcType=DECIMAL},
+      GOODS_SPEC4 = #{goodsSpec4,jdbcType=DECIMAL},
+      GOODS_PROPERTY1 = #{goodsProperty1,jdbcType=VARCHAR},
+      GOODS_PROPERTY2 = #{goodsProperty2,jdbcType=VARCHAR},
+      GOODS_PROPERTY3 = #{goodsProperty3,jdbcType=VARCHAR},
+      GOODS_PROPERTY4 = #{goodsProperty4,jdbcType=VARCHAR},
+      GOODS_PROPERTY5 = #{goodsProperty5,jdbcType=VARCHAR},
+      GOODS_NUMPROPERTY1 = #{goodsNumproperty1,jdbcType=DECIMAL},
+      GOODS_NUMPROPERTY2 = #{goodsNumproperty2,jdbcType=DECIMAL},
+      GOODS_CONTRACT = #{goodsContract,jdbcType=VARCHAR},
+      GOODS_CONTRACTBATCH = #{goodsContractbatch,jdbcType=VARCHAR},
+      GOODS_CONTRACTSTR1 = #{goodsContractstr1,jdbcType=VARCHAR},
+      GOODS_CONTRACTSTR2 = #{goodsContractstr2,jdbcType=VARCHAR},
+      GOODS_CONTRACTSTR3 = #{goodsContractstr3,jdbcType=VARCHAR},
+      GOODS_CONTRACTSTR4 = #{goodsContractstr4,jdbcType=VARCHAR},
+      GOODS_CONTRACTSTR5 = #{goodsContractstr5,jdbcType=VARCHAR},
+      GOODS_ENTRYBATCH = #{goodsEntrybatch,jdbcType=VARCHAR},
+      GOODS_ENTRYBATCHOLD = #{goodsEntrybatchold,jdbcType=VARCHAR},
+      GOODS_ENTRYSTR1 = #{goodsEntrystr1,jdbcType=VARCHAR},
+      GOODS_ENTRYSTR2 = #{goodsEntrystr2,jdbcType=VARCHAR},
+      GOODS_ENTRYSTR3 = #{goodsEntrystr3,jdbcType=VARCHAR},
+      GOODS_ENTRYSTR4 = #{goodsEntrystr4,jdbcType=VARCHAR},
+      GOODS_ENTRYSTR5 = #{goodsEntrystr5,jdbcType=VARCHAR},
+      GOODS_CODEBILLOLD = #{goodsCodebillold,jdbcType=VARCHAR},
+      GOODS_CODESTR1 = #{goodsCodestr1,jdbcType=VARCHAR},
+      GOODS_CODESTR2 = #{goodsCodestr2,jdbcType=VARCHAR},
+      GOODS_CODESTR3 = #{goodsCodestr3,jdbcType=VARCHAR},
+      GOODS_CODESTR4 = #{goodsCodestr4,jdbcType=VARCHAR},
+      GOODS_CODESTR5 = #{goodsCodestr5,jdbcType=VARCHAR},
+      GOODS_CODESTR6 = #{goodsCodestr6,jdbcType=VARCHAR},
+      GOODS_CODESTR7 = #{goodsCodestr7,jdbcType=VARCHAR},
+      GOODS_CODESTR8 = #{goodsCodestr8,jdbcType=VARCHAR},
+      GOODS_CODESTR9 = #{goodsCodestr9,jdbcType=VARCHAR},
+      GOODS_CODESTR10 = #{goodsCodestr10,jdbcType=VARCHAR},
+      GOODS_CODENUM1 = #{goodsCodenum1,jdbcType=DECIMAL},
+      GOODS_CODENUM2 = #{goodsCodenum2,jdbcType=DECIMAL},
+      GOODS_CODENUM3 = #{goodsCodenum3,jdbcType=DECIMAL},
+      PARTSNAME_SPLIT = #{partsnameSplit,jdbcType=DECIMAL},
+      GOODS_PROPERTY = #{goodsProperty,jdbcType=VARCHAR},
+      GOODS_PARTSBRANCH = #{goodsPartsbranch,jdbcType=DECIMAL},
+      GOODS_WETPERCENTAGE = #{goodsWetpercentage,jdbcType=DECIMAL},
+      GOODS_ORG = #{goodsOrg,jdbcType=VARCHAR},
+      GOODS_DEPT = #{goodsDept,jdbcType=VARCHAR},
+      GOODS_CURRENCY = #{goodsCurrency,jdbcType=VARCHAR},
+      GOODS_EXRATE = #{goodsExrate,jdbcType=DECIMAL},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      PARTSNAME_NUMUNIT = #{partsnameNumunit,jdbcType=VARCHAR},
+      PARTSNAME_WEIGHTUNIT = #{partsnameWeightunit,jdbcType=VARCHAR},
+      GOODS_METERING = #{goodsMetering,jdbcType=VARCHAR},
+      GOODS_PRICEUN = #{goodsPriceun,jdbcType=DECIMAL},
+      GOODS_PIECEMODE = #{goodsPiecemode,jdbcType=DECIMAL},
+      GOODS_WEIGHTMODE = #{goodsWeightmode,jdbcType=DECIMAL},
+      GOODS_CUSTOMSCODE = #{goodsCustomscode,jdbcType=VARCHAR},
+      GOODS_ENNAME = #{goodsEnname,jdbcType=VARCHAR},
+      GOODS_ENDESCRIBE = #{goodsEndescribe,jdbcType=VARCHAR},
+      GOODS_BATCH = #{goodsBatch,jdbcType=VARCHAR},
+      GOODS_INDUSTRY = #{goodsIndustry,jdbcType=VARCHAR},
+      GOODS_NUM = #{goodsNum,jdbcType=DECIMAL},
+      GOODS_PIECENUM = #{goodsPiecenum,jdbcType=DECIMAL},
+      GOODS_SINGERNUM = #{goodsSingernum,jdbcType=DECIMAL},
+      GOODS_WEIGHT = #{goodsWeight,jdbcType=DECIMAL},
+      GOODS_ASSISTWEIGHT = #{goodsAssistweight,jdbcType=DECIMAL},
+      GOODS_WMSCODEBILL = #{goodsWmscodebill,jdbcType=VARCHAR}
+    where GOODS_ID = #{goodsId,jdbcType=DECIMAL}
+  </update>
+</mapper>

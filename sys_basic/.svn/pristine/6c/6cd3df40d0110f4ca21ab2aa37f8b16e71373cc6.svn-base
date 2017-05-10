@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xyscm.sys.basic.dao.BasicOrgMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicOrg" >
+    <id column="ORG_ID" property="orgId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="ORG_PARENT" property="orgParent" jdbcType="VARCHAR" />
+    <result column="ORG_NAME" property="orgName" jdbcType="VARCHAR" />
+    <result column="ORG_ABBREVIATE" property="orgAbbreviate" jdbcType="VARCHAR" />
+    <result column="ORG_PHONE" property="orgPhone" jdbcType="VARCHAR" />
+    <result column="ORG_FAX" property="orgFax" jdbcType="VARCHAR" />
+    <result column="ORG_CORPORATION" property="orgCorporation" jdbcType="VARCHAR" />
+    <result column="ORG_ACCOUNTS" property="orgAccounts" jdbcType="VARCHAR" />
+    <result column="ORG_BANKNAME" property="orgBankname" jdbcType="VARCHAR" />
+    <result column="ORG_TANU" property="orgTanu" jdbcType="VARCHAR" />
+    <result column="ORG_ADDR" property="orgAddr" jdbcType="VARCHAR" />
+    <result column="ORG_REMARK" property="orgRemark" jdbcType="VARCHAR" />
+    <result column="ORG_ISLEAF" property="orgIsleaf" jdbcType="DECIMAL" />
+    <result column="ORG_NODECODE" property="orgNodecode" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ORG_ID, MEMBER_CODE, ORG_CODE, ORG_PARENT, ORG_NAME, ORG_ABBREVIATE, ORG_PHONE, ORG_FAX, 
+    ORG_CORPORATION, ORG_ACCOUNTS, ORG_BANKNAME, ORG_TANU, ORG_ADDR, ORG_REMARK, ORG_ISLEAF, 
+    ORG_NODECODE, BASIC_SHARE, COMPANY_CODE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from BASIC_ORG
+    where ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_ORG
+    where ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicOrg" >
+    insert into  BASIC_ORG (ORG_ID, MEMBER_CODE, ORG_CODE, 
+      ORG_PARENT, ORG_NAME, ORG_ABBREVIATE, 
+      ORG_PHONE, ORG_FAX, ORG_CORPORATION, 
+      ORG_ACCOUNTS, ORG_BANKNAME, ORG_TANU, 
+      ORG_ADDR, ORG_REMARK, ORG_ISLEAF, 
+      ORG_NODECODE, BASIC_SHARE, COMPANY_CODE
+      )
+    values (#{orgId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, 
+      #{orgParent,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{orgAbbreviate,jdbcType=VARCHAR}, 
+      #{orgPhone,jdbcType=VARCHAR}, #{orgFax,jdbcType=VARCHAR}, #{orgCorporation,jdbcType=VARCHAR}, 
+      #{orgAccounts,jdbcType=VARCHAR}, #{orgBankname,jdbcType=VARCHAR}, #{orgTanu,jdbcType=VARCHAR}, 
+      #{orgAddr,jdbcType=VARCHAR}, #{orgRemark,jdbcType=VARCHAR}, #{orgIsleaf,jdbcType=DECIMAL}, 
+      #{orgNodecode,jdbcType=VARCHAR}, #{basicShare,jdbcType=DECIMAL}, #{companyCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicOrg" >
+    insert into  BASIC_ORG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="orgParent != null" >
+        ORG_PARENT,
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME,
+      </if>
+      <if test="orgAbbreviate != null" >
+        ORG_ABBREVIATE,
+      </if>
+      <if test="orgPhone != null" >
+        ORG_PHONE,
+      </if>
+      <if test="orgFax != null" >
+        ORG_FAX,
+      </if>
+      <if test="orgCorporation != null" >
+        ORG_CORPORATION,
+      </if>
+      <if test="orgAccounts != null" >
+        ORG_ACCOUNTS,
+      </if>
+      <if test="orgBankname != null" >
+        ORG_BANKNAME,
+      </if>
+      <if test="orgTanu != null" >
+        ORG_TANU,
+      </if>
+      <if test="orgAddr != null" >
+        ORG_ADDR,
+      </if>
+      <if test="orgRemark != null" >
+        ORG_REMARK,
+      </if>
+      <if test="orgIsleaf != null" >
+        ORG_ISLEAF,
+      </if>
+      <if test="orgNodecode != null" >
+        ORG_NODECODE,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orgId != null" >
+        #{orgId,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgParent != null" >
+        #{orgParent,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAbbreviate != null" >
+        #{orgAbbreviate,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPhone != null" >
+        #{orgPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orgFax != null" >
+        #{orgFax,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCorporation != null" >
+        #{orgCorporation,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAccounts != null" >
+        #{orgAccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBankname != null" >
+        #{orgBankname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTanu != null" >
+        #{orgTanu,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAddr != null" >
+        #{orgAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRemark != null" >
+        #{orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIsleaf != null" >
+        #{orgIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="orgNodecode != null" >
+        #{orgNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicOrg" >
+    update  BASIC_ORG
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgParent != null" >
+        ORG_PARENT = #{orgParent,jdbcType=VARCHAR},
+      </if>
+      <if test="orgName != null" >
+        ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAbbreviate != null" >
+        ORG_ABBREVIATE = #{orgAbbreviate,jdbcType=VARCHAR},
+      </if>
+      <if test="orgPhone != null" >
+        ORG_PHONE = #{orgPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orgFax != null" >
+        ORG_FAX = #{orgFax,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCorporation != null" >
+        ORG_CORPORATION = #{orgCorporation,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAccounts != null" >
+        ORG_ACCOUNTS = #{orgAccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="orgBankname != null" >
+        ORG_BANKNAME = #{orgBankname,jdbcType=VARCHAR},
+      </if>
+      <if test="orgTanu != null" >
+        ORG_TANU = #{orgTanu,jdbcType=VARCHAR},
+      </if>
+      <if test="orgAddr != null" >
+        ORG_ADDR = #{orgAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRemark != null" >
+        ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orgIsleaf != null" >
+        ORG_ISLEAF = #{orgIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="orgNodecode != null" >
+        ORG_NODECODE = #{orgNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicOrg" >
+    update  BASIC_ORG
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      ORG_PARENT = #{orgParent,jdbcType=VARCHAR},
+      ORG_NAME = #{orgName,jdbcType=VARCHAR},
+      ORG_ABBREVIATE = #{orgAbbreviate,jdbcType=VARCHAR},
+      ORG_PHONE = #{orgPhone,jdbcType=VARCHAR},
+      ORG_FAX = #{orgFax,jdbcType=VARCHAR},
+      ORG_CORPORATION = #{orgCorporation,jdbcType=VARCHAR},
+      ORG_ACCOUNTS = #{orgAccounts,jdbcType=VARCHAR},
+      ORG_BANKNAME = #{orgBankname,jdbcType=VARCHAR},
+      ORG_TANU = #{orgTanu,jdbcType=VARCHAR},
+      ORG_ADDR = #{orgAddr,jdbcType=VARCHAR},
+      ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      ORG_ISLEAF = #{orgIsleaf,jdbcType=DECIMAL},
+      ORG_NODECODE = #{orgNodecode,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+    where ORG_ID = #{orgId,jdbcType=DECIMAL}
+  </update>
+</mapper>

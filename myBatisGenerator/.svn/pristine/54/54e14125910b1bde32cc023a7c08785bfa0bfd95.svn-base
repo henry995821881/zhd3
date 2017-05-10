@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration 
+	  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" 
+	  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd"> 
+   
+<generatorConfiguration> 
+	<!-- classPathEntry:数据库的JDBC驱动的jar包地址--> 
+	<!--<classPathEntry location="D:\oracle\ojdbc6.jar" /> --> 
+	<context id="ORACLE_TABLES" targetRuntime="MyBatis3"> 
+ 
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+    
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" 
+			connectionURL="jdbc:oracle:thin:@192.168.80.153:1521:orcl" 
+			userId="czzhd2" 
+			password="czzhd2"> 
+		</jdbcConnection> 
+		<!--  默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer  
+				 true，把JDBC DECIMAL 和 NUMERIC 类型解析为java.math.BigDecimal  
+			 -->  
+		<javaTypeResolver > 
+			<property name="forceBigDecimals" value="true" /> 
+		</javaTypeResolver> 
+		<!-- targetProject:自动生成代码的位置 --> 
+		<javaModelGenerator targetPackage="com.xyscm.sys.basic.model" targetProject="src"> 
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->      
+			<property name="enableSubPackages" value="false" /> 
+			<!-- 从数据库返回的值被清理前后的空格  -->  
+			<property name="trimStrings" value="true" /> 
+		</javaModelGenerator> 
+  
+		<sqlMapGenerator targetPackage="sqlmap"  targetProject="res">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>    
+
+     
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.xyscm.sys.basic.dao"  targetProject="src"> 
+			<property name="enableSubPackages" value="false" /> 
+		</javaClientGenerator> 
+		<!-- tableName:用于自动生成代码的数据库表；domainObjectName:对应于数据库表的javaBean类名 --> 
+		<table schema="czzhd3" tableName="BASIC_ORG" domainObjectName="BasicOrg" 
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table> 
+	</context> 
+    
+</generatorConfiguration> 
+
+

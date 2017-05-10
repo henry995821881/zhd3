@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.WarehouseSumGoodsProMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.WarehouseSumGoodsPro" >
+    <id column="SUMGOODS_PRO_ID" property="sumgoodsProId" jdbcType="DECIMAL" />
+    <result column="SUMGOODS_BATCH" property="sumgoodsBatch" jdbcType="VARCHAR" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="PRICESET_MAKEPRICE" property="pricesetMakeprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_BASEPRICE" property="pricesetBaseprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_ASPRICE" property="pricesetAsprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_PREFPRICE" property="pricesetPrefprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_INSIDEPRICE" property="pricesetInsideprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_HANGPRICE" property="pricesetHangprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_OLDMAKEPRICE" property="pricesetOldmakeprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_OLDBASEPRICE" property="pricesetOldbaseprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_OLDASPRICE" property="pricesetOldasprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_OLDPREFPRICE" property="pricesetOldprefprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_OLDINSIDEPRICE" property="pricesetOldinsideprice" jdbcType="DECIMAL" />
+    <result column="PRICESET_OLDHANGPRICE" property="pricesetOldhangprice" jdbcType="DECIMAL" />
+    <result column="DATA_VERNUM" property="dataVernum" jdbcType="DECIMAL" />
+    <result column="GOODS_FULFILL" property="goodsFulfill" jdbcType="DECIMAL" />
+    <result column="GOODS_NUM" property="goodsNum" jdbcType="DECIMAL" />
+    <result column="GOODS_PIECENUM" property="goodsPiecenum" jdbcType="DECIMAL" />
+    <result column="GOODS_SINGERNUM" property="goodsSingernum" jdbcType="DECIMAL" />
+    <result column="GOODS_WEIGHT" property="goodsWeight" jdbcType="DECIMAL" />
+    <result column="GOODS_ASSISTWEIGHT" property="goodsAssistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_SUPPLYNUM" property="goodsSupplynum" jdbcType="DECIMAL" />
+    <result column="GOODS_SUPPLYWEIGHT" property="goodsSupplyweight" jdbcType="DECIMAL" />
+    <result column="GOODS_SUPPLYASSISTWEIGHT" property="goodsSupplyassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_SLOCKNUM" property="goodsSlocknum" jdbcType="DECIMAL" />
+    <result column="GOODS_SLOCKWEIGHT" property="goodsSlockweight" jdbcType="DECIMAL" />
+    <result column="GOODS_SLOCKASSISTWEIGHT" property="goodsSlockassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_FNUM" property="goodsFnum" jdbcType="DECIMAL" />
+    <result column="GOODS_FWEIGHT" property="goodsFweight" jdbcType="DECIMAL" />
+    <result column="GOODS_FASSISTWEIGHT" property="goodsFassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_ORDNUM" property="goodsOrdnum" jdbcType="DECIMAL" />
+    <result column="GOODS_ORDWEIGHT" property="goodsOrdweight" jdbcType="DECIMAL" />
+    <result column="GOODS_ORDASSISTWEIGHT" property="goodsOrdassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_SNUM" property="goodsSnum" jdbcType="DECIMAL" />
+    <result column="GOODS_SWEIGHT" property="goodsSweight" jdbcType="DECIMAL" />
+    <result column="GOODS_SASSISTWEIGHT" property="goodsSassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_BILLNUM" property="goodsBillnum" jdbcType="DECIMAL" />
+    <result column="GOODS_BILLWEIGHT" property="goodsBillweight" jdbcType="DECIMAL" />
+    <result column="GOODS_BILLASSISTWEIGHT" property="goodsBillassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_MACNUM" property="goodsMacnum" jdbcType="DECIMAL" />
+    <result column="GOODS_MACWEIGHT" property="goodsMacweight" jdbcType="DECIMAL" />
+    <result column="GOODS_MACASSISTWEIGHT" property="goodsMacassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_HANGNUM" property="goodsHangnum" jdbcType="DECIMAL" />
+    <result column="GOODS_HANGWEIGHT" property="goodsHangweight" jdbcType="DECIMAL" />
+    <result column="GOODS_HANGASSISTWEIGHT" property="goodsHangassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_LOCKNUM" property="goodsLocknum" jdbcType="DECIMAL" />
+    <result column="GOODS_LOCKWEIGHT" property="goodsLockweight" jdbcType="DECIMAL" />
+    <result column="GOODS_LOCKASSISTWEIGHT" property="goodsLockassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_MONUM" property="goodsMonum" jdbcType="DECIMAL" />
+    <result column="GOODS_MOWEIGHT" property="goodsMoweight" jdbcType="DECIMAL" />
+    <result column="GOODS_MOASSISTWEIGHT" property="goodsMoassistweight" jdbcType="DECIMAL" />
+    <result column="GOODS_EXTNUM" property="goodsExtnum" jdbcType="DECIMAL" />
+    <result column="GOODS_EXTWEIGHT" property="goodsExtweight" jdbcType="DECIMAL" />
+    <result column="GOODS_EXTASSISTWEIGHT" property="goodsExtassistweight" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SUMGOODS_PRO_ID, SUMGOODS_BATCH, MEMBER_CODE, PRICESET_MAKEPRICE, PRICESET_BASEPRICE, 
+    PRICESET_ASPRICE, PRICESET_PREFPRICE, PRICESET_INSIDEPRICE, PRICESET_HANGPRICE, PRICESET_OLDMAKEPRICE, 
+    PRICESET_OLDBASEPRICE, PRICESET_OLDASPRICE, PRICESET_OLDPREFPRICE, PRICESET_OLDINSIDEPRICE, 
+    PRICESET_OLDHANGPRICE, DATA_VERNUM, GOODS_FULFILL, GOODS_NUM, GOODS_PIECENUM, GOODS_SINGERNUM, 
+    GOODS_WEIGHT, GOODS_ASSISTWEIGHT, GOODS_SUPPLYNUM, GOODS_SUPPLYWEIGHT, GOODS_SUPPLYASSISTWEIGHT, 
+    GOODS_SLOCKNUM, GOODS_SLOCKWEIGHT, GOODS_SLOCKASSISTWEIGHT, GOODS_FNUM, GOODS_FWEIGHT, 
+    GOODS_FASSISTWEIGHT, GOODS_ORDNUM, GOODS_ORDWEIGHT, GOODS_ORDASSISTWEIGHT, GOODS_SNUM, 
+    GOODS_SWEIGHT, GOODS_SASSISTWEIGHT, GOODS_BILLNUM, GOODS_BILLWEIGHT, GOODS_BILLASSISTWEIGHT, 
+    GOODS_MACNUM, GOODS_MACWEIGHT, GOODS_MACASSISTWEIGHT, GOODS_HANGNUM, GOODS_HANGWEIGHT, 
+    GOODS_HANGASSISTWEIGHT, GOODS_LOCKNUM, GOODS_LOCKWEIGHT, GOODS_LOCKASSISTWEIGHT, 
+    GOODS_MONUM, GOODS_MOWEIGHT, GOODS_MOASSISTWEIGHT, GOODS_EXTNUM, GOODS_EXTWEIGHT, 
+    GOODS_EXTASSISTWEIGHT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  WAREHOUSE_SUMGOODS_PRO
+    where SUMGOODS_PRO_ID = #{sumgoodsProId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  WAREHOUSE_SUMGOODS_PRO
+    where SUMGOODS_PRO_ID = #{sumgoodsProId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.WarehouseSumGoodsPro" >
+    insert into  WAREHOUSE_SUMGOODS_PRO (SUMGOODS_PRO_ID, SUMGOODS_BATCH, MEMBER_CODE, 
+      PRICESET_MAKEPRICE, PRICESET_BASEPRICE, PRICESET_ASPRICE, 
+      PRICESET_PREFPRICE, PRICESET_INSIDEPRICE, 
+      PRICESET_HANGPRICE, PRICESET_OLDMAKEPRICE, 
+      PRICESET_OLDBASEPRICE, PRICESET_OLDASPRICE, 
+      PRICESET_OLDPREFPRICE, PRICESET_OLDINSIDEPRICE, 
+      PRICESET_OLDHANGPRICE, DATA_VERNUM, GOODS_FULFILL, 
+      GOODS_NUM, GOODS_PIECENUM, GOODS_SINGERNUM, 
+      GOODS_WEIGHT, GOODS_ASSISTWEIGHT, GOODS_SUPPLYNUM, 
+      GOODS_SUPPLYWEIGHT, GOODS_SUPPLYASSISTWEIGHT, 
+      GOODS_SLOCKNUM, GOODS_SLOCKWEIGHT, GOODS_SLOCKASSISTWEIGHT, 
+      GOODS_FNUM, GOODS_FWEIGHT, GOODS_FASSISTWEIGHT, 
+      GOODS_ORDNUM, GOODS_ORDWEIGHT, GOODS_ORDASSISTWEIGHT, 
+      GOODS_SNUM, GOODS_SWEIGHT, GOODS_SASSISTWEIGHT, 
+      GOODS_BILLNUM, GOODS_BILLWEIGHT, GOODS_BILLASSISTWEIGHT, 
+      GOODS_MACNUM, GOODS_MACWEIGHT, GOODS_MACASSISTWEIGHT, 
+      GOODS_HANGNUM, GOODS_HANGWEIGHT, GOODS_HANGASSISTWEIGHT, 
+      GOODS_LOCKNUM, GOODS_LOCKWEIGHT, GOODS_LOCKASSISTWEIGHT, 
+      GOODS_MONUM, GOODS_MOWEIGHT, GOODS_MOASSISTWEIGHT, 
+      GOODS_EXTNUM, GOODS_EXTWEIGHT, GOODS_EXTASSISTWEIGHT
+      )
+    values (#{sumgoodsProId,jdbcType=DECIMAL}, #{sumgoodsBatch,jdbcType=VARCHAR}, #{memberCode,jdbcType=VARCHAR}, 
+      #{pricesetMakeprice,jdbcType=DECIMAL}, #{pricesetBaseprice,jdbcType=DECIMAL}, #{pricesetAsprice,jdbcType=DECIMAL}, 
+      #{pricesetPrefprice,jdbcType=DECIMAL}, #{pricesetInsideprice,jdbcType=DECIMAL}, 
+      #{pricesetHangprice,jdbcType=DECIMAL}, #{pricesetOldmakeprice,jdbcType=DECIMAL}, 
+      #{pricesetOldbaseprice,jdbcType=DECIMAL}, #{pricesetOldasprice,jdbcType=DECIMAL}, 
+      #{pricesetOldprefprice,jdbcType=DECIMAL}, #{pricesetOldinsideprice,jdbcType=DECIMAL}, 
+      #{pricesetOldhangprice,jdbcType=DECIMAL}, #{dataVernum,jdbcType=DECIMAL}, #{goodsFulfill,jdbcType=DECIMAL}, 
+      #{goodsNum,jdbcType=DECIMAL}, #{goodsPiecenum,jdbcType=DECIMAL}, #{goodsSingernum,jdbcType=DECIMAL}, 
+      #{goodsWeight,jdbcType=DECIMAL}, #{goodsAssistweight,jdbcType=DECIMAL}, #{goodsSupplynum,jdbcType=DECIMAL}, 
+      #{goodsSupplyweight,jdbcType=DECIMAL}, #{goodsSupplyassistweight,jdbcType=DECIMAL}, 
+      #{goodsSlocknum,jdbcType=DECIMAL}, #{goodsSlockweight,jdbcType=DECIMAL}, #{goodsSlockassistweight,jdbcType=DECIMAL}, 
+      #{goodsFnum,jdbcType=DECIMAL}, #{goodsFweight,jdbcType=DECIMAL}, #{goodsFassistweight,jdbcType=DECIMAL}, 
+      #{goodsOrdnum,jdbcType=DECIMAL}, #{goodsOrdweight,jdbcType=DECIMAL}, #{goodsOrdassistweight,jdbcType=DECIMAL}, 
+      #{goodsSnum,jdbcType=DECIMAL}, #{goodsSweight,jdbcType=DECIMAL}, #{goodsSassistweight,jdbcType=DECIMAL}, 
+      #{goodsBillnum,jdbcType=DECIMAL}, #{goodsBillweight,jdbcType=DECIMAL}, #{goodsBillassistweight,jdbcType=DECIMAL}, 
+      #{goodsMacnum,jdbcType=DECIMAL}, #{goodsMacweight,jdbcType=DECIMAL}, #{goodsMacassistweight,jdbcType=DECIMAL}, 
+      #{goodsHangnum,jdbcType=DECIMAL}, #{goodsHangweight,jdbcType=DECIMAL}, #{goodsHangassistweight,jdbcType=DECIMAL}, 
+      #{goodsLocknum,jdbcType=DECIMAL}, #{goodsLockweight,jdbcType=DECIMAL}, #{goodsLockassistweight,jdbcType=DECIMAL}, 
+      #{goodsMonum,jdbcType=DECIMAL}, #{goodsMoweight,jdbcType=DECIMAL}, #{goodsMoassistweight,jdbcType=DECIMAL}, 
+      #{goodsExtnum,jdbcType=DECIMAL}, #{goodsExtweight,jdbcType=DECIMAL}, #{goodsExtassistweight,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.WarehouseSumGoodsPro" >
+    insert into  WAREHOUSE_SUMGOODS_PRO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sumgoodsProId != null" >
+        SUMGOODS_PRO_ID,
+      </if>
+      <if test="sumgoodsBatch != null" >
+        SUMGOODS_BATCH,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="pricesetMakeprice != null" >
+        PRICESET_MAKEPRICE,
+      </if>
+      <if test="pricesetBaseprice != null" >
+        PRICESET_BASEPRICE,
+      </if>
+      <if test="pricesetAsprice != null" >
+        PRICESET_ASPRICE,
+      </if>
+      <if test="pricesetPrefprice != null" >
+        PRICESET_PREFPRICE,
+      </if>
+      <if test="pricesetInsideprice != null" >
+        PRICESET_INSIDEPRICE,
+      </if>
+      <if test="pricesetHangprice != null" >
+        PRICESET_HANGPRICE,
+      </if>
+      <if test="pricesetOldmakeprice != null" >
+        PRICESET_OLDMAKEPRICE,
+      </if>
+      <if test="pricesetOldbaseprice != null" >
+        PRICESET_OLDBASEPRICE,
+      </if>
+      <if test="pricesetOldasprice != null" >
+        PRICESET_OLDASPRICE,
+      </if>
+      <if test="pricesetOldprefprice != null" >
+        PRICESET_OLDPREFPRICE,
+      </if>
+      <if test="pricesetOldinsideprice != null" >
+        PRICESET_OLDINSIDEPRICE,
+      </if>
+      <if test="pricesetOldhangprice != null" >
+        PRICESET_OLDHANGPRICE,
+      </if>
+      <if test="dataVernum != null" >
+        DATA_VERNUM,
+      </if>
+      <if test="goodsFulfill != null" >
+        GOODS_FULFILL,
+      </if>
+      <if test="goodsNum != null" >
+        GOODS_NUM,
+      </if>
+      <if test="goodsPiecenum != null" >
+        GOODS_PIECENUM,
+      </if>
+      <if test="goodsSingernum != null" >
+        GOODS_SINGERNUM,
+      </if>
+      <if test="goodsWeight != null" >
+        GOODS_WEIGHT,
+      </if>
+      <if test="goodsAssistweight != null" >
+        GOODS_ASSISTWEIGHT,
+      </if>
+      <if test="goodsSupplynum != null" >
+        GOODS_SUPPLYNUM,
+      </if>
+      <if test="goodsSupplyweight != null" >
+        GOODS_SUPPLYWEIGHT,
+      </if>
+      <if test="goodsSupplyassistweight != null" >
+        GOODS_SUPPLYASSISTWEIGHT,
+      </if>
+      <if test="goodsSlocknum != null" >
+        GOODS_SLOCKNUM,
+      </if>
+      <if test="goodsSlockweight != null" >
+        GOODS_SLOCKWEIGHT,
+      </if>
+      <if test="goodsSlockassistweight != null" >
+        GOODS_SLOCKASSISTWEIGHT,
+      </if>
+      <if test="goodsFnum != null" >
+        GOODS_FNUM,
+      </if>
+      <if test="goodsFweight != null" >
+        GOODS_FWEIGHT,
+      </if>
+      <if test="goodsFassistweight != null" >
+        GOODS_FASSISTWEIGHT,
+      </if>
+      <if test="goodsOrdnum != null" >
+        GOODS_ORDNUM,
+      </if>
+      <if test="goodsOrdweight != null" >
+        GOODS_ORDWEIGHT,
+      </if>
+      <if test="goodsOrdassistweight != null" >
+        GOODS_ORDASSISTWEIGHT,
+      </if>
+      <if test="goodsSnum != null" >
+        GOODS_SNUM,
+      </if>
+      <if test="goodsSweight != null" >
+        GOODS_SWEIGHT,
+      </if>
+      <if test="goodsSassistweight != null" >
+        GOODS_SASSISTWEIGHT,
+      </if>
+      <if test="goodsBillnum != null" >
+        GOODS_BILLNUM,
+      </if>
+      <if test="goodsBillweight != null" >
+        GOODS_BILLWEIGHT,
+      </if>
+      <if test="goodsBillassistweight != null" >
+        GOODS_BILLASSISTWEIGHT,
+      </if>
+      <if test="goodsMacnum != null" >
+        GOODS_MACNUM,
+      </if>
+      <if test="goodsMacweight != null" >
+        GOODS_MACWEIGHT,
+      </if>
+      <if test="goodsMacassistweight != null" >
+        GOODS_MACASSISTWEIGHT,
+      </if>
+      <if test="goodsHangnum != null" >
+        GOODS_HANGNUM,
+      </if>
+      <if test="goodsHangweight != null" >
+        GOODS_HANGWEIGHT,
+      </if>
+      <if test="goodsHangassistweight != null" >
+        GOODS_HANGASSISTWEIGHT,
+      </if>
+      <if test="goodsLocknum != null" >
+        GOODS_LOCKNUM,
+      </if>
+      <if test="goodsLockweight != null" >
+        GOODS_LOCKWEIGHT,
+      </if>
+      <if test="goodsLockassistweight != null" >
+        GOODS_LOCKASSISTWEIGHT,
+      </if>
+      <if test="goodsMonum != null" >
+        GOODS_MONUM,
+      </if>
+      <if test="goodsMoweight != null" >
+        GOODS_MOWEIGHT,
+      </if>
+      <if test="goodsMoassistweight != null" >
+        GOODS_MOASSISTWEIGHT,
+      </if>
+      <if test="goodsExtnum != null" >
+        GOODS_EXTNUM,
+      </if>
+      <if test="goodsExtweight != null" >
+        GOODS_EXTWEIGHT,
+      </if>
+      <if test="goodsExtassistweight != null" >
+        GOODS_EXTASSISTWEIGHT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sumgoodsProId != null" >
+        #{sumgoodsProId,jdbcType=DECIMAL},
+      </if>
+      <if test="sumgoodsBatch != null" >
+        #{sumgoodsBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pricesetMakeprice != null" >
+        #{pricesetMakeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetBaseprice != null" >
+        #{pricesetBaseprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetAsprice != null" >
+        #{pricesetAsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetPrefprice != null" >
+        #{pricesetPrefprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetInsideprice != null" >
+        #{pricesetInsideprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetHangprice != null" >
+        #{pricesetHangprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldmakeprice != null" >
+        #{pricesetOldmakeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldbaseprice != null" >
+        #{pricesetOldbaseprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldasprice != null" >
+        #{pricesetOldasprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldprefprice != null" >
+        #{pricesetOldprefprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldinsideprice != null" >
+        #{pricesetOldinsideprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldhangprice != null" >
+        #{pricesetOldhangprice,jdbcType=DECIMAL},
+      </if>
+      <if test="dataVernum != null" >
+        #{dataVernum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFulfill != null" >
+        #{goodsFulfill,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNum != null" >
+        #{goodsNum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPiecenum != null" >
+        #{goodsPiecenum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSingernum != null" >
+        #{goodsSingernum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeight != null" >
+        #{goodsWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsAssistweight != null" >
+        #{goodsAssistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSupplynum != null" >
+        #{goodsSupplynum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSupplyweight != null" >
+        #{goodsSupplyweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSupplyassistweight != null" >
+        #{goodsSupplyassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSlocknum != null" >
+        #{goodsSlocknum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSlockweight != null" >
+        #{goodsSlockweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSlockassistweight != null" >
+        #{goodsSlockassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFnum != null" >
+        #{goodsFnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFweight != null" >
+        #{goodsFweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFassistweight != null" >
+        #{goodsFassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOrdnum != null" >
+        #{goodsOrdnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOrdweight != null" >
+        #{goodsOrdweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOrdassistweight != null" >
+        #{goodsOrdassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSnum != null" >
+        #{goodsSnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSweight != null" >
+        #{goodsSweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSassistweight != null" >
+        #{goodsSassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsBillnum != null" >
+        #{goodsBillnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsBillweight != null" >
+        #{goodsBillweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsBillassistweight != null" >
+        #{goodsBillassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMacnum != null" >
+        #{goodsMacnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMacweight != null" >
+        #{goodsMacweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMacassistweight != null" >
+        #{goodsMacassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsHangnum != null" >
+        #{goodsHangnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsHangweight != null" >
+        #{goodsHangweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsHangassistweight != null" >
+        #{goodsHangassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsLocknum != null" >
+        #{goodsLocknum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsLockweight != null" >
+        #{goodsLockweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsLockassistweight != null" >
+        #{goodsLockassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMonum != null" >
+        #{goodsMonum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMoweight != null" >
+        #{goodsMoweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMoassistweight != null" >
+        #{goodsMoassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsExtnum != null" >
+        #{goodsExtnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsExtweight != null" >
+        #{goodsExtweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsExtassistweight != null" >
+        #{goodsExtassistweight,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.WarehouseSumGoodsPro" >
+    update  WAREHOUSE_SUMGOODS_PRO
+    <set >
+      <if test="sumgoodsBatch != null" >
+        SUMGOODS_BATCH = #{sumgoodsBatch,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pricesetMakeprice != null" >
+        PRICESET_MAKEPRICE = #{pricesetMakeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetBaseprice != null" >
+        PRICESET_BASEPRICE = #{pricesetBaseprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetAsprice != null" >
+        PRICESET_ASPRICE = #{pricesetAsprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetPrefprice != null" >
+        PRICESET_PREFPRICE = #{pricesetPrefprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetInsideprice != null" >
+        PRICESET_INSIDEPRICE = #{pricesetInsideprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetHangprice != null" >
+        PRICESET_HANGPRICE = #{pricesetHangprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldmakeprice != null" >
+        PRICESET_OLDMAKEPRICE = #{pricesetOldmakeprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldbaseprice != null" >
+        PRICESET_OLDBASEPRICE = #{pricesetOldbaseprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldasprice != null" >
+        PRICESET_OLDASPRICE = #{pricesetOldasprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldprefprice != null" >
+        PRICESET_OLDPREFPRICE = #{pricesetOldprefprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldinsideprice != null" >
+        PRICESET_OLDINSIDEPRICE = #{pricesetOldinsideprice,jdbcType=DECIMAL},
+      </if>
+      <if test="pricesetOldhangprice != null" >
+        PRICESET_OLDHANGPRICE = #{pricesetOldhangprice,jdbcType=DECIMAL},
+      </if>
+      <if test="dataVernum != null" >
+        DATA_VERNUM = #{dataVernum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFulfill != null" >
+        GOODS_FULFILL = #{goodsFulfill,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsNum != null" >
+        GOODS_NUM = #{goodsNum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsPiecenum != null" >
+        GOODS_PIECENUM = #{goodsPiecenum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSingernum != null" >
+        GOODS_SINGERNUM = #{goodsSingernum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeight != null" >
+        GOODS_WEIGHT = #{goodsWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsAssistweight != null" >
+        GOODS_ASSISTWEIGHT = #{goodsAssistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSupplynum != null" >
+        GOODS_SUPPLYNUM = #{goodsSupplynum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSupplyweight != null" >
+        GOODS_SUPPLYWEIGHT = #{goodsSupplyweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSupplyassistweight != null" >
+        GOODS_SUPPLYASSISTWEIGHT = #{goodsSupplyassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSlocknum != null" >
+        GOODS_SLOCKNUM = #{goodsSlocknum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSlockweight != null" >
+        GOODS_SLOCKWEIGHT = #{goodsSlockweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSlockassistweight != null" >
+        GOODS_SLOCKASSISTWEIGHT = #{goodsSlockassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFnum != null" >
+        GOODS_FNUM = #{goodsFnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFweight != null" >
+        GOODS_FWEIGHT = #{goodsFweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsFassistweight != null" >
+        GOODS_FASSISTWEIGHT = #{goodsFassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOrdnum != null" >
+        GOODS_ORDNUM = #{goodsOrdnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOrdweight != null" >
+        GOODS_ORDWEIGHT = #{goodsOrdweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsOrdassistweight != null" >
+        GOODS_ORDASSISTWEIGHT = #{goodsOrdassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSnum != null" >
+        GOODS_SNUM = #{goodsSnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSweight != null" >
+        GOODS_SWEIGHT = #{goodsSweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsSassistweight != null" >
+        GOODS_SASSISTWEIGHT = #{goodsSassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsBillnum != null" >
+        GOODS_BILLNUM = #{goodsBillnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsBillweight != null" >
+        GOODS_BILLWEIGHT = #{goodsBillweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsBillassistweight != null" >
+        GOODS_BILLASSISTWEIGHT = #{goodsBillassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMacnum != null" >
+        GOODS_MACNUM = #{goodsMacnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMacweight != null" >
+        GOODS_MACWEIGHT = #{goodsMacweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMacassistweight != null" >
+        GOODS_MACASSISTWEIGHT = #{goodsMacassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsHangnum != null" >
+        GOODS_HANGNUM = #{goodsHangnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsHangweight != null" >
+        GOODS_HANGWEIGHT = #{goodsHangweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsHangassistweight != null" >
+        GOODS_HANGASSISTWEIGHT = #{goodsHangassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsLocknum != null" >
+        GOODS_LOCKNUM = #{goodsLocknum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsLockweight != null" >
+        GOODS_LOCKWEIGHT = #{goodsLockweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsLockassistweight != null" >
+        GOODS_LOCKASSISTWEIGHT = #{goodsLockassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMonum != null" >
+        GOODS_MONUM = #{goodsMonum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMoweight != null" >
+        GOODS_MOWEIGHT = #{goodsMoweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMoassistweight != null" >
+        GOODS_MOASSISTWEIGHT = #{goodsMoassistweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsExtnum != null" >
+        GOODS_EXTNUM = #{goodsExtnum,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsExtweight != null" >
+        GOODS_EXTWEIGHT = #{goodsExtweight,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsExtassistweight != null" >
+        GOODS_EXTASSISTWEIGHT = #{goodsExtassistweight,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where SUMGOODS_PRO_ID = #{sumgoodsProId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.WarehouseSumGoodsPro" >
+    update  WAREHOUSE_SUMGOODS_PRO
+    set SUMGOODS_BATCH = #{sumgoodsBatch,jdbcType=VARCHAR},
+      MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      PRICESET_MAKEPRICE = #{pricesetMakeprice,jdbcType=DECIMAL},
+      PRICESET_BASEPRICE = #{pricesetBaseprice,jdbcType=DECIMAL},
+      PRICESET_ASPRICE = #{pricesetAsprice,jdbcType=DECIMAL},
+      PRICESET_PREFPRICE = #{pricesetPrefprice,jdbcType=DECIMAL},
+      PRICESET_INSIDEPRICE = #{pricesetInsideprice,jdbcType=DECIMAL},
+      PRICESET_HANGPRICE = #{pricesetHangprice,jdbcType=DECIMAL},
+      PRICESET_OLDMAKEPRICE = #{pricesetOldmakeprice,jdbcType=DECIMAL},
+      PRICESET_OLDBASEPRICE = #{pricesetOldbaseprice,jdbcType=DECIMAL},
+      PRICESET_OLDASPRICE = #{pricesetOldasprice,jdbcType=DECIMAL},
+      PRICESET_OLDPREFPRICE = #{pricesetOldprefprice,jdbcType=DECIMAL},
+      PRICESET_OLDINSIDEPRICE = #{pricesetOldinsideprice,jdbcType=DECIMAL},
+      PRICESET_OLDHANGPRICE = #{pricesetOldhangprice,jdbcType=DECIMAL},
+      DATA_VERNUM = #{dataVernum,jdbcType=DECIMAL},
+      GOODS_FULFILL = #{goodsFulfill,jdbcType=DECIMAL},
+      GOODS_NUM = #{goodsNum,jdbcType=DECIMAL},
+      GOODS_PIECENUM = #{goodsPiecenum,jdbcType=DECIMAL},
+      GOODS_SINGERNUM = #{goodsSingernum,jdbcType=DECIMAL},
+      GOODS_WEIGHT = #{goodsWeight,jdbcType=DECIMAL},
+      GOODS_ASSISTWEIGHT = #{goodsAssistweight,jdbcType=DECIMAL},
+      GOODS_SUPPLYNUM = #{goodsSupplynum,jdbcType=DECIMAL},
+      GOODS_SUPPLYWEIGHT = #{goodsSupplyweight,jdbcType=DECIMAL},
+      GOODS_SUPPLYASSISTWEIGHT = #{goodsSupplyassistweight,jdbcType=DECIMAL},
+      GOODS_SLOCKNUM = #{goodsSlocknum,jdbcType=DECIMAL},
+      GOODS_SLOCKWEIGHT = #{goodsSlockweight,jdbcType=DECIMAL},
+      GOODS_SLOCKASSISTWEIGHT = #{goodsSlockassistweight,jdbcType=DECIMAL},
+      GOODS_FNUM = #{goodsFnum,jdbcType=DECIMAL},
+      GOODS_FWEIGHT = #{goodsFweight,jdbcType=DECIMAL},
+      GOODS_FASSISTWEIGHT = #{goodsFassistweight,jdbcType=DECIMAL},
+      GOODS_ORDNUM = #{goodsOrdnum,jdbcType=DECIMAL},
+      GOODS_ORDWEIGHT = #{goodsOrdweight,jdbcType=DECIMAL},
+      GOODS_ORDASSISTWEIGHT = #{goodsOrdassistweight,jdbcType=DECIMAL},
+      GOODS_SNUM = #{goodsSnum,jdbcType=DECIMAL},
+      GOODS_SWEIGHT = #{goodsSweight,jdbcType=DECIMAL},
+      GOODS_SASSISTWEIGHT = #{goodsSassistweight,jdbcType=DECIMAL},
+      GOODS_BILLNUM = #{goodsBillnum,jdbcType=DECIMAL},
+      GOODS_BILLWEIGHT = #{goodsBillweight,jdbcType=DECIMAL},
+      GOODS_BILLASSISTWEIGHT = #{goodsBillassistweight,jdbcType=DECIMAL},
+      GOODS_MACNUM = #{goodsMacnum,jdbcType=DECIMAL},
+      GOODS_MACWEIGHT = #{goodsMacweight,jdbcType=DECIMAL},
+      GOODS_MACASSISTWEIGHT = #{goodsMacassistweight,jdbcType=DECIMAL},
+      GOODS_HANGNUM = #{goodsHangnum,jdbcType=DECIMAL},
+      GOODS_HANGWEIGHT = #{goodsHangweight,jdbcType=DECIMAL},
+      GOODS_HANGASSISTWEIGHT = #{goodsHangassistweight,jdbcType=DECIMAL},
+      GOODS_LOCKNUM = #{goodsLocknum,jdbcType=DECIMAL},
+      GOODS_LOCKWEIGHT = #{goodsLockweight,jdbcType=DECIMAL},
+      GOODS_LOCKASSISTWEIGHT = #{goodsLockassistweight,jdbcType=DECIMAL},
+      GOODS_MONUM = #{goodsMonum,jdbcType=DECIMAL},
+      GOODS_MOWEIGHT = #{goodsMoweight,jdbcType=DECIMAL},
+      GOODS_MOASSISTWEIGHT = #{goodsMoassistweight,jdbcType=DECIMAL},
+      GOODS_EXTNUM = #{goodsExtnum,jdbcType=DECIMAL},
+      GOODS_EXTWEIGHT = #{goodsExtweight,jdbcType=DECIMAL},
+      GOODS_EXTASSISTWEIGHT = #{goodsExtassistweight,jdbcType=DECIMAL}
+    where SUMGOODS_PRO_ID = #{sumgoodsProId,jdbcType=DECIMAL}
+  </update>
+</mapper>
