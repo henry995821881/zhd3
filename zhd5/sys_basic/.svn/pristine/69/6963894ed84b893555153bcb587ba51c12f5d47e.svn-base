@@ -1,0 +1,190 @@
+package com.xyscm.sys.basic.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xyscm.sys.basic.common.constant.ErrorCode;
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicWarePlaceMapper;
+import com.xyscm.sys.basic.model.BasicOrg;
+import com.xyscm.sys.basic.model.BasicWareArea;
+import com.xyscm.sys.basic.model.BasicWarePlace;
+import com.xyscm.sys.basic.model.BasicWarePlaceEx;
+
+/**
+ * 
+ * 库位设置
+ * 
+ * @author Administrator
+ * 
+ */
+@Service
+public class BasicWarePlaceService {
+	Logger logger = LoggerFactory.getLogger(BasicWarePlaceService.class);
+	@Autowired
+	BasicWarePlaceMapper basicWarePlaceMapper;
+
+	/**
+	 * 
+	 * 
+	 * 查询库位
+	 * 
+	 * @param record
+	 *            .warehouseCode record.memeberCode
+	 * @return
+	 */
+	public List<BasicWarePlace> queryList(BasicWarePlace record) {
+
+		List<BasicWarePlace> list = null;
+		try {
+			list = basicWarePlaceMapper.queryList(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_WP_SELECT.getErrCode());
+		}
+
+		return list;
+
+	}
+	/**
+	 * 分页查询
+	 * @param pageNum
+	 * @param pageSize
+	 * @param record
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	public PageInfo getPage(int pageNum,int pageSize,BasicWarePlace record){
+		
+         PageInfo<BasicOrg> pageInfo=null;
+		try {
+			PageHelper.startPage(pageNum, pageSize);  // 开启分页，必须
+			
+			
+			  // 对原来的查询方法不需要任何修改
+			  Page page = (Page)basicWarePlaceMapper.queryList(record);
+			pageInfo = new PageInfo<BasicOrg>(page);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_WP_SELECT.getErrCode());
+		}
+		
+		return pageInfo;
+	}
+	
+	
+	/**
+	 * 分页查询
+	 * @param pageNum
+	 * @param pageSize
+	 * @param record
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	public PageInfo getPageWithWarehouse(int pageNum,int pageSize,BasicWarePlace record){
+		
+         PageInfo<BasicOrg> pageInfo=null;
+		try {
+			PageHelper.startPage(pageNum, pageSize);  // 开启分页，必须
+			
+			
+			  // 对原来的查询方法不需要任何修改
+			 Page page = (Page) basicWarePlaceMapper.queryListWithWarehouse(record);
+			pageInfo = new PageInfo<BasicOrg>(page);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_WP_SELECT.getErrCode());
+		}
+		
+		return pageInfo;
+	}
+	
+	
+	
+	
+	/**
+	 * 更新
+	 * 
+	 * @param record
+	 * @return
+	 */
+	public int updateWarePlace(BasicWarePlace record) {
+
+		int i = 0;
+		try {
+			i = basicWarePlaceMapper.updateByPrimaryKeySelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_WP_UPDATE.getErrCode());
+		}
+
+		return i;
+	}
+	
+	/**
+	 * 
+	 * @param record WAREPLACE_CODE MEMBER_CODE
+	 */
+	public void updateWarePlaceByCode(BasicWarePlace record){
+		
+		try {
+			basicWarePlaceMapper.updateWarePlaceByCode(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_WP_UPDATE.getErrCode());
+		}
+	}
+
+	/**
+	 * 
+	 * @param record
+	 *            .WAREPLACE_CODE record.memeberCode
+	 * @return
+	 */
+	public void deleteWarePlace(BasicWarePlace record) {
+
+		try {
+			 basicWarePlaceMapper.deleteWarePlace(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_WP_DELETE.getErrCode());
+		}
+	}
+
+	/**
+	 * 新增
+	 * 
+	 * @param
+	 * @return
+	 * 
+	 */
+	public int saveWarePlace(BasicWarePlace record) {
+		int i = 0;
+		try {
+			i = basicWarePlaceMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_WP_ADD.getErrCode());
+		}
+
+		return i;
+	}
+
+}

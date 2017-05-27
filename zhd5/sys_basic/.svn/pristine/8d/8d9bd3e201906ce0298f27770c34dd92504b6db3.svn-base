@@ -1,0 +1,81 @@
+
+mainContentLeft();
+
+$.post("warehouseManage/query",
+		  {
+		    memeber_code:'0000'
+		  },
+		 
+		  function(d,status){
+			var content= eval("("+d+")");
+		
+				var WarehouseSettinghtml = template('WarehouseSetting', content);
+			
+				
+				$("#content_warehouse").html(WarehouseSettinghtml);
+			
+				aTable();
+				
+			 
+		  });
+
+
+
+/**
+ * 
+ * 
+ * 
+ */
+
+var Verification_Disabled = function() {
+	if($('#WarehouseName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	$('#WarehouseName').val(table_details.eq(0).text());
+	$('#Assistant').val(table_details.eq(2).text());
+	$('#WarehouseType').val(table_details.eq(3).text());	
+	if($('#Supervision').val() === table_details.eq(4).text()) {
+		$('#Supervision').attr("checked", "checked");
+	}
+	if($('#Location').val() === table_details.eq(5).text()) {
+		$('#Location').attr("checked", "checked");
+	}
+	$('#Area').val(table_details.eq(6).text());
+	$('#Contact').val(table_details.eq(7).text());
+	$('#Phone').val(table_details.eq(8).text());
+	$('#Tel').val(table_details.eq(9).text());
+	$('#Add').val(table_details.eq(10).text());
+	$('#Remark').val(table_details.eq(11).text());
+}
+/*var table_detail_empty = function() {
+	$('#WarehouseName').val('');
+	$('#Assistant').val('');
+	$('#WarehouseType').val('');
+	$('#Area').val('');
+	$('#Contact').val('');
+	$('#Phone').val('');
+	$('#Tel').val('');
+	$('#Add').val('');
+	$('#Remark').val('');
+	$('#Location').removeAttr('checked');
+	$('#Supervision').removeAttr('checked');
+}*/
+$('#WarehouseName').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+	
+	
+	
+	
+});
+
+
+
+
+
+

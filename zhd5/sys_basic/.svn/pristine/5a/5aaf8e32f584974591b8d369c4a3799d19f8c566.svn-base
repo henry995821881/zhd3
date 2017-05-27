@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicPnTreeMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicPnTree" >
+    <id column="PNTREE_ID" property="pntreeId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="PNTREE_CODE" property="pntreeCode" jdbcType="VARCHAR" />
+    <result column="PNTREE_NAME" property="pntreeName" jdbcType="VARCHAR" />
+    <result column="PNTREE_PARENTCODE" property="pntreeParentcode" jdbcType="VARCHAR" />
+    <result column="PNTREE_NODECODE" property="pntreeNodecode" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PNTREE_ID, MEMBER_CODE, PNTREE_CODE, PNTREE_NAME, PNTREE_PARENTCODE, PNTREE_NODECODE, 
+    BASIC_SHARE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  BASIC_PNTREE
+    where PNTREE_ID = #{pntreeId,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.xyscm.sys.basic.model.BasicPnTree">
+  select 
+    <include refid="Base_Column_List" />
+    from  BASIC_PNTREE
+    where  MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+    and  PNTREE_PARENTCODE = #{pntreeParentcode,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_PNTREE
+    where PNTREE_ID = #{pntreeId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicPnTree" >
+    insert into  BASIC_PNTREE (PNTREE_ID, MEMBER_CODE, PNTREE_CODE, 
+      PNTREE_NAME, PNTREE_PARENTCODE, PNTREE_NODECODE, 
+      BASIC_SHARE)
+    values (#{pntreeId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{pntreeCode,jdbcType=VARCHAR}, 
+      #{pntreeName,jdbcType=VARCHAR}, #{pntreeParentcode,jdbcType=VARCHAR}, #{pntreeNodecode,jdbcType=VARCHAR}, 
+      #{basicShare,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicPnTree" >
+    insert into  BASIC_PNTREE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pntreeId != null" >
+        PNTREE_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="pntreeCode != null" >
+        PNTREE_CODE,
+      </if>
+      <if test="pntreeName != null" >
+        PNTREE_NAME,
+      </if>
+      <if test="pntreeParentcode != null" >
+        PNTREE_PARENTCODE,
+      </if>
+      <if test="pntreeNodecode != null" >
+        PNTREE_NODECODE,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pntreeId != null" >
+        #{pntreeId,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeCode != null" >
+        #{pntreeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeName != null" >
+        #{pntreeName,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeParentcode != null" >
+        #{pntreeParentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeNodecode != null" >
+        #{pntreeNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicPnTree" >
+    update  BASIC_PNTREE
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeCode != null" >
+        PNTREE_CODE = #{pntreeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeName != null" >
+        PNTREE_NAME = #{pntreeName,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeParentcode != null" >
+        PNTREE_PARENTCODE = #{pntreeParentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeNodecode != null" >
+        PNTREE_NODECODE = #{pntreeNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where PNTREE_ID = #{pntreeId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicPnTree" >
+    update  BASIC_PNTREE
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      PNTREE_CODE = #{pntreeCode,jdbcType=VARCHAR},
+      PNTREE_NAME = #{pntreeName,jdbcType=VARCHAR},
+      PNTREE_PARENTCODE = #{pntreeParentcode,jdbcType=VARCHAR},
+      PNTREE_NODECODE = #{pntreeNodecode,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL}
+    where PNTREE_ID = #{pntreeId,jdbcType=DECIMAL}
+  </update>
+</mapper>

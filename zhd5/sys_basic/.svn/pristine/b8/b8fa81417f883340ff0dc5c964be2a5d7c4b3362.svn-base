@@ -1,0 +1,564 @@
+<#assign base=request.contextPath />
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+	<div class="main_content_left">
+				<h4 class="title">查询</h4>
+				<ul class="menu_content Inquire">
+					<form id="query_company">
+						<li class="menu_content_list">
+							<span>开始时间：</span>
+							<input type="text" name="birthdayStart" id="birthdayStart" onClick="WdatePicker()" readonly="readonly">
+						</li>
+						<li class="menu_content_list">
+							<span>结束时间：</span>
+							<input type="text" name="birthdayEnd" id="birthdayEnd" onClick="WdatePicker()" readonly="readonly">
+						</li>
+						<li class="menu_content_list">
+							<span>代码：</span>
+							<input type="text" name="companyCode" id="companyCode" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>名称：</span>
+							<input type="text" name="companyName" id="companyName" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>简称：</span>
+							<input type="text" name="companyAbbreviate" id="companyAbbreviate" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>地区：</span>
+							<input type="text" name="areaCode" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>状态：</span>
+							<input type="text" name="companyState" id="companyState" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>信誉额度：</span>
+							<input type="text" name="companyAssessCredit" id="companyAssessCredit" value="" />
+						</li>
+						<li class="menu_content_list">
+							<input type="button" id="Inquire" onclick="query()" value="查询" class="InquireButton bg_1199c4" />
+							<input type="reset" value="重置" class="InquireButton" />
+						</li>
+					</form>
+						
+				</ul>
+				<h4 class="title">地区</h4>
+				<ul class="menu_content">
+					<li class="menu_content_group">
+						<ul class="nav_list_toggle menu_content_group_node areaPart" value="0">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi "></i>
+								<span>地区设置</span>
+							</li>
+						</ul>
+						<ul id="areaTreeLeft" class="pl_10 hidden">
+							
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="main_content_right">
+				<div class="crud_menu">
+					<ul class="">
+						<li opt="add" class="fl_l add_table_icon opt_"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li opt="update" class="fl_l modify_table_icon opt_"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+						<li opt="del" class="fl_l delete_table_icon opt_"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+						<li class="fl_l merge_table_icon"><i class="icon iconfont icon-shanchu1"></i>单位合并</li>
+						<li class="fl_l Import_table_icon"><i class="icon iconfont icon-tianjia "></i>导入</li>
+					</ul>
+				</div>
+				<div id="content_SetCompany"></div>
+	<!--弹出框 导入-->
+				<div class="add_table" id="Import_table">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>往来单位导入</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li >
+								<span>附件：</span>
+								<input type="file" name="" id="" value="" />
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+							</li>
+						</form>
+					</ul>
+				</div>
+				<!--弹出框 添加table-->
+				<div class="add_table_long" id="add_table">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>往来单位登记</span>
+					</h4>
+					<ul class="add_table_content">
+						<form id="add_company">
+							<input id="companyId" name="companyId"  value="" type="hidden" >
+							<input id="linkman_list" name="linkman_list" value="" type="hidden" >
+							<li class="fl_l">
+								<span>代码：</span>
+								<input type="text" name="companyCode" id="companyCode_table" value=""  readonly="readonly"/>
+							</li>
+							<li class="fl_l">
+								<span style="color: red;">名称：</span>
+								<input type="text" name="companyName" id="companyName_table" value="" />
+							</li>
+							<li class="fl_l">
+								<span style="color: red;">简称：</span>
+								<input type="text" name="companyAbbreviate" id="companyAbbreviate_table" value="" />
+							</li>
+							<li class="fl_l">
+								<span>助记码：</span>
+								<input type="text" name="companyMnemcode" id="companyMnemcode" value="" />
+							</li>
+							<li class="fl_l">
+								<span style="color: red;">地区：</span>
+								<select name="areaCode" id="select_areaCode" onfocus="areaLoad()">
+									<option value="0001">北京市</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>联系地址：</span>
+								<input type="text" name="companyAddr" id="companyAddr" value="" />
+							</li>
+							<li class="fl_l">
+								<span>联系人：</span>
+								<input type="text" name="companyLinkman" id="companyLinkman" value="" />
+							</li>
+							<li class="fl_l">
+								<span>法人代表：</span>
+								<input type="text" name="companyCorporation" id="companyCorporation" value="" />
+							</li>
+							<li class="fl_l">
+								<span>开户行：</span>
+								<input type="text" name="companyBank" id="companyBank" value="" />
+							</li>
+							<li class="fl_l">
+								<span>开票地址：</span>
+								<input type="text" name="companyInvoiceaddr" id="companyInvoiceaddr" value="" />
+							</li>
+							<li class="fl_l">
+								<span>账号：</span>
+								<input type="text" name="companyBankaccounts" id="companyBankaccounts" value="" />
+							</li>
+							<li class="fl_l">
+								<span>税号：</span>
+								<input type="text" name="companyTanu" id="companyTanu" value="" />
+							</li>
+							<li class="fl_l">
+								<span>电话：</span>
+								<input type="text" name="companyPhone" id="companyPhone" value="" />
+							</li>
+							<li class="fl_l">
+								<span>传真：</span>
+								<input type="text" name="companyFax" id="companyFax" value="" />
+							</li>
+							<li class="fl_l">
+								<span>邮政编码：</span>
+								<input type="text" name="companyPostcode" id="companyPostcode" value="" />
+							</li>
+							<li class="fl_l">
+								<span>业务员：</span>
+								<input type="text" name="employeeCode" id="employeeCode" value="" />
+							</li>
+							<li class="fl_l">
+								<span>授权方式：</span>
+								<select name="">
+									<option value="0">不控制</option>
+									<option value="1">角色</option>
+									<option value="2">机构</option>	
+									<option value="3">部门</option>
+									<option value="4">操作员</option>
+								</select>
+								<button>授权</button>
+							</li>
+							<li class="fl_l">
+								<span>分管部门：</span>
+								<select name="deptCode" id="deptCode">
+								</select>
+							</li>
+							<li class="fl_l">
+								<span style="color: red;">业务关系：</span>
+								<select name="companyAssessType" id="companyAssessType">
+									<option value="供应商">供应商</option>
+									<option value="客户">客户</option>
+									<option value="内部单位">内部单位</option>
+									<option value="货主">货主</option>
+									<option value="费用单位">费用单位</option>
+									<option value="质押单位">质押单位</option>
+								</select>
+							</li>
+							<li class="fl_l" >
+								<span>内部机构：</span>
+								<select name=""  readonly="readonly"	>
+									<option value="">隐藏</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>单位类型：</span>
+								<select name="companyClass" id="companyClass">
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>信誉额度：</span>
+								<select name="companyAssessCredit" id="companyAssessCredit">
+									<option value="1">高</option>
+									<option value="2">中</option>
+									<option value="3">低</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>资信等级：</span>
+								<input type="text" name="companyAssessGrade" id="companyAssessGrade" value="0级" disabled="" />
+							</li>
+							<li class="fl_l">
+								<span>客户状态：</span>
+								<input type="text" name="companyAssessState" id="companyAssessState" value="活跃" disabled="" />
+							</li>
+							<li class="fl_l">
+								<span>单位性质：</span>
+								<select name="companyProperty" id="companyProperty">
+									<option value="0">正式客户</option>
+									<option value="1">公共客户</option>
+									<option value="2">潜在客户</option>
+									<option value="3">放弃客户</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>客户来源：</span>
+								<select name="companySource" id="companySource">
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>客户类别：</span>
+								<select name="companyType" id="companyType">
+									<option value="0">企业用户</option>
+									<option value="1">个人用户</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>上级单位：</span>
+								<select name="companyParent" id="companyParent" >
+									<option value="0001">平台</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>所属行业：</span>
+								<select name="companyIndustry" id="companyIndustry">
+								</select>
+							</li>
+							<li class="fl_l">
+								<span style="width: 200px;">是否允许对其他货主显示信息：</span>
+								<input type="radio" name="allowquery" id="" value="0" />
+								<label>不允许</label>
+								<input type="radio" name="allowquery" id="" value="1" />
+								<label>允许</label>
+							</li>
+							<li class="fl_l">
+								<span>经营范围：</span>
+								<input type="text" name="companyRemark" id="companyRemark" value="" />
+							</li>
+							<li class="fl_l">
+								<span>状态：</span>
+								<input type="radio" name="companyState" id="" value="0" />
+								<label>启用</label>
+								<input type="radio" name="companyState" id="" value="1" />
+								<label>不启用</label>
+							</li>
+							<li class="text_r cl">
+								<input type="button" class="add_table_submit" onclick="save()" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+					<ul class="table_Switch">
+						<li id="lxr" class="fl_l Contact">联系人</li>
+						<li id="dwzh" class="fl_l UnitAccountNumber">单位账号</li>
+						<li id="xm" class="fl_l project">项目</li>
+					</ul>
+					<ul class="table_operating">
+						<li id="btn_add" class="fl_l add_table_icon"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li id="btn_del" class="fl_l delete_table_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+					</ul>
+					<ul>
+						<li id="linkman" class="overflow_auto">
+							<table cellspacing="1"  class="table" id="table_linkman">
+								<thead>
+								<tr>
+									<th>姓名</th>
+									<th>性别</th>
+									<th>生日</th>
+									<th>电话</th>
+									<th>MSN</th>
+									<th>QQ</th>
+									<th>传真号</th>
+									<th>邮箱</th>
+									<th>手机</th>
+									<th>住址</th>
+									<th>职位</th>
+									<th>备注</th>
+								</tr>
+								</thead>
+								<tbody id="table_linkman_body">
+								</tbody>
+								<tr>
+									<td colspan="12">
+										合计（<span>0</span>条）
+									</td>
+								</tr>
+							</table>
+						</li>
+						<li id="account" class="hide">
+							<table cellspacing="1"  class="table" id="table_account">
+								<thead>
+								<tr>
+									<th>账号</th>
+									<th>开会银行</th>
+									<th>备注</th>
+								</tr>
+								</thead>
+								<tbody id="table_account_body">
+								</tbody>
+								<tr>
+									<td colspan="3">
+										合计（<span>0</span>条）
+									</td>
+								</tr>
+							</table>
+						</li>
+						<li id="project" class="hide">
+							<table cellspacing="1"  class="table" id="table_project">
+								<thead>
+								<tr>
+									<th>日期</th>
+									<th>名称</th>
+									<th>备注</th>
+								</tr>
+								</thead>
+								<tbody id="table_project_body">
+								</tbody>
+								<tr>
+									<td colspan="3">
+										合计（<span>0</span>条）
+									</td>
+								</tr>
+							</table>
+						</li>
+					</ul>
+				</div>
+				<!--弹出框 添加组-->
+				<div class="add_table" id="add_jt">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_group_close"></i>
+						<span>地区设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li class="fl_l">
+								<span>地区名称：</span>
+								<input type="text" name="GroupName" id="GroupName" value="" />
+							</li>
+							<li class="fl_l">
+								<span>助记码：</span>
+								<input type="text" name="AssistantCode" id="AssistantCode" value="" />
+							</li>
+							<li class="remark cl">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+			</div>
+		<script id="SetCompany" type="text/html">
+			
+				<div class="main_content_right_table">
+					<table id="tbl" class="table" cellspacing="1">
+						<tr class="table_title">
+							<td>代码</td>
+							<td>名称</td>
+							<td>日期</td>
+							<td>简称</td>
+							<td>状态</td>
+							<td>信誉额度</td>
+							<td>客户类别</td>
+							<td>客户来源</td>
+							<td>单位类型</td>
+							<td>所属行业</td>
+							<td>电话</td>
+							<td>传真</td>
+							<td>法人代表</td>
+							<td>账号</td>
+							<td>开户行</td>
+							<td>税号</td>
+							<td>联系地址</td>
+							<td>地区</td>
+							<td>助记码</td>
+							<td>联系人</td>
+							<td>邮政编码</td>
+							<td>开票地址</td>
+							<td>业务员</td>
+							<td>分管部门</td>
+							<td>业务关系</td>
+							<td>内部机构</td>
+							<td>授权模式</td>
+							<td>登记机构</td>
+							<td>经验范围</td>
+							<td style="display:none">companyAssessGrade</td>
+							<td style="display:none">companyAssessState</td>
+							<td style="display:none">companyProperty</td>
+							<td style="display:none">allowquery</td>
+							<td style="display:none">companyState</td>
+							<td style="display:none">companyClass</td>
+						</tr>
+			<% for(var i=0;i<data.length;i++) {%>
+						<tr class="table_detail" companyId="<%=data[i].companyId%>">
+							<td><%=data[i].companyCode%></td>
+							<td><%=data[i].companyName%></td>
+							<td><%=data[i].dataSystemdates%></td>
+							<td><%=data[i].companyAbbreviate%></td>
+							<td><%=data[i].companyState%></td>
+							<td><%=data[i].companyAssessCredit%></td>
+							<td><%=data[i].companyType%></td>
+							<td><%=data[i].companySource%></td>
+							<td><%=data[i].companyClass%></td>
+							<td><%=data[i].companyIndustry%></td>
+							<td><%=data[i].companyPhone%></td>
+							<td><%=data[i].companyFax%></td>
+							<td><%=data[i].companyCorporation%></td>
+							<td><%=data[i].companyBankaccounts%></td>
+							<td><%=data[i].companyBank%></td>
+							<td><%=data[i].companyTanu%></td>
+							<td><%=data[i].companyAddr%></td>
+							<td><%=data[i].areaCode%></td>
+							<td><%=data[i].companyMnemcode%></td>
+							<td><%=data[i].companyLinkman%></td>
+							<td><%=data[i].companyPostcode%></td>
+							<td><%=data[i].companyInvoiceaddr%></td>
+							<td><%=data[i].employeeCode%></td>
+							<td><%=data[i].deptCode%></td>
+							<td><%=data[i].companyAssessType%></td>
+							<td><%=data[i].companyOrgcode%></td>
+							<td><%=data[i].companyPermitmode%></td>
+							<td><%=data[i].dataEditOrg%></td>
+							<td><%=data[i].companyRemark%></td>
+							<td style="display:none">0级</td>
+							<td style="display:none">活跃</td>
+							<td style="display:none"><%=data[i].companyProperty%></td>
+							<td style="display:none"><%=data[i].allowquery%></td>
+							<td style="display:none"><%=data[i].companyState%></td>
+							<td style="display:none"><%=data[i].companyClass%></td>
+						</tr>
+			<%}%>
+					</table>
+				</div>
+				<div id="page" class="main_content_right_page">
+					<%include('mainpage')%>
+				</div>
+				
+				
+		</script>
+		
+		
+		<script id="areaTree" type="text/html">
+		<% for(var i=0;i<data.length;i++) {%>
+		<li>	
+						<ul class="nav_list_toggle menu_content_group_node company_tree" areaCode="<%=data[i].first.areaCode%>"  id="<%=data[i].first.areaNodecode%>" areaId="<%=data[i].first.areaId%>" value="1">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+									<span><%=data[i].first.areaName%></span>
+							</li>
+						</ul>
+
+					<ul class="pl_10 hidden">
+						<% for(var j=0;j<data[i].second.length;j++) {%>
+								<li>
+									<ul class="nav_list_toggle menu_content_group_node company_tree"  areaCode="<%=data[i].second[j].areaCode%>"  id="<%=data[i].second[j].areaNodecode%>" areaId="<%=data[i].second[j].areaId%>" value="2">
+											<li>
+												<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+												<span><%=data[i].second[j].areaName%></span>
+											</li>
+									</ul>
+									<ul class="pl_10 hidden nextTree_ul" next="<%=data[i].second[j].areaId%>">
+									</ul>
+								</li>
+						<%}%>	
+					</ul>
+				
+		</li>		
+		<%}%>
+		
+		</script>	
+		
+		<script id="nextTree" type="text/html">
+					<% for(var j=0;j<data.length;j++) {%>	
+						<li>
+							<ul class="nav_list_toggle menu_content_group_node nextTree company_tree" areaCode="<%=data[j].areaCode%>" id="<%=data[j].areaNodecode%>" areaId="<%=data[j].areaId%>" value="3">
+								<li>
+										<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+										<span><%=data[j].areaName%></span>
+								</li>
+							</ul>
+							<ul class="pl_10 hidden	nextTree_ul" next="<%=data[j].areaId%>">	
+							</ul>
+						<li>
+					<%}%>	
+		</script>
+		
+		<script id="add_table_linkman" type="text/html">
+					<tr class="table_detail">
+						<td><input type="text" style="width: 100px;"></td>
+						<td>
+							<select style="width: 100px;">
+								<option value="男">男
+								<option value="女">女
+							</select>
+						</td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+					</tr> 
+		</script>
+		
+		<script id="add_table_account" type="text/html">
+					<tr class="table_detail">
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+					</tr> 
+		</script>
+		
+		<script id="add_table_project" type="text/html">
+					<tr class="table_detail">
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+						<td><input type="text" style="width: 100px;" value=""></td>
+					</tr> 
+		</script>
+		
+		<script src="${base}js/companyManage/companyManage.js" type="text/javascript" charset="utf-8"></script>
+	
+	</body>
+
+</html>

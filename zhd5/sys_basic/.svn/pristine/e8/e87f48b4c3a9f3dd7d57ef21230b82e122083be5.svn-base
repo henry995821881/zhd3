@@ -1,0 +1,419 @@
+
+/****************************分页****************************/
+var page_size = 2;
+var current_page_g=1;
+function page_init(current_page_,max_page_){
+		
+	//初始化页面分页
+	   pageHtml();
+//分页
+	 $('.pagination').jqPagination({
+		//link_string : '/?page={page_number}',
+		current_page: current_page_, //设置当前页 默认为1
+		max_page : max_page_, //设置最大页 默认为1
+		page_string : '当前第{current_page}页,共{max_page}页',
+		paged :function(c_page) {
+			//回发事件。。。
+			current_page_g = c_page;
+			query_(c_page);
+		}
+	});
+	
+}
+/********************************************************/
+
+
+/**
+ * 加载仓库
+ */
+
+var current_warehouse_code='';
+var current_warehouse_name='';
+
+$.post("warehouseManage/query",
+			  {
+			    memeber_code:'0000'
+			  },
+			 
+			  function(d,status){
+				  var content= eval("("+d+")");
+					//验证返回数据
+				
+			
+					var html = template('warehouse_tpl1', content);
+					
+					$("#warehouse_ul").html(html);
+					
+					
+					
+					aGroup();
+					//绑定事件
+					$("li.wareplace_oper").on('click', function() {
+						console.log('库位');
+						var warehouseCode = $(this).attr("warehouseCode");
+						var warehouseName = $(this).attr("warehouseName");
+					    
+						$("#warehouseName_1").val(warehouseName);
+						$("#warehouseCode_1").val(warehouseCode);
+						
+						
+						query_(1);
+						
+						//查询库区
+						query_ware_area(warehouseCode);
+						
+						
+					});
+					
+				
+			  });
+
+
+
+
+
+
+
+
+
+function query_ware_area(warehouse_code){
+	
+	
+	$.post("wareAreaManage/query",
+			  {
+		        memberCode:'0000',
+			    warehouseCode:warehouse_code
+			  },
+			 
+			  function(d,status){
+				  var content= eval("("+d+")");
+					//验证返回数据
+					
+				 
+				   
+					var html = template('wareare_tpl', content);
+					
+					$("#ReservoirArea").html(html);
+					
+				
+			  });
+}
+
+
+
+//查询
+function query_form_button(){
+	
+	query_(1);
+}
+//重置
+//...
+
+function reset_form_button(){
+
+	
+	$("#warehouseName_1").val("");
+	$("#warehouseCode_1").val("");
+	$("#wareplaceWregion_").val("");
+	$("#wareplaceGregion_").val("");
+	
+}
+
+
+
+
+
+
+function query_(current_page_){
+	
+	
+	
+	var $form = $('#form_query');
+
+	var data = $form.serialize();
+	data = data+"&current_page=" +current_page_;
+	data = data+"&page_size=" +page_size;
+
+	
+	$.post("warePlaceManage/query/page",
+			 data,
+			 
+			  function(d,status){
+		     var content= eval("("+d+")");
+				
+			
+			
+					var html = template('wareplace_tpl', content);
+					
+					$("#content_wareplace").html(html);
+					
+				
+						aTable();
+				
+						page_init(current_page_,content.max_page);
+				
+			  });
+	
+}
+
+
+var Verification_Disabled = function() {
+	if($('#Location').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	
+	$("#wareplaceCode_").val(table_details.eq(1).attr("wareplaceCode"));
+	$('#ReservoirArea').val(table_details.eq(1).attr("data"));
+	$('#CargoArea').val(table_details.eq(2).attr("data"));
+	$('#Location').val(table_details.eq(3).attr("data"));	
+	$('#Types').val(table_details.eq(4).attr("data"));
+	$('#Minimum').val(table_details.eq(5).attr("data"));
+	$('#Maximum').val(table_details.eq(6).attr("data"));
+	$('#GraphicLines').val(table_details.eq(7).attr("data"));
+	$('#GraphicColumns').val(table_details.eq(8).attr("data"));
+	$('#VideoEquipment').val(table_details.eq(9).attr("data"));
+	$('#Remark').val(table_details.eq(10).attr("data"));
+}
+/*var table_detail_empty = function() {
+	$('#ReservoirArea').val('');
+	$('#CargoArea').val('');
+	$('#Location').val('');
+	$('#Minimum').val('');
+	$('#Maximum').val('');
+	$('#GraphicLines').val('');
+	$('#GraphicColumns').val('');
+	$('#VideoEquipment').val('');
+	$('#Types').val('');
+	$('#Remark').val('');
+}*/
+$('#Location').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+
+
+
+
+//判断是增加还是修改
+var flag = "";
+$("li.oper_").on('click', function() {
+	
+	flag = $(this).attr("data");
+	
+	
+	//弹出
+	if(flag=='add'){
+		//验证
+		if($("li.menu_content_group_node.active").length<1){
+			alert("请选择仓库！");
+			return;
+		}
+		 //跳出窗口
+		 AddTable();
+	}
+	
+	if(flag=='update'){
+		
+		 //验证
+		if($(".table_detail.active").length <1){
+			alert("请选择库位");
+			return;
+		}
+		 //跳出窗口
+		 ModifyTable();
+	}
+	
+	
+	//加载视频设备
+	init_device();
+	
+	if(flag=='del'){
+		
+		//删除
+	  
+		 //验证
+		if($(".table_detail.active").length <1){
+			alert("请选择库位");
+			return;
+		}
+	   
+	var wareplaceCode= $('.table_detail.active').find('td').eq(1).attr("wareplaceCode");
+		
+		var data={'wareplaceCode':wareplaceCode};
+		 var url ="warePlaceManage/delete";
+		$.post(url, data, function(d) {
+			var content= eval("("+d+")");
+			//验证返回数据
+			if(!validated_return_data(content)){
+				
+				alert(content.msg);
+				return;
+			}
+			close_window();
+			query_(current_page_g);
+
+		});
+		
+	}
+});
+
+
+function wareplace_oper(){
+	
+	
+	var msg = validated_form();
+	if(msg != 'ok'){
+		
+		alert(msg);
+		return;
+	}
+	
+	  if(flag =="add"){
+			 
+			 save_wareplace();
+		 }else if(flag =="update"){
+			 update_wareplace();
+		 }
+		
+	
+}
+
+
+function save_wareplace(){
+	
+	
+
+	
+var warehouseCode =   $("li.menu_content_group_node.active").attr("warehouseCode");	
+
+
+
+
+	$("#warehouseCode_2").val(warehouseCode);
+	
+	var $form = $('#form_wareplace');
+	var data = $form.serialize();
+	
+	var url ="warePlaceManage/add";
+	$.post(url, data, function(d) {
+		var content= eval("("+d+")");
+		//验证返回数据
+		if(!validated_return_data(content)){
+			
+			alert(content.msg);
+			return;
+		}
+		
+		close_window();
+		query_(1);
+			
+		
+
+	});
+	
+	
+}
+
+function update_wareplace(){
+	
+	var warehouseCode =   $("li.menu_content_group_node.active").attr("warehouseCode");	
+
+	
+
+
+
+		$("#warehouseCode_2").val(warehouseCode);
+		
+		
+	var $form = $('#form_wareplace');
+	var data = $form.serialize();
+	
+	var url ="warePlaceManage/update";
+	$.post(url, data, function(d) {
+		var content= eval("("+d+")");
+		//验证返回数据
+		if(!validated_return_data(content)){
+			
+			alert(content.msg);
+			return;
+		}
+	
+		query_(current_page_g);
+		close_window();
+			
+		
+
+	});
+	
+}
+
+
+
+//加载视频设备
+function init_device(){
+	
+	$.post("monitor/query",
+			  {
+			    memeber_code:'0000'
+			   
+			  },
+			 
+			  function(d,status){
+				var content=eval("("+d+")");
+			
+			
+				
+				var html='';
+				var data = content.data;
+				  for(var i =0;i<data.length;i++){
+					  
+					html +='<option  deviceid="'+data[i].deviceId+'"  value="'+data[i].deviceName+'">'+data[i].deviceName+'</option>';  
+
+				  }
+				  $("#VideoEquipment").html(html);
+					
+				  
+				//如果是修改 
+					   if(flag =='update'){
+					   var device_name =  $('.table_detail.active').find('td').eq(9).attr("data");
+						$("#VideoEquipment").val(device_name);
+					}
+				
+			  });
+}
+
+/***
+ * 表单验证
+ * @returns {String}
+ */
+function validated_form(){
+	var msg ='ok';
+	
+	if($("#Location").val()==''){
+		
+		msg="库位不能空";
+	}
+	
+	
+	
+	return msg;
+	
+}
+
+
+//@ sourceURL=product.js  
+
+
+
+
+
+
+
+
+
+

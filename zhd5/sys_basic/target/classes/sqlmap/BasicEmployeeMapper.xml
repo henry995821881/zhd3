@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicEmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicEmployee" >
+    <id column="EMPLOYEE_ID" property="employeeId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_CODE" property="employeeCode" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_NAME" property="employeeName" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_MNEMCODE" property="employeeMnemcode" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR" />
+    <result column="WORKTYPE_NAME" property="worktypeName" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_JOB" property="employeeJob" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_SEX" property="employeeSex" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_IDCARD" property="employeeIdcard" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_NATIVE" property="employeeNative" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_SPECIALTY" property="employeeSpecialty" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_PARTY" property="employeeParty" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_TECHNICAL" property="employeeTechnical" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_NATION" property="employeeNation" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_MARRIAGE" property="employeeMarriage" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_DEGREE" property="employeeDegree" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_BIRTHDAY" property="employeeBirthday" jdbcType="TIMESTAMP" />
+    <result column="EMPLOYEE_JOINDATE" property="employeeJoindate" jdbcType="TIMESTAMP" />
+    <result column="EMPLOYEE_ADDR" property="employeeAddr" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_PHONE" property="employeePhone" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_MOBILE" property="employeeMobile" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_EMAIL" property="employeeEmail" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_CLASS" property="employeeClass" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_STATE" property="employeeState" jdbcType="DECIMAL" />
+    <result column="EMPLOYEE_REMARK" property="employeeRemark" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EMPLOYEE_ID, MEMBER_CODE, EMPLOYEE_CODE, EMPLOYEE_NAME, EMPLOYEE_MNEMCODE, ORG_CODE, 
+    DEPT_CODE, WORKTYPE_NAME, EMPLOYEE_JOB, EMPLOYEE_SEX, EMPLOYEE_IDCARD, EMPLOYEE_NATIVE, 
+    EMPLOYEE_SPECIALTY, EMPLOYEE_PARTY, EMPLOYEE_TECHNICAL, EMPLOYEE_NATION, EMPLOYEE_MARRIAGE, 
+    EMPLOYEE_DEGREE, EMPLOYEE_BIRTHDAY, EMPLOYEE_JOINDATE, EMPLOYEE_ADDR, EMPLOYEE_PHONE, 
+    EMPLOYEE_MOBILE, EMPLOYEE_EMAIL, EMPLOYEE_CLASS, EMPLOYEE_STATE, EMPLOYEE_REMARK, 
+    BASIC_SHARE
+  </sql>
+  
+  <!-- 查询seq -->
+  <!-- <select  id="getSeq" resultType="java.lang.Long">
+	SELECT BASIC_EMPLOYEE_SEQ.NEXTVAL FROM DUAL
+  </select >-->
+  
+  
+  	<select id="queryAll" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from BASIC_EMPLOYEE ORDER BY EMPLOYEE_CODE DESC
+  	</select>
+  	
+  <select id="queryByBean" resultMap="BaseResultMap" parameterType="com.xyscm.sys.basic.model.BasicEmployee">
+  	select 
+  	<include refid="Base_Column_List" />
+  	from BASIC_EMPLOYEE
+  	where 1=1
+  	<if test="employeeCode !=null and employeeCode != ''" >
+      and EMPLOYEE_CODE = #{employeeCode}
+    </if>
+    <if test="employeeName !=null and employeeName != ''" >
+      and EMPLOYEE_NAME like '%'|| #{employeeName} ||'%'
+    </if>
+    <if test="employeeMnemcode !=null and employeeMnemcode != ''" >
+      and EMPLOYEE_MNEMCODE = #{employeeMnemcode}
+    </if>
+    <if test="orgCode !=null and orgCode != ''" >
+      and ORG_CODE = #{orgCode}
+    </if>
+    <if test="deptCode !=null and deptCode != ''" >
+      and DEPT_CODE = #{deptCode}
+    </if>
+  </select>
+  	
+  	
+  	<select id="getByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select  
+  	<include refid="Base_Column_List" />
+  	from BASIC_EMPLOYEE
+  	where EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  	</select>
+  	
+	<select id="getByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select  
+  	<include refid="Base_Column_List" />
+  	from BASIC_EMPLOYEE
+  	where EMPLOYEE_NAME = #{employeeName,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  	</select>
+
+
+	<insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicEmployee" >
+    insert into BASIC_EMPLOYEE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        EMPLOYEE_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="true" >
+        EMPLOYEE_CODE,
+      </if>
+      <if test="employeeName != null" >
+        EMPLOYEE_NAME,
+      </if>
+      <if test="employeeMnemcode != null" >
+        EMPLOYEE_MNEMCODE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE,
+      </if>
+      <if test="worktypeName != null" >
+        WORKTYPE_NAME,
+      </if>
+      <if test="employeeJob != null" >
+        EMPLOYEE_JOB,
+      </if>
+      <if test="employeeSex != null" >
+        EMPLOYEE_SEX,
+      </if>
+      <if test="employeeIdcard != null" >
+        EMPLOYEE_IDCARD,
+      </if>
+      <if test="employeeNative != null" >
+        EMPLOYEE_NATIVE,
+      </if>
+      <if test="employeeSpecialty != null" >
+        EMPLOYEE_SPECIALTY,
+      </if>
+      <if test="employeeParty != null" >
+        EMPLOYEE_PARTY,
+      </if>
+      <if test="employeeTechnical != null" >
+        EMPLOYEE_TECHNICAL,
+      </if>
+      <if test="employeeNation != null" >
+        EMPLOYEE_NATION,
+      </if>
+      <if test="employeeMarriage != null" >
+        EMPLOYEE_MARRIAGE,
+      </if>
+      <if test="employeeDegree != null" >
+        EMPLOYEE_DEGREE,
+      </if>
+      <if test="employeeBirthday != null" >
+        EMPLOYEE_BIRTHDAY,
+      </if>
+      <if test="employeeJoindate != null" >
+        EMPLOYEE_JOINDATE,
+      </if>
+      <if test="employeeAddr != null" >
+        EMPLOYEE_ADDR,
+      </if>
+      <if test="employeePhone != null" >
+        EMPLOYEE_PHONE,
+      </if>
+      <if test="employeeMobile != null" >
+        EMPLOYEE_MOBILE,
+      </if>
+      <if test="employeeEmail != null" >
+        EMPLOYEE_EMAIL,
+      </if>
+      <if test="employeeClass != null" >
+        EMPLOYEE_CLASS,
+      </if>
+      <if test="employeeState != null" >
+        EMPLOYEE_STATE,
+      </if>
+      <if test="employeeRemark != null" >
+        EMPLOYEE_REMARK,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        BASIC_EMPLOYEE_SEQ.nextval,
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="true" >
+        (select  lpad((max(bb.EMPLOYEE_CODE)+1),5,'0')as code from BASIC_EMPLOYEE bb),
+      </if>
+      <if test="employeeName != null" >
+        #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeMnemcode != null" >
+        #{employeeMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="worktypeName != null" >
+        #{worktypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeJob != null" >
+        #{employeeJob,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSex != null" >
+        #{employeeSex,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeIdcard != null" >
+        #{employeeIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNative != null" >
+        #{employeeNative,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSpecialty != null" >
+        #{employeeSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeParty != null" >
+        #{employeeParty,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeTechnical != null" >
+        #{employeeTechnical,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNation != null" >
+        #{employeeNation,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeMarriage != null" >
+        #{employeeMarriage,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeDegree != null" >
+        #{employeeDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeBirthday != null" >
+        #{employeeBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeJoindate != null" >
+        #{employeeJoindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeAddr != null" >
+        #{employeeAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhone != null" >
+        #{employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeMobile != null" >
+        #{employeeMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEmail != null" >
+        #{employeeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeClass != null" >
+        #{employeeClass,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeState != null" >
+        #{employeeState,jdbcType=DECIMAL},
+      </if>
+      <if test="employeeRemark != null" >
+        #{employeeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+
+<update id="update" parameterType="com.xyscm.sys.basic.model.BasicEmployee" >
+    update BASIC_EMPLOYEE
+    <set>
+      <if test="employeeName != null" >
+        EMPLOYEE_NAME = #{employeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeMnemcode != null" >
+        EMPLOYEE_MNEMCODE = #{employeeMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="worktypeName != null" >
+        WORKTYPE_NAME = #{worktypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeJob != null" >
+        EMPLOYEE_JOB = #{employeeJob,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSex != null" >
+        EMPLOYEE_SEX = #{employeeSex,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeIdcard != null" >
+        EMPLOYEE_IDCARD = #{employeeIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNative != null" >
+        EMPLOYEE_NATIVE = #{employeeNative,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeSpecialty != null" >
+        EMPLOYEE_SPECIALTY = #{employeeSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeParty != null" >
+        EMPLOYEE_PARTY = #{employeeParty,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeTechnical != null" >
+        EMPLOYEE_TECHNICAL = #{employeeTechnical,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeNation != null" >
+        EMPLOYEE_NATION = #{employeeNation,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeMarriage != null" >
+        EMPLOYEE_MARRIAGE = #{employeeMarriage,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeDegree != null" >
+        EMPLOYEE_DEGREE = #{employeeDegree,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeBirthday != null" >
+        EMPLOYEE_BIRTHDAY = #{employeeBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeJoindate != null" >
+        EMPLOYEE_JOINDATE = #{employeeJoindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="employeeAddr != null" >
+        EMPLOYEE_ADDR = #{employeeAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="employeePhone != null" >
+        EMPLOYEE_PHONE = #{employeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeMobile != null" >
+        EMPLOYEE_MOBILE = #{employeeMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeEmail != null" >
+        EMPLOYEE_EMAIL = #{employeeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeClass != null" >
+        EMPLOYEE_CLASS = #{employeeClass,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeState != null" >
+        EMPLOYEE_STATE = #{employeeState,jdbcType=DECIMAL},
+      </if>
+      <if test="employeeRemark != null" >
+        EMPLOYEE_REMARK = #{employeeRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where MEMBER_CODE = #{memberCode,jdbcType=VARCHAR} and EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR}
+ </update>
+
+	<delete id="delete"  parameterType="java.lang.String" >
+    delete from BASIC_EMPLOYEE
+    where EMPLOYEE_CODE = #{employeeCode,jdbcType=DECIMAL} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </delete>
+
+	<!-- public int getCountByCode(@Param("orgCode")String orgCode, @Param("deptCode")String deptCode, String other1,
+			String other2, String other3, @Param("memberCode")String memberCode);	 -->
+	<select id="getCountByCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from BASIC_EMPLOYEE
+  	</select>
+
+
+	<select id="queryPdaEmployee" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from BASIC_EMPLOYEE where WORKTYPE_NAME = #{worktypeName,jdbcType=VARCHAR}
+  	</select>
+
+  
+  
+</mapper>

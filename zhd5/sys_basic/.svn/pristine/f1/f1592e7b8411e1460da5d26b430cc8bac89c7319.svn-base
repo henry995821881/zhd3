@@ -1,0 +1,112 @@
+package com.xyscm.sys.basic.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicProductAreaMapper;
+import com.xyscm.sys.basic.model.BasicOrg;
+import com.xyscm.sys.basic.model.BasicProductArea;
+import com.xyscm.sys.basic.model.BasicWarehouse;
+
+/**
+ * 
+ * @author henry 产地设置
+ * 
+ */
+@Service
+public class BasicProductAreaService {
+
+	@Autowired
+	BasicProductAreaMapper basicProductAreaMapper;
+
+	/**
+	 * 
+	 * @param record memberCode
+	 * @return
+	 */
+	public List<BasicProductArea> queryList(BasicProductArea record) {
+
+		List<BasicProductArea> list = null;
+		try {
+			list = basicProductAreaMapper.queryList(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001","查询产地出错!");
+		}
+		return list;
+
+	}
+	
+	
+
+	/**
+	 * 分页查询
+	 * @param pageNum
+	 * @param pageSize
+	 * @param record
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	public PageInfo getPage(int pageNum,int pageSize,BasicProductArea record){
+		
+         PageHelper.startPage(pageNum, pageSize);  // 开启分页，必须
+		
+		
+	      // 对原来的查询方法不需要任何修改
+	      Page page = (Page)basicProductAreaMapper.queryList(record);
+		PageInfo<BasicOrg> pageInfo = new PageInfo<BasicOrg>(page); // 对page对象包了一层，里面有一些翻页需要的信息
+		
+		return pageInfo;
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param record membercode PRODUCTAREA_CODE
+	 */
+	public void updateProductArea(BasicProductArea record){
+		try {
+			basicProductAreaMapper.updateProductArea(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001","更新产地出错!");
+		}
+	}
+	
+	/**
+	 * 
+	 * @param record record membercode PRODUCTAREA_CODE
+	 */
+	public void deleteProductArea(BasicProductArea record){
+		
+		try {
+			basicProductAreaMapper.deleteProductArea(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001","删除产地出错!");
+		}
+	}
+	
+	
+	public void saveProductArea(BasicProductArea record){
+		try {
+			basicProductAreaMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001","保存产地出错!");
+		}
+	}
+}

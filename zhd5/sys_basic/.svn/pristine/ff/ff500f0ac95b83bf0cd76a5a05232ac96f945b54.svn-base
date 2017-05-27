@@ -1,0 +1,39 @@
+package com.xyscm.sys.basic.controller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.xyscm.sys.basic.cas.User;
+import com.xyscm.sys.basic.cas.util.SessionUtils;
+
+@Controller
+public class Entry {
+
+	private static final Logger logger = LoggerFactory.getLogger(Entry.class.getName());
+	
+	@RequestMapping("/index")
+	public ModelAndView login(){
+		
+		 ModelAndView modelAndView = new ModelAndView("entry/entry"); 
+		 
+		User user = SessionUtils.getUserInfo();
+    	logger.debug("user="+user);
+    	
+    	modelAndView.addObject("user", user);
+		
+		return modelAndView;
+		
+	}
+	
+	@RequestMapping("/about")
+	public String about(){
+		
+		
+		return "entry/about";
+	}
+	
+	
+}

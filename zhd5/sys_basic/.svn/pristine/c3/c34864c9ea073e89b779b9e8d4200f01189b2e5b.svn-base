@@ -1,0 +1,35 @@
+var Verification_Disabled = function() {
+	if($('#Name').val() === ''||$('#IndustryCategory').val() === null||$('#TaxRate').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	$('#Name').val(table_details.eq(0).text());
+	$('#Assistant').val(table_details.eq(2).text());
+	$('#TaxRate').val(table_details.eq(3).text());	
+	$('#NameCategory').val(table_details.eq(4).text());
+	$('#PieceMode').val(table_details.eq(5).text());
+	$('#WeightMode').val(table_details.eq(6).text());
+	$('#MeasurementMethod').val(table_details.eq(7).text());
+	$('#PricingMethod').val(table_details.eq(8).text());
+	$('#Formula').val(table_details.eq(9).text());
+	$('#Remark').val(table_details.eq(10).text());
+}
+
+$('#Name').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#IndustryCategory').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#TaxRate').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="font/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="css/basic.css" />
+		<link rel="stylesheet" type="text/css" href="css/login.css" />
+	</head>
+
+	<body>
+		<div id="" class="login">
+			<form name="f1" id="f1" method="post">
+				<div class="login_box">
+					<h3>系统登录</h3>
+					<ul>
+						<li class="loginList">
+							<span><i class="icon iconfont icon-qunzu"></i>用户名：</span>
+							<input type="text" name="name" id="" value="" />
+						</li>
+						<li class="loginList">
+							<span><i class="icon iconfont icon-suo"></i>密码：</span>
+							<input type="password" name="password" id="" value="" />
+						</li>
+						<li class="crandomCode">
+							<input name="checkInput" type="text" class="" placeholder="验证码">
+							<img id="randomCode" src="../validateCodeServlet" border="0" onclick="reloadCode();" />
+							<span><a href="javascript:reloadCode();">看不清换一张</a></span>
+						</li>
+						<li class="btnlogin">
+							<a href="javascript:void(0);" id="btnlogin" onclick="checkForm(this);return false" class="btnbg">登录</a>
+							<input type="reset" name="" id="" class="reset" value="重置" />
+						</li>
+					</ul>
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript">
+			function checkForm(_button) {
+				_button.disabled = "disabled";
+				var form = document.getElementById("f1");
+				var name = form.name.value;
+				var password = form.password.value;
+				var checkInput = form.checkInput.value;
+				if(name.trim() == "") {
+					alert("请输入用户名!");
+					_button.disabled = false;
+					form.name.focus();
+					return;
+				}
+				if(password == "") {
+					alert("请输入密码!");
+					_button.disabled = false;
+					form.password.focus();
+					return;
+				}
+				if(checkInput.trim() == "") {
+					alert("请输入验证码!");
+					_button.disabled = false;
+					form.checkInput.focus();
+					return;
+				}
+				var bean = {};
+				bean['name'] = name;
+				bean['password'] = hex_md5(password);
+				bean['checkInput'] = checkInput;
+				Ext.Ajax.request({
+					url: 'loginAjax.do',
+					method: 'POST',
+					timeout: 120000,
+					params: bean,
+					callback: function(options, success, response) {
+						var res = Ext.JSON.decode(response.responseText);
+						if(res.map.state == 3) {
+							window.location.href = "index.do";
+						} else {
+							var _msg = res.map.msg;
+							if(null == _msg || "" == _msg) {
+								_msg = "操作失败";
+							}
+							reloadCode();
+							alert(_msg);
+						}
+					}
+				})
+				_button.disabled = false;
+			};
+
+			function reloadCode() {
+				var form = document.getElementById("f1");
+				form.checkInput.focus();
+				form.checkInput.value = "";
+				var verify = document.getElementById('randomCode');
+				verify.setAttribute('src', '../validateCodeServlet?dt=' + Math.random());
+			};
+			document.onkeydown = function() {
+				if(event.keyCode == 13) {
+					checkForm(document.getElementById("btnlogin"))
+				}
+			};
+			String.prototype.trim = function() {
+				return this.replace(/(^\s*)(\s*$)/g, "");
+			}
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,51 @@
+package com.xyscm.sys.basic.vo;
+
+import java.io.Serializable;
+
+public class EmployeeBeanVo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	/**员工代码*/
+	private String employeeCode;
+	/**员工名称*/
+	private String employeeName;
+	/**助记码 */
+	private String employeeMnemcode;
+	/**机构代码*/
+	private String orgCode;
+	/**部门代码*/
+	private String deptCode;
+	
+	public String getEmployeeCode() {
+		return employeeCode;
+	}
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+	public String getEmployeeMnemcode() {
+		return employeeMnemcode;
+	}
+	public void setEmployeeMnemcode(String employeeMnemcode) {
+		this.employeeMnemcode = employeeMnemcode;
+	}
+	public String getOrgCode() {
+		return orgCode;
+	}
+	public void setOrgCode(String orgCode) {
+		this.orgCode = orgCode;
+	}
+	public String getDeptCode() {
+		return deptCode;
+	}
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
+	}
+	
+}

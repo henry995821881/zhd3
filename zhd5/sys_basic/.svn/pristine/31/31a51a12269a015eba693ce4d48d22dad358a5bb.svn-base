@@ -1,0 +1,1145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicCompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicCompany" >
+    <id column="COMPANY_ID" property="companyId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" />
+    <result column="COMPANY_ABBREVIATE" property="companyAbbreviate" jdbcType="VARCHAR" />
+    <result column="COMPANY_PERMITMODE" property="companyPermitmode" jdbcType="DECIMAL" />
+    <result column="COMPANY_PHONE" property="companyPhone" jdbcType="VARCHAR" />
+    <result column="COMPANY_FAX" property="companyFax" jdbcType="VARCHAR" />
+    <result column="COMPANY_CORPORATION" property="companyCorporation" jdbcType="VARCHAR" />
+    <result column="COMPANY_TANU" property="companyTanu" jdbcType="VARCHAR" />
+    <result column="COMPANY_BANK" property="companyBank" jdbcType="VARCHAR" />
+    <result column="COMPANY_BANKACCOUNTS" property="companyBankaccounts" jdbcType="VARCHAR" />
+    <result column="COMPANY_INVOICEADDR" property="companyInvoiceaddr" jdbcType="VARCHAR" />
+    <result column="COMPANY_EMAIL" property="companyEmail" jdbcType="VARCHAR" />
+    <result column="COMPANY_ADDR" property="companyAddr" jdbcType="VARCHAR" />
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN" property="companyLinkman" jdbcType="VARCHAR" />
+    <result column="COMPANY_POSTCODE" property="companyPostcode" jdbcType="VARCHAR" />
+    <result column="COMPANY_REMARK" property="companyRemark" jdbcType="VARCHAR" />
+    <result column="COMPANY_STATE" property="companyState" jdbcType="DECIMAL" />
+    <result column="COMPANY_MNEMCODE" property="companyMnemcode" jdbcType="VARCHAR" />
+    <result column="COMPANY_TYPE" property="companyType" jdbcType="DECIMAL" />
+    <result column="COMPANY_CLASS" property="companyClass" jdbcType="VARCHAR" />
+    <result column="COMPANY_PROPERTY" property="companyProperty" jdbcType="DECIMAL" />
+    <result column="DATA_SYSTEMDATE" property="dataSystemdate" jdbcType="TIMESTAMP" />
+    <result column="COMPANY_INDUSTRY" property="companyIndustry" jdbcType="VARCHAR" />
+    <result column="COMPANY_MERGERMODE" property="companyMergermode" jdbcType="DECIMAL" />
+    <result column="COMPANY_MERGERCODE" property="companyMergercode" jdbcType="VARCHAR" />
+    <result column="COMPANY_MERGERREMARK" property="companyMergerremark" jdbcType="VARCHAR" />
+    <result column="COMPANY_MERGERDMAN" property="companyMergerdman" jdbcType="VARCHAR" />
+    <result column="COMPANY_MERGERDATA" property="companyMergerdata" jdbcType="TIMESTAMP" />
+    <result column="COMPANY_SOURCE" property="companySource" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_CODE" property="employeeCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_CODE" property="operatorCode" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR" />
+    <result column="DATA_EDIT_ORG" property="dataEditOrg" jdbcType="VARCHAR" />
+    <result column="DATA_EDIT_DEPT" property="dataEditDept" jdbcType="VARCHAR" />
+    <result column="COMPANY_ASSESS_TYPE" property="companyAssessType" jdbcType="VARCHAR" />
+    <result column="COMPANY_PARENT" property="companyParent" jdbcType="VARCHAR" />
+    <result column="COMPANY_PARENTNODECODE" property="companyParentnodecode" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+    <result column="COMPANY_ORGCODE" property="companyOrgcode" jdbcType="VARCHAR" />
+    <result column="ALLOWQUERY" property="allowquery" jdbcType="DECIMAL" />
+    <result column="COMPANY_ASSESS_CREDIT" property="companyAssessCredit" jdbcType="VARCHAR" />
+    <result column="COMPANY_ASSESS_GRADE" property="companyAssessGrade" jdbcType="VARCHAR" />
+    <result column="COMPANY_ASSESS_STATE" property="companyAssessState" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.xyscm.sys.basic.model.BasicCompany" extends="BaseResultMap" >
+    <result column="COMPANY_PERMITLIST" property="companyPermitlist" jdbcType="CLOB" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COMPANY_ID, MEMBER_CODE, COMPANY_CODE, COMPANY_NAME, COMPANY_ABBREVIATE, COMPANY_PERMITMODE, 
+    COMPANY_PHONE, COMPANY_FAX, COMPANY_CORPORATION, COMPANY_TANU, COMPANY_BANK, COMPANY_BANKACCOUNTS, 
+    COMPANY_INVOICEADDR, COMPANY_EMAIL, COMPANY_ADDR, AREA_CODE, COMPANY_LINKMAN, COMPANY_POSTCODE, 
+    COMPANY_REMARK, COMPANY_STATE, COMPANY_MNEMCODE, COMPANY_TYPE, COMPANY_CLASS, COMPANY_PROPERTY, 
+    DATA_SYSTEMDATE, COMPANY_INDUSTRY, COMPANY_MERGERMODE, COMPANY_MERGERCODE, COMPANY_MERGERREMARK, 
+    COMPANY_MERGERDMAN, COMPANY_MERGERDATA, COMPANY_SOURCE, EMPLOYEE_CODE, OPERATOR_CODE, 
+    ORG_CODE, DEPT_CODE, DATA_EDIT_ORG, DATA_EDIT_DEPT, COMPANY_ASSESS_TYPE, COMPANY_PARENT, 
+    COMPANY_PARENTNODECODE, BASIC_SHARE, COMPANY_ORGCODE, ALLOWQUERY, COMPANY_ASSESS_CREDIT, 
+    COMPANY_ASSESS_GRADE, COMPANY_ASSESS_STATE
+  </sql>
+  <sql id="Blob_Column_List" >
+    COMPANY_PERMITLIST
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from  BASIC_COMPANY
+    where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_COMPANY
+    where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicCompany" >
+    insert into  BASIC_COMPANY (COMPANY_ID, MEMBER_CODE, COMPANY_CODE, 
+      COMPANY_NAME, COMPANY_ABBREVIATE, COMPANY_PERMITMODE, 
+      COMPANY_PHONE, COMPANY_FAX, COMPANY_CORPORATION, 
+      COMPANY_TANU, COMPANY_BANK, COMPANY_BANKACCOUNTS, 
+      COMPANY_INVOICEADDR, COMPANY_EMAIL, COMPANY_ADDR, 
+      AREA_CODE, COMPANY_LINKMAN, COMPANY_POSTCODE, 
+      COMPANY_REMARK, COMPANY_STATE, COMPANY_MNEMCODE, 
+      COMPANY_TYPE, COMPANY_CLASS, COMPANY_PROPERTY, 
+      DATA_SYSTEMDATE, COMPANY_INDUSTRY, COMPANY_MERGERMODE, 
+      COMPANY_MERGERCODE, COMPANY_MERGERREMARK, 
+      COMPANY_MERGERDMAN, COMPANY_MERGERDATA, 
+      COMPANY_SOURCE, EMPLOYEE_CODE, OPERATOR_CODE, 
+      ORG_CODE, DEPT_CODE, DATA_EDIT_ORG, 
+      DATA_EDIT_DEPT, COMPANY_ASSESS_TYPE, COMPANY_PARENT, 
+      COMPANY_PARENTNODECODE, BASIC_SHARE, COMPANY_ORGCODE, 
+      ALLOWQUERY, COMPANY_ASSESS_CREDIT, COMPANY_ASSESS_GRADE, 
+      COMPANY_ASSESS_STATE, COMPANY_PERMITLIST)
+    values (#{companyId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, 
+      #{companyName,jdbcType=VARCHAR}, #{companyAbbreviate,jdbcType=VARCHAR}, #{companyPermitmode,jdbcType=DECIMAL}, 
+      #{companyPhone,jdbcType=VARCHAR}, #{companyFax,jdbcType=VARCHAR}, #{companyCorporation,jdbcType=VARCHAR}, 
+      #{companyTanu,jdbcType=VARCHAR}, #{companyBank,jdbcType=VARCHAR}, #{companyBankaccounts,jdbcType=VARCHAR}, 
+      #{companyInvoiceaddr,jdbcType=VARCHAR}, #{companyEmail,jdbcType=VARCHAR}, #{companyAddr,jdbcType=VARCHAR}, 
+      #{areaCode,jdbcType=VARCHAR}, #{companyLinkman,jdbcType=VARCHAR}, #{companyPostcode,jdbcType=VARCHAR}, 
+      #{companyRemark,jdbcType=VARCHAR}, #{companyState,jdbcType=DECIMAL}, #{companyMnemcode,jdbcType=VARCHAR}, 
+      #{companyType,jdbcType=DECIMAL}, #{companyClass,jdbcType=VARCHAR}, #{companyProperty,jdbcType=DECIMAL}, 
+      #{dataSystemdate,jdbcType=TIMESTAMP}, #{companyIndustry,jdbcType=VARCHAR}, #{companyMergermode,jdbcType=DECIMAL}, 
+      #{companyMergercode,jdbcType=VARCHAR}, #{companyMergerremark,jdbcType=VARCHAR}, 
+      #{companyMergerdman,jdbcType=VARCHAR}, #{companyMergerdata,jdbcType=TIMESTAMP}, 
+      #{companySource,jdbcType=VARCHAR}, #{employeeCode,jdbcType=VARCHAR}, #{operatorCode,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, #{dataEditOrg,jdbcType=VARCHAR}, 
+      #{dataEditDept,jdbcType=VARCHAR}, #{companyAssessType,jdbcType=VARCHAR}, #{companyParent,jdbcType=VARCHAR}, 
+      #{companyParentnodecode,jdbcType=VARCHAR}, #{basicShare,jdbcType=DECIMAL}, #{companyOrgcode,jdbcType=VARCHAR}, 
+      #{allowquery,jdbcType=DECIMAL}, #{companyAssessCredit,jdbcType=VARCHAR}, #{companyAssessGrade,jdbcType=VARCHAR}, 
+      #{companyAssessState,jdbcType=VARCHAR}, #{companyPermitlist,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicCompany" >
+    insert into  BASIC_COMPANY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        COMPANY_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
+      </if>
+      <if test="companyAbbreviate != null" >
+        COMPANY_ABBREVIATE,
+      </if>
+      <if test="companyPermitmode != null" >
+        COMPANY_PERMITMODE,
+      </if>
+      <if test="companyPhone != null" >
+        COMPANY_PHONE,
+      </if>
+      <if test="companyFax != null" >
+        COMPANY_FAX,
+      </if>
+      <if test="companyCorporation != null" >
+        COMPANY_CORPORATION,
+      </if>
+      <if test="companyTanu != null" >
+        COMPANY_TANU,
+      </if>
+      <if test="companyBank != null" >
+        COMPANY_BANK,
+      </if>
+      <if test="companyBankaccounts != null" >
+        COMPANY_BANKACCOUNTS,
+      </if>
+      <if test="companyInvoiceaddr != null" >
+        COMPANY_INVOICEADDR,
+      </if>
+      <if test="companyEmail != null" >
+        COMPANY_EMAIL,
+      </if>
+      <if test="companyAddr != null" >
+        COMPANY_ADDR,
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="companyLinkman != null" >
+        COMPANY_LINKMAN,
+      </if>
+      <if test="companyPostcode != null" >
+        COMPANY_POSTCODE,
+      </if>
+      <if test="companyRemark != null" >
+        COMPANY_REMARK,
+      </if>
+      <if test="companyState != null" >
+        COMPANY_STATE,
+      </if>
+      <if test="companyMnemcode != null" >
+        COMPANY_MNEMCODE,
+      </if>
+      <if test="companyType != null" >
+        COMPANY_TYPE,
+      </if>
+      <if test="companyClass != null" >
+        COMPANY_CLASS,
+      </if>
+      <if test="companyProperty != null" >
+        COMPANY_PROPERTY,
+      </if>
+      <if test="dataSystemdate != null" >
+        DATA_SYSTEMDATE,
+      </if>
+      <if test="companyIndustry != null" >
+        COMPANY_INDUSTRY,
+      </if>
+      <if test="companyMergermode != null" >
+        COMPANY_MERGERMODE,
+      </if>
+      <if test="companyMergercode != null" >
+        COMPANY_MERGERCODE,
+      </if>
+      <if test="companyMergerremark != null" >
+        COMPANY_MERGERREMARK,
+      </if>
+      <if test="companyMergerdman != null" >
+        COMPANY_MERGERDMAN,
+      </if>
+      <if test="companyMergerdata != null" >
+        COMPANY_MERGERDATA,
+      </if>
+      <if test="companySource != null" >
+        COMPANY_SOURCE,
+      </if>
+      <if test="employeeCode != null" >
+        EMPLOYEE_CODE,
+      </if>
+      <if test="operatorCode != null" >
+        OPERATOR_CODE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE,
+      </if>
+      <if test="dataEditOrg != null" >
+        DATA_EDIT_ORG,
+      </if>
+      <if test="dataEditDept != null" >
+        DATA_EDIT_DEPT,
+      </if>
+      <if test="companyAssessType != null" >
+        COMPANY_ASSESS_TYPE,
+      </if>
+      <if test="companyParent != null" >
+        COMPANY_PARENT,
+      </if>
+      <if test="companyParentnodecode != null" >
+        COMPANY_PARENTNODECODE,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+      <if test="companyOrgcode != null" >
+        COMPANY_ORGCODE,
+      </if>
+      <if test="allowquery != null" >
+        ALLOWQUERY,
+      </if>
+      <if test="companyAssessCredit != null" >
+        COMPANY_ASSESS_CREDIT,
+      </if>
+      <if test="companyAssessGrade != null" >
+        COMPANY_ASSESS_GRADE,
+      </if>
+      <if test="companyAssessState != null" >
+        COMPANY_ASSESS_STATE,
+      </if>
+      <if test="companyPermitlist != null" >
+        COMPANY_PERMITLIST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        #{companyId,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAbbreviate != null" >
+        #{companyAbbreviate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPermitmode != null" >
+        #{companyPermitmode,jdbcType=DECIMAL},
+      </if>
+      <if test="companyPhone != null" >
+        #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFax != null" >
+        #{companyFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCorporation != null" >
+        #{companyCorporation,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTanu != null" >
+        #{companyTanu,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBank != null" >
+        #{companyBank,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBankaccounts != null" >
+        #{companyBankaccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="companyInvoiceaddr != null" >
+        #{companyInvoiceaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null" >
+        #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkman != null" >
+        #{companyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPostcode != null" >
+        #{companyPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRemark != null" >
+        #{companyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyState != null" >
+        #{companyState,jdbcType=DECIMAL},
+      </if>
+      <if test="companyMnemcode != null" >
+        #{companyMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        #{companyType,jdbcType=DECIMAL},
+      </if>
+      <if test="companyClass != null" >
+        #{companyClass,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProperty != null" >
+        #{companyProperty,jdbcType=DECIMAL},
+      </if>
+      <if test="dataSystemdate != null" >
+        #{dataSystemdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyIndustry != null" >
+        #{companyIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergermode != null" >
+        #{companyMergermode,jdbcType=DECIMAL},
+      </if>
+      <if test="companyMergercode != null" >
+        #{companyMergercode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerremark != null" >
+        #{companyMergerremark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerdman != null" >
+        #{companyMergerdman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerdata != null" >
+        #{companyMergerdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companySource != null" >
+        #{companySource,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorCode != null" >
+        #{operatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditOrg != null" >
+        #{dataEditOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditDept != null" >
+        #{dataEditDept,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessType != null" >
+        #{companyAssessType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParent != null" >
+        #{companyParent,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParentnodecode != null" >
+        #{companyParentnodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="companyOrgcode != null" >
+        #{companyOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="allowquery != null" >
+        #{allowquery,jdbcType=DECIMAL},
+      </if>
+      <if test="companyAssessCredit != null" >
+        #{companyAssessCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessGrade != null" >
+        #{companyAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessState != null" >
+        #{companyAssessState,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPermitlist != null" >
+        #{companyPermitlist,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+ 
+ 
+ 
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicCompany" >
+    update  BASIC_COMPANY
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAbbreviate != null" >
+        COMPANY_ABBREVIATE = #{companyAbbreviate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPermitmode != null" >
+        COMPANY_PERMITMODE = #{companyPermitmode,jdbcType=DECIMAL},
+      </if>
+      <if test="companyPhone != null" >
+        COMPANY_PHONE = #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFax != null" >
+        COMPANY_FAX = #{companyFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCorporation != null" >
+        COMPANY_CORPORATION = #{companyCorporation,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTanu != null" >
+        COMPANY_TANU = #{companyTanu,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBank != null" >
+        COMPANY_BANK = #{companyBank,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBankaccounts != null" >
+        COMPANY_BANKACCOUNTS = #{companyBankaccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="companyInvoiceaddr != null" >
+        COMPANY_INVOICEADDR = #{companyInvoiceaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null" >
+        COMPANY_EMAIL = #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        COMPANY_ADDR = #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkman != null" >
+        COMPANY_LINKMAN = #{companyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPostcode != null" >
+        COMPANY_POSTCODE = #{companyPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRemark != null" >
+        COMPANY_REMARK = #{companyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyState != null" >
+        COMPANY_STATE = #{companyState,jdbcType=DECIMAL},
+      </if>
+      <if test="companyMnemcode != null" >
+        COMPANY_MNEMCODE = #{companyMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        COMPANY_TYPE = #{companyType,jdbcType=DECIMAL},
+      </if>
+      <if test="companyClass != null" >
+        COMPANY_CLASS = #{companyClass,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProperty != null" >
+        COMPANY_PROPERTY = #{companyProperty,jdbcType=DECIMAL},
+      </if>
+      <if test="dataSystemdate != null" >
+        DATA_SYSTEMDATE = #{dataSystemdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyIndustry != null" >
+        COMPANY_INDUSTRY = #{companyIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergermode != null" >
+        COMPANY_MERGERMODE = #{companyMergermode,jdbcType=DECIMAL},
+      </if>
+      <if test="companyMergercode != null" >
+        COMPANY_MERGERCODE = #{companyMergercode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerremark != null" >
+        COMPANY_MERGERREMARK = #{companyMergerremark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerdman != null" >
+        COMPANY_MERGERDMAN = #{companyMergerdman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerdata != null" >
+        COMPANY_MERGERDATA = #{companyMergerdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companySource != null" >
+        COMPANY_SOURCE = #{companySource,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorCode != null" >
+        OPERATOR_CODE = #{operatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditOrg != null" >
+        DATA_EDIT_ORG = #{dataEditOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditDept != null" >
+        DATA_EDIT_DEPT = #{dataEditDept,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessType != null" >
+        COMPANY_ASSESS_TYPE = #{companyAssessType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParent != null" >
+        COMPANY_PARENT = #{companyParent,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParentnodecode != null" >
+        COMPANY_PARENTNODECODE = #{companyParentnodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="companyOrgcode != null" >
+        COMPANY_ORGCODE = #{companyOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="allowquery != null" >
+        ALLOWQUERY = #{allowquery,jdbcType=DECIMAL},
+      </if>
+      <if test="companyAssessCredit != null" >
+        COMPANY_ASSESS_CREDIT = #{companyAssessCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessGrade != null" >
+        COMPANY_ASSESS_GRADE = #{companyAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessState != null" >
+        COMPANY_ASSESS_STATE = #{companyAssessState,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPermitlist != null" >
+        COMPANY_PERMITLIST = #{companyPermitlist,jdbcType=CLOB},
+      </if>
+    </set>
+    where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  
+  
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.xyscm.sys.basic.model.BasicCompany" >
+    update  BASIC_COMPANY
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      COMPANY_ABBREVIATE = #{companyAbbreviate,jdbcType=VARCHAR},
+      COMPANY_PERMITMODE = #{companyPermitmode,jdbcType=DECIMAL},
+      COMPANY_PHONE = #{companyPhone,jdbcType=VARCHAR},
+      COMPANY_FAX = #{companyFax,jdbcType=VARCHAR},
+      COMPANY_CORPORATION = #{companyCorporation,jdbcType=VARCHAR},
+      COMPANY_TANU = #{companyTanu,jdbcType=VARCHAR},
+      COMPANY_BANK = #{companyBank,jdbcType=VARCHAR},
+      COMPANY_BANKACCOUNTS = #{companyBankaccounts,jdbcType=VARCHAR},
+      COMPANY_INVOICEADDR = #{companyInvoiceaddr,jdbcType=VARCHAR},
+      COMPANY_EMAIL = #{companyEmail,jdbcType=VARCHAR},
+      COMPANY_ADDR = #{companyAddr,jdbcType=VARCHAR},
+      AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      COMPANY_LINKMAN = #{companyLinkman,jdbcType=VARCHAR},
+      COMPANY_POSTCODE = #{companyPostcode,jdbcType=VARCHAR},
+      COMPANY_REMARK = #{companyRemark,jdbcType=VARCHAR},
+      COMPANY_STATE = #{companyState,jdbcType=DECIMAL},
+      COMPANY_MNEMCODE = #{companyMnemcode,jdbcType=VARCHAR},
+      COMPANY_TYPE = #{companyType,jdbcType=DECIMAL},
+      COMPANY_CLASS = #{companyClass,jdbcType=VARCHAR},
+      COMPANY_PROPERTY = #{companyProperty,jdbcType=DECIMAL},
+      DATA_SYSTEMDATE = #{dataSystemdate,jdbcType=TIMESTAMP},
+      COMPANY_INDUSTRY = #{companyIndustry,jdbcType=VARCHAR},
+      COMPANY_MERGERMODE = #{companyMergermode,jdbcType=DECIMAL},
+      COMPANY_MERGERCODE = #{companyMergercode,jdbcType=VARCHAR},
+      COMPANY_MERGERREMARK = #{companyMergerremark,jdbcType=VARCHAR},
+      COMPANY_MERGERDMAN = #{companyMergerdman,jdbcType=VARCHAR},
+      COMPANY_MERGERDATA = #{companyMergerdata,jdbcType=TIMESTAMP},
+      COMPANY_SOURCE = #{companySource,jdbcType=VARCHAR},
+      EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR},
+      OPERATOR_CODE = #{operatorCode,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      DATA_EDIT_ORG = #{dataEditOrg,jdbcType=VARCHAR},
+      DATA_EDIT_DEPT = #{dataEditDept,jdbcType=VARCHAR},
+      COMPANY_ASSESS_TYPE = #{companyAssessType,jdbcType=VARCHAR},
+      COMPANY_PARENT = #{companyParent,jdbcType=VARCHAR},
+      COMPANY_PARENTNODECODE = #{companyParentnodecode,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      COMPANY_ORGCODE = #{companyOrgcode,jdbcType=VARCHAR},
+      ALLOWQUERY = #{allowquery,jdbcType=DECIMAL},
+      COMPANY_ASSESS_CREDIT = #{companyAssessCredit,jdbcType=VARCHAR},
+      COMPANY_ASSESS_GRADE = #{companyAssessGrade,jdbcType=VARCHAR},
+      COMPANY_ASSESS_STATE = #{companyAssessState,jdbcType=VARCHAR},
+      COMPANY_PERMITLIST = #{companyPermitlist,jdbcType=CLOB}
+    where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicCompany" >
+    update  BASIC_COMPANY
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      COMPANY_ABBREVIATE = #{companyAbbreviate,jdbcType=VARCHAR},
+      COMPANY_PERMITMODE = #{companyPermitmode,jdbcType=DECIMAL},
+      COMPANY_PHONE = #{companyPhone,jdbcType=VARCHAR},
+      COMPANY_FAX = #{companyFax,jdbcType=VARCHAR},
+      COMPANY_CORPORATION = #{companyCorporation,jdbcType=VARCHAR},
+      COMPANY_TANU = #{companyTanu,jdbcType=VARCHAR},
+      COMPANY_BANK = #{companyBank,jdbcType=VARCHAR},
+      COMPANY_BANKACCOUNTS = #{companyBankaccounts,jdbcType=VARCHAR},
+      COMPANY_INVOICEADDR = #{companyInvoiceaddr,jdbcType=VARCHAR},
+      COMPANY_EMAIL = #{companyEmail,jdbcType=VARCHAR},
+      COMPANY_ADDR = #{companyAddr,jdbcType=VARCHAR},
+      AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      COMPANY_LINKMAN = #{companyLinkman,jdbcType=VARCHAR},
+      COMPANY_POSTCODE = #{companyPostcode,jdbcType=VARCHAR},
+      COMPANY_REMARK = #{companyRemark,jdbcType=VARCHAR},
+      COMPANY_STATE = #{companyState,jdbcType=DECIMAL},
+      COMPANY_MNEMCODE = #{companyMnemcode,jdbcType=VARCHAR},
+      COMPANY_TYPE = #{companyType,jdbcType=DECIMAL},
+      COMPANY_CLASS = #{companyClass,jdbcType=VARCHAR},
+      COMPANY_PROPERTY = #{companyProperty,jdbcType=DECIMAL},
+      DATA_SYSTEMDATE = #{dataSystemdate,jdbcType=TIMESTAMP},
+      COMPANY_INDUSTRY = #{companyIndustry,jdbcType=VARCHAR},
+      COMPANY_MERGERMODE = #{companyMergermode,jdbcType=DECIMAL},
+      COMPANY_MERGERCODE = #{companyMergercode,jdbcType=VARCHAR},
+      COMPANY_MERGERREMARK = #{companyMergerremark,jdbcType=VARCHAR},
+      COMPANY_MERGERDMAN = #{companyMergerdman,jdbcType=VARCHAR},
+      COMPANY_MERGERDATA = #{companyMergerdata,jdbcType=TIMESTAMP},
+      COMPANY_SOURCE = #{companySource,jdbcType=VARCHAR},
+      EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR},
+      OPERATOR_CODE = #{operatorCode,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      DATA_EDIT_ORG = #{dataEditOrg,jdbcType=VARCHAR},
+      DATA_EDIT_DEPT = #{dataEditDept,jdbcType=VARCHAR},
+      COMPANY_ASSESS_TYPE = #{companyAssessType,jdbcType=VARCHAR},
+      COMPANY_PARENT = #{companyParent,jdbcType=VARCHAR},
+      COMPANY_PARENTNODECODE = #{companyParentnodecode,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      COMPANY_ORGCODE = #{companyOrgcode,jdbcType=VARCHAR},
+      ALLOWQUERY = #{allowquery,jdbcType=DECIMAL},
+      COMPANY_ASSESS_CREDIT = #{companyAssessCredit,jdbcType=VARCHAR},
+      COMPANY_ASSESS_GRADE = #{companyAssessGrade,jdbcType=VARCHAR},
+      COMPANY_ASSESS_STATE = #{companyAssessState,jdbcType=VARCHAR}
+    where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <!-- 查询往来单位 -->
+  <select id="queryCompany" parameterType="com.xyscm.sys.basic.model.BasicCompany" resultMap="BaseResultMap">
+  	select * 
+	from Basic_Company a where a.member_Code = #{memberCode,jdbcType=VARCHAR}  and a.member_Code = #{memberCode,jdbcType=VARCHAR}  and  
+	(  ( a.org_Code in (#{orgCode,jdbcType=VARCHAR}) )  )  order by company_Code asc,a.company_Id asc
+  </select>
+  
+  <!-- 查询seq -->
+  <select  id="getSeq" resultType="java.lang.Long">
+	SELECT BASIC_COMPANY_SEQ.NEXTVAL FROM DUAL
+  </select >
+  
+  <!-- 往来单位详情 -->
+  <select id="getCompanyInfo" resultMap="ResultMapWithBLOBs" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from  BASIC_COMPANY
+    where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 新增 -->
+  <insert id="insertCompany" parameterType="com.xyscm.sys.basic.model.BasicCompany" >
+    insert into  BASIC_COMPANY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        COMPANY_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="true" >
+        COMPANY_CODE,
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME,
+      </if>
+      <if test="companyAbbreviate != null" >
+        COMPANY_ABBREVIATE,
+      </if>
+      <if test="companyPermitmode != null" >
+        COMPANY_PERMITMODE,
+      </if>
+      <if test="companyPhone != null" >
+        COMPANY_PHONE,
+      </if>
+      <if test="companyFax != null" >
+        COMPANY_FAX,
+      </if>
+      <if test="companyCorporation != null" >
+        COMPANY_CORPORATION,
+      </if>
+      <if test="companyTanu != null" >
+        COMPANY_TANU,
+      </if>
+      <if test="companyBank != null" >
+        COMPANY_BANK,
+      </if>
+      <if test="companyBankaccounts != null" >
+        COMPANY_BANKACCOUNTS,
+      </if>
+      <if test="companyInvoiceaddr != null" >
+        COMPANY_INVOICEADDR,
+      </if>
+      <if test="companyEmail != null" >
+        COMPANY_EMAIL,
+      </if>
+      <if test="companyAddr != null" >
+        COMPANY_ADDR,
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="companyLinkman != null" >
+        COMPANY_LINKMAN,
+      </if>
+      <if test="companyPostcode != null" >
+        COMPANY_POSTCODE,
+      </if>
+      <if test="companyRemark != null" >
+        COMPANY_REMARK,
+      </if>
+      <if test="companyState != null" >
+        COMPANY_STATE,
+      </if>
+      <if test="companyMnemcode != null" >
+        COMPANY_MNEMCODE,
+      </if>
+      <if test="companyType != null" >
+        COMPANY_TYPE,
+      </if>
+      <if test="companyClass != null" >
+        COMPANY_CLASS,
+      </if>
+      <if test="companyProperty != null" >
+        COMPANY_PROPERTY,
+      </if>
+      <if test="dataSystemdate != null" >
+        DATA_SYSTEMDATE,
+      </if>
+      <if test="companyIndustry != null" >
+        COMPANY_INDUSTRY,
+      </if>
+      <if test="companyMergermode != null" >
+        COMPANY_MERGERMODE,
+      </if>
+      <if test="companyMergercode != null" >
+        COMPANY_MERGERCODE,
+      </if>
+      <if test="companyMergerremark != null" >
+        COMPANY_MERGERREMARK,
+      </if>
+      <if test="companyMergerdman != null" >
+        COMPANY_MERGERDMAN,
+      </if>
+      <if test="companyMergerdata != null" >
+        COMPANY_MERGERDATA,
+      </if>
+      <if test="companySource != null" >
+        COMPANY_SOURCE,
+      </if>
+      <if test="employeeCode != null" >
+        EMPLOYEE_CODE,
+      </if>
+      <if test="operatorCode != null" >
+        OPERATOR_CODE,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE,
+      </if>
+      <if test="dataEditOrg != null" >
+        DATA_EDIT_ORG,
+      </if>
+      <if test="dataEditDept != null" >
+        DATA_EDIT_DEPT,
+      </if>
+      <if test="companyAssessType != null" >
+        COMPANY_ASSESS_TYPE,
+      </if>
+      <if test="companyParent != null" >
+        COMPANY_PARENT,
+      </if>
+      <if test="companyParentnodecode != null" >
+        COMPANY_PARENTNODECODE,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+      <if test="companyOrgcode != null" >
+        COMPANY_ORGCODE,
+      </if>
+      <if test="allowquery != null" >
+        ALLOWQUERY,
+      </if>
+      <if test="companyAssessCredit != null" >
+        COMPANY_ASSESS_CREDIT,
+      </if>
+      <if test="companyAssessGrade != null" >
+        COMPANY_ASSESS_GRADE,
+      </if>
+      <if test="companyAssessState != null" >
+        COMPANY_ASSESS_STATE,
+      </if>
+      <if test="companyPermitlist != null" >
+        COMPANY_PERMITLIST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        BASIC_COMPANY_SEQ.NEXTVAL,
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="true" >
+       (select Max(company_code)+1 from Basic_Company),
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAbbreviate != null" >
+        #{companyAbbreviate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPermitmode != null" >
+        #{companyPermitmode,jdbcType=DECIMAL},
+      </if>
+      <if test="companyPhone != null" >
+        #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFax != null" >
+        #{companyFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCorporation != null" >
+        #{companyCorporation,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTanu != null" >
+        #{companyTanu,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBank != null" >
+        #{companyBank,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBankaccounts != null" >
+        #{companyBankaccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="companyInvoiceaddr != null" >
+        #{companyInvoiceaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null" >
+        #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkman != null" >
+        #{companyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPostcode != null" >
+        #{companyPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRemark != null" >
+        #{companyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyState != null" >
+        #{companyState,jdbcType=DECIMAL},
+      </if>
+      <if test="companyMnemcode != null" >
+        #{companyMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        #{companyType,jdbcType=DECIMAL},
+      </if>
+      <if test="companyClass != null" >
+        #{companyClass,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProperty != null" >
+        #{companyProperty,jdbcType=DECIMAL},
+      </if>
+      <if test="dataSystemdate != null" >
+        #{dataSystemdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyIndustry != null" >
+        #{companyIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergermode != null" >
+        #{companyMergermode,jdbcType=DECIMAL},
+      </if>
+      <if test="companyMergercode != null" >
+        #{companyMergercode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerremark != null" >
+        #{companyMergerremark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerdman != null" >
+        #{companyMergerdman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerdata != null" >
+        #{companyMergerdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companySource != null" >
+        #{companySource,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorCode != null" >
+        #{operatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditOrg != null" >
+        #{dataEditOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditDept != null" >
+        #{dataEditDept,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessType != null" >
+        #{companyAssessType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParent != null" >
+        #{companyParent,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParentnodecode != null" >
+        #{companyParentnodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="companyOrgcode != null" >
+        #{companyOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="allowquery != null" >
+        #{allowquery,jdbcType=DECIMAL},
+      </if>
+      <if test="companyAssessCredit != null" >
+        #{companyAssessCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessGrade != null" >
+        #{companyAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessState != null" >
+        #{companyAssessState,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPermitlist != null" >
+        #{companyPermitlist,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+ 
+ 
+ 	<!-- 编辑 -->
+  <update id="updateCompany" parameterType="com.xyscm.sys.basic.model.BasicCompany" >
+    update  BASIC_COMPANY
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAbbreviate != null" >
+        COMPANY_ABBREVIATE = #{companyAbbreviate,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPermitmode != null" >
+        COMPANY_PERMITMODE = #{companyPermitmode,jdbcType=DECIMAL},
+      </if>
+      <if test="companyPhone != null" >
+        COMPANY_PHONE = #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyFax != null" >
+        COMPANY_FAX = #{companyFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCorporation != null" >
+        COMPANY_CORPORATION = #{companyCorporation,jdbcType=VARCHAR},
+      </if>
+      <if test="companyTanu != null" >
+        COMPANY_TANU = #{companyTanu,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBank != null" >
+        COMPANY_BANK = #{companyBank,jdbcType=VARCHAR},
+      </if>
+      <if test="companyBankaccounts != null" >
+        COMPANY_BANKACCOUNTS = #{companyBankaccounts,jdbcType=VARCHAR},
+      </if>
+      <if test="companyInvoiceaddr != null" >
+        COMPANY_INVOICEADDR = #{companyInvoiceaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyEmail != null" >
+        COMPANY_EMAIL = #{companyEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddr != null" >
+        COMPANY_ADDR = #{companyAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkman != null" >
+        COMPANY_LINKMAN = #{companyLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPostcode != null" >
+        COMPANY_POSTCODE = #{companyPostcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRemark != null" >
+        COMPANY_REMARK = #{companyRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyState != null" >
+        COMPANY_STATE = #{companyState,jdbcType=DECIMAL},
+      </if>
+      <if test="companyMnemcode != null" >
+        COMPANY_MNEMCODE = #{companyMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null" >
+        COMPANY_TYPE = #{companyType,jdbcType=DECIMAL},
+      </if>
+      <if test="companyClass != null" >
+        COMPANY_CLASS = #{companyClass,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProperty != null" >
+        COMPANY_PROPERTY = #{companyProperty,jdbcType=DECIMAL},
+      </if>
+      <if test="dataSystemdate != null" >
+        DATA_SYSTEMDATE = #{dataSystemdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyIndustry != null" >
+        COMPANY_INDUSTRY = #{companyIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergermode != null" >
+        COMPANY_MERGERMODE = #{companyMergermode,jdbcType=DECIMAL},
+      </if>
+      <if test="companyMergercode != null" >
+        COMPANY_MERGERCODE = #{companyMergercode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerremark != null" >
+        COMPANY_MERGERREMARK = #{companyMergerremark,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerdman != null" >
+        COMPANY_MERGERDMAN = #{companyMergerdman,jdbcType=VARCHAR},
+      </if>
+      <if test="companyMergerdata != null" >
+        COMPANY_MERGERDATA = #{companyMergerdata,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companySource != null" >
+        COMPANY_SOURCE = #{companySource,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorCode != null" >
+        OPERATOR_CODE = #{operatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditOrg != null" >
+        DATA_EDIT_ORG = #{dataEditOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditDept != null" >
+        DATA_EDIT_DEPT = #{dataEditDept,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessType != null" >
+        COMPANY_ASSESS_TYPE = #{companyAssessType,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParent != null" >
+        COMPANY_PARENT = #{companyParent,jdbcType=VARCHAR},
+      </if>
+      <if test="companyParentnodecode != null" >
+        COMPANY_PARENTNODECODE = #{companyParentnodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="companyOrgcode != null" >
+        COMPANY_ORGCODE = #{companyOrgcode,jdbcType=VARCHAR},
+      </if>
+      <if test="allowquery != null" >
+        ALLOWQUERY = #{allowquery,jdbcType=DECIMAL},
+      </if>
+      <if test="companyAssessCredit != null" >
+        COMPANY_ASSESS_CREDIT = #{companyAssessCredit,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessGrade != null" >
+        COMPANY_ASSESS_GRADE = #{companyAssessGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAssessState != null" >
+        COMPANY_ASSESS_STATE = #{companyAssessState,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPermitlist != null" >
+        COMPANY_PERMITLIST = #{companyPermitlist,jdbcType=CLOB},
+      </if>
+    </set>
+    where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <!-- 删除往来单位 -->
+  <delete id="deleteCompany" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_COMPANY
+    where COMPANY_ID = #{companyId,jdbcType=DECIMAL}
+  </delete>
+</mapper>

@@ -1,0 +1,204 @@
+package com.xyscm.sys.basic.vo;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+import javax.validation.constraints.DecimalMin;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.xyscm.sys.basic.common.validatedGroup.DeleteGroup;
+import com.xyscm.sys.basic.common.validatedGroup.QueryGroup;
+import com.xyscm.sys.basic.common.validatedGroup.SaveGroup;
+import com.xyscm.sys.basic.common.validatedGroup.UpdateGroup;
+
+public class BasicWarePlaceVo implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public String toString() {
+		return "BasicWarePlace [wareplaceId=" + wareplaceId + ", wareplaceCode=" + wareplaceCode + ", wareplaceName="
+				+ wareplaceName + ", wareplaceWregion=" + wareplaceWregion + ", wareplaceGregion=" + wareplaceGregion
+				+ ", warehouseCode=" + warehouseCode + ", wareplaceMinnum=" + wareplaceMinnum + ", wareplaceMaxnum="
+				+ wareplaceMaxnum + ", memberCode=" + memberCode + ", wareplaceCtype=" + wareplaceCtype
+				+ ", wareplaceRemark=" + wareplaceRemark + ", wareplaceX=" + wareplaceX + ", wareplaceY=" + wareplaceY
+				+ ", wareplaceHeight=" + wareplaceHeight + ", wareplaceWidth=" + wareplaceWidth + ", deviceId="
+				+ deviceId + ", deviceName=" + deviceName + "]";
+	}
+
+	private BigDecimal wareplaceId;
+
+	@NotEmpty(message="库位代码空",groups={UpdateGroup.class,DeleteGroup.class})
+	private String wareplaceCode;
+
+	@NotEmpty(message="库位名空!",groups={SaveGroup.class})
+	private String wareplaceName;
+
+	private String wareplaceWregion;
+
+	private String wareplaceGregion;
+
+
+	private String warehouseCode;
+	 @DecimalMin(message="最低存放量必须大于0的数字", value="0",groups={SaveGroup.class,UpdateGroup.class})
+	private BigDecimal wareplaceMinnum;
+	 @DecimalMin(message="最大存放量必须大于0的数字", value="0",groups={SaveGroup.class,UpdateGroup.class})
+	private BigDecimal wareplaceMaxnum;
+
+	private String memberCode;
+
+	private String wareplaceCtype;
+
+	private String wareplaceRemark;
+
+	private BigDecimal wareplaceX;
+
+	private BigDecimal wareplaceY;
+	 @DecimalMin(message="高必须大于0的数字", value="0",groups={SaveGroup.class,UpdateGroup.class})
+	private BigDecimal wareplaceHeight;
+	 @DecimalMin(message="宽必须大于0的数字", value="0",groups={SaveGroup.class,UpdateGroup.class})
+	private BigDecimal wareplaceWidth;
+
+	private BigDecimal deviceId;
+
+	private String deviceName;
+
+	public BigDecimal getWareplaceId() {
+		return wareplaceId;
+	}
+
+	public void setWareplaceId(BigDecimal wareplaceId) {
+		this.wareplaceId = wareplaceId;
+	}
+
+	public String getWareplaceCode() {
+		return wareplaceCode;
+	}
+
+	public void setWareplaceCode(String wareplaceCode) {
+		this.wareplaceCode = wareplaceCode == null ? null : wareplaceCode.trim();
+	}
+
+	public String getWareplaceName() {
+		return wareplaceName;
+	}
+
+	public void setWareplaceName(String wareplaceName) {
+		this.wareplaceName = wareplaceName == null ? null : wareplaceName.trim();
+	}
+
+	public String getWareplaceWregion() {
+		return wareplaceWregion;
+	}
+
+	public void setWareplaceWregion(String wareplaceWregion) {
+		this.wareplaceWregion = wareplaceWregion == null ? null : wareplaceWregion.trim();
+	}
+
+	public String getWareplaceGregion() {
+		return wareplaceGregion;
+	}
+
+	public void setWareplaceGregion(String wareplaceGregion) {
+		this.wareplaceGregion = wareplaceGregion == null ? null : wareplaceGregion.trim();
+	}
+
+	public String getWarehouseCode() {
+		return warehouseCode;
+	}
+
+	public void setWarehouseCode(String warehouseCode) {
+		this.warehouseCode = warehouseCode == null ? null : warehouseCode.trim();
+	}
+
+	public BigDecimal getWareplaceMinnum() {
+		return wareplaceMinnum;
+	}
+
+	public void setWareplaceMinnum(BigDecimal wareplaceMinnum) {
+		this.wareplaceMinnum = wareplaceMinnum;
+	}
+
+	public BigDecimal getWareplaceMaxnum() {
+		return wareplaceMaxnum;
+	}
+
+	public void setWareplaceMaxnum(BigDecimal wareplaceMaxnum) {
+		this.wareplaceMaxnum = wareplaceMaxnum;
+	}
+
+	public String getMemberCode() {
+		return memberCode;
+	}
+
+	public void setMemberCode(String memberCode) {
+		this.memberCode = memberCode == null ? null : memberCode.trim();
+	}
+
+	public String getWareplaceCtype() {
+		return wareplaceCtype;
+	}
+
+	public void setWareplaceCtype(String wareplaceCtype) {
+		this.wareplaceCtype = wareplaceCtype == null ? null : wareplaceCtype.trim();
+	}
+
+	public String getWareplaceRemark() {
+		return wareplaceRemark;
+	}
+
+	public void setWareplaceRemark(String wareplaceRemark) {
+		this.wareplaceRemark = wareplaceRemark == null ? null : wareplaceRemark.trim();
+	}
+
+	public BigDecimal getWareplaceX() {
+		return wareplaceX;
+	}
+
+	public void setWareplaceX(BigDecimal wareplaceX) {
+		this.wareplaceX = wareplaceX;
+	}
+
+	public BigDecimal getWareplaceY() {
+		return wareplaceY;
+	}
+
+	public void setWareplaceY(BigDecimal wareplaceY) {
+		this.wareplaceY = wareplaceY;
+	}
+
+	public BigDecimal getWareplaceHeight() {
+		return wareplaceHeight;
+	}
+
+	public void setWareplaceHeight(BigDecimal wareplaceHeight) {
+		this.wareplaceHeight = wareplaceHeight;
+	}
+
+	public BigDecimal getWareplaceWidth() {
+		return wareplaceWidth;
+	}
+
+	public void setWareplaceWidth(BigDecimal wareplaceWidth) {
+		this.wareplaceWidth = wareplaceWidth;
+	}
+
+	public BigDecimal getDeviceId() {
+		return deviceId;
+	}
+
+	public void setDeviceId(BigDecimal deviceId) {
+		this.deviceId = deviceId;
+	}
+
+	public String getDeviceName() {
+		return deviceName;
+	}
+
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName == null ? null : deviceName.trim();
+	}
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+			<div class="main_content_left">
+				<h4 class="title">地区</h4>
+				<ul class="crud_menu">
+					<li class="fl_l add_group_icon"><i class="icon iconfont icon-tianjia"></i>增加</li>
+					<li class="fl_l modify_group_icon"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+					<li class="fl_l delete_group_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+				</ul>
+				<ul class="menu_content" >
+
+					<li class="menu_content_group">
+						<ul class="nav_list_toggle menu_content_group_node">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+								<span>地区设置</span>
+							</li>
+						</ul>
+						<ul id="areaTreeLeft" class="pl_10 hidden">
+							
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="main_content_right">
+				<div class="crud_menu">
+					<ul class="">
+						<li class="fl_l add_table_icon"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li class="fl_l modify_table_icon"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+						<li class="fl_l delete_table_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+					</ul>
+				</div>
+				<div id="content_area">
+					
+				</div>
+				<div class="main_content_right_page">
+					<ul>
+						<li></li>
+					</ul>
+				</div>
+				<div class="add_table" id="add_table">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>开会银行设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li class="fl_l">
+								<span>地区名称：</span>
+								<input type="text" name="AreaName" id="AreaName" value="" />
+							</li>
+							<li class="fl_l">
+								<span>助记码：</span>
+								<input type="text" name="AssistantCode" id="AssistantCode" value="" />
+							</li>
+							<li class="remark cl">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+
+				<div class="add_table" id="add_jt">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_group_close"></i>
+						<span>地区设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li class="fl_l">
+								<span>地区名称：</span>
+								<input type="text" name="GroupName" id="GroupName" value="" />
+							</li>
+							<li class="fl_l">
+								<span>助记码：</span>
+								<input type="text" name="AssistantCode" id="AssistantCode" value="" />
+							</li>
+							<li class="remark cl">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks"></textarea>
+							</li>
+							<li class="text_r" >
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+			</div>
+		
+		<script id="areaTree" type="text/html">
+		<% for(var i=0;i<data.length;i++) {%>
+		<li>	
+						<ul class="nav_list_toggle menu_content_group_node" id="<%=data[i].first.areaNodecode%>">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+									<span><%=data[i].first.areaName%></span>
+							</li>
+						</ul>
+
+					<ul class="pl_10 hidden">
+						<% for(var j=1;j<data[i].second.length;j++) {%>
+								<li>
+									<ul class="nav_list_toggle menu_content_group_node" id="<%=data[i].second[j].areaNodecode%>">
+											<li>
+												<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+												<span><%=data[i].second[j].areaName%></span>
+											</li>
+									</ul>
+									<ul class="pl_10 hidden">
+											<% for(var k=1;k<data[i].third.length;k++) {%>					
+												<li class="nav_list_toggle menu_content_group_node" id="<%=data[i].third[k].areaNodecode%>"><i class="icon iconfont icon-jiaochabiao"></i>
+													<span><%=data[i].third[k].areaName%></span>
+												</li>
+											<%}%>	
+									</ul>
+								</li>
+						<%}%>	
+					</ul>
+				
+		</li>		
+		<%}%>
+		
+		</script>	
+		
+		<script id="AreaSetting" type="text/html">
+			<div  class="main_content_right_table">	
+				<table id="tbl" class="table" cellspacing="1">
+					<tr class="table_title">
+						<td>地区名称</td>
+						<td>地区代码</td>
+						<td>助记码</td>
+						<td>备注</td>
+					</tr>
+			<% for(var j=0;j<data.length;j++) {%>
+					<tr class="table_detail">
+						<td><%=data[j].areaName%></td>
+						<td><%=data[j].areaCode%></td>
+						<td><%=data[j].areaMnemcode%></td>
+						<td><%=data[j].areaRemark%></td>
+					</tr>
+			<% }%>
+				</table>
+			</div>
+			<div id="page" class="main_content_right_page">
+				<%include('mainpage')%>
+			</div>
+		</script>	
+	
+		<script src="js/areaManage/areaManage.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

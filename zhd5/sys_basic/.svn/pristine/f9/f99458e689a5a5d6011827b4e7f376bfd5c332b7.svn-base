@@ -1,0 +1,11 @@
+package com.xyscm.sys.basic.common.constant;
+
+public class SuperConstants {
+
+	/**树第一级默认的父代码*/
+	public static final String TREE_EMPTY = "-1";
+	/**树的叶子结点*/
+	public static final String TREE_LEAF = "1";
+	
+	
+}

@@ -1,0 +1,54 @@
+package com.xyscm.sys.basic.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xyscm.sys.basic.dao.BasicCompanyLinkmanMapper;
+import com.xyscm.sys.basic.model.BasicCompanyLinkman;
+
+
+@Service
+public class BasicCompanyLinkmanService {
+
+	@Autowired
+	BasicCompanyLinkmanMapper basicCompanyLinkmanMapper;
+	
+	  /**
+     * 根据compangcode查询公司联系人
+     * @param companyCode
+     * @return
+     *
+     * List<BasicCompanyLinkman>
+     */
+    public List<BasicCompanyLinkman> queryCompanyLinkman(String companyCode){
+		List<BasicCompanyLinkman> list  = basicCompanyLinkmanMapper.queryCompanyLinkman(companyCode);
+		return list;
+	}
+    
+    
+   	/**
+   	 * 新增公司联系人
+     * @return
+     *
+     * basicCompanyLinkman
+   	 */
+   	public int insertCompanyLinkman(BasicCompanyLinkman basicCompanyLinkman){
+    	return basicCompanyLinkmanMapper.insertCompanyLinkman(basicCompanyLinkman);
+   	}
+    
+
+	/**
+	 * 根据id删除公司联系人
+	 * @param companyLinkmanId
+	 * @return
+	 *
+	 * int
+	 */
+	public int deltCompanyLinkman(BigDecimal companyLinkmanId){
+		return basicCompanyLinkmanMapper.deltCompanyLinkman(companyLinkmanId);
+	}
+
+}

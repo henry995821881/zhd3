@@ -1,0 +1,227 @@
+<#assign base=request.contextPath />
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+	<div class="main_content_left">
+				<h4 class="title">查询</h4>
+				<ul class="menu_content Inquire">
+					<form id="form_query">
+					
+					   <li class="menu_content_list">
+							<span>仓库名：</span>
+							<input type="text"  name="warehouseName" id="warehouseName_1" readonly="readonly" class="input_disabled" />
+						  <input type="hidden" name="warehouseCode" id="warehouseCode_1"/>
+						</li>
+					
+						<li class="menu_content_list">
+							<span>库区：</span>
+							<input type="text" name="wareplaceWregion" id="wareplaceWregion_" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>货区：</span>
+							<input type="text" name="wareplaceGregion" id="wareplaceGregion_" value="" />
+						</li>
+						<li class="menu_content_list">
+							<input type="button" onclick="query_form_button();" name="Inquire" id="Inquire" value="查询" class="InquireButton bg_1199c4" />
+							<input type="button" onclick="reset_form_button();" value="重置" class="InquireButton" />
+						</li>
+					</form>
+				</ul>
+				<h4 class="title">仓库列表</h4>
+				<ul class="menu_content">
+					<li class="menu_content_group">
+						<ul class="nav_list_toggle menu_content_group_node">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+								<span>仓库</span>
+							</li>
+						</ul>
+						<ul class="pl_10 hidden" id="warehouse_ul">
+							<!-- <li class=" menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+								<span>江苏智恒达</span>
+							</li>
+							<li class=" menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+								<span>江苏智恒达</span>
+							</li>
+							<li class=" menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+								<span>江苏智恒达</span>
+							</li>
+							<li class=" menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+								<span>江苏智恒达</span>
+							</li>
+							<li class=" menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+								<span>江苏智恒达</span>
+							</li> -->
+						</ul>
+					</li>
+				</ul>
+				
+			</div>
+			<div class="main_content_right">
+				<div class="crud_menu">
+					<ul class="">
+						<li data="add" class="oper_ fl_l add_table_icon"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li data="update" class="oper_ fl_l modify_table_icon"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+						<li data="del" class="oper_ fl_l delete_table_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+					</ul>
+				</div>
+				
+				<div id="content_wareplace"></div>
+				<div id="pageHtml" class="main_content_right_page">
+					
+				</div>
+				<div class="add_table" id="add_table">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>库位设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form  id="form_wareplace">
+							<li class="fl_l">
+								<span>库位：</span>
+								<input type="text" name="wareplaceName" id="Location" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>库区：</span>
+								<select name="wareplaceWregion" id="ReservoirArea" class="table_detail_empty">
+									<!-- <option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option> -->
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>货区：</span>
+								<input type="text" name="wareplaceGregion" id="CargoArea" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>类型：</span>
+								<select name="wareplaceCtype" id="Types" class="table_detail_empty">
+								<option value="室内">室内</option>
+									<option value="室外">室外</option>
+									<option value="综合">综合</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>最低存放量：</span>
+								<input type="number" name="wareplaceMinnum" id="Minimum" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>最大存放量：</span>
+								<input type="number" name="wareplaceMaxnum" id="Maximum" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>图形行：</span>
+								<input type="number" name="wareplaceX" id="GraphicLines" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>图形列：</span>
+								<input type="number" name="wareplaceY" id="GraphicColumns" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>视频设备：</span>
+								<select name="deviceName" id="VideoEquipment" class="table_detail_empty">
+									<option deviceid="" value="内容a">内容a</option>
+								
+								</select>
+							</li>
+							<li class="cl remark">
+								<span>备注：</span>
+								<textarea name="wareplaceRemark" id="Remark" class="remarks table_detail_empty"></textarea>
+							</li>
+							<li class="text_r">
+							    <input type="hidden" name="warehouseCode"  id="warehouseCode_2"/>
+							    <input type="hidden" name="wareplaceCode" id="wareplaceCode_" />
+								<input type="button" onclick="wareplace_oper();" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+
+			</div>
+			
+			
+			<script id="wareare_tpl" type="text/html">
+
+                    <%for(var i =0;i<data.length;i++){%>
+
+                     <option value='<%=data[i].wareareaName%>'><%=data[i].wareareaName%></option>
+                  
+                   <%}%>
+
+           </script>
+			
+			<script id="warehouse_tpl1" type="text/html">
+
+
+
+                      
+
+
+                            <%for(var i= 0;i<data.length;i++){%>
+
+                             <li warehouseName='<%=data[i].warehouseName%>'  warehouseCode='<%=data[i].warehouseCode%>' class="wareplace_oper menu_content_group_node">
+
+                              <i class="icon iconfont icon-jiaochabiao"></i>
+								<span><%=data[i].warehouseName%></span>
+
+							</li>
+                     <%}%>
+
+	      </script>
+			
+			
+		<script id="wareplace_tpl" type="text/html">
+			
+				<div class="main_content_right_table">
+					<table id="tbl" class="table" cellspacing="1">
+						<tr class="table_title">
+							<td>仓库</td>
+							<td>库区</td>
+							<td>货区</td>
+							<td>库位</td>
+							<td>类型</td>
+							<td>最低存放量</td>
+							<td>最大存放量</td>
+							<td>图形行</td>
+							<td>图形列</td>
+							<td>视频设备</td>
+							<td>备注</td>
+						</tr>
+
+<%for(var i =0;i<data.length;i++){%>
+						<tr class="table_detail">
+                            <td data='<%=data[i].warehouseName%>' warehouseCode='' ><%=data[i].warehouseName%></td>
+							<td data='<%=data[i].wareplaceWregion%>' wareplaceCode='<%=data[i].wareplaceCode%>'><%=data[i].wareplaceWregion%></td>
+							<td data='<%=data[i].wareplaceGregion%>'><%=data[i].wareplaceGregion%></td>
+							<td data='<%=data[i].wareplaceName%>'><%=data[i].wareplaceName%></td>
+							<td data='<%=data[i].wareplaceCtype%>'><%=data[i].wareplaceCtype%></td>
+							<td data='<%=data[i].wareplaceMinnum%>' ><%=data[i].wareplaceMinnum%></td>
+							<td data='<%=data[i].wareplaceMaxnum%>' ><%=data[i].wareplaceMaxnum%></td>
+							<td data='<%=data[i].wareplaceX%>' ><%=data[i].wareplaceX%></td>
+							<td data='<%=data[i].wareplaceY%>'><%=data[i].wareplaceY%></td>
+							<td data='<%=data[i].deviceName%>'><%=data[i].deviceName%></td>
+							<td data='<%=data[i].wareplaceRemark%>'><%=data[i].wareplaceRemark%></td>
+						</tr>
+<%}%>
+					</table>
+				</div>
+				
+
+		</script>
+		
+		
+		
+		
+		<script src="${base}/js/goodsManage/wareplaceManage.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>

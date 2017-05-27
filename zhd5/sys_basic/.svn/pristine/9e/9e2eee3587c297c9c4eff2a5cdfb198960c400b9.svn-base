@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicPartsNameMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicPartsName" >
+    <id column="PARTSNAME_ID" property="partsnameId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_CODE" property="partsnameCode" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_NAME" property="partsnameName" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_MNEMCODE" property="partsnameMnemcode" jdbcType="VARCHAR" />
+    <result column="PNTREE_NAME" property="pntreeName" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_WORKCOE" property="partsnameWorkcoe" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_FORMULA" property="partsnameFormula" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_PROPERTY1" property="partsnameProperty1" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_PROPERTY2" property="partsnameProperty2" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_PROPERTY3" property="partsnameProperty3" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_PROPERTY4" property="partsnameProperty4" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_PROPERTY5" property="partsnameProperty5" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_SCRAPPRICE" property="partsnameScrapprice" jdbcType="DECIMAL" />
+    <result column="GOODS_TAXRATE" property="goodsTaxrate" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_PRICE" property="partsnamePrice" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_NUMUNIT" property="partsnameNumunit" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_WEIGHTUNIT" property="partsnameWeightunit" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_PRICEUN" property="partsnamePriceun" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_AMDI" property="partsnameAmdi" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_WEDI" property="partsnameWedi" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_REMARK" property="partsnameRemark" jdbcType="VARCHAR" />
+    <result column="PARTSNAME_ADJUST_WEIGHT" property="partsnameAdjustWeight" jdbcType="DECIMAL" />
+    <result column="PARTSNAME_STATE" property="partsnameState" jdbcType="DECIMAL" />
+    <result column="PNTREE_NODECODE" property="pntreeNodecode" jdbcType="VARCHAR" />
+    <result column="INDUSTRY_CODE" property="industryCode" jdbcType="VARCHAR" />
+    <result column="GOODS_PIECEMODE" property="goodsPiecemode" jdbcType="DECIMAL" />
+    <result column="GOODS_WEIGHTMODE" property="goodsWeightmode" jdbcType="DECIMAL" />
+    <result column="GOODS_METERING" property="goodsMetering" jdbcType="VARCHAR" />
+    <result column="GOODS_PRICEUN" property="goodsPriceun" jdbcType="DECIMAL" />
+    <result column="GOODS_PROPERTY" property="goodsProperty" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+    <result column="PNTREE_PARENTNAME" property="pntreeParentname" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    PARTSNAME_ID, MEMBER_CODE, PARTSNAME_CODE, PARTSNAME_NAME, PARTSNAME_MNEMCODE, PNTREE_NAME, 
+    PARTSNAME_WORKCOE, PARTSNAME_FORMULA, PARTSNAME_PROPERTY1, PARTSNAME_PROPERTY2, PARTSNAME_PROPERTY3, 
+    PARTSNAME_PROPERTY4, PARTSNAME_PROPERTY5, PARTSNAME_SCRAPPRICE, GOODS_TAXRATE, PARTSNAME_PRICE, 
+    PARTSNAME_NUMUNIT, PARTSNAME_WEIGHTUNIT, PARTSNAME_PRICEUN, PARTSNAME_AMDI, PARTSNAME_WEDI, 
+    PARTSNAME_REMARK, PARTSNAME_ADJUST_WEIGHT, PARTSNAME_STATE, PNTREE_NODECODE, INDUSTRY_CODE, 
+    GOODS_PIECEMODE, GOODS_WEIGHTMODE, GOODS_METERING, GOODS_PRICEUN, GOODS_PROPERTY, 
+    BASIC_SHARE, PNTREE_PARENTNAME
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List"   />
+    from  BASIC_PARTSNAME
+    where PARTSNAME_ID = #{partsnameId,jdbcType=DECIMAL}
+  </select>
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.xyscm.sys.basic.model.BasicPartsName">
+   select 
+    <include refid="Base_Column_List" />
+    from  BASIC_PARTSNAME
+    where MEMBER_CODE = #{memberCode}
+      <if test="pntreeNodecode != null and pntreeNodecode != ''" >
+       and   PNTREE_NODECODE like '%'||#{pntreeNodecode}||'%' 
+      </if>
+    
+     order by PARTSNAME_CODE desc
+  </select>
+  
+  <select id="queryBycode" resultMap="BaseResultMap" parameterType="com.xyscm.sys.basic.model.BasicPartsName" >
+  
+   select 
+    <include refid="Base_Column_List" />
+    from  BASIC_PARTSNAME
+    where MEMBER_CODE = #{memberCode}
+   
+       and   PARTSNAME_CODE = #{partsnameCode} 
+     
+    
+     order by PARTSNAME_CODE desc
+  
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_PARTSNAME
+    where PARTSNAME_ID = #{partsnameId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deletePartsName" parameterType="com.xyscm.sys.basic.model.BasicPartsName">
+  delete from  BASIC_PARTSNAME
+    where PARTSNAME_CODE = #{partsnameCode}
+    and MEMBER_CODE = #{memberCode}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicPartsName" >
+    insert into  BASIC_PARTSNAME (PARTSNAME_ID, MEMBER_CODE, PARTSNAME_CODE, 
+      PARTSNAME_NAME, PARTSNAME_MNEMCODE, PNTREE_NAME, 
+      PARTSNAME_WORKCOE, PARTSNAME_FORMULA, PARTSNAME_PROPERTY1, 
+      PARTSNAME_PROPERTY2, PARTSNAME_PROPERTY3, 
+      PARTSNAME_PROPERTY4, PARTSNAME_PROPERTY5, 
+      PARTSNAME_SCRAPPRICE, GOODS_TAXRATE, PARTSNAME_PRICE, 
+      PARTSNAME_NUMUNIT, PARTSNAME_WEIGHTUNIT, 
+      PARTSNAME_PRICEUN, PARTSNAME_AMDI, PARTSNAME_WEDI, 
+      PARTSNAME_REMARK, PARTSNAME_ADJUST_WEIGHT, 
+      PARTSNAME_STATE, PNTREE_NODECODE, INDUSTRY_CODE, 
+      GOODS_PIECEMODE, GOODS_WEIGHTMODE, GOODS_METERING, 
+      GOODS_PRICEUN, GOODS_PROPERTY, BASIC_SHARE, 
+      PNTREE_PARENTNAME)
+    values (#{partsnameId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{partsnameCode,jdbcType=VARCHAR}, 
+      #{partsnameName,jdbcType=VARCHAR}, #{partsnameMnemcode,jdbcType=VARCHAR}, #{pntreeName,jdbcType=VARCHAR}, 
+      #{partsnameWorkcoe,jdbcType=DECIMAL}, #{partsnameFormula,jdbcType=VARCHAR}, #{partsnameProperty1,jdbcType=DECIMAL}, 
+      #{partsnameProperty2,jdbcType=DECIMAL}, #{partsnameProperty3,jdbcType=DECIMAL}, 
+      #{partsnameProperty4,jdbcType=DECIMAL}, #{partsnameProperty5,jdbcType=DECIMAL}, 
+      #{partsnameScrapprice,jdbcType=DECIMAL}, #{goodsTaxrate,jdbcType=DECIMAL}, #{partsnamePrice,jdbcType=VARCHAR}, 
+      #{partsnameNumunit,jdbcType=VARCHAR}, #{partsnameWeightunit,jdbcType=VARCHAR}, 
+      #{partsnamePriceun,jdbcType=DECIMAL}, #{partsnameAmdi,jdbcType=DECIMAL}, #{partsnameWedi,jdbcType=DECIMAL}, 
+      #{partsnameRemark,jdbcType=VARCHAR}, #{partsnameAdjustWeight,jdbcType=DECIMAL}, 
+      #{partsnameState,jdbcType=DECIMAL}, #{pntreeNodecode,jdbcType=VARCHAR}, #{industryCode,jdbcType=VARCHAR}, 
+      #{goodsPiecemode,jdbcType=DECIMAL}, #{goodsWeightmode,jdbcType=DECIMAL}, #{goodsMetering,jdbcType=VARCHAR}, 
+      #{goodsPriceun,jdbcType=DECIMAL}, #{goodsProperty,jdbcType=VARCHAR}, #{basicShare,jdbcType=DECIMAL}, 
+      #{pntreeParentname,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicPartsName" >
+    insert into  BASIC_PARTSNAME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        PARTSNAME_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="true" >
+        PARTSNAME_CODE,
+      </if>
+      <if test="partsnameName != null" >
+        PARTSNAME_NAME,
+      </if>
+      <if test="partsnameMnemcode != null" >
+        PARTSNAME_MNEMCODE,
+      </if>
+      <if test="pntreeName != null" >
+        PNTREE_NAME,
+      </if>
+      <if test="partsnameWorkcoe != null" >
+        PARTSNAME_WORKCOE,
+      </if>
+      <if test="partsnameFormula != null" >
+        PARTSNAME_FORMULA,
+      </if>
+      <if test="partsnameProperty1 != null" >
+        PARTSNAME_PROPERTY1,
+      </if>
+      <if test="partsnameProperty2 != null" >
+        PARTSNAME_PROPERTY2,
+      </if>
+      <if test="partsnameProperty3 != null" >
+        PARTSNAME_PROPERTY3,
+      </if>
+      <if test="partsnameProperty4 != null" >
+        PARTSNAME_PROPERTY4,
+      </if>
+      <if test="partsnameProperty5 != null" >
+        PARTSNAME_PROPERTY5,
+      </if>
+      <if test="partsnameScrapprice != null" >
+        PARTSNAME_SCRAPPRICE,
+      </if>
+      <if test="goodsTaxrate != null" >
+        GOODS_TAXRATE,
+      </if>
+      <if test="partsnamePrice != null" >
+        PARTSNAME_PRICE,
+      </if>
+      <if test="partsnameNumunit != null" >
+        PARTSNAME_NUMUNIT,
+      </if>
+      <if test="partsnameWeightunit != null" >
+        PARTSNAME_WEIGHTUNIT,
+      </if>
+      <if test="partsnamePriceun != null" >
+        PARTSNAME_PRICEUN,
+      </if>
+      <if test="partsnameAmdi != null" >
+        PARTSNAME_AMDI,
+      </if>
+      <if test="partsnameWedi != null" >
+        PARTSNAME_WEDI,
+      </if>
+      <if test="partsnameRemark != null" >
+        PARTSNAME_REMARK,
+      </if>
+      <if test="partsnameAdjustWeight != null" >
+        PARTSNAME_ADJUST_WEIGHT,
+      </if>
+      <if test="partsnameState != null" >
+        PARTSNAME_STATE,
+      </if>
+      <if test="pntreeNodecode != null" >
+        PNTREE_NODECODE,
+      </if>
+      <if test="industryCode != null" >
+        INDUSTRY_CODE,
+      </if>
+      <if test="goodsPiecemode != null" >
+        GOODS_PIECEMODE,
+      </if>
+      <if test="goodsWeightmode != null" >
+        GOODS_WEIGHTMODE,
+      </if>
+      <if test="goodsMetering != null" >
+        GOODS_METERING,
+      </if>
+      <if test="goodsPriceun != null" >
+        GOODS_PRICEUN,
+      </if>
+      <if test="goodsProperty != null" >
+        GOODS_PROPERTY,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+      <if test="pntreeParentname != null" >
+        PNTREE_PARENTNAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+       basic_partsname_seq.nextval,
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="true" >
+       (select  lpad((max(bb.partsname_code)+1),6,'0')as code from basic_partsname bb),
+      </if>
+      <if test="partsnameName != null" >
+        #{partsnameName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameMnemcode != null" >
+        #{partsnameMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeName != null" >
+        #{pntreeName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameWorkcoe != null" >
+        #{partsnameWorkcoe,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameFormula != null" >
+        #{partsnameFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameProperty1 != null" >
+        #{partsnameProperty1,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty2 != null" >
+        #{partsnameProperty2,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty3 != null" >
+        #{partsnameProperty3,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty4 != null" >
+        #{partsnameProperty4,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty5 != null" >
+        #{partsnameProperty5,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameScrapprice != null" >
+        #{partsnameScrapprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsTaxrate != null" >
+        #{goodsTaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnamePrice != null" >
+        #{partsnamePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameNumunit != null" >
+        #{partsnameNumunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameWeightunit != null" >
+        #{partsnameWeightunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnamePriceun != null" >
+        #{partsnamePriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameAmdi != null" >
+        #{partsnameAmdi,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameWedi != null" >
+        #{partsnameWedi,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameRemark != null" >
+        #{partsnameRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameAdjustWeight != null" >
+        #{partsnameAdjustWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameState != null" >
+        #{partsnameState,jdbcType=DECIMAL},
+      </if>
+      <if test="pntreeNodecode != null" >
+        #{pntreeNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPiecemode != null" >
+        #{goodsPiecemode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeightmode != null" >
+        #{goodsWeightmode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMetering != null" >
+        #{goodsMetering,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPriceun != null" >
+        #{goodsPriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty != null" >
+        #{goodsProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="pntreeParentname != null" >
+        #{pntreeParentname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicPartsName" >
+    update  BASIC_PARTSNAME
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameCode != null" >
+        PARTSNAME_CODE = #{partsnameCode,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameName != null" >
+        PARTSNAME_NAME = #{partsnameName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameMnemcode != null" >
+        PARTSNAME_MNEMCODE = #{partsnameMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeName != null" >
+        PNTREE_NAME = #{pntreeName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameWorkcoe != null" >
+        PARTSNAME_WORKCOE = #{partsnameWorkcoe,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameFormula != null" >
+        PARTSNAME_FORMULA = #{partsnameFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameProperty1 != null" >
+        PARTSNAME_PROPERTY1 = #{partsnameProperty1,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty2 != null" >
+        PARTSNAME_PROPERTY2 = #{partsnameProperty2,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty3 != null" >
+        PARTSNAME_PROPERTY3 = #{partsnameProperty3,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty4 != null" >
+        PARTSNAME_PROPERTY4 = #{partsnameProperty4,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty5 != null" >
+        PARTSNAME_PROPERTY5 = #{partsnameProperty5,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameScrapprice != null" >
+        PARTSNAME_SCRAPPRICE = #{partsnameScrapprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsTaxrate != null" >
+        GOODS_TAXRATE = #{goodsTaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnamePrice != null" >
+        PARTSNAME_PRICE = #{partsnamePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameNumunit != null" >
+        PARTSNAME_NUMUNIT = #{partsnameNumunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameWeightunit != null" >
+        PARTSNAME_WEIGHTUNIT = #{partsnameWeightunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnamePriceun != null" >
+        PARTSNAME_PRICEUN = #{partsnamePriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameAmdi != null" >
+        PARTSNAME_AMDI = #{partsnameAmdi,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameWedi != null" >
+        PARTSNAME_WEDI = #{partsnameWedi,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameRemark != null" >
+        PARTSNAME_REMARK = #{partsnameRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameAdjustWeight != null" >
+        PARTSNAME_ADJUST_WEIGHT = #{partsnameAdjustWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameState != null" >
+        PARTSNAME_STATE = #{partsnameState,jdbcType=DECIMAL},
+      </if>
+      <if test="pntreeNodecode != null" >
+        PNTREE_NODECODE = #{pntreeNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPiecemode != null" >
+        GOODS_PIECEMODE = #{goodsPiecemode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeightmode != null" >
+        GOODS_WEIGHTMODE = #{goodsWeightmode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMetering != null" >
+        GOODS_METERING = #{goodsMetering,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPriceun != null" >
+        GOODS_PRICEUN = #{goodsPriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty != null" >
+        GOODS_PROPERTY = #{goodsProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="pntreeParentname != null" >
+        PNTREE_PARENTNAME = #{pntreeParentname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PARTSNAME_ID = #{partsnameId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <update id="updatePartsName" parameterType="com.xyscm.sys.basic.model.BasicPartsName">
+  
+   update  BASIC_PARTSNAME
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameCode != null" >
+        PARTSNAME_CODE = #{partsnameCode,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameName != null" >
+        PARTSNAME_NAME = #{partsnameName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameMnemcode != null" >
+        PARTSNAME_MNEMCODE = #{partsnameMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="pntreeName != null" >
+        PNTREE_NAME = #{pntreeName,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameWorkcoe != null" >
+        PARTSNAME_WORKCOE = #{partsnameWorkcoe,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameFormula != null" >
+        PARTSNAME_FORMULA = #{partsnameFormula,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameProperty1 != null" >
+        PARTSNAME_PROPERTY1 = #{partsnameProperty1,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty2 != null" >
+        PARTSNAME_PROPERTY2 = #{partsnameProperty2,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty3 != null" >
+        PARTSNAME_PROPERTY3 = #{partsnameProperty3,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty4 != null" >
+        PARTSNAME_PROPERTY4 = #{partsnameProperty4,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameProperty5 != null" >
+        PARTSNAME_PROPERTY5 = #{partsnameProperty5,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameScrapprice != null" >
+        PARTSNAME_SCRAPPRICE = #{partsnameScrapprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsTaxrate != null" >
+        GOODS_TAXRATE = #{goodsTaxrate,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnamePrice != null" >
+        PARTSNAME_PRICE = #{partsnamePrice,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameNumunit != null" >
+        PARTSNAME_NUMUNIT = #{partsnameNumunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameWeightunit != null" >
+        PARTSNAME_WEIGHTUNIT = #{partsnameWeightunit,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnamePriceun != null" >
+        PARTSNAME_PRICEUN = #{partsnamePriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameAmdi != null" >
+        PARTSNAME_AMDI = #{partsnameAmdi,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameWedi != null" >
+        PARTSNAME_WEDI = #{partsnameWedi,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameRemark != null" >
+        PARTSNAME_REMARK = #{partsnameRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="partsnameAdjustWeight != null" >
+        PARTSNAME_ADJUST_WEIGHT = #{partsnameAdjustWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="partsnameState != null" >
+        PARTSNAME_STATE = #{partsnameState,jdbcType=DECIMAL},
+      </if>
+      <if test="pntreeNodecode != null" >
+        PNTREE_NODECODE = #{pntreeNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPiecemode != null" >
+        GOODS_PIECEMODE = #{goodsPiecemode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeightmode != null" >
+        GOODS_WEIGHTMODE = #{goodsWeightmode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMetering != null" >
+        GOODS_METERING = #{goodsMetering,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPriceun != null" >
+        GOODS_PRICEUN = #{goodsPriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty != null" >
+        GOODS_PROPERTY = #{goodsProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="pntreeParentname != null" >
+        PNTREE_PARENTNAME = #{pntreeParentname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where  PARTSNAME_CODE = #{partsnameCode,jdbcType=VARCHAR}
+    and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicPartsName" >
+    update  BASIC_PARTSNAME
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      PARTSNAME_CODE = #{partsnameCode,jdbcType=VARCHAR},
+      PARTSNAME_NAME = #{partsnameName,jdbcType=VARCHAR},
+      PARTSNAME_MNEMCODE = #{partsnameMnemcode,jdbcType=VARCHAR},
+      PNTREE_NAME = #{pntreeName,jdbcType=VARCHAR},
+      PARTSNAME_WORKCOE = #{partsnameWorkcoe,jdbcType=DECIMAL},
+      PARTSNAME_FORMULA = #{partsnameFormula,jdbcType=VARCHAR},
+      PARTSNAME_PROPERTY1 = #{partsnameProperty1,jdbcType=DECIMAL},
+      PARTSNAME_PROPERTY2 = #{partsnameProperty2,jdbcType=DECIMAL},
+      PARTSNAME_PROPERTY3 = #{partsnameProperty3,jdbcType=DECIMAL},
+      PARTSNAME_PROPERTY4 = #{partsnameProperty4,jdbcType=DECIMAL},
+      PARTSNAME_PROPERTY5 = #{partsnameProperty5,jdbcType=DECIMAL},
+      PARTSNAME_SCRAPPRICE = #{partsnameScrapprice,jdbcType=DECIMAL},
+      GOODS_TAXRATE = #{goodsTaxrate,jdbcType=DECIMAL},
+      PARTSNAME_PRICE = #{partsnamePrice,jdbcType=VARCHAR},
+      PARTSNAME_NUMUNIT = #{partsnameNumunit,jdbcType=VARCHAR},
+      PARTSNAME_WEIGHTUNIT = #{partsnameWeightunit,jdbcType=VARCHAR},
+      PARTSNAME_PRICEUN = #{partsnamePriceun,jdbcType=DECIMAL},
+      PARTSNAME_AMDI = #{partsnameAmdi,jdbcType=DECIMAL},
+      PARTSNAME_WEDI = #{partsnameWedi,jdbcType=DECIMAL},
+      PARTSNAME_REMARK = #{partsnameRemark,jdbcType=VARCHAR},
+      PARTSNAME_ADJUST_WEIGHT = #{partsnameAdjustWeight,jdbcType=DECIMAL},
+      PARTSNAME_STATE = #{partsnameState,jdbcType=DECIMAL},
+      PNTREE_NODECODE = #{pntreeNodecode,jdbcType=VARCHAR},
+      INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR},
+      GOODS_PIECEMODE = #{goodsPiecemode,jdbcType=DECIMAL},
+      GOODS_WEIGHTMODE = #{goodsWeightmode,jdbcType=DECIMAL},
+      GOODS_METERING = #{goodsMetering,jdbcType=VARCHAR},
+      GOODS_PRICEUN = #{goodsPriceun,jdbcType=DECIMAL},
+      GOODS_PROPERTY = #{goodsProperty,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      PNTREE_PARENTNAME = #{pntreeParentname,jdbcType=VARCHAR}
+    where PARTSNAME_ID = #{partsnameId,jdbcType=DECIMAL}
+  </update>
+</mapper>

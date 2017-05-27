@@ -1,0 +1,32 @@
+package com.xyscm.sys.basic.dao;
+
+import com.xyscm.sys.basic.model.BasicPartsName;
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+@Repository
+public interface BasicPartsNameMapper {
+    int deleteByPrimaryKey(BigDecimal partsnameId);
+
+    int insert(BasicPartsName record);
+
+    int insertSelective(BasicPartsName record);
+
+    BasicPartsName selectByPrimaryKey(BigDecimal partsnameId);
+
+    int updateByPrimaryKeySelective(BasicPartsName record);
+
+    int updateByPrimaryKey(BasicPartsName record);
+
+    /**
+     * @author henry
+     * @param record
+     * @return
+     */
+	List<BasicPartsName> queryList(BasicPartsName record);
+
+	void updatePartsName(BasicPartsName record);
+
+	void deletePartsName(BasicPartsName record);
+}

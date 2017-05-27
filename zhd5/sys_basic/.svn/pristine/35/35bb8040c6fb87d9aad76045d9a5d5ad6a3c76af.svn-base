@@ -1,0 +1,144 @@
+package com.xyscm.sys.basic.controller;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.xyscm.sys.basic.model.BasicWarehouse;
+import com.xyscm.sys.basic.service.BasicWarehouseService;
+import com.xyscm.sys.basic.service.WarehouseGoodsDaoTest;
+import com.xyscm.sys.basic.vo.BasicWarehouseVo;
+
+@Controller
+public class GoodsManage {
+
+	@Autowired
+	BasicWarehouseService basicWarehouseService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(GoodsManage.class.getName());
+	
+	@RequestMapping("/warehouseManage")
+	public String Warehouse(ServletRequest request,ServletResponse response){
+		
+	
+		return "goodsManage/warehouseManage";
+		
+	}
+	
+	@RequestMapping("/warehouseManage/query")
+	@ResponseBody
+	public  Map<String,Object> queryWareHouse(){
+		Map<String,Object> map = new HashMap<>();
+		
+		try {
+			List<BasicWarehouse> list = basicWarehouseService.queryAllByMemberCode("0000");
+			map.put("data", list);
+			map.put("msg", "ok");
+		} catch (Exception e) {
+			map.put("msg", "error");
+			e.printStackTrace();
+		}
+		
+	
+		return map;
+	}
+	
+	@RequestMapping("/warehouseManage/add")
+	@ResponseBody
+	public  Map<String,Object> addWareHouse(BasicWarehouseVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			//验证表单
+			//.....
+			BasicWarehouse bean = new BasicWarehouse();
+			
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+			basicWarehouseService.saveWarehouse(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	
+	@RequestMapping("/warehouseManage/update")
+	@ResponseBody
+	public  Map<String,Object> updateWareHouse(BasicWarehouseVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			//验证表单
+			//.....
+			BasicWarehouse bean = new BasicWarehouse();
+		logger.debug(vo.toString());	
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+			basicWarehouseService.updateWarehouse(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+
+	
+	@RequestMapping("/warehouseManage/delete")
+	@ResponseBody
+	public  Map<String,Object> deleteWareHouse(String warehouse_code){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			//验证表单
+			//.....
+			BasicWarehouse bean = new BasicWarehouse();
+			
+			
+			bean.setMemberCode("0000");
+			bean.setWarehouseCode(warehouse_code);
+			basicWarehouseService.deleteWarehouseByCode(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+
+	
+	
+	
+	
+}

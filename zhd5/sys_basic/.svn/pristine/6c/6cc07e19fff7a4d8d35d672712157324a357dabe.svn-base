@@ -1,0 +1,63 @@
+function entry(val) {
+	var entryGet = function(data) {
+		$("#content").html(data);
+		Window_Width_Height();
+	}
+	switch (val) {
+	case '1':
+		$.get("InstitutionalSetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '2':
+		$.get("DepartmentSetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '3':
+		$.get("StaffSetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '4':
+		$.get("StaffSetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '5':
+		$.get("LibrarySetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '6':
+		$.get("LocationSetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '7':
+		$.get("NameSetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '8':
+		$.get("OriginSetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '9':
+		$.get("MaterialCode.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '30':
+		$.get("AreaSetting.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	case '31':
+		$.get("SetUpUnits.html", function(data) {
+			entryGet(data);
+		});
+		break;
+	}
+}

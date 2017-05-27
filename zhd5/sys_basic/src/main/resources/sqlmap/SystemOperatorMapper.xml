@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.cas.dao.SystemOperatorMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.cas.model.SystemOperator" >
+    <id column="OPERATOR_ID" property="operatorId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_CODE" property="operatorCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_USERID" property="operatorUserid" jdbcType="VARCHAR" />
+    <result column="OPERATOR_USER" property="operatorUser" jdbcType="VARCHAR" />
+    <result column="OPERATOR_PASSWORD" property="operatorPassword" jdbcType="VARCHAR" />
+    <result column="ROLE_CODELIST" property="roleCodelist" jdbcType="VARCHAR" />
+    <result column="OPERATOR_KEY" property="operatorKey" jdbcType="VARCHAR" />
+    <result column="OPERATOR_STATE" property="operatorState" jdbcType="DECIMAL" />
+    <result column="OPERATOR_IDENTITY" property="operatorIdentity" jdbcType="DECIMAL" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_CODE" property="employeeCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_NICKNAME" property="operatorNickname" jdbcType="VARCHAR" />
+    <result column="OPERATOR_PHOTO" property="operatorPhoto" jdbcType="VARCHAR" />
+    <result column="OPERATOR_HOMEURL" property="operatorHomeurl" jdbcType="VARCHAR" />
+    <result column="OPERATOR_FAILNUM" property="operatorFailnum" jdbcType="DECIMAL" />
+    <result column="PDAUSER_STATE" property="pdauserState" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    OPERATOR_ID, MEMBER_CODE, OPERATOR_CODE, OPERATOR_USERID, OPERATOR_USER, OPERATOR_PASSWORD, 
+    ROLE_CODELIST, OPERATOR_KEY, OPERATOR_STATE, OPERATOR_IDENTITY, ORG_CODE, DEPT_CODE, 
+    EMPLOYEE_CODE, OPERATOR_NICKNAME, OPERATOR_PHOTO, OPERATOR_HOMEURL, OPERATOR_FAILNUM, 
+    PDAUSER_STATE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYSTEM_OPERATOR
+    where OPERATOR_ID = #{operatorId,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYSTEM_OPERATOR
+    where OPERATOR_USERID = #{operatorUserid,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

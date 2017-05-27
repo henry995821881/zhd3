@@ -1,0 +1,253 @@
+
+mainContentLeft();
+
+//地区列表
+function init_data(){
+	
+	$.post("area/queryAllArea",
+	  {
+	    memeber_code:'0000'
+	  },
+	  function(d,status){
+		  	var content= eval("("+d+")");
+			var areaTree = template('areaTree', content);
+			$("#areaTreeLeft").html(areaTree);
+			
+			//地区列表点击事件
+//			$(".nav_list_toggle").off('click');
+			$(".nav_list_toggle").on('click', function(item) {
+				var areaNodecode = $(this).attr("id");
+				var type = $(this).attr("value");
+				var areaId = $(this).attr("areaId");	//地区id
+				var areaParent = $(this).attr("areaCode");
+				if(areaId != null){
+					$("#areaId").val(areaId);
+				}
+				getdata(areaNodecode,type,areaId,areaParent,item);
+				aTable();
+			});
+		aGroup();
+	  });
+}
+init_data();
+//获取列表数据
+function getdata(areaNodecode,type,areaId,areaParent,item){
+	
+		$.ajaxSetup({
+		  async: false
+		 });
+		
+		$.post("area/query2BasicArea",  
+			{
+			areaNodecode:areaNodecode,
+			type:type,
+			areaId:areaId,
+			areaParent:areaParent
+			}, 
+			function(d) {
+				
+				var content= eval("("+d+")");
+				var content_area = template('AreaSetting', content);
+				$("#content_area").html(content_area);
+				aTable();
+
+				//表格选择事件
+				$(".table_detail").on('click', function(item) {
+					var areaId = $(this).attr("areaId");
+					$("#areaId").val(areaId);
+					var areaNodecode = $(this).attr("areaNodecode");
+					$("#AreaNodecode").val(areaNodecode);
+					var areaParent = $(this).attr("areaParent");
+					$("#AreaParent").val(areaParent);
+					$("#afterupdate2query").val(areaParent);
+					
+				});
+				
+				if(type == 0){//增加一级地区
+					$("#AreaParent").val(-1);	
+					$("#AreaNodecode").val("");	
+				}else if(type == 1){//增加二级地区
+					$("#AreaParent").val(content.basicArea.areaNodecode);	//上级地区的areaNodecode
+					$("#AreaNodecode").val(content.basicArea.areaNodecode+".");	
+				}else {
+					$("#AreaParent").val(content.basicArea.areaCode);
+					$("#AreaNodecode").val(content.basicArea.areaNodecode+".");	
+					
+					var nextTree = template('nextTree', content);
+					$("ul[next="+areaId+"]").html(nextTree);
+					$(".nav_list_toggle").off('click');
+
+					$(".nextTree").on('click', function(item) {
+						
+						var areaParent = $(this).attr("areaCode");
+						var type = $(this).attr("value");
+						var areaId = $(this).attr("areaId");	//地区id
+						
+						$.ajaxSetup({
+							  async: false
+							 });
+						
+						$.post("area/query2BasicArea",  
+								{
+								areaParent:areaParent,
+								type:type,
+								areaId:areaId
+								}, 	function(d) {
+							
+									
+									var content= eval("("+d+")");
+									var nextTree = template('nextTree', content);
+									$("ul[next="+areaId+"]").html(nextTree);
+									
+									var content_area = template('AreaSetting', content);
+									$("#content_area").html(content_area);
+									
+									$("#AreaParent").val(content.basicArea.areaCode);
+									$("#AreaNodecode").val(areaNodecode+".");	
+									
+									//表格选择事件
+									$(".table_detail").on('click', function(item) {
+										var areaId = $(this).attr("areaId");
+										$("#areaId").val(areaId);
+										var areaNodecode = $(this).attr("areaNodecode");
+										$("#AreaNodecode").val(areaNodecode);
+										var areaParent = $(this).attr("areaParent");
+										$("#AreaParent").val(areaParent);
+										$("#afterupdate2query").val(areaParent);
+									});
+									aTable();
+									
+									$(".nav_list_toggle").off('click');
+									$(".nav_list_toggle").on('click', function(item) {
+										var areaNodecode = $(this).attr("id");
+										var type = $(this).attr("value");
+										var areaId = $(this).attr("areaId");	//地区id
+										var areaParent = $(this).attr("areaCode");
+										if(areaId != null){
+											$("#areaId").val(areaId);
+										}
+										getdata(areaNodecode,type,areaId,areaParent,item);
+										aTable();
+									});
+								
+									aGroup();
+								});
+					})
+				aGroup();
+				}
+				
+			});
+		
+	}
+
+
+
+//操作-------表格
+var opt_table_status = "";
+$(".opt_").on('click',function(){
+	
+	opt_table_status = $(this).attr("opt");
+	if(opt_table_status == 'del_table'){
+		del_table_area();
+	}
+})
+
+function save_table(){
+	if(opt_table_status == 'add_table'){
+		add_table_area();
+	}
+	if(opt_table_status == 'update_table'){
+		$("#AreaParent").val("");	
+		$("#AreaNodecode").val("");	
+		update_table_area();
+	}
+	
+}
+
+//新增------表格
+function add_table_area(){
+	var $form = $('#add_area_table');
+	
+	var data = $form.serialize();
+	var url ="area/insertArea";
+	$.post(url, data, function(d) {
+		init_data();
+		
+		close_window();
+	});
+}
+
+//修改------表格
+function update_table_area(){
+	var $form = $('#add_area_table');
+	
+	var data = $form.serialize();
+	var url ="area/updateArea";
+	$.post(url, data, function(d) {
+		init_data();
+		
+		var areaId = $("#areaId").val();
+		var areaParent = $("#afterupdate2query").val();
+		
+		$.post("area/query2BasicArea",  
+			{
+			areaParent:areaParent,
+			type:2,
+			areaId:areaId
+			}, 	function(d) {
+				var content= eval("("+d+")");
+			
+				var content_area = template('AreaSetting', content);
+				$("#content_area").html(content_area);
+				
+				//表格选择事件
+				$(".table_detail").on('click', function(item) {
+					var areaId = $(this).attr("areaId");
+					$("#areaId").val(areaId);
+					var areaNodecode = $(this).attr("areaNodecode");
+					$("#AreaNodecode").val(areaNodecode);
+				});
+				aTable();
+				
+			});
+		
+		
+		close_window();
+	
+	});
+}
+
+
+//删除------表格
+function del_table_area(){
+	var areaNodecode = $("#AreaNodecode").val();
+	var areaParent = $("#AreaParent").val();
+	var data = {areaNodecode:areaNodecode,areaParent:areaParent};
+	var url ="area/deleteArea";
+	$.post(url, data, function(d) {
+	 	var content= eval("("+d+")");
+	 	if(content.msg == "error"){
+	 		alert("该地区下有子地区，不可删除");
+	 	}
+	 	close_window();
+	});
+}
+
+
+var Verification_Disabled = function() {
+	if($('#AreaName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+
+var TableDetail = function(table_details) {
+	$('#AreaName').val(table_details.eq(0).text());
+	$('#AssistantCode').val(table_details.eq(2).text());
+	$('#Remark').val(table_details.eq(3).text());
+}
+
+
+
+//@ sourceURL=product.js  

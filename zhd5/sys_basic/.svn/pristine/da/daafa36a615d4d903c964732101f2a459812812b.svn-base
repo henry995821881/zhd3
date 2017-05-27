@@ -1,0 +1,259 @@
+<#assign base=request.contextPath />
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+	<input id="companyId" name="companyId" style="display: none;" value="">
+	<div class="main_content_left">
+				<h4 class="title">查询</h4>
+				<ul class="menu_content Inquire">
+					<form id="query_company">
+						<li class="menu_content_list">
+							<span>开始时间：</span>
+							<input type="text" name="birthdayStart" id="birthdayStart" onClick="WdatePicker()" readonly="readonly">
+						</li>
+						<li class="menu_content_list">
+							<span>结束时间：</span>
+							<input type="text" name="birthdayEnd" id="birthdayEnd" onClick="WdatePicker()" readonly="readonly">
+						</li>
+						<li class="menu_content_list">
+							<span>代码：</span>
+							<input type="text" name="companyCode" id="companyCode" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>名称：</span>
+							<input type="text" name="companyName" id="companyName" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>简称：</span>
+							<input type="text" name="companyAbbreviate" id="companyAbbreviate" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>地区：</span>
+							<input type="text" name="areaCode" id="areaCode" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>状态：</span>
+							<input type="text" name="companyState" id="companyState" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>信誉额度：</span>
+							<input type="text" name="companyAssessCredit" id="companyAssessCredit" value="" />
+						</li>
+						<li class="menu_content_list">
+							<input type="button" id="Inquire" onclick="query()" value="查询" class="InquireButton bg_1199c4" />
+							<input type="reset" value="重置" class="InquireButton" />
+						</li>
+					</form>
+						
+				</ul>
+				<h4 class="title">地区</h4>
+				<ul class="menu_content">
+					<li class="menu_content_group">
+						<ul class="nav_list_toggle menu_content_group_node">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+								<span>地区设置</span>
+							</li>
+						</ul>
+						<ul class="pl_10 hidden">
+							<li>
+								<ul class="nav_list_toggle menu_content_group_node">
+									<li>
+										<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+										<span>北京市</span>
+									</li>
+								</ul>
+								<ul class="pl_10 hidden">
+									<li class="nav_list_toggle menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+										<span>东城区</span>
+									</li>
+									<li class="nav_list_toggle menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+										<span>西城区</span>
+									</li>
+									<li class="nav_list_toggle menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+										<span>东城区</span>
+									</li>
+									<li class="nav_list_toggle menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+										<span>东城区</span>
+									</li>
+									<li class="nav_list_toggle menu_content_group_node"><i class="icon iconfont icon-jiaochabiao"></i>
+										<span>东城区</span>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="main_content_right">
+				<div class="crud_menu">
+					<ul class="">
+						<li opt="add" class="fl_l add_table_icon opt_"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li opt="update" class="fl_l modify_table_icon opt_"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+						<li opt="del" class="fl_l delete_table_icon opt_"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+						<li class="fl_l merge_table_icon"><i class="icon iconfont icon-shanchu1"></i>单位合并</li>
+						<li class="fl_l Import_table_icon"><i class="icon iconfont icon-tianjia "></i>导入</li>
+					</ul>
+				</div>
+				<div id="content_SetCompany"></div>
+	<!--弹出框 导入-->
+				<div class="add_table" id="Import_table">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>往来单位导入</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li >
+								<span>附件：</span>
+								<input type="file" name="" id="" value="" />
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+							</li>
+						</form>
+					</ul>
+				</div>
+				<!--弹出框 添加table-->
+				<div class="add_table" id="add_table">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>开会银行设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li class="fl_l">
+								<span>地区名称：</span>
+								<input type="text" name="AreaName" id="AreaName" value="" />
+							</li>
+							<li class="fl_l">
+								<span>助记码：</span>
+								<input type="text" name="AssistantCode" id="AssistantCode" value="" />
+							</li>
+							<li class="remark cl">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+				<!--弹出框 添加组-->
+				<div class="add_table" id="add_jt">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_group_close"></i>
+						<span>地区设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li class="fl_l">
+								<span>地区名称：</span>
+								<input type="text" name="GroupName" id="GroupName" value="" />
+							</li>
+							<li class="fl_l">
+								<span>助记码：</span>
+								<input type="text" name="AssistantCode" id="AssistantCode" value="" />
+							</li>
+							<li class="remark cl">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+			</div>
+		<script id="SetCompany" type="text/html">
+			
+				<div class="main_content_right_table">
+					<table id="tbl" class="table" cellspacing="1">
+						<tr class="table_title">
+							<td>代码</td>
+							<td>名称</td>
+							<td>日期</td>
+							<td>简称</td>
+							<td>状态</td>
+							<td>信誉额度</td>
+							<td>客户类别</td>
+							<td>客户来源</td>
+							<td>单位类型</td>
+							<td>所属行业</td>
+							<td>电话</td>
+							<td>传真</td>
+							<td>法人代表</td>
+							<td>账号</td>
+							<td>开户行</td>
+							<td>税号</td>
+							<td>联系地址</td>
+							<td>地区</td>
+							<td>助记码</td>
+							<td>联系人</td>
+							<td>邮政编码</td>
+							<td>开票地址</td>
+							<td>业务员</td>
+							<td>分管部门</td>
+							<td>业务关系</td>
+							<td>内部机构</td>
+							<td>授权模式</td>
+							<td>登记机构</td>
+							<td>经验范围</td>
+						</tr>
+			<% for(var i=0;i<data.length;i++) {%>
+						<tr class="table_detail" companyId="<%=data[i].companyId%>">
+							<td><%=data[i].companyCode%></td>
+							<td><%=data[i].companyName%></td>
+							<td><%=data[i].dataSystemdate%></td>
+							<td><%=data[i].companyAbbreviate%></td>
+							<td><%=data[i].companyState%></td>
+							<td><%=data[i].companyAssessCredit%></td>
+							<td>111111111</td>
+							<td><%=data[i].companySource%></td>
+							<td><%=data[i].companyClass%></td>
+							<td><%=data[i].companyIndustry%></td>
+							<td><%=data[i].companyPhone%></td>
+							<td><%=data[i].companyFax%></td>
+							<td><%=data[i].companyCorporation%></td>
+							<td><%=data[i].companyBankaccounts%></td>
+							<td><%=data[i].companyBank%></td>
+							<td><%=data[i].companyTanu%></td>
+							<td><%=data[i].companyAddr%></td>
+							<td><%=data[i].areaCode%></td>
+							<td><%=data[i].companyMnemcode%></td>
+							<td><%=data[i].companyLinkman%></td>
+							<td><%=data[i].companyPostcode%></td>
+							<td><%=data[i].companyInvoiceaddr%></td>
+							<td><%=data[i].employeeCode%></td>
+							<td>未知</td>
+							<td><%=data[i].companyAssessType%></td>
+							<td><%=data[i].companyOrgcode%></td>
+							<td><%=data[i].companyPermitmode%></td>
+							<td><%=data[i].dataEditOrg%></td>
+							<td><%=data[i].companyRemark%></td>
+						
+						</tr>
+			<%}%>
+					</table>
+				</div>
+				<div id="page" class="main_content_right_page">
+					<%include('mainpage')%>
+				</div>
+				
+				
+		</script>
+		<script src="${base}js/companyManage/companyManage.js" type="text/javascript" charset="utf-8"></script>
+	
+	</body>
+
+</html>

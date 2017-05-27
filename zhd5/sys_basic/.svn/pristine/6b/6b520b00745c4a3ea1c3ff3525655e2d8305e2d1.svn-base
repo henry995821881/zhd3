@@ -1,0 +1,141 @@
+package com.xyscm.sys.basic.controller;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xyscm.sys.basic.model.BasicArea;
+import com.xyscm.sys.basic.model.BasicCompany;
+import com.xyscm.sys.basic.service.BasicCompanyService;
+import com.xyscm.sys.basic.vo.BasicCompanyVo;
+
+@Controller
+public class CompanyManageController {
+
+	@Autowired
+	private BasicCompanyService basicCompanyService;
+	
+	/**
+	 * 跳转往来单位设置页面
+	 * @param request
+	 * @param response
+	 * @return
+	 *
+	 * String
+	 */
+	@RequestMapping("/to_company")
+	public String to_company(ServletRequest request,ServletResponse response){
+			
+		
+		return "/companyManage/companyManage";
+	}
+	
+	
+	/**
+	 * 查询往来单位
+	 * @param request
+	 * @param response
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	@RequestMapping("/company/queryCompany")
+	@ResponseBody
+	public Map<String,Object>  queryCompany(BasicCompanyVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		BasicCompany basicCompany = new BasicCompany();
+		BeanUtils.copyProperties(vo, basicCompany);
+		String orgCode = "0002";	//权限
+		basicCompany.setMemberCode("0000");
+		basicCompany.setOrgCode(orgCode);
+		List<BasicCompany> list = basicCompanyService.queryCompany(basicCompany);
+		map.put("data", list);
+		return map;
+	}
+	
+	
+	/**
+	 * 查询往来单位的详情
+	 * @param request
+	 * @param response
+	 * @return
+	 *
+	 * BasicCompany
+	 */
+	@RequestMapping("/company/getCompanyInfo")
+	public BasicCompany get(ServletRequest request,ServletResponse response){
+		BigDecimal companyId = new BigDecimal(1234);
+		BasicCompany basicCompany = basicCompanyService.getCompanyInfo(companyId);
+		return basicCompany;
+	}
+	
+	
+	/**
+	 * 新增往来单位
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	public void insertCompany(ServletRequest request,ServletResponse response){
+		
+		String memberCode = "";
+		String companyName = "";
+		BasicCompany basicCompany = new BasicCompany();
+		basicCompany.setMemberCode(memberCode);
+		basicCompany.setCompanyName(companyName);
+		basicCompanyService.insertCompany(basicCompany);
+		
+	}
+	
+	/**
+	 * 编辑往来单位
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	public void update(ServletRequest request,ServletResponse response){
+		
+		BasicCompany basicCompany = new BasicCompany();
+		basicCompany.setCompanyId(new BigDecimal(21499));
+		basicCompany.setCompanyAbbreviate("adc");
+		basicCompanyService.updateCompany(basicCompany);
+	}
+	
+	/**
+	 * 删除往来单位
+	 *
+	 */
+	@RequestMapping("/company/deleteCompany")
+	@ResponseBody
+	public Map<String,Object> deleteArea(String companyId){
+		Map<String,Object> map = new HashMap<>();
+		
+		try{
+			basicCompanyService.deleteCompany(new BigDecimal(companyId));
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+}

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.SystemIndustryMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.SystemIndustry" >
+    <id column="COLUMN_ID" property="columnId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="INDUSTRY_CODE" property="industryCode" jdbcType="VARCHAR" />
+    <result column="INDUSTRY_PARENT" property="industryParent" jdbcType="VARCHAR" />
+    <result column="INDUSTRY_NAME" property="industryName" jdbcType="VARCHAR" />
+    <result column="ORG_REMARK" property="orgRemark" jdbcType="VARCHAR" />
+    <result column="INDUSTRY_ISLEAF" property="industryIsleaf" jdbcType="DECIMAL" />
+    <result column="INDUSTRY_NODECODE" property="industryNodecode" jdbcType="VARCHAR" />
+    <result column="GOODS_PIECEMODE" property="goodsPiecemode" jdbcType="DECIMAL" />
+    <result column="GOODS_WEIGHTMODE" property="goodsWeightmode" jdbcType="DECIMAL" />
+    <result column="GOODS_METERING" property="goodsMetering" jdbcType="VARCHAR" />
+    <result column="GOODS_PRICEUN" property="goodsPriceun" jdbcType="DECIMAL" />
+    <result column="GOODS_PROPERTY" property="goodsProperty" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COLUMN_ID, MEMBER_CODE, INDUSTRY_CODE, INDUSTRY_PARENT, INDUSTRY_NAME, ORG_REMARK, 
+    INDUSTRY_ISLEAF, INDUSTRY_NODECODE, GOODS_PIECEMODE, GOODS_WEIGHTMODE, GOODS_METERING, 
+    GOODS_PRICEUN, GOODS_PROPERTY, BASIC_SHARE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  SYSTEM_INDUSTRY
+    where COLUMN_ID = #{columnId,jdbcType=DECIMAL}
+  </select>
+  <select id="queryList"  resultMap="BaseResultMap" parameterType="com.xyscm.sys.basic.model.SystemIndustry">
+    select 
+    <include refid="Base_Column_List" />
+    from  SYSTEM_INDUSTRY
+    where MEMBER_CODE = #{memberCode}
+    order by INDUSTRY_CODE desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  SYSTEM_INDUSTRY
+    where COLUMN_ID = #{columnId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.SystemIndustry" >
+    insert into  SYSTEM_INDUSTRY (COLUMN_ID, MEMBER_CODE, INDUSTRY_CODE, 
+      INDUSTRY_PARENT, INDUSTRY_NAME, ORG_REMARK, 
+      INDUSTRY_ISLEAF, INDUSTRY_NODECODE, GOODS_PIECEMODE, 
+      GOODS_WEIGHTMODE, GOODS_METERING, GOODS_PRICEUN, 
+      GOODS_PROPERTY, BASIC_SHARE)
+    values (#{columnId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{industryCode,jdbcType=VARCHAR}, 
+      #{industryParent,jdbcType=VARCHAR}, #{industryName,jdbcType=VARCHAR}, #{orgRemark,jdbcType=VARCHAR}, 
+      #{industryIsleaf,jdbcType=DECIMAL}, #{industryNodecode,jdbcType=VARCHAR}, #{goodsPiecemode,jdbcType=DECIMAL}, 
+      #{goodsWeightmode,jdbcType=DECIMAL}, #{goodsMetering,jdbcType=VARCHAR}, #{goodsPriceun,jdbcType=DECIMAL}, 
+      #{goodsProperty,jdbcType=VARCHAR}, #{basicShare,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.SystemIndustry" >
+    insert into  SYSTEM_INDUSTRY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="columnId != null" >
+        COLUMN_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="industryCode != null" >
+        INDUSTRY_CODE,
+      </if>
+      <if test="industryParent != null" >
+        INDUSTRY_PARENT,
+      </if>
+      <if test="industryName != null" >
+        INDUSTRY_NAME,
+      </if>
+      <if test="orgRemark != null" >
+        ORG_REMARK,
+      </if>
+      <if test="industryIsleaf != null" >
+        INDUSTRY_ISLEAF,
+      </if>
+      <if test="industryNodecode != null" >
+        INDUSTRY_NODECODE,
+      </if>
+      <if test="goodsPiecemode != null" >
+        GOODS_PIECEMODE,
+      </if>
+      <if test="goodsWeightmode != null" >
+        GOODS_WEIGHTMODE,
+      </if>
+      <if test="goodsMetering != null" >
+        GOODS_METERING,
+      </if>
+      <if test="goodsPriceun != null" >
+        GOODS_PRICEUN,
+      </if>
+      <if test="goodsProperty != null" >
+        GOODS_PROPERTY,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="columnId != null" >
+        #{columnId,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryParent != null" >
+        #{industryParent,jdbcType=VARCHAR},
+      </if>
+      <if test="industryName != null" >
+        #{industryName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRemark != null" >
+        #{orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="industryIsleaf != null" >
+        #{industryIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="industryNodecode != null" >
+        #{industryNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPiecemode != null" >
+        #{goodsPiecemode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeightmode != null" >
+        #{goodsWeightmode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMetering != null" >
+        #{goodsMetering,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPriceun != null" >
+        #{goodsPriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty != null" >
+        #{goodsProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.SystemIndustry" >
+    update  SYSTEM_INDUSTRY
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryCode != null" >
+        INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="industryParent != null" >
+        INDUSTRY_PARENT = #{industryParent,jdbcType=VARCHAR},
+      </if>
+      <if test="industryName != null" >
+        INDUSTRY_NAME = #{industryName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgRemark != null" >
+        ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="industryIsleaf != null" >
+        INDUSTRY_ISLEAF = #{industryIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="industryNodecode != null" >
+        INDUSTRY_NODECODE = #{industryNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPiecemode != null" >
+        GOODS_PIECEMODE = #{goodsPiecemode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsWeightmode != null" >
+        GOODS_WEIGHTMODE = #{goodsWeightmode,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsMetering != null" >
+        GOODS_METERING = #{goodsMetering,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPriceun != null" >
+        GOODS_PRICEUN = #{goodsPriceun,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsProperty != null" >
+        GOODS_PROPERTY = #{goodsProperty,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where COLUMN_ID = #{columnId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.SystemIndustry" >
+    update  SYSTEM_INDUSTRY
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      INDUSTRY_CODE = #{industryCode,jdbcType=VARCHAR},
+      INDUSTRY_PARENT = #{industryParent,jdbcType=VARCHAR},
+      INDUSTRY_NAME = #{industryName,jdbcType=VARCHAR},
+      ORG_REMARK = #{orgRemark,jdbcType=VARCHAR},
+      INDUSTRY_ISLEAF = #{industryIsleaf,jdbcType=DECIMAL},
+      INDUSTRY_NODECODE = #{industryNodecode,jdbcType=VARCHAR},
+      GOODS_PIECEMODE = #{goodsPiecemode,jdbcType=DECIMAL},
+      GOODS_WEIGHTMODE = #{goodsWeightmode,jdbcType=DECIMAL},
+      GOODS_METERING = #{goodsMetering,jdbcType=VARCHAR},
+      GOODS_PRICEUN = #{goodsPriceun,jdbcType=DECIMAL},
+      GOODS_PROPERTY = #{goodsProperty,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL}
+    where COLUMN_ID = #{columnId,jdbcType=DECIMAL}
+  </update>
+</mapper>

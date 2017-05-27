@@ -1,0 +1,506 @@
+package com.xyscm.sys.basic.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.xyscm.sys.basic.model.BasicPartsName;
+import com.xyscm.sys.basic.model.BasicPnTree;
+import com.xyscm.sys.basic.model.BasicWareArea;
+import com.xyscm.sys.basic.model.BasicWarePlace;
+import com.xyscm.sys.basic.model.BasicWarehouse;
+import com.xyscm.sys.basic.service.BasicPartsNameService;
+import com.xyscm.sys.basic.service.BasicPnTreeService;
+import com.xyscm.sys.basic.service.BasicWareAreaService;
+import com.xyscm.sys.basic.service.BasicWarePlaceService;
+import com.xyscm.sys.basic.service.BasicWarehouseService;
+import com.xyscm.sys.basic.service.WarehouseGoodsDaoTest;
+import com.xyscm.sys.basic.vo.BasicPartsNameVo;
+import com.xyscm.sys.basic.vo.BasicWareAreaVo;
+import com.xyscm.sys.basic.vo.BasicWarePlaceVo;
+import com.xyscm.sys.basic.vo.BasicWarehouseVo;
+
+@Controller
+public class GoodsManage {
+
+	@Autowired
+	BasicWarehouseService basicWarehouseService;
+	
+	
+	@Autowired
+	BasicWareAreaService basicWareAreaService;
+	
+	@Autowired
+	BasicWarePlaceService basicWarePlaceService;
+	
+	
+	@Autowired
+	BasicPnTreeService basicPnTreeService;
+	
+	
+	@Autowired
+	BasicPartsNameService basicPartsNameService;
+	 
+	private static final Logger logger = LoggerFactory.getLogger(GoodsManage.class.getName());
+
+	
+/*
+ * 仓库
+ */
+	@RequestMapping("/warehouseManage")
+	public String Warehouse(ServletRequest request,ServletResponse response){
+		
+	
+		return "goodsManage/warehouseManage";
+		
+	}
+	
+	@RequestMapping("/warehouseManage/query")
+	@ResponseBody
+	public  Map<String,Object> queryWareHouse(){
+		Map<String,Object> map = new HashMap<>();
+		
+		try {
+			List<BasicWarehouse> list = basicWarehouseService.queryAllByMemberCode("0000");
+			map.put("data", list);
+			map.put("msg", "ok");
+		} catch (Exception e) {
+			map.put("msg", "error");
+			e.printStackTrace();
+		}
+		
+	
+		return map;
+	}
+	
+	@RequestMapping("/warehouseManage/add")
+	@ResponseBody
+	public  Map<String,Object> addWareHouse(BasicWarehouseVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			//验证表单
+			//.....
+			BasicWarehouse bean = new BasicWarehouse();
+			
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+			basicWarehouseService.saveWarehouse(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	
+	@RequestMapping("/warehouseManage/update")
+	@ResponseBody
+	public  Map<String,Object> updateWareHouse(BasicWarehouseVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			//验证表单
+			//.....
+			BasicWarehouse bean = new BasicWarehouse();
+		logger.debug(vo.toString());	
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+			basicWarehouseService.updateWarehouse(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+
+	
+	@RequestMapping("/warehouseManage/delete")
+	@ResponseBody
+	public  Map<String,Object> deleteWareHouse(String warehouse_code){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			//验证表单
+			//.....
+			BasicWarehouse bean = new BasicWarehouse();
+			
+			
+			bean.setMemberCode("0000");
+			bean.setWarehouseCode(warehouse_code);
+			basicWarehouseService.deleteWarehouseByCode(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+
+	
+	/*
+	 * 库区
+	 */
+	
+	@RequestMapping("/wareAreaManage")
+	public  String wareArea(){
+		
+		
+		return "goodsManage/wareAreaManage";
+	
+	}
+	
+	
+	
+	
+	
+	
+	@RequestMapping("/wareAreaManage/query")
+	@ResponseBody
+	public  Map<String,Object> queryWareArea(BasicWareAreaVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//验证
+			//.....
+			
+			BasicWareArea bean = new BasicWareArea();
+			BeanUtils.copyProperties(vo, bean);
+			
+			List<BasicWareArea> list = basicWareAreaService.queryList(bean);
+			map.put("data", list);
+			
+			
+		} catch (BeansException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	@RequestMapping("/wareAreaManage/add")
+	@ResponseBody
+	public  Map<String,Object> addWareArea(BasicWareAreaVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//验证
+			//.....
+			
+			logger.debug(vo.toString());
+			BasicWareArea bean = new BasicWareArea();
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+			basicWareAreaService.saveWareArea(bean);
+			
+			
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	@RequestMapping("/wareAreaManage/update")
+	@ResponseBody
+	public  Map<String,Object> updateWareArea(BasicWareAreaVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//验证
+			//.....
+			
+			logger.debug(vo.toString());
+			BasicWareArea bean = new BasicWareArea();
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+			basicWareAreaService.updateWareAreaByCode(bean);
+			
+			
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}	
+	
+	
+	@RequestMapping("/wareAreaManage/delete")
+	@ResponseBody
+	public  Map<String,Object> deleteWareArea(String wareareaCode){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//验证
+			//.....
+			
+			
+			BasicWareArea bean = new BasicWareArea();
+		
+			bean.setMemberCode("0000");
+			bean.setWareareaCode(wareareaCode);
+			basicWareAreaService.deleteWareArea(bean);
+			
+			
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	
+	/**
+	 * 库位
+	 */
+	
+	
+	@RequestMapping("/warePlaceManage")
+	public  String wareplace(){
+		
+		
+		return "goodsManage/wareplaceManage";
+	
+	}
+
+	
+	
+	@RequestMapping("/warePlaceManage/query")
+	@ResponseBody
+	public  Map<String,Object> queryWarePlace(BasicWarePlaceVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//验证
+			//.....
+			
+			BasicWarePlace bean = new BasicWarePlace();
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+			
+			List<BasicWarePlace> list = basicWarePlaceService.queryList(bean);
+			map.put("data", list);
+			map.put("msg", "ok");
+			
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	@RequestMapping("/warePlaceManage/add")
+	@ResponseBody
+	public  Map<String,Object> saveWarePlace(BasicWarePlaceVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//验证
+			//.....
+			
+			BasicWarePlace bean = new BasicWarePlace();
+			
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+
+			basicWarePlaceService.saveWarePlace(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	
+	@RequestMapping("/warePlaceManage/update")
+	@ResponseBody
+	public  Map<String,Object> updateWarePlace(BasicWarePlaceVo vo){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//验证
+			//.....
+			logger.debug(vo.toString());
+			BasicWarePlace bean = new BasicWarePlace();
+			
+			BeanUtils.copyProperties(vo, bean);
+			bean.setMemberCode("0000");
+
+			basicWarePlaceService.updateWarePlaceByCode(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	@RequestMapping("/warePlaceManage/delete")
+	@ResponseBody
+	public  Map<String,Object> deleteWarePlace(String wareplaceCode){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//验证
+			//.....
+		
+			BasicWarePlace bean = new BasicWarePlace();
+			
+			bean.setMemberCode("0000");
+			bean.setWareplaceCode(wareplaceCode);
+
+			basicWarePlaceService.deleteWarePlace(bean);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	/**
+	 * 品名设置
+	 */
+	
+	@RequestMapping("/partsname")
+	public  String partsname(){
+		
+		
+		return "goodsManage/partsname";
+	
+	}	
+	
+	
+	//品名大类树
+	@RequestMapping("/pntree/query")
+	@ResponseBody
+	public  Map<String,Object> queryPntree(){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			BasicPnTree bean = new BasicPnTree();
+			bean.setMemberCode("0000");
+			bean.setPntreeParentcode("-1");
+			List<Map<String,Object>> list = new ArrayList<>();
+			
+			
+			List<BasicPnTree> root_tree = basicPnTreeService.queryList(bean);
+			for(BasicPnTree t:root_tree){
+				bean.setPntreeParentcode(t.getPntreeNodecode());
+				List<BasicPnTree> queryList = basicPnTreeService.queryList(bean);
+				Map<String,Object> dd = new HashMap<>();
+				dd.put("root", t);
+				dd.put("second", queryList);
+				list.add(dd);
+				
+			}
+			map.put("data", list);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+	//品名
+	@RequestMapping("/partsname/query")
+	@ResponseBody
+	public  Map<String,Object> querypartsname(String pntreeNodecode){
+		Map<String,Object> map = new HashMap<>();
+		
+		
+		try {
+			
+			//pntreeNodecode	
+			BasicPartsName bean = new BasicPartsName();
+	           		
+                 bean.setMemberCode("0000");
+                 bean.setPntreeNodecode(pntreeNodecode);
+			List<BasicPartsName> list = basicPartsNameService.queryList(bean);
+			map.put("data", list);
+			map.put("msg", "ok");
+		} catch (BeansException e) {
+			e.printStackTrace();
+			map.put("msg", "error");
+		}
+		
+		return map;
+	}
+	
+	
+	
+}

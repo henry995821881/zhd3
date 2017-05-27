@@ -1,0 +1,153 @@
+/**
+ * 智恒达钢盟网络科技有限公司
+ */
+package com.xyscm.sys.basic.cas;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationInfo;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.InvalidSessionException;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.xyscm.sys.basic.cas.model.SystemOperator;
+import com.xyscm.sys.basic.cas.service.OperatorService;
+import com.xyscm.sys.basic.cas.service.UserInfoService;
+
+
+/**
+ * 功能描述：登录安全验证
+ * 
+ * @author xielf
+ * @CreateDate 2017-5-16 下午1:41:41
+ * @Version: 1.0
+ */
+public class SysBasicCasRealm extends AuthorizingRealm {
+	
+	private static final Logger logger = LoggerFactory.getLogger(SysBasicCasRealm.class.getName());
+	
+	private UserInfoService userInfoService; // 用户信息查询service
+
+	/**
+	 * 
+	 */
+	@Override
+	protected AuthorizationInfo doGetAuthorizationInfo(
+			PrincipalCollection principals) {
+		
+		String username = (String) principals.fromRealm( 
+		         getName()).iterator().next(); 
+		
+		// 根据用户ID查询对应的授权信息
+		
+
+		return null;
+	}
+
+	@Override
+	protected AuthenticationInfo doGetAuthenticationInfo(
+			AuthenticationToken _token) throws AuthenticationException {
+
+		User  userInfo = null; 
+		UsernamePasswordCaptchaToken token = (UsernamePasswordCaptchaToken) _token;
+		token.setRememberMe(true);
+		
+		Session session = getSession();
+
+		String userId = token.getUsername();
+		SystemOperator systemOperator = userInfoService.getOperatorByUserid(userId);
+		if(systemOperator==null){
+			// 用户不存在
+		} else {
+			// 根据用户ID查询对应的用户信息、权限信息
+//			userInfo = new User();
+//			convert(systemOperator,userInfo);
+			userInfo = userInfoService.getUserInfo(userId);
+
+		}
+
+		if(userInfo!=null){
+			
+			return new SimpleAuthenticationInfo(userInfo,session.getId(),getName());
+		}
+		
+		
+		return null;
+
+	}
+
+	/**
+	 * 保存登录名
+	 */
+	private void setSession(Object key, Object value) {
+		Session session = getSession();
+		System.out.println("Session默认超时时间为[" + session.getTimeout() + "]毫秒");
+		if (null != session) {
+			session.setAttribute(key, value);
+		}
+	}
+
+	/**
+	 * 获取session对象
+	 * @return
+	 *
+	 * Session
+	 */
+	private Session getSession() {
+		try {
+			Subject subject = SecurityUtils.getSubject();
+			Session session = subject.getSession(false);
+			if (session == null) {
+				session = subject.getSession();
+			}
+			if (session != null) {
+				return session;
+			}
+		} catch (InvalidSessionException e) {
+			
+			logger.debug("获取session异常. ", e);
+			logger.warn("获取session异常："+e.getMessage());
+
+		}
+		return null;
+	}
+
+
+	
+	/**
+	 * 对象赋值
+	 * @param source
+	 * @param target
+	 *
+	 * void
+	 */
+	private void convert(SystemOperator source, User target){
+		
+		target.setUserId(source.getOperatorUserid());
+		target.setPassword(source.getOperatorPassword());
+		
+	}
+
+	/**
+	 * @return the userInfoService
+	 */
+	public UserInfoService getUserInfoService() {
+		return userInfoService;
+	}
+
+	/**
+	 * @param userInfoService the userInfoService to set
+	 */
+	public void setUserInfoService(UserInfoService userInfoService) {
+		this.userInfoService = userInfoService;
+	}
+
+}

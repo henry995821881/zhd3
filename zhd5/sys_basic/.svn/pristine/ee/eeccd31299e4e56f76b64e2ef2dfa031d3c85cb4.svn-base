@@ -1,0 +1,295 @@
+//左侧菜单
+window.addEventListener('load', function() {
+	navmenu();
+	jPages();
+	Window_Width_Height();
+	WindowLoad();
+});
+window.addEventListener('resize', function() {
+	Window_Width_Height();
+});
+var navmenu = function() {
+	var nav_list_toggle = $('.nav_list_toggle'),
+		nav_list = $('.nav_list');
+	active = $('.hover');
+	nav_list_toggle.on('click', function(event) {
+		$(this).next('.hidden').toggle('3000');
+		if($(this).find('.icon').hasClass('icon-wenjianjia-shouqi')) {
+			$(this).find('.icon').removeClass('icon-wenjianjia-shouqi').addClass('icon-wenjianjia-zhankai');
+		} else {
+			$(this).find('.icon').removeClass('icon-wenjianjia-zhankai').addClass('icon-wenjianjia-shouqi');
+		}
+		return false;
+	});
+	active.on('click', function() {
+		active.css('background', '');
+		$(this).css('background', '#fff');
+	});
+
+	nav_list.on('click', function() {
+		var main_content_nav_list = $('.main_content_nav_list');
+		var main_content_nav = $('.main_content_nav').find('ul');
+		var val = $(this).attr('data-val');
+		entry(val);
+		if($(this).hasClass('available') === false) {
+			$(this).addClass('available');
+			main_content_nav_list.removeClass('active');
+			var text = $(this).find('span').text();
+			var html = '<li class="main_content_nav_list border_r active " data-val=' + val + '><i class="icon iconfont icon-shibai-yin close"></i><span>' + text + '</span></li>';
+			main_content_nav.append(html);
+			MainContentNavList();
+			nav_listClose();
+		} else {
+			main_content_nav_list.eq().removeClass('active');
+			for(var i = 0; i < main_content_nav_list.length; i++) {
+				if( main_content_nav_list.eq(i).attr('data-val')==val) {
+					main_content_nav_list.eq(i).addClass('active');
+					break;
+				}
+			}
+		}
+		return false;
+	});
+}
+var jPages = function() {
+	$('#page').jqPagination({
+    paged: function(page) {
+        // 分页事件
+    }
+});
+}
+var MainContentNavList = function() {
+	$('.main_content_nav_list').on('click', function() {
+		var b = $(this).attr('data-val');
+		var a = '#' + b;
+		$('.content_hidden').hide();
+		$(a).show();
+		$('.main_content_nav_list').removeClass('active');
+		$(this).addClass('active');
+		return false;
+	});
+}
+var nav_listClose = function() {
+	$('.main_content_nav_list .close').on('click', function() {
+		var ThisPrev=$(this).parent('.main_content_nav_list').prev()
+		var val = ThisPrev.attr('data-val');
+		entry(val);
+		var a=$(this).parent('.main_content_nav_list').index();
+		$('.available').eq(a).removeClass('available');
+		$(this).parent('.main_content_nav_list').remove();
+		ThisPrev.addClass('active');
+		return false;
+	});
+}
+//右侧内容宽度高度
+
+var table_detail_empty = function() {
+	$('.table_detail_empty').val('');
+}
+
+var Window_Width_Height=function () {
+	var window_width = $(window).width(),
+		window_height = $(window).height();
+	$('.main_content').css('width', (window_width - 200));
+	$('.main_content_right').css('width', (window_width - 400));
+	$('.menul_left').css('height', (window_height - 40));
+	$('.main_content_left').css('height', (window_height - 75));
+	$('.main_content_right_table').css('height', (window_height - 141));
+}
+
+var WindowLoad = function() {
+	//增加组
+	var add_group_icon = $('.add_group_icon'),
+		modify_group_icon = $('.modify_group_icon'),
+		delete_group_icon = $('.delete_group_icon'),
+		add_jt = $('#add_jt'),
+		add_group_close = $('.add_group_close'),
+		GroupName = $('#GroupName');
+	var add_group_show = function() {
+		add_jt.show('500');
+		mask.show();
+	}
+	var add_group_hide = function() {
+		add_jt.hide('500');
+		mask.hide();
+		$('input').css('border-color', '#ddd');
+	}
+	GroupName.on('blur', function() {
+		var a = $(this);
+		Verification(a);
+		if(GroupName.val() === '') {
+			add_table_submit.attr("disabled", "disabled");
+		} else {
+			add_table_submit.attr("disabled", false);
+		}
+	});
+	add_group_icon.on('click', function() {
+		add_group_show();
+	});
+	add_group_close.on('click', function() {
+		add_group_hide();
+	})
+	//选中组
+	var modify_group_icon = $('.modify_group_icon'),
+		menu_content_group_node = $('.menu_content_group_node');
+	menu_content_group_node.on('click', function() {
+		menu_content_group_node.removeClass('active');
+		$(this).addClass('active');
+	});
+	//修改组
+	modify_group_icon.on('click', function() {
+		var menu_content_group_node_active = $('.menu_content_group_node.active');
+		if(menu_content_group_node_active.hasClass('active')) {
+			GroupName.val(menu_content_group_node_active.find('span').text());
+			add_group_show();
+
+		} else {
+			alert('请选择要修改的节点');
+		}
+	});
+	//删除组
+	delete_group_icon.on('click', function() {
+		var menu_content_group_node_active = $('.menu_content_group_node.active');
+		if(nav_list.hasClass('active')) {
+			menu_content_group_node_active.parent('.menu_content_group').remove();
+			console.log($(this).parent('.menu_content_group'));
+		}
+		if(menu_content_group_node.hasClass('active')) {
+			menu_content_group_node_active.removeClass('active').remove();
+		} else {
+			alert('请选择要修改的节点');
+		}
+	})
+	//选中table
+	var table_detail = $('.table_detail');
+	table_detail.on('click', function() {
+		table_detail.find('td').removeClass('active');
+		table_detail.removeClass('active');
+		$(this).find('td').addClass('active');
+		$(this).addClass('active');
+	})
+	//	增加 table
+	var add_table = $('#add_table'),
+		mask = $('.mask'),
+		add_table_close = $('.add_table_close'),
+		add_table_icon = $('.add_table_icon');
+
+	var add_table_hide = function() {
+		add_table.hide('500');
+		mask.hide();
+		$('input').css('border-color', '#ddd');
+		$('select').css('border-color', '#ddd');
+	}
+
+	var add_table_show = function() {
+		add_table.show('500');
+		mask.show();
+	}
+	add_table_icon.on('click', function() {
+		$('.add_table_submit').attr("disabled", "disabled");
+		add_table_show();
+		table_detail_empty();
+	});
+	add_table_close.on('click', function() {
+		add_table_hide();
+	});
+	mask.on('click', function() {
+		add_table_hide();
+		add_group_hide();
+	});
+	//	修改 table
+	var modify_table_icon = $('.modify_table_icon');
+	modify_table_icon.on('click', function() {
+		if(table_detail.hasClass('active')) {
+			var table_details = $('.table_detail').find('td');
+			TableDetail(table_details);
+			add_table_show();
+		} else {
+			alert('请选择要修改的节点');
+		}
+	});
+	//	删除 table
+	var delete_table_icon = $('.delete_table_icon');
+	delete_table_icon.on('click', function() {
+		if(table_detail.hasClass('active')) {
+			$('.table_detail.active').removeClass('active').remove();
+		} else {
+			alert('请选择要修改的节点');
+		}
+
+	});
+	//验证
+
+}
+var add_table_submit = $('.add_table_submit');
+var Verification = function(a) {
+	if(a.val() === '' || a.val() === null) {
+		a.css('border-color', 'red');
+	} else {
+		a.css('border-color', '#ddd');
+	}
+}
+//table 拖动伸缩宽度
+var TableTelescopic = function() {
+	var headerTds = document.getElementById("tbl").rows[0].cells;
+	var mousedown = false;
+	var resizeable = false;
+	var targetTd;
+	var screenXStart = 0;
+	var tdWidth = 0;
+	var headerWidth = 0;
+	var tblObj = document.getElementById("tbl");
+	for(var i = 0; i < headerTds.length; i++) {
+		addListener(headerTds[i], "mousedown", onmousedown);
+		addListener(headerTds[i], "mousemove", onmousemove);
+	}
+
+	function onmousedown(event) {
+		if(resizeable == true) {
+			var evt = event || window.event;
+			mousedown = true;
+			screenXStart = evt.screenX;
+			tdWidth = targetTd.offsetWidth;
+			headerWidth = tblObj.offsetWidth;
+		}
+	}
+
+	function onmousemove(event) {
+		var evt = event || window.event;
+		var srcObj = getTarget(evt);
+		var offsetX = evt.offsetX || (evt.clientX - srcObj.getBoundingClientRect().left); //这个比较关键，解决了Firefox无offsetX属性的问题
+		if(mousedown == true) {
+			var width = (tdWidth + (evt.screenX - screenXStart)) + "px"; //计算后的新的宽度
+			targetTd.style.width = width;
+			tblObj.style.width = (headerWidth + (evt.screenX - screenXStart)) + "px";
+		} else {
+			var trObj = tblObj.rows[0];
+			if(srcObj.offsetWidth - offsetX <= 4) { //实际改变本单元格列宽
+				targetTd = srcObj;
+				resizeable = true;
+				srcObj.style.cursor = 'col-resize'; //修改光标样式
+			} else if(offsetX <= 4 && srcObj.cellIndex > 0) { //实际改变前一单元格列宽，但是表格左边框线不可拖动
+				targetTd = trObj.cells[srcObj.cellIndex - 1];
+				resizeable = true;
+				srcObj.style.cursor = 'col-resize';
+			} else {
+				resizeable = false;
+				srcObj.style.cursor = 'default';
+			}
+		}
+	}
+	document.onmouseup = function(event) {
+		tartgetTd = null;
+		resizeable = false;
+		mousedown = false;
+		document.body.style.cursor = 'default';
+	}
+
+	function getTarget(evt) {
+		return evt.target || evt.srcElement;
+	}
+
+	function addListener(element, type, listener, useCapture) {
+		element.addEventListener ? element.addEventListener(type, listener, useCapture) : element.attachEvent("on" + type, listener);
+	}
+}

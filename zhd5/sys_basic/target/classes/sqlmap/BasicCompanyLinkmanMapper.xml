@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicCompanyLinkmanMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicCompanyLinkman" >
+    <id column="COMPANY_LINKMAN_ID" property="companyLinkmanId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_NAME" property="companyLinkmanName" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_PHONE" property="companyLinkmanPhone" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_MSN" property="companyLinkmanMsn" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_QQ" property="companyLinkmanQq" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_FAX" property="companyLinkmanFax" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_EMAIL" property="companyLinkmanEmail" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_REMARK" property="companyLinkmanRemark" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_CODE" property="operatorCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_JOB" property="companyLinkmanJob" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_SEX" property="companyLinkmanSex" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_BIRTHDAY" property="companyLinkmanBirthday" jdbcType="TIMESTAMP" />
+    <result column="COMPANY_LINKMAN_ADDR" property="companyLinkmanAddr" jdbcType="VARCHAR" />
+    <result column="COMPANY_LINKMAN_MOBILE" property="companyLinkmanMobile" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COMPANY_LINKMAN_ID, MEMBER_CODE, COMPANY_CODE, COMPANY_LINKMAN_NAME, COMPANY_LINKMAN_PHONE, 
+    COMPANY_LINKMAN_MSN, COMPANY_LINKMAN_QQ, COMPANY_LINKMAN_FAX, COMPANY_LINKMAN_EMAIL, 
+    COMPANY_LINKMAN_REMARK, ORG_CODE, OPERATOR_CODE, COMPANY_LINKMAN_JOB, COMPANY_LINKMAN_SEX, 
+    COMPANY_LINKMAN_BIRTHDAY, COMPANY_LINKMAN_ADDR, COMPANY_LINKMAN_MOBILE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  BASIC_COMPANY_LINKMAN
+    where COMPANY_LINKMAN_ID = #{companyLinkmanId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_COMPANY_LINKMAN
+    where COMPANY_LINKMAN_ID = #{companyLinkmanId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicCompanyLinkman" >
+    insert into  BASIC_COMPANY_LINKMAN (COMPANY_LINKMAN_ID, MEMBER_CODE, COMPANY_CODE, 
+      COMPANY_LINKMAN_NAME, COMPANY_LINKMAN_PHONE, 
+      COMPANY_LINKMAN_MSN, COMPANY_LINKMAN_QQ, COMPANY_LINKMAN_FAX, 
+      COMPANY_LINKMAN_EMAIL, COMPANY_LINKMAN_REMARK, 
+      ORG_CODE, OPERATOR_CODE, COMPANY_LINKMAN_JOB, 
+      COMPANY_LINKMAN_SEX, COMPANY_LINKMAN_BIRTHDAY, 
+      COMPANY_LINKMAN_ADDR, COMPANY_LINKMAN_MOBILE
+      )
+    values (#{companyLinkmanId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{companyCode,jdbcType=VARCHAR}, 
+      #{companyLinkmanName,jdbcType=VARCHAR}, #{companyLinkmanPhone,jdbcType=VARCHAR}, 
+      #{companyLinkmanMsn,jdbcType=VARCHAR}, #{companyLinkmanQq,jdbcType=VARCHAR}, #{companyLinkmanFax,jdbcType=VARCHAR}, 
+      #{companyLinkmanEmail,jdbcType=VARCHAR}, #{companyLinkmanRemark,jdbcType=VARCHAR}, 
+      #{orgCode,jdbcType=VARCHAR}, #{operatorCode,jdbcType=VARCHAR}, #{companyLinkmanJob,jdbcType=VARCHAR}, 
+      #{companyLinkmanSex,jdbcType=VARCHAR}, #{companyLinkmanBirthday,jdbcType=TIMESTAMP}, 
+      #{companyLinkmanAddr,jdbcType=VARCHAR}, #{companyLinkmanMobile,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicCompanyLinkman" >
+    insert into  BASIC_COMPANY_LINKMAN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyLinkmanId != null" >
+        COMPANY_LINKMAN_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="companyLinkmanName != null" >
+        COMPANY_LINKMAN_NAME,
+      </if>
+      <if test="companyLinkmanPhone != null" >
+        COMPANY_LINKMAN_PHONE,
+      </if>
+      <if test="companyLinkmanMsn != null" >
+        COMPANY_LINKMAN_MSN,
+      </if>
+      <if test="companyLinkmanQq != null" >
+        COMPANY_LINKMAN_QQ,
+      </if>
+      <if test="companyLinkmanFax != null" >
+        COMPANY_LINKMAN_FAX,
+      </if>
+      <if test="companyLinkmanEmail != null" >
+        COMPANY_LINKMAN_EMAIL,
+      </if>
+      <if test="companyLinkmanRemark != null" >
+        COMPANY_LINKMAN_REMARK,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="operatorCode != null" >
+        OPERATOR_CODE,
+      </if>
+      <if test="companyLinkmanJob != null" >
+        COMPANY_LINKMAN_JOB,
+      </if>
+      <if test="companyLinkmanSex != null" >
+        COMPANY_LINKMAN_SEX,
+      </if>
+      <if test="companyLinkmanBirthday != null" >
+        COMPANY_LINKMAN_BIRTHDAY,
+      </if>
+      <if test="companyLinkmanAddr != null" >
+        COMPANY_LINKMAN_ADDR,
+      </if>
+      <if test="companyLinkmanMobile != null" >
+        COMPANY_LINKMAN_MOBILE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyLinkmanId != null" >
+        #{companyLinkmanId,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanName != null" >
+        #{companyLinkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanPhone != null" >
+        #{companyLinkmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanMsn != null" >
+        #{companyLinkmanMsn,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanQq != null" >
+        #{companyLinkmanQq,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanFax != null" >
+        #{companyLinkmanFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanEmail != null" >
+        #{companyLinkmanEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanRemark != null" >
+        #{companyLinkmanRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorCode != null" >
+        #{operatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanJob != null" >
+        #{companyLinkmanJob,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanSex != null" >
+        #{companyLinkmanSex,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanBirthday != null" >
+        #{companyLinkmanBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyLinkmanAddr != null" >
+        #{companyLinkmanAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanMobile != null" >
+        #{companyLinkmanMobile,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicCompanyLinkman" >
+    update  BASIC_COMPANY_LINKMAN
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanName != null" >
+        COMPANY_LINKMAN_NAME = #{companyLinkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanPhone != null" >
+        COMPANY_LINKMAN_PHONE = #{companyLinkmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanMsn != null" >
+        COMPANY_LINKMAN_MSN = #{companyLinkmanMsn,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanQq != null" >
+        COMPANY_LINKMAN_QQ = #{companyLinkmanQq,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanFax != null" >
+        COMPANY_LINKMAN_FAX = #{companyLinkmanFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanEmail != null" >
+        COMPANY_LINKMAN_EMAIL = #{companyLinkmanEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanRemark != null" >
+        COMPANY_LINKMAN_REMARK = #{companyLinkmanRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorCode != null" >
+        OPERATOR_CODE = #{operatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanJob != null" >
+        COMPANY_LINKMAN_JOB = #{companyLinkmanJob,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanSex != null" >
+        COMPANY_LINKMAN_SEX = #{companyLinkmanSex,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanBirthday != null" >
+        COMPANY_LINKMAN_BIRTHDAY = #{companyLinkmanBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyLinkmanAddr != null" >
+        COMPANY_LINKMAN_ADDR = #{companyLinkmanAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanMobile != null" >
+        COMPANY_LINKMAN_MOBILE = #{companyLinkmanMobile,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COMPANY_LINKMAN_ID = #{companyLinkmanId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicCompanyLinkman" >
+    update  BASIC_COMPANY_LINKMAN
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_NAME = #{companyLinkmanName,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_PHONE = #{companyLinkmanPhone,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_MSN = #{companyLinkmanMsn,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_QQ = #{companyLinkmanQq,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_FAX = #{companyLinkmanFax,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_EMAIL = #{companyLinkmanEmail,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_REMARK = #{companyLinkmanRemark,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      OPERATOR_CODE = #{operatorCode,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_JOB = #{companyLinkmanJob,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_SEX = #{companyLinkmanSex,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_BIRTHDAY = #{companyLinkmanBirthday,jdbcType=TIMESTAMP},
+      COMPANY_LINKMAN_ADDR = #{companyLinkmanAddr,jdbcType=VARCHAR},
+      COMPANY_LINKMAN_MOBILE = #{companyLinkmanMobile,jdbcType=VARCHAR}
+    where COMPANY_LINKMAN_ID = #{companyLinkmanId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  
+  <!-- 根据compangcode查询公司联系人 -->
+  <select id="queryCompanyLinkman" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from basic_company_linkman
+    where company_code = #{companyCode,jdbcType=DECIMAL}
+  </select>
+  
+  
+  <!-- 新增公司联系人 -->
+  <insert id="insertCompanyLinkman" parameterType="com.xyscm.sys.basic.model.BasicCompanyLinkman" >
+      insert into  BASIC_COMPANY_LINKMAN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        COMPANY_LINKMAN_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="companyLinkmanName != null" >
+        COMPANY_LINKMAN_NAME,
+      </if>
+      <if test="companyLinkmanPhone != null" >
+        COMPANY_LINKMAN_PHONE,
+      </if>
+      <if test="companyLinkmanMsn != null" >
+        COMPANY_LINKMAN_MSN,
+      </if>
+      <if test="companyLinkmanQq != null" >
+        COMPANY_LINKMAN_QQ,
+      </if>
+      <if test="companyLinkmanFax != null" >
+        COMPANY_LINKMAN_FAX,
+      </if>
+      <if test="companyLinkmanEmail != null" >
+        COMPANY_LINKMAN_EMAIL,
+      </if>
+      <if test="companyLinkmanRemark != null" >
+        COMPANY_LINKMAN_REMARK,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="operatorCode != null" >
+        OPERATOR_CODE,
+      </if>
+      <if test="companyLinkmanJob != null" >
+        COMPANY_LINKMAN_JOB,
+      </if>
+      <if test="companyLinkmanSex != null" >
+        COMPANY_LINKMAN_SEX,
+      </if>
+      <if test="companyLinkmanBirthday != null" >
+        COMPANY_LINKMAN_BIRTHDAY,
+      </if>
+      <if test="companyLinkmanAddr != null" >
+        COMPANY_LINKMAN_ADDR,
+      </if>
+      <if test="companyLinkmanMobile != null" >
+        COMPANY_LINKMAN_MOBILE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+         BASIC_COMPANY_LINKMAN_SEQ.NEXTVAL,
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanName != null" >
+        #{companyLinkmanName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanPhone != null" >
+        #{companyLinkmanPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanMsn != null" >
+        #{companyLinkmanMsn,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanQq != null" >
+        #{companyLinkmanQq,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanFax != null" >
+        #{companyLinkmanFax,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanEmail != null" >
+        #{companyLinkmanEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanRemark != null" >
+        #{companyLinkmanRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorCode != null" >
+        #{operatorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanJob != null" >
+        #{companyLinkmanJob,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanSex != null" >
+        #{companyLinkmanSex,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanBirthday != null" >
+        #{companyLinkmanBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyLinkmanAddr != null" >
+        #{companyLinkmanAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="companyLinkmanMobile != null" >
+        #{companyLinkmanMobile,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 删除公司联系人 -->
+  <delete id="deltCompanyLinkmanByCode" parameterType="java.lang.String" >
+    delete from BASIC_COMPANY_LINKMAN
+     where company_Code = #{companyCode,jdbcType=DECIMAL}
+  </delete>
+  
+  
+  <!-- 更新 -->
+  <update id="updateLinkmanByCompanyCode" parameterType="java.lang.String"  >
+    update  BASIC_COMPANY_LINKMAN 
+    set company_Code = #{newCompanyCode,jdbcType=VARCHAR}
+    where  company_Code = #{oldCompanyCode,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

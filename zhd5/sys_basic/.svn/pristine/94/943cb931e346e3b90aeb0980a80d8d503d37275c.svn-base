@@ -1,0 +1,55 @@
+package com.xyscm.sys.basic.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xyscm.sys.basic.dao.BasicCompanyAccountsMapper;
+import com.xyscm.sys.basic.model.BasicCompanyAccounts;
+
+
+@Service
+public class BasicCompanyAccountsService {
+
+	@Autowired
+	BasicCompanyAccountsMapper basicCompanyAccountsMapper;
+	
+	  /**
+     * 根据compangcode查询公司账号
+     * @param companyCode
+     * @return
+     *
+     * List<BasicCompanyAccounts>
+     */
+    public List<BasicCompanyAccounts> queryCompanyAccounts(String companyCode){
+		List<BasicCompanyAccounts> list  = basicCompanyAccountsMapper.queryCompanyAccounts(companyCode);
+		return list;
+	}
+    
+    
+   	/**
+   	 * 新增公司账号
+   	 * @param companyCode
+        * @return
+        *
+        * basicCompanyAccounts
+   	 */
+   	public int insertCompanyAccount(BasicCompanyAccounts basicCompanyAccounts){
+    	return basicCompanyAccountsMapper.insertCompanyAccount(basicCompanyAccounts);
+   	}
+    
+
+	/**
+	 * 根据id删除公司账号
+	 * @param basicCompanyAccounts
+	 * @return
+	 *
+	 * int
+	 */
+	public int deltCompanyAccount(BigDecimal companyAccountsId){
+		return basicCompanyAccountsMapper.deltCompanyAccount(companyAccountsId);
+	}
+
+}

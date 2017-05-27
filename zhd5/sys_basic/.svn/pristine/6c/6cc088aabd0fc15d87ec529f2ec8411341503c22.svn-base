@@ -1,0 +1,199 @@
+package com.xyscm.sys.basic.service;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xyscm.sys.basic.common.constant.ErrorCode;
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicWarehouseMapper;
+import com.xyscm.sys.basic.model.BasicOrg;
+import com.xyscm.sys.basic.model.BasicWarehouse;
+
+/**
+ * 
+ * 
+ * 仓库设置
+ * 
+ * @author Administrator
+ * 
+ */
+@Service
+public class BasicWarehouseService {
+
+	@Autowired
+	BasicWarehouseMapper basicWarehouseMapper;
+
+	/**
+	 * 根据会员code查询仓库
+	 * 
+	 * @param memberCode
+	 * @return
+	 */
+	public List<BasicWarehouse> queryAllByMemberCode(String memberCode) {
+
+		List<BasicWarehouse> queryAllByMemberCode = null;
+
+		try {
+			queryAllByMemberCode = basicWarehouseMapper
+					.queryAllByMemberCode(memberCode);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_WH_SELECT.getErrCode());
+			// TODO Auto-generated catch block
+		}
+
+		return queryAllByMemberCode;
+
+	}
+	
+	
+	
+
+	/**
+	 * 分页查询
+	 * @param pageNum
+	 * @param pageSize
+	 * @param record
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	public PageInfo getPage(int pageNum,int pageSize,BasicWarehouse record){
+		
+         PageInfo<BasicOrg> pageInfo=null;
+		try {
+			PageHelper.startPage(pageNum, pageSize);  // 开启分页，必须
+			
+			
+			  // 对原来的查询方法不需要任何修改
+			  Page page = (Page)basicWarehouseMapper.queryList(record);
+			pageInfo = new PageInfo<BasicOrg>(page);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_WH_SELECT.getErrCode());
+		}
+		
+		return pageInfo;
+	}
+	
+	
+	public List<BasicWarehouse> queryList(BasicWarehouse record) {
+
+		List<BasicWarehouse> queryAllByMemberCode = null;
+
+		try {
+			queryAllByMemberCode = basicWarehouseMapper.queryList(record);
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+			throw new BaseException(ErrorCode.E_SYSB_WH_SELECT.getErrCode());
+			// TODO Auto-generated catch block
+		}
+
+		return queryAllByMemberCode;
+
+	}
+
+	/**
+	 * 根据仓库id 更新仓库
+	 * 
+	 * @param record
+	 */
+
+	public int updateByWarehouseId(BasicWarehouse record) {
+
+		int updateByPrimaryKeySelective = 0;
+		try {
+			updateByPrimaryKeySelective = basicWarehouseMapper
+					.updateByPrimaryKeySelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_WH_UPDATE.getErrCode());
+		}
+
+		return updateByPrimaryKeySelective;
+	}
+	
+	
+	/**
+	 * 
+	 * @param record WAREHOUSE_CODE MemeberCode
+	 */
+	public void updateWarehouse(BasicWarehouse record){
+		
+		try {
+			basicWarehouseMapper.updateWarehouse(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_WH_UPDATE.getErrCode());
+		}
+		
+	}
+
+	/**
+	 * 根据仓库id 和 会员code 删除
+	 * 
+	 * @param record
+	 * @return
+	 */
+	public int deleteWarehouse(BasicWarehouse record) {
+
+		int deleteWarehouse = 0;
+		try {
+			deleteWarehouse = basicWarehouseMapper.deleteWarehouse(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_WH_DELETE.getErrCode());
+		}
+		return deleteWarehouse;
+
+	}
+
+	/**
+	 * 
+	 * @param record WAREHOUSE_CODE MemeberCode
+	 */
+	public void deleteWarehouseByCode(BasicWarehouse record){
+		
+		try {
+			basicWarehouseMapper.deleteWarehouseByCode(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_WH_DELETE.getErrCode());
+		}
+		
+	}
+	/**
+	 * 新增
+	 * 
+	 * @param record
+	 * @return
+	 */
+	public int saveWarehouse(BasicWarehouse record) {
+		int insertSelective = 0;
+		try {
+			insertSelective = basicWarehouseMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_WH_ADD.getErrCode());
+		}
+		return insertSelective;
+
+	}
+
+}

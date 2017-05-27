@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicWorkgroupMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicWorkgroup" >
+    <id column="WORKGROUP_ID" property="workgroupId" jdbcType="DECIMAL" />
+    <result column="WORKGROUP_CODE" property="workgroupCode" jdbcType="VARCHAR" />
+    <result column="WORKGROUP_NAME" property="workgroupName" jdbcType="VARCHAR" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_CODE" property="warehouseCode" jdbcType="VARCHAR" />
+    <result column="EMPLOYEE_CODE" property="employeeCode" jdbcType="VARCHAR" />
+    <result column="WORKTYPE_NAME" property="worktypeName" jdbcType="VARCHAR" />
+    <result column="WORKGROUP_CLASS" property="workgroupClass" jdbcType="DECIMAL" />
+    <result column="WORKGROUP_REMARK" property="workgroupRemark" jdbcType="VARCHAR" />
+    <result column="DATA_EDIT_ORG" property="dataEditOrg" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WORKGROUP_ID, WORKGROUP_CODE, WORKGROUP_NAME, MEMBER_CODE, WAREHOUSE_CODE, EMPLOYEE_CODE, 
+    WORKTYPE_NAME, WORKGROUP_CLASS, WORKGROUP_REMARK, DATA_EDIT_ORG, ORG_CODE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from BASIC_WORKGROUP
+    where WORKGROUP_ID = #{workgroupId,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="queryAll" resultMap="BaseResultMap"  parameterType="com.xyscm.sys.basic.model.BasicWorkgroup">
+  
+   select 
+    <include refid="Base_Column_List" />
+    from BASIC_WORKGROUP
+    where MEMBER_CODE = #{memberCode}
+    order by WORKGROUP_CODE desc
+  
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from BASIC_WORKGROUP
+    where WORKGROUP_ID = #{workgroupId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicWorkgroup" >
+    insert into BASIC_WORKGROUP (WORKGROUP_ID, WORKGROUP_CODE, WORKGROUP_NAME, 
+      MEMBER_CODE, WAREHOUSE_CODE, EMPLOYEE_CODE, 
+      WORKTYPE_NAME, WORKGROUP_CLASS, WORKGROUP_REMARK, 
+      DATA_EDIT_ORG, ORG_CODE)
+    values (#{workgroupId,jdbcType=DECIMAL}, #{workgroupCode,jdbcType=VARCHAR}, #{workgroupName,jdbcType=VARCHAR}, 
+      #{memberCode,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, #{employeeCode,jdbcType=VARCHAR}, 
+      #{worktypeName,jdbcType=VARCHAR}, #{workgroupClass,jdbcType=DECIMAL}, #{workgroupRemark,jdbcType=VARCHAR}, 
+      #{dataEditOrg,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicWorkgroup" >
+    insert into BASIC_WORKGROUP
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workgroupId != null" >
+        WORKGROUP_ID,
+      </if>
+      <if test="workgroupCode != null" >
+        WORKGROUP_CODE,
+      </if>
+      <if test="workgroupName != null" >
+        WORKGROUP_NAME,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE,
+      </if>
+      <if test="employeeCode != null" >
+        EMPLOYEE_CODE,
+      </if>
+      <if test="worktypeName != null" >
+        WORKTYPE_NAME,
+      </if>
+      <if test="workgroupClass != null" >
+        WORKGROUP_CLASS,
+      </if>
+      <if test="workgroupRemark != null" >
+        WORKGROUP_REMARK,
+      </if>
+      <if test="dataEditOrg != null" >
+        DATA_EDIT_ORG,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workgroupId != null" >
+        #{workgroupId,jdbcType=DECIMAL},
+      </if>
+      <if test="workgroupCode != null" >
+        #{workgroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="workgroupName != null" >
+        #{workgroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="worktypeName != null" >
+        #{worktypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="workgroupClass != null" >
+        #{workgroupClass,jdbcType=DECIMAL},
+      </if>
+      <if test="workgroupRemark != null" >
+        #{workgroupRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditOrg != null" >
+        #{dataEditOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicWorkgroup" >
+    update BASIC_WORKGROUP
+    <set >
+      <if test="workgroupCode != null" >
+        WORKGROUP_CODE = #{workgroupCode,jdbcType=VARCHAR},
+      </if>
+      <if test="workgroupName != null" >
+        WORKGROUP_NAME = #{workgroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeCode != null" >
+        EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="worktypeName != null" >
+        WORKTYPE_NAME = #{worktypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="workgroupClass != null" >
+        WORKGROUP_CLASS = #{workgroupClass,jdbcType=DECIMAL},
+      </if>
+      <if test="workgroupRemark != null" >
+        WORKGROUP_REMARK = #{workgroupRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="dataEditOrg != null" >
+        DATA_EDIT_ORG = #{dataEditOrg,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WORKGROUP_ID = #{workgroupId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicWorkgroup" >
+    update BASIC_WORKGROUP
+    set WORKGROUP_CODE = #{workgroupCode,jdbcType=VARCHAR},
+      WORKGROUP_NAME = #{workgroupName,jdbcType=VARCHAR},
+      MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      EMPLOYEE_CODE = #{employeeCode,jdbcType=VARCHAR},
+      WORKTYPE_NAME = #{worktypeName,jdbcType=VARCHAR},
+      WORKGROUP_CLASS = #{workgroupClass,jdbcType=DECIMAL},
+      WORKGROUP_REMARK = #{workgroupRemark,jdbcType=VARCHAR},
+      DATA_EDIT_ORG = #{dataEditOrg,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR}
+    where WORKGROUP_ID = #{workgroupId,jdbcType=DECIMAL}
+  </update>
+</mapper>

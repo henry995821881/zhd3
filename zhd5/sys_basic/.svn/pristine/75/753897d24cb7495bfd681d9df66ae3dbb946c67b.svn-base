@@ -1,0 +1,92 @@
+package com.xyscm.sys.basic.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicPartsNameMapper;
+import com.xyscm.sys.basic.model.BasicPartsName;
+
+/**
+ * 品名设置
+ * 
+ * @author Administrator
+ * 
+ */
+@Service
+public class BasicPartsNameService {
+
+	@Autowired
+	BasicPartsNameMapper basicPartsNameMapper;
+
+	/**
+	 * @author henry
+	 * @see 更具 PNTREE_NODECODE like 查询屏幕
+	 * @param record
+	 *            .PNTREE_NODECODE record.memebercode
+	 * @return
+	 */
+	public List<BasicPartsName> queryList(BasicPartsName record) {
+
+		List<BasicPartsName> list = null;
+		try {
+			list = basicPartsNameMapper.queryList(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "查询品名出错！");
+		}
+		return list;
+	}
+
+	/**
+	 * 
+	 * @param memberCode
+	 *            partsnameCode
+	 */
+	public void updatePartsName(BasicPartsName record) {
+
+		try {
+			basicPartsNameMapper.updatePartsName(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "更新品名出错！");
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param memberCode
+	 *            partsnameCode
+	 */
+	public void deletePartsName(BasicPartsName record) {
+
+		try {
+			basicPartsNameMapper.deletePartsName(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "删除品名出错！");
+		}
+	}
+
+	/**
+	 * 
+	 * @param record
+	 */
+	public void savePartsName(BasicPartsName record) {
+
+		try {
+			basicPartsNameMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "保存品名出错！");
+		}
+	}
+
+}

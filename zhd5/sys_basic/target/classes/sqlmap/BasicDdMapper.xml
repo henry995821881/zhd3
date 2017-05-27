@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicDdMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicDd" >
+    <id column="DD_ID" property="ddId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="DD_NAME" property="ddName" jdbcType="VARCHAR" />
+    <result column="DDTYPE_CLASS" property="ddtypeClass" jdbcType="VARCHAR" />
+    <result column="DD_NOTUSE" property="ddNotuse" jdbcType="DECIMAL" />
+    <result column="DD_REMARK" property="ddRemark" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+    <result column="DD_TYPE_ACCINOUTCLASS" property="ddTypeAccinoutclass" jdbcType="VARCHAR" />
+    <result column="SUBJECT_CODE" property="subjectCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DD_ID, MEMBER_CODE, DD_NAME, DDTYPE_CLASS, DD_NOTUSE, DD_REMARK, BASIC_SHARE, DD_TYPE_ACCINOUTCLASS, 
+    SUBJECT_CODE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from CZZHD2.BASIC_DD
+    where DD_ID = #{ddId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from CZZHD2.BASIC_DD
+    where DD_ID = #{ddId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicDd" >
+    insert into CZZHD2.BASIC_DD (DD_ID, MEMBER_CODE, DD_NAME, 
+      DDTYPE_CLASS, DD_NOTUSE, DD_REMARK, 
+      BASIC_SHARE, DD_TYPE_ACCINOUTCLASS, SUBJECT_CODE
+      )
+    values (#{ddId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{ddName,jdbcType=VARCHAR}, 
+      #{ddtypeClass,jdbcType=VARCHAR}, #{ddNotuse,jdbcType=DECIMAL}, #{ddRemark,jdbcType=VARCHAR}, 
+      #{basicShare,jdbcType=DECIMAL}, #{ddTypeAccinoutclass,jdbcType=VARCHAR}, #{subjectCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicDd" >
+    insert into CZZHD2.BASIC_DD
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddId != null" >
+        DD_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="ddName != null" >
+        DD_NAME,
+      </if>
+      <if test="ddtypeClass != null" >
+        DDTYPE_CLASS,
+      </if>
+      <if test="ddNotuse != null" >
+        DD_NOTUSE,
+      </if>
+      <if test="ddRemark != null" >
+        DD_REMARK,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+      <if test="ddTypeAccinoutclass != null" >
+        DD_TYPE_ACCINOUTCLASS,
+      </if>
+      <if test="subjectCode != null" >
+        SUBJECT_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddId != null" >
+        #{ddId,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ddName != null" >
+        #{ddName,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtypeClass != null" >
+        #{ddtypeClass,jdbcType=VARCHAR},
+      </if>
+      <if test="ddNotuse != null" >
+        #{ddNotuse,jdbcType=DECIMAL},
+      </if>
+      <if test="ddRemark != null" >
+        #{ddRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="ddTypeAccinoutclass != null" >
+        #{ddTypeAccinoutclass,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCode != null" >
+        #{subjectCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicDd" >
+    update CZZHD2.BASIC_DD
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ddName != null" >
+        DD_NAME = #{ddName,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtypeClass != null" >
+        DDTYPE_CLASS = #{ddtypeClass,jdbcType=VARCHAR},
+      </if>
+      <if test="ddNotuse != null" >
+        DD_NOTUSE = #{ddNotuse,jdbcType=DECIMAL},
+      </if>
+      <if test="ddRemark != null" >
+        DD_REMARK = #{ddRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="ddTypeAccinoutclass != null" >
+        DD_TYPE_ACCINOUTCLASS = #{ddTypeAccinoutclass,jdbcType=VARCHAR},
+      </if>
+      <if test="subjectCode != null" >
+        SUBJECT_CODE = #{subjectCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DD_ID = #{ddId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicDd" >
+    update CZZHD2.BASIC_DD
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      DD_NAME = #{ddName,jdbcType=VARCHAR},
+      DDTYPE_CLASS = #{ddtypeClass,jdbcType=VARCHAR},
+      DD_NOTUSE = #{ddNotuse,jdbcType=DECIMAL},
+      DD_REMARK = #{ddRemark,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      DD_TYPE_ACCINOUTCLASS = #{ddTypeAccinoutclass,jdbcType=VARCHAR},
+      SUBJECT_CODE = #{subjectCode,jdbcType=VARCHAR}
+    where DD_ID = #{ddId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  
+  
+  
+  <!-- 根据ddtype_Class查询信息  nvl(a.dd_Notuse,0)<>1  -->
+  <select id="queryByClass" parameterType="java.lang.String" resultMap="BaseResultMap" >
+	select * 
+	from Basic_Dd a where nvl(a.dd_Notuse,0)&lt;&gt;1 
+	<if test="ddtypeClass != null and ddtypeClass != '' " >
+		and a.ddtype_Class=#{ddtypeClass,jdbcType=VARCHAR}
+    </if>
+	
+  </select>
+</mapper>

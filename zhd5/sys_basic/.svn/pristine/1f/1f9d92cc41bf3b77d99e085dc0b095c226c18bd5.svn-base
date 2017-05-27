@@ -1,0 +1,43 @@
+var Verification_Disabled = function() {
+	if($('#Name').val() === ''||$('#Material').val() === ''||$('#Specification').val() === ''||$('#Origin').val() === null) {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	$('#Name').val(table_details.eq(2).text());
+	$('#Material').val(table_details.eq(3).text());
+	$('#Specification').val(table_details.eq(4).text());
+	$('#Origin').val(table_details.eq(5).text());
+	$('#TaxRate').val(table_details.eq(6).text());
+	$('#QuantityUnits').val(table_details.eq(7).text());
+	$('#WeightUnit').val(table_details.eq(8).text());
+	$('#AssistantCode').val(table_details.eq(9).text());
+	$('#PieceMode').val(table_details.eq(10).text());
+	$('#WeightMode').val(table_details.eq(11).text());
+	$('#MeasurementMode').val(table_details.eq(12).text());
+	$('#PricingMethod').val(table_details.eq(13).text());
+	$('#Remarks').val(table_details.eq(14).text());
+}
+
+$('#Name').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Material').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Specification').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Origin').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});

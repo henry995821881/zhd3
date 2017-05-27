@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+		<script id="EmployeeManage" type="text/html">
+			<div class="main_content_left">
+				<h4 class="title">查询</h4>
+				<ul class="menu_content Inquire">
+					<form action="" method="post">
+						<li class="menu_content_list">
+							<span>代码：</span>
+							<input type="text" name="CodeInquire" id="CodeInquire" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>姓名：</span>
+							<input type="text" name="NameInquire" id="NameInquire" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>助记码：</span>
+							<input type="text" name="NameInquire" id="NameInquire" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>机构：</span>
+							<select name="OrganizationInquire" id="OrganizationInquire">
+								<option value="内容a">内容a</option>
+								<option value="内容b">内容b</option>
+								<option value="内容c">内容c</option>
+								<option value="内容d">内容d</option>
+								<option value="内容D">内容D</option>
+							</select>
+						</li>
+						<li class="menu_content_list">
+							<span>部门：</span>
+							<select name="DepartmentInquire" id="DepartmentInquire">
+								<option value="内容a">内容a</option>
+								<option value="内容b">内容b</option>
+								<option value="内容c">内容c</option>
+								<option value="内容d">内容d</option>
+								<option value="内容D">内容D</option>
+							</select>
+						</li>
+						<li class="menu_content_list">
+							<input type="submit" name="Inquire" id="Inquire" value="查询" class="InquireButton bg_1199c4" />
+							<input type="reset" value="重置" class="InquireButton" />
+						</li>
+					</form>
+				</ul>
+			</div>
+			<div class="main_content_right">
+				<div class="crud_menu">
+					<ul class="">
+						<li class="fl_l add_table_icon"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li class="fl_l modify_table_icon"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+						<li class="fl_l delete_table_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+					</ul>
+				</div>
+				<div class="main_content_right_table">
+					<table id="tbl" class="table" cellspacing="1">
+						<tr class="table_title">
+							<td>姓名</td>
+							<td>代码</td>
+							<td>机构</td>
+							<td>部门</td>
+							<td>助记码</td>
+							<td>员工类别</td>
+							<td>职位</td>
+							<td>专业</td>
+							<td>职称</td>
+							<td>性别</td>
+							<td>学历</td>
+							<td>政治面貌</td>
+							<td>名族</td>
+							<td>籍贯</td>
+							<td>婚姻</td>
+							<td>状态</td>
+							<td>出身日期</td>
+							<td>入职时间</td>
+							<td>身份证号</td>
+							<td>工种名称</td>
+							<td>电话</td>
+							<td>手机</td>
+							<td>电子邮箱</td>
+							<td>家庭地址</td>
+							<td>备注</td>
+						</tr>
+						<tr class="table_detail">
+							<td>0Name</td>
+							<td>1代码</td>
+							<td>2 Organization</td>
+							<td>3Department</td>
+							<td>4Assistant</td>
+							<td>5EmployeeCategory</td>
+							<td>6Office</td>
+							<td>7Profession</td>
+							<td>8JobTitle</td>
+							<td>男</td>
+							<td>10Education</td>
+							<td>11PoliticalStatus</td>
+							<td>12Nation</td>
+							<td>13NativePlace</td>
+							<td>未婚</td>
+							<td>启用</td>
+							<td>16Birthday</td>
+							<td>17EntryTime</td>
+							<td>18IdNum</td>
+							<td>19NameJobs</td>
+							<td>20Phone</td>
+							<td>21Tel</td>
+							<td>22Email</td>
+							<td>23Address</td>
+							<td>24Remark</td>
+						</tr>
+					</table>
+				</div>
+				<div id="page" class="main_content_right_page">
+					<div class="pagination">
+						<a href="#" class="first" data-action="first">&laquo;</a>
+						<a href="#" class="previous" data-action="previous">&lsaquo;</a>
+						<input type="text" readonly="readonly" data-max-page="<%= num %>" />
+						<a href="#" class="next" data-action="next">&rsaquo;</a>
+						<a href="#" class="last" data-action="last">&raquo;</a>
+					</div>
+				</div>
+				<div class="add_table" id="add_table">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>职员设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post" id="FormSetting">
+							<li class="fl_l">
+								<span>姓名：</span>
+								<input type="text" name="Name" id="Name" value="" />
+							</li>
+							<li class="fl_l">
+								<span>机构：</span>
+								<select name="Organization" id="Organization">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>部门：</span>
+								<select name="Department" id="Department">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>助记码：</span>
+								<input type="text" name="Assistant" id="Assistant" value="" />
+							</li>
+							<li class="fl_l">
+								<span>员工类别：</span>
+								<select name="EmployeeCategory" id="EmployeeCategory">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>职位：</span>
+								<select name="Office" id="Office">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>专业：</span>
+								<select name="Profession" id="Profession">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>职称：</span>
+								<select name="JobTitle" id="JobTitle">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>性别：</span>
+								<input type="radio" name="Sex" id="SexMan" value="男" />
+								<label class="pr_10">男</label>
+								<input type="radio" name="Sex" id="SexGirl" value="女" />
+								<label class="pr_10">女</label>
+							</li>
+							<li class="fl_l">
+								<span>学历：</span>
+								<select name="Education" id="Education">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>政治面貌：</span>
+								<select name="PoliticalStatus" id="PoliticalStatus">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>民族：</span>
+								<select name="Nation" id="Nation">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>籍贯：</span>
+								<select name="NativePlace" id="NativePlace">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+
+							<li class="fl_l">
+								<span>出身日期：</span>
+								<input type="text" name="Birthday" id="Birthday" onClick="WdatePicker()" readonly="readonly">
+							</li>
+							<li class="fl_l">
+								<span>婚姻：</span>
+								<input type="radio" name="Marriage" id="Married" value="已婚" />
+								<label class="pr_10">已婚</label>
+								<input type="radio" name="Marriage" id="Unmarried" value="未婚" />
+								<label class="pr_10">未婚</label>
+							</li>
+							<li class="fl_l">
+								<span>入职时间：</span>
+								<input type="text" name="EntryTime" id="EntryTime" onClick="WdatePicker()" readonly="readonly">
+							</li>
+							<li class="fl_l">
+								<span>电子邮箱：</span>
+								<input type="email" name="Email" id="Email" value="" />
+							</li>
+							<li class="fl_l">
+								<span>电话：</span>
+								<input type="text" name="Phone" id="Phone" value="" />
+							</li>
+							<li class="fl_l">
+								<span>手机：</span>
+								<input type="text" name="Tel" id="Tel" value="" />
+							</li>
+							<li class="fl_l">
+								<span>身份证号：</span>
+								<input type="text" name="IdNum" id="IdNum" value="" />
+							</li>
+							<li class="fl_l">
+								<span>工种名称：</span>
+								<select name="NameJobs" id="NameJobs">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>状态：</span>
+								<input type="radio" name="Status" id="StatusOpen" value="启用" />
+								<label class="pr_10">启用</label>
+								<input type="radio" name="Status" id="StatusDisabled" value="停用" />
+								<label class="pr_10">停用</label>
+							</li>
+							<li class="cl remark">
+								<span>家庭地址：</span>
+								<textarea name="Address" id="Address" class="remarks address"></textarea>
+							</li>
+							<li class="cl remark">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+			</div>
+		</script>
+		<script src="../../js/orgManage/EmployeeManage.js" type="text/javascript" charset="utf-8"></script>t="" type="tejavascripttml">
+		<script type="text/javascript">
+			var EmployeeManageData = {
+				isAdmin: false
+			};
+			var EmployeeManagehtml = template('EmployeeManage', EmployeeManageData);
+			document.getElementById('content').innerHTML = EmployeeManagehtml;
+		</script>
+
+		
+	</body>
+
+</html>

@@ -1,0 +1,172 @@
+package com.xyscm.sys.basic.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xyscm.sys.basic.common.constant.ErrorCode;
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicPartsNameMapper;
+import com.xyscm.sys.basic.model.BasicOrg;
+import com.xyscm.sys.basic.model.BasicPartsName;
+import com.xyscm.sys.basic.model.BasicProductArea;
+
+/**
+ * 品名设置
+ * 
+ * @author Administrator
+ * 
+ */
+@Service
+public class BasicPartsNameService {
+	Logger logger = LoggerFactory.getLogger(BasicPartsNameService.class);
+	@Autowired
+	BasicPartsNameMapper basicPartsNameMapper;
+
+	/**
+	 * @author henry
+	 * @see 更具 PNTREE_NODECODE like 查询屏幕
+	 * @param record
+	 *            .PNTREE_NODECODE record.memebercode
+	 * @return
+	 */
+	public List<BasicPartsName> queryList(BasicPartsName record) {
+
+		List<BasicPartsName> list = null;
+		try {
+			list = basicPartsNameMapper.queryList(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PN_SELECT.getErrCode());
+		}
+		return list;
+	}
+
+	/**
+	 * query by code
+	 * @param record
+	 * @return
+	 *
+	 * List<BasicPartsName>
+	 */
+	public List<BasicPartsName> queryByCode(BasicPartsName record) {
+
+		List<BasicPartsName> list = null;
+		try {
+			list = basicPartsNameMapper.queryBycode(record);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PN_SELECT.getErrCode());
+		}
+		return list;
+	}
+	
+
+	/**
+	 * query by name
+	 * @param record
+	 * @return
+	 *
+	 * List<BasicPartsName>
+	 */
+	public List<BasicPartsName> queryByName(BasicPartsName record) {
+
+		List<BasicPartsName> list = null;
+		try {
+			list = basicPartsNameMapper.queryByName(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PN_SELECT.getErrCode());
+		}
+		return list;
+	}
+	
+	
+	/**
+	 * 分页查询
+	 * @param pageNum
+	 * @param pageSize
+	 * @param record
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	public PageInfo getPage(int pageNum,int pageSize,BasicPartsName record){
+		
+         PageInfo<BasicOrg> pageInfo =null;
+		try {
+			PageHelper.startPage(pageNum, pageSize);  // 开启分页，必须
+			
+			
+			  // 对原来的查询方法不需要任何修改
+			  Page page = (Page)basicPartsNameMapper.queryList(record);
+			pageInfo = new PageInfo<BasicOrg>(page);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PN_SELECT.getErrCode());
+		}
+		
+		return pageInfo;
+	}
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param memberCode
+	 *            partsnameCode
+	 */
+	public void updatePartsName(BasicPartsName record) {
+
+		try {
+			basicPartsNameMapper.updatePartsName(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PN_UPDATE.getErrCode());
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param memberCode
+	 *            partsnameCode
+	 */
+	public void deletePartsName(BasicPartsName record) {
+
+		try {
+			basicPartsNameMapper.deletePartsName(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PN_DELETE.getErrCode());
+		}
+	}
+
+	/**
+	 * 
+	 * @param record
+	 */
+	public void savePartsName(BasicPartsName record) {
+
+		try {
+			basicPartsNameMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PN_ADD.getErrCode());
+		}
+	}
+
+}

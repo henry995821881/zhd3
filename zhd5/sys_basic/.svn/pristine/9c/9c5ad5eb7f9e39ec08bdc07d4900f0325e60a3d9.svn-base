@@ -1,0 +1,211 @@
+//mainContentLeft();
+
+
+function init_data(){
+	$.post("orgManage/queryAllOrg",
+		  {
+		    memeber_code:'0000'
+		  },
+		 
+		  function(d,status){
+			  var content= eval("("+d+")");
+			  var orgTree = template('orgTree', content);
+			 $("#orgTreeLeft").html(orgTree);
+			 
+			 var parentList = content.parentList;
+			 var appendParentOrg = "";
+			 for ( var i = 0; i < parentList.length; i++) {
+				 appendParentOrg += "<option value='"+parentList[i].orgCode+"'>"+parentList[i].orgName+"</option></br>";
+			 }
+			 $("#Organization").html(appendParentOrg);
+			 
+			 
+			 aGroup();
+			//组织列表点击事件
+			$(".nav_list_toggle").on('click', function(item) {
+				var type = $(this).attr("value");
+				var orgId = $(this).attr("orgId");
+				var orgCode = $(this).attr("orgCode");
+				if(orgId != null){
+					$("#orgId").val(orgId);
+				}
+				getdata(type,orgId,orgCode);
+				aTable();
+			});
+			
+			  
+	  });
+}
+	
+init_data();
+
+function getdata(type,orgId,orgCode){
+	$.ajaxSetup({
+		  async: false
+		 });
+		
+		$.post("orgManage/queryBasicOrg",  
+			{
+			type:type,
+			orgId:orgId,
+			orgCode:orgCode
+			}, 
+			function(d) {
+				
+				var content= eval("("+d+")");
+				var content_org = template('OrgManage', content);
+				$("#content_org").html(content_org);
+				
+				//修改时用到的orgId
+				$(".table_detail").on('click', function(item) {
+					var orgId = $(this).attr("orgId");
+					$("#OrgId").val(orgId);
+					var orgNodecode = $(this).attr("orgNodecode");
+					$("#OrgNodecode").val(orgNodecode);
+				});
+				
+			});
+}
+
+
+/*function init_rootNode(){
+	$.post("orgManage/getRootNode",  
+			{
+				member_code:'0000'
+			}, 
+			function(d,status) {
+				var content= eval("("+d+")");
+				$("#rootNodeId").html(content.data.orgName);
+			});
+}
+
+init_rootNode();*/
+
+
+
+/*var Verification_Disabled = function() {
+	if($('#Abbreviation').val() === '' || $('#Institution').val() === '' || $('#Organization') === null) {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}*/
+
+/*$('#Institution').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Organization').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Abbreviation').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});*/
+
+//操作-------表格
+var opt_table_status = "";
+$(".opt_").on('click',function(){
+	
+	opt_table_status = $(this).attr("opt");
+	if(opt_table_status == 'del_table'){
+		del_table_org();
+	}
+})
+
+function save_table(){
+	if(opt_table_status == 'add_table'){
+		add_table_org();
+	}
+	if(opt_table_status == 'update_table'){
+		$("#OrgParent").val("");	
+		$("#OrgNodecode").val("");	
+		update_table_org();
+	}
+	
+}
+
+//新增------表格
+function add_table_org(){
+	var $form = $('#add_org_table');
+	
+	var data = $form.serialize();
+	var url ="orgManage/add";
+	$.post(url, data, function(d) {
+		
+		close_window();
+		init_data();
+	});
+}
+
+//修改------表格
+function update_table_org(){
+	var $form = $('#add_org_table');
+	
+	var data = $form.serialize();
+	var url ="orgManage/update";
+	$.post(url, data, function(d) {
+		close_window();
+		init_data();
+		var OrgName = $("#OrgName").val();
+		var orgMnemcode = $("#AssistantCode").val();
+		var Remark = $("#Remark").val();
+		var orgId = $("#tab_orgId").val();
+		
+		/*$("tr[tab_orgId="+orgId+"]>td").eq(0).html(OrgName);*/
+		/*$("tr[tab_orgId="+orgId+"]>td").eq(2).html(orgMnemcode);
+		$("tr[tab_orgId="+orgId+"]>td").eq(3).html(Remark);*/
+	});
+}
+
+
+//删除------表格
+function del_table_org(){
+	var orgNodecode = $("#OrgNodecode").val();
+	var data = {orgNodecode:orgNodecode};
+	var url ="orgManage/delete";
+	$.post(url, data, function(d) {
+		close_window();
+	});
+}
+
+
+/*var Verification_Disabled = function() {
+	if($('#OrgName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}*/
+
+
+var TableDetail = function(table_details) {
+	$('#Institution').val(table_details.eq(0).text());
+	
+	$("input[name='orgCode']").val(table_details.eq(0).attr("org_code"));
+	
+	$('#Abbreviation').val(table_details.eq(2).text());
+	$('#Organization').val(table_details.eq(3).text());
+	$('#Legal').val(table_details.eq(4).text());
+	$('#Tel').val(table_details.eq(5).text());
+	$('#Fax').val(table_details.eq(6).text());
+	$('#Account').val(table_details.eq(7).text());
+	$('#Bank').val(table_details.eq(8).text());
+	$('#TaxNum').val(table_details.eq(9).text());
+	$('#Add').val(table_details.eq(10).text());
+	$('#Remark').val(table_details.eq(11).text());
+	
+	/*$('#OrgParent').val(table_details.eq(4).text());
+	$('#OrgNodecode').val(table_details.eq(2).text());
+	$('#OrgId').val(table_details.eq(2).text());*/
+	
+}
+
+
+
+//@ sourceURL=product.js  
+

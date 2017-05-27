@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+	<script id="OrgManage" type="text/html">
+			<div class="main_content_left">
+				<h4 class="title"><%= title%></h4>
+				<ul class="crud_menu">
+					<li class="fl_l add_group_icon"><i class="icon iconfont icon-tianjia"></i>增加</li>
+					<li class="fl_l modify_group_icon"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+					<li class="fl_l delete_group_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+				</ul>
+				<ul class="menu_content" id="menu_content">
+					<% for (var i = 0; i < list.length; i ++) { %>
+					<li class="menu_content_group">
+						<ul class="nav_list_toggle menu_content_group_node">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+								<span><%= list[i] %></span>
+							</li>
+						</ul>
+					</li>
+					<% } %>
+				</ul>
+			</div>
+			<div class="main_content_right">
+				<div class="crud_menu">
+					<ul class="">
+						<li class="fl_l add_table_icon"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li class="fl_l modify_table_icon"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+						<li class="fl_l delete_table_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+					</ul>
+				</div>
+				<div class="main_content_right_table">
+					<table id="tbl" class="table" cellspacing="1">
+						<thead>
+							<tr class="table_title">
+								<% for (var i = 0; i < lists.length; i++) { %>
+								<td>
+									<%= lists[i]%>
+								</td>
+								<% } %>
+							</tr>
+						</thead>
+
+						<tbody id="itemContainer">
+							<% for (var b = 0; b < contents.length; b++) { %>
+							<tr class="table_detail">
+								<% for (var j = 0; j < contents[b].item.length; j++) { %>
+								<td>
+									<%= contents[b].item[j]%>
+								</td>
+								<% } %>
+							</tr>
+							<% } %>
+						</tbody>
+					</table>
+				</div>
+				<div id="page" class="main_content_right_page">
+					<div class="pagination">
+						<a href="#" class="first" data-action="first">&laquo;</a>
+						<a href="#" class="previous" data-action="previous">&lsaquo;</a>
+						<input type="text" readonly="readonly" data-max-page="<%= num %>" />
+						<a href="#" class="next" data-action="next">&rsaquo;</a>
+						<a href="#" class="last" data-action="last">&raquo;</a>
+					</div>
+				</div>
+				<div class="add_table" id="add_table">
+					<h4 class="add_table_title">
+								<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+								<span>机构设置</span>
+								</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li class="fl_l">
+								<span>机构名称：</span>
+								<input type="text" name="Institution" id="Institution" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>机构简称：</span>
+								<input type="text" name="Abbreviation" id="Abbreviation" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>上级组织：</span>
+								<select name="Organization" id="Organization" class="table_detail_empty">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>法人代表：</span>
+								<input type="text" name="Legal" id="Legal" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>电话：</span>
+								<input type="text" name="Tel" id="Tel" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>传真：</span>
+								<input type="text" name="Fax" id="Fax" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>账号：</span>
+								<input type="text" name="Account" id="Account" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>开会银行：</span>
+								<input type="text" name="Bank" id="Bank" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>税号：</span>
+								<input type="text" name="TaxNum" id="TaxNum" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>地址：</span>
+								<input type="text" name="Add" id="Add" value="" class="table_detail_empty" />
+							</li>
+							<li class="cl remark">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks table_detail_empty"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+				<div class="add_table" id="add_jt">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_group_close"></i>
+						<span>公司组织</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li>
+								<span>组织名称：</span>
+								<input type="text" name="GroupName" id="GroupName" value="" />
+							</li>
+							<li class="remark">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+			</div>
+
+		</script>
+		<script src="../../js/orgManage/OrgManage.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var OrgManageData = {
+				title: '公司组织',
+				lists: ['机构名称', '机构代码', '机构简称', '上级组织', '法人代表', '电话', '传真', '账号', '开会银行', '税号', '地址', '备注'],
+				contents: [{
+						"item": ['内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A']
+					},
+					{
+						"item": ['内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A']
+					}
+				],
+				num: '13',
+				list: ['集团', '集团1'],
+			};
+			var OrgManageDatahtml = template('OrgManage', OrgManageData);
+			document.getElementById('content').innerHTML = OrgManageDatahtml;
+		</script>
+	</body>
+
+</html>

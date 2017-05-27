@@ -1,0 +1,218 @@
+
+mainContentLeft();
+
+
+
+
+function init_data(){
+	
+	query_();
+	
+	
+}
+
+init_data();
+
+
+
+
+
+
+/**
+ * 模糊查询
+ */
+function query_(){
+	
+	
+	
+	var $form = $('#form_query');
+
+	var data = $form.serialize();
+	
+	$.post("warehouseManage/query",
+			  data,
+			  function(d,status){
+				var content= eval("("+d+")");
+			
+					var WarehouseSettinghtml = template('WarehouseSetting', content);
+				
+					
+					$("#content_warehouse").html(WarehouseSettinghtml);
+				
+					aTable();
+					
+				 
+			  });
+	
+	
+}
+
+
+
+
+/**
+ * 
+ * 
+ * 
+ */
+
+var Verification_Disabled = function() {
+	if($('#WarehouseName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	
+	$('#WarehouseName').val(table_details.eq(0).text());
+	//
+	$("input[name='warehouseCode']").val(table_details.eq(0).attr("warehouse_code"));
+	 
+	$('#Assistant').val(table_details.eq(2).text());
+	$('#WarehouseType').val(table_details.eq(3).text());	
+	if($('#Supervision').val() === table_details.eq(4).text()) {
+		$('#Supervision').attr("checked", "checked");
+	}
+	if($('#Location').val() === table_details.eq(5).text()) {
+		$('#Location').attr("checked", "checked");
+	}
+	$('#Area').val(table_details.eq(6).text());
+	$('#Contact').val(table_details.eq(7).text());
+	$('#Phone').val(table_details.eq(8).text());
+	$('#Tel').val(table_details.eq(9).text());
+	$('#Add').val(table_details.eq(10).text());
+	$('#Remark').val(table_details.eq(11).text());
+}
+/*
+ * var table_detail_empty = function() { $('#WarehouseName').val('');
+ * $('#Assistant').val(''); $('#WarehouseType').val(''); $('#Area').val('');
+ * $('#Contact').val(''); $('#Phone').val(''); $('#Tel').val('');
+ * $('#Add').val(''); $('#Remark').val('');
+ * $('#Location').removeAttr('checked');
+ * $('#Supervision').removeAttr('checked'); }
+ */
+/*
+ * $('#WarehouseName').on('blur', function() { var a = $(this); Verification(a);
+ * Verification_Disabled();
+ * 
+ * 
+ * 
+ * 
+ * });
+ */
+
+//判断是增加还是修改
+var flag = "";
+$("li.oper_").on('click', function() {
+	
+	flag = $(this).attr("data");
+	if(flag=='del'){
+		
+		//删除
+		
+		var warehouse_code= $('.table_detail.active').find('td').eq(0).attr("warehouse_code");
+		
+		var data={'warehouse_code':warehouse_code};
+		var url = "warehouseManage/delete";
+		$.post(url, data, function(d) {
+
+			init_data();
+			close_window();
+
+		});
+		
+	}
+});
+
+
+
+
+
+function oper_warehouse(){
+
+	 if(flag =="add"){
+		 
+		 save_warehouse();
+	 }else if(flag =="update"){
+		 update_warehouse();
+	 }
+	
+	 if($("input[name='warehouseWareplace1']").attr("checked")){
+			
+			$("input[name='warehouseWareplace']").val("1");
+		}else{
+			
+			$("input[name='warehouseWareplace']").val("0");
+			
+		}
+		
+	   if($("input[name='warehouseOwnSupervise1']").attr("checked")){
+			
+			$("input[name='warehouseOwnSupervise']").val("1");
+		}else{
+			
+			$("input[name='warehouseOwnSupervise']").val("0");
+			
+		}
+	
+	
+}
+
+
+function update_warehouse(){
+	
+	//表单验证
+	var $form = $('#add_warehouse');
+
+
+   
+   
+   
+	var data = $form.serialize();
+	var url ="warehouseManage/update";
+	$.post(url, data, function(d) {
+
+	
+		init_data();
+		close_window();
+			
+		
+
+	});
+	
+}
+
+
+
+
+
+function save_warehouse(){
+	
+	
+	//表单验证
+	var $form = $('#add_warehouse');
+
+	
+   
+   //
+	
+	var data = $form.serialize();
+	var url ="warehouseManage/add";
+	$.post(url, data, function(d) {
+
+	
+		init_data();
+		close_window();
+			
+		
+
+	});
+	
+	
+}
+
+
+
+
+

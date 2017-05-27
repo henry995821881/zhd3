@@ -1,0 +1,164 @@
+package com.xyscm.sys.basic.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicAreaMapper;
+import com.xyscm.sys.basic.model.BasicArea;
+
+
+@Service
+public class BasicAreaService {
+
+	@Autowired
+	BasicAreaMapper basicAreaMapper;
+	
+	/**
+	 * 所有地区
+	 */
+	public List<BasicArea> queryAllArea(String memberCode){
+		List<BasicArea> list = null;
+		try{
+    		list = basicAreaMapper.queryAllArea(memberCode);
+    	}catch(Exception e){
+			e.printStackTrace();
+    		throw new BaseException("所有地区查看失败");
+    	}
+    	
+        return list;
+	}
+	
+    /**
+     * 查询一级地名
+     * @param memberCode	都为0000
+     */
+    public List<BasicArea> queryBasicArea(String memberCode) {
+    	
+    	List<BasicArea> list = null;
+    	try{
+    		list = basicAreaMapper.queryBasicArea(memberCode);
+    	}catch(Exception e){
+			e.printStackTrace();
+    		throw new BaseException("一级地区查看失败");
+    	}
+    	
+        return list;
+    }
+    
+    /**
+     * 查询根据二级地名
+     * @param memberCode 
+     * @param areaParent 	所属一级地区的area_code（当areaNodecode传null时 则查出所有二级地区）
+     */
+    public List<BasicArea> query2BasicArea(String memberCode,String areaParent) {
+    	List<BasicArea> list = null;
+    	try{
+    		list = basicAreaMapper.query2BasicArea(memberCode,areaParent);
+    	}catch(Exception e){
+			e.printStackTrace();
+    		throw new BaseException("二级地区查看失败");
+    	}
+        return list;
+    }
+    
+    /**
+     * 查询根据三级地名
+     * @param memberCode 
+     * @param areaNodecode 	所属一级地区的area_code（当areaNodecode传null时 则查出所有二级地区）
+     */
+    public List<BasicArea> query3BasicArea(String memberCode,String areaNodecode) {
+    	List<BasicArea> list = null;
+    	try{
+    		list = basicAreaMapper.query3BasicArea(memberCode,areaNodecode);
+    	}catch(Exception e){
+			e.printStackTrace();
+    		throw new BaseException("三级地区查看失败");
+    	}
+        return list;
+    }
+    /**
+     * 查询当前地址详情
+     * @param memberCode 
+     * @param areaNodecode 	地区的所属编号
+     */
+    public BasicArea getAreaDetail(BigDecimal areaId) {
+    	BasicArea basicArea = null;
+    	try{
+    		basicArea = basicAreaMapper.getAreaDetail(areaId);
+    	}catch(Exception e){
+			e.printStackTrace();
+    		throw new BaseException("地址详情查看失败");
+    	}
+        return basicArea;
+    }
+    
+    
+    /**
+     * 增加地区
+     * @param BasicArea.MemberCode
+     * @param BasicArea.AreaName
+     * @param BasicArea.AreaParent
+     * @param BasicArea.AreaNodecode
+     * @return -1:失败	1:成功
+     */
+    public int insertArea(BasicArea basicArea){
+    	int i = -1;
+    	try{
+    		i = basicAreaMapper.insertArea(basicArea); 
+    	}catch(Exception e){
+			e.printStackTrace();
+    		throw new BaseException("增加地区失败");
+    	}
+    	return i;
+    }
+  
+    
+    /**
+     * 编辑地区
+     * @param BasicArea.AreaId
+     * @return -1:失败	1:成功
+     */
+    public int updateArea(BasicArea basicArea){
+    	int i = -1;
+    	try{
+    		i = basicAreaMapper.updateArea(basicArea); 
+    	}catch(Exception e){
+			e.printStackTrace();
+    		throw new BaseException("编辑地区失败");
+    	}
+    	return i;
+    }
+  
+    
+	/**
+	 * 删除地区（级联删除）
+	 * @param memberCode
+	 * @param areaNodecode	地区的所属编号
+	 * @return	-1:失败	1:成功
+	 */
+    public int deleteArea(String memberCode,String areaNodecode){
+    	int i = -1;
+    	//areaNodecode为2级地区list中只有一个，areaNodecode为1级地区list中则有多个
+    	List<BasicArea> list = basicAreaMapper.query2BasicArea(memberCode,areaNodecode);
+    	try{
+    		if(list != null && list.size() > 0){
+        		for (BasicArea basicArea : list) {
+        			//删除地区
+        			i = basicAreaMapper.deleteBasicArea(basicArea.getAreaCode());
+        			if(1 != i){
+        				i = -1;
+        				break;
+        			}
+        		}
+        	}
+    	}catch(Exception e){
+			e.printStackTrace();
+    		throw new BaseException("删除地区失败");
+    	}
+    	return i;
+    }
+}

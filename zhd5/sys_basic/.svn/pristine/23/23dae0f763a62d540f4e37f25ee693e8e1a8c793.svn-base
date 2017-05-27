@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicProductAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicProductArea" >
+    <id column="PRODUCTAREA_ID" property="productareaId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="PRODUCTAREA_CODE" property="productareaCode" jdbcType="VARCHAR" />
+    <result column="PRODUCTAREA_NAME" property="productareaName" jdbcType="VARCHAR" />
+    <result column="PRODUCTAREA_MNEMCODE" property="productareaMnemcode" jdbcType="VARCHAR" />
+    <result column="PRODUCTAREA__REMARK" property="productareaRemark" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PRODUCTAREA_ID, MEMBER_CODE, PRODUCTAREA_CODE, PRODUCTAREA_NAME, PRODUCTAREA_MNEMCODE, 
+    PRODUCTAREA__REMARK, BASIC_SHARE
+  </sql>
+  <sql id="orderby">
+  order by PRODUCTAREA_CODE desc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  BASIC_PRODUCTAREA
+    where PRODUCTAREA_ID = #{productareaId,jdbcType=DECIMAL}
+  </select>
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.xyscm.sys.basic.model.BasicProductArea">
+  
+   select 
+    <include refid="Base_Column_List" />
+    from  BASIC_PRODUCTAREA
+    where MEMBER_CODE = #{memberCode}
+    
+    <include refid="orderby"></include>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_PRODUCTAREA
+    where PRODUCTAREA_ID = #{productareaId,jdbcType=DECIMAL}
+  </delete>
+  
+  <delete id="deleteProductArea" parameterType="com.xyscm.sys.basic.model.BasicProductArea">
+  delete from  BASIC_PRODUCTAREA
+    where MEMBER_CODE = #{memberCode} 
+    and PRODUCTAREA_CODE =#{productareaCode}
+  </delete>
+
+  <insert id="insert"  parameterType="com.xyscm.sys.basic.model.BasicProductArea" >
+    insert into  BASIC_PRODUCTAREA (PRODUCTAREA_ID, MEMBER_CODE, PRODUCTAREA_CODE, 
+      PRODUCTAREA_NAME, PRODUCTAREA_MNEMCODE, PRODUCTAREA__REMARK, 
+      BASIC_SHARE)
+    values (#{productareaId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{productareaCode,jdbcType=VARCHAR}, 
+      #{productareaName,jdbcType=VARCHAR}, #{productareaMnemcode,jdbcType=VARCHAR}, #{productareaRemark,jdbcType=VARCHAR}, 
+      #{basicShare,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicProductArea" >
+    insert into  BASIC_PRODUCTAREA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        PRODUCTAREA_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="true" >
+        PRODUCTAREA_CODE,
+      </if>
+      <if test="productareaName != null" >
+        PRODUCTAREA_NAME,
+      </if>
+      <if test="productareaMnemcode != null" >
+        PRODUCTAREA_MNEMCODE,
+      </if>
+      <if test="productareaRemark != null" >
+        PRODUCTAREA__REMARK,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+       BASIC_PRODUCTAREA_SEQ.nextval,
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="true" >
+        ( select  lpad((max(bb.productarea_code)+1),6,'0')as code from BASIC_PRODUCTAREA bb),
+      </if>
+      <if test="productareaName != null" >
+        #{productareaName,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaMnemcode != null" >
+        #{productareaMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaRemark != null" >
+        #{productareaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateProductArea" parameterType="com.xyscm.sys.basic.model.BasicProductArea">
+   update  BASIC_PRODUCTAREA
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaCode != null" >
+        PRODUCTAREA_CODE = #{productareaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaName != null" >
+        PRODUCTAREA_NAME = #{productareaName,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaMnemcode != null" >
+        PRODUCTAREA_MNEMCODE = #{productareaMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaRemark != null" >
+        PRODUCTAREA__REMARK = #{productareaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where MEMBER_CODE = #{memberCode} 
+    and PRODUCTAREA_CODE =#{productareaCode}
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicProductArea" >
+    update  BASIC_PRODUCTAREA
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaCode != null" >
+        PRODUCTAREA_CODE = #{productareaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaName != null" >
+        PRODUCTAREA_NAME = #{productareaName,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaMnemcode != null" >
+        PRODUCTAREA_MNEMCODE = #{productareaMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="productareaRemark != null" >
+        PRODUCTAREA__REMARK = #{productareaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where PRODUCTAREA_ID = #{productareaId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicProductArea" >
+    update  BASIC_PRODUCTAREA
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      PRODUCTAREA_CODE = #{productareaCode,jdbcType=VARCHAR},
+      PRODUCTAREA_NAME = #{productareaName,jdbcType=VARCHAR},
+      PRODUCTAREA_MNEMCODE = #{productareaMnemcode,jdbcType=VARCHAR},
+      PRODUCTAREA__REMARK = #{productareaRemark,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL}
+    where PRODUCTAREA_ID = #{productareaId,jdbcType=DECIMAL}
+  </update>
+</mapper>

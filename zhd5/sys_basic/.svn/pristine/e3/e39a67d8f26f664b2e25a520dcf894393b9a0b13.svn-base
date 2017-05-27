@@ -1,0 +1,275 @@
+package com.xyscm.sys.basic.vo;
+
+public class OrgBean {
+	private String memberCode;
+	private String orgCode;
+	private String orgName;
+	private Long orgProperty;
+	private String orgRemark;
+
+	private String orgParam;
+	private String orgTwoParam;
+	private String orgThParam;
+	private String orgParamValue;
+	private String orgTwoParamValue;
+	private String orgThParamValue;
+	private String deptParam;
+	private String deptParamValue;
+	private String warhouseParam;
+	private String warhouseParamValue;
+	private String operatorParam;
+	private String operatorParamValue;
+	private String partsNameParam;
+	private String partsNameParamValue;
+	private String[] likeCol;
+	private String queryOrderStr1;
+	private String queryOrderStr2;
+	private String queryOrderStr3;
+	private String queryOrderStr4;
+	private String queryOrderStr5;
+	private String[] orderCol;
+
+
+	public String getOrgParam() {
+		return orgParam;
+	}
+
+	public void setOrgParam(String orgParam) {
+		this.orgParam = orgParam;
+	}
+
+	public String getOrgTwoParam() {
+		return orgTwoParam;
+	}
+
+	public void setOrgTwoParam(String orgTwoParam) {
+		this.orgTwoParam = orgTwoParam;
+	}
+
+	public String getOrgThParam() {
+		return orgThParam;
+	}
+
+	public void setOrgThParam(String orgThParam) {
+		this.orgThParam = orgThParam;
+	}
+
+	public String getOrgParamValue() {
+		return orgParamValue;
+	}
+
+	public void setOrgParamValue(String orgParamValue) {
+		this.orgParamValue = orgParamValue;
+	}
+
+	public String getOrgTwoParamValue() {
+		return orgTwoParamValue;
+	}
+
+	public void setOrgTwoParamValue(String orgTwoParamValue) {
+		this.orgTwoParamValue = orgTwoParamValue;
+	}
+
+	public String getOrgThParamValue() {
+		return orgThParamValue;
+	}
+
+	public void setOrgThParamValue(String orgThParamValue) {
+		this.orgThParamValue = orgThParamValue;
+	}
+
+	public String getDeptParam() {
+		return deptParam;
+	}
+
+	public void setDeptParam(String deptParam) {
+		this.deptParam = deptParam;
+	}
+
+	public String getDeptParamValue() {
+		return deptParamValue;
+	}
+
+	public void setDeptParamValue(String deptParamValue) {
+		this.deptParamValue = deptParamValue;
+	}
+
+	public String getWarhouseParam() {
+		return warhouseParam;
+	}
+
+	public void setWarhouseParam(String warhouseParam) {
+		this.warhouseParam = warhouseParam;
+	}
+
+	public String getWarhouseParamValue() {
+		return warhouseParamValue;
+	}
+
+	public void setWarhouseParamValue(String warhouseParamValue) {
+		this.warhouseParamValue = warhouseParamValue;
+	}
+
+	public String getOperatorParam() {
+		return operatorParam;
+	}
+
+	public void setOperatorParam(String operatorParam) {
+		this.operatorParam = operatorParam;
+	}
+
+	public String getOperatorParamValue() {
+		return operatorParamValue;
+	}
+
+	public void setOperatorParamValue(String operatorParamValue) {
+		this.operatorParamValue = operatorParamValue;
+	}
+
+	public String getPartsNameParam() {
+		return partsNameParam;
+	}
+
+	public void setPartsNameParam(String partsNameParam) {
+		this.partsNameParam = partsNameParam;
+	}
+
+	public String getPartsNameParamValue() {
+		return partsNameParamValue;
+	}
+
+	public void setPartsNameParamValue(String partsNameParamValue) {
+		this.partsNameParamValue = partsNameParamValue;
+	}
+
+	public String[] getLikeCol() {
+		return likeCol;
+	}
+
+	public void setLikeCol(String[] likeCol) {
+		this.likeCol = likeCol;
+	}
+
+	public String getQueryOrderStr1() {
+		return queryOrderStr1;
+	}
+
+	public void setQueryOrderStr1(String queryOrderStr1) {
+		this.queryOrderStr1 = queryOrderStr1;
+	}
+
+	public String getQueryOrderStr2() {
+		return queryOrderStr2;
+	}
+
+	public void setQueryOrderStr2(String queryOrderStr2) {
+		this.queryOrderStr2 = queryOrderStr2;
+	}
+
+	public String getQueryOrderStr3() {
+		return queryOrderStr3;
+	}
+
+	public void setQueryOrderStr3(String queryOrderStr3) {
+		this.queryOrderStr3 = queryOrderStr3;
+	}
+
+	public String getQueryOrderStr4() {
+		return queryOrderStr4;
+	}
+
+	public void setQueryOrderStr4(String queryOrderStr4) {
+		this.queryOrderStr4 = queryOrderStr4;
+	}
+
+	public String getQueryOrderStr5() {
+		return queryOrderStr5;
+	}
+
+	public void setQueryOrderStr5(String queryOrderStr5) {
+		this.queryOrderStr5 = queryOrderStr5;
+	}
+
+	public String[] getOrderCol() {
+		return orderCol;
+	}
+
+	public void setOrderCol(String[] orderCol) {
+		this.orderCol = orderCol;
+	}
+
+	/**
+	 * @return the memberCode
+	 */
+	public String getMemberCode() {
+		return memberCode;
+	}
+
+	/**
+	 * @param memberCode
+	 *            the memberCode to set
+	 */
+	public void setMemberCode(String memberCode) {
+		this.memberCode = memberCode;
+	}
+
+	/**
+	 * @return the orgCode
+	 */
+	public String getOrgCode() {
+		return orgCode;
+	}
+
+	/**
+	 * @param orgCode
+	 *            the orgCode to set
+	 */
+	public void setOrgCode(String orgCode) {
+		this.orgCode = orgCode;
+	}
+
+	/**
+	 * @return the orgName
+	 */
+	public String getOrgName() {
+		return orgName;
+	}
+
+	/**
+	 * @param orgName
+	 *            the orgName to set
+	 */
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+
+	/**
+	 * @return the orgProperty
+	 */
+	public Long getOrgProperty() {
+		return orgProperty;
+	}
+
+	/**
+	 * @param orgProperty
+	 *            the orgProperty to set
+	 */
+	public void setOrgProperty(Long orgProperty) {
+		this.orgProperty = orgProperty;
+	}
+
+	/**
+	 * @return the orgRemark
+	 */
+	public String getOrgRemark() {
+		return orgRemark;
+	}
+
+	/**
+	 * @param orgRemark
+	 *            the orgRemark to set
+	 */
+	public void setOrgRemark(String orgRemark) {
+		this.orgRemark = orgRemark;
+	}
+}

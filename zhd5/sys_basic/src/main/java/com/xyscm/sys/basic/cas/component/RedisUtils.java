@@ -1,0 +1,192 @@
+/**
+ * 智恒达钢盟网络科技有限公司
+ */
+package com.xyscm.sys.basic.cas.component;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.redis.connection.RedisConnection;
+import org.springframework.data.redis.core.RedisCallback;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Component;
+
+/**
+ * 功能描述：redis客户端操作类
+ * 
+ * @author xielf
+ * @CreateDate 2017-5-18 下午2:21:06
+ * @Version: 1.0
+ */
+public class RedisUtils
+{
+	@Autowired
+    private RedisTemplate redisTemplate;
+
+	private static RedisUtils redisUtils;
+	
+	/**
+	 * spring 初始化完成后执行
+	 * void
+	 */
+	@PostConstruct
+    public void init() {
+		redisUtils = this;  
+		redisUtils.redisTemplate = this.redisTemplate;  
+  
+    }  
+
+    public RedisTemplate getRedisTemplate()
+    {
+        return redisTemplate;
+    }
+
+    public void setRedisTemplate(RedisTemplate redisTemplate)
+    {
+    	redisTemplate = redisTemplate;
+    }
+
+    public static Boolean expire(String key, long timeout, TimeUnit unit)
+    {
+        return redisUtils.redisTemplate.expire(key, timeout, unit);
+    }
+
+    public static Boolean expireAt(String key, Date date)
+    {
+        return redisUtils.redisTemplate.expireAt(key, date);
+    }
+
+    public static void setObject(String key, Object value)
+    {
+    	redisUtils.redisTemplate.boundValueOps(key).set(value);
+    }
+
+    public static void setObject(String key, Object value, long timeout, TimeUnit unit)
+    {
+    	redisUtils.redisTemplate.boundValueOps(key).set(value, timeout, unit);
+    }
+
+    public static Object getObject(String key)
+    {
+        return redisUtils.redisTemplate.boundValueOps(key).get();
+    }
+
+    public Long increment(String key, long delta)
+    {
+        return redisUtils.redisTemplate.boundValueOps(key).increment(delta);
+    }
+
+    public static Double increment(String key, double delta)
+    {
+        return redisUtils.redisTemplate.boundValueOps(key).increment(delta);
+    }
+
+    public static void setMap(String key, Map value)
+    {
+    	redisUtils.redisTemplate.boundHashOps(key).putAll(value);
+    }
+
+    public static void setMap(String key, Map value, long timeout, TimeUnit unit)
+    {
+    	redisUtils.redisTemplate.boundHashOps(key).putAll(value);
+    	redisUtils.redisTemplate.boundHashOps(key).expire(timeout, unit);
+    }
+    
+    /**
+     * 
+     * 更新redis中map对象中的指定值
+     * 
+     * @param key redis key
+     * @param hk  map中的key
+     * @param hv  map中的值
+     *
+     * void
+     */
+    public static void hsetMap(String key, String hk, Object hv)
+    {
+    	redisUtils.redisTemplate.boundHashOps(key).put(hk,hv);
+    }
+
+    public static Map getMap(String key)
+    {
+        return redisUtils.redisTemplate.boundHashOps(key).entries();
+    }
+    
+    /**
+     * 从redis中的map对象中获取指定key的值
+     * @param key redis中的map对象对应的key
+     * @param hk  map中的指定key
+     *
+     * void
+     */
+    public static Object hgetMap(String key,String hk){
+    	return redisUtils.redisTemplate.boundHashOps(key).get(hk);
+    }
+
+    public static void setSet(String key, Set value)
+    {
+    	redisUtils.redisTemplate.boundSetOps(key).add(new Object[] {
+            value
+        });
+    }
+
+    public static void setSet(String key, Set value, long timeout, TimeUnit unit)
+    {
+    	redisUtils.redisTemplate.boundSetOps(key).add(new Object[] {
+            value
+        });
+    	redisUtils.redisTemplate.boundSetOps(key).expire(timeout, unit);
+    }
+
+    public static Set getSet(String key)
+    {
+        return redisUtils.redisTemplate.boundSetOps(key).members();
+    }
+
+    public static void setList(String key, List value)
+    {
+    	redisUtils.redisTemplate.boundListOps(key).leftPushAll(new Object[] {
+            value
+        });
+    }
+
+    public static void setList(String key, List value, long timeout, TimeUnit unit)
+    {
+    	redisUtils.redisTemplate.boundListOps(key).leftPushAll(new Object[] {
+            value
+        });
+    	redisUtils.redisTemplate.boundListOps(key).expire(timeout, unit);
+    }
+
+    public static List getList(String key)
+    {
+        return redisUtils.redisTemplate.boundListOps(key).range(0L, redisUtils.redisTemplate.boundListOps(key).size().longValue());
+    }
+
+    public static void del(String key)
+    {
+    	redisUtils.redisTemplate.delete(key);
+    }
+
+    public static boolean exists(String key)
+    {
+        final byte[] keys = redisUtils.redisTemplate.getStringSerializer().serialize(key);
+        return ((Boolean)redisUtils.redisTemplate.execute(new RedisCallback() {
+
+            public Boolean doInRedis(RedisConnection connection) throws DataAccessException
+            {
+                return connection.exists(keys);
+            }
+
+        }, true)).booleanValue();
+    }
+
+
+}

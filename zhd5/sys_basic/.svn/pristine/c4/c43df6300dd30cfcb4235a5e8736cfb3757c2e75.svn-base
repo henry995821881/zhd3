@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        ">
+
+	<dubbo:application name="sys_basic_provider" />
+	<dubbo:protocol name="dubbo" port="-1" accepts="200" /><!-- 端口自动分配 -->
+
+	<dubbo:registry protocol="zookeeper" address="192.168.80.149:2181" id="basicZookeeper" timeout="15000"/>
+	<!-- generator-insert-location -->
+	
+	<!-- 发布服务 -->
+	<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicOrgService"
+		ref="apiBasicOrgFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+    <dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicDeptService"
+		ref="apiBasicDeptFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+	<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicEmployeeService"
+		ref="apiBasicEmployeeFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+	<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicWarehouseService"
+		ref="apiBasicWarehouseFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicPnTreeService"
+		ref="apiBasicPnTreeFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicWareAreaService"
+		ref="apiBasicWareAreaFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicWarePlaceService"
+		ref="apiBasicWarePlaceFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicProductAreaService"
+		ref="apiBasicProductAreaFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+
+<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicPartsNameService"
+		ref="apiBasicPartsNameFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicGoodsCodeService"
+		ref="apiBasicGoodsCodeFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+
+
+
+							  
+	<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicAreaService"
+		ref="apiBasicAreaFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+   
+	<dubbo:service interface="com.xyscm.sys.basic.api.ApiBasicCompanyService"
+		ref="apiBasicCompanyFacade" group="sys-basic-soa" version="1.0.0"
+                     timeout="60000" protocol="dubbo" registry="basicZookeeper" validation="false"  retries="2" />
+
+
+	<!-- <dubbo:reference interface="com.gmkj.ldp.api.LdpReceivingCheckInService" id="ldpReceivingCheckInService"
+					 group="ldp-soa" version="1.0.0"
+					 timeout="60000" protocol="dubbo" registry="ldpZookeeper" validation="false" lazy="true" retries="2" check="false"/>
+
+
+	<bean id="receivingLdpCodeBill" class="com.gmkj.erp.ldp.api.facade.ReceivingLdpCodeBillFacade">
+		<property name="warehouseEntryactService" ref="warehouseEntryactService"></property>
+	</bean> -->
+	<!--测试-->
+	<!-- <dubbo:service interface="com.gmkj.api.ldp.TestService"
+		ref="TestServiceImpl" group="ldp-soa" version="1.0"
+                     timeout="60000" protoco
+                     l="dubbo" registry="ldpZookeeper" validation="false"  retries="2" />
+ -->
+	<!-- <bean id="TestServiceImpl" class="com.gmkj.api.ldp.impl.TestServiceImpl"> 
+	</bean>-->
+	
+	<bean id="apiBasicOrgFacade" class="com.xyscm.sys.basic.facade.ApiBasicOrgFacade"/> 
+	<bean id="apiBasicDeptFacade" class="com.xyscm.sys.basic.facade.ApiBasicDeptFacade"/> 
+	<bean id="apiBasicEmployeeFacade" class="com.xyscm.sys.basic.facade.ApiBasicEmployeeFacade"/> 
+
+	<bean id="apiBasicWarehouseFacade" class="com.xyscm.sys.basic.facade.ApiBasicWarehouseFacade"/>
+	<bean id="apiBasicPnTreeFacade" class="com.xyscm.sys.basic.facade.ApiBasicPnTreeFacade"/>
+    <bean id="apiBasicWareAreaFacade" class="com.xyscm.sys.basic.facade.ApiBasicWareAreaFacade"/>
+    <bean id="apiBasicWarePlaceFacade"  class="com.xyscm.sys.basic.facade.ApiBasicWarePlaceFacade"/>
+    <bean id="apiBasicProductAreaFacade"  class="com.xyscm.sys.basic.facade.ApiBasicProductAreaFacade"/> 
+    <bean id="apiBasicPartsNameFacade" class="com.xyscm.sys.basic.facade.ApiBasicPartsNameFacade"/>
+    <bean id="apiBasicGoodsCodeFacade" class="com.xyscm.sys.basic.facade.ApiBasicGoodsCodeFacade"/>
+
+   	<bean id="apiBasicAreaFacade"  class="com.xyscm.sys.basic.facade.ApiBasicAreaFacade"/>
+    <bean id="apiBasicCompanyFacade"  class="com.xyscm.sys.basic.facade.ApiBasicCompanyFacade"/>
+    
+
+</beans>

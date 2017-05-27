@@ -1,0 +1,56 @@
+package com.xyscm.sys.basic.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xyscm.sys.basic.dao.BasicCompanyLinkmanMapper;
+import com.xyscm.sys.basic.dao.BasicCompanyProjectMapper;
+import com.xyscm.sys.basic.model.BasicCompanyLinkman;
+import com.xyscm.sys.basic.model.BasicCompanyProject;
+
+
+@Service
+public class BasicCompanyProjectService {
+
+	@Autowired
+	BasicCompanyProjectMapper basicCompanyProjectMapper;
+	
+	  /**
+     * 根据compangcode查询公司项目
+     * @param companyCode
+     * @return
+     *
+     * List<BasicCompanyProject>
+     */
+    public List<BasicCompanyProject> queryCompanyProject(String companyCode){
+		List<BasicCompanyProject> list  = basicCompanyProjectMapper.queryCompanyProject(companyCode);
+		return list;
+	}
+    
+    
+   	/**
+   	 * 新增公司项目
+     * @return
+     *
+     * basicCompanyProject
+   	 */
+   	public int insertCompanyProject(BasicCompanyProject basicCompanyProject){
+    	return basicCompanyProjectMapper.insertCompanyProject(basicCompanyProject);
+   	}
+    
+
+	/**
+	 * 根据id删除公司项目
+	 * @param companyLinkmanId
+	 * @return
+	 *
+	 * int
+	 */
+	public int deltCompanyLinkman(BigDecimal companyProjectId){
+		return basicCompanyProjectMapper.deltCompanyProject(companyProjectId);
+	}
+
+}

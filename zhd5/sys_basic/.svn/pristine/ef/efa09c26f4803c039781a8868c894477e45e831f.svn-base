@@ -1,0 +1,111 @@
+package com.xyscm.sys.basic.service;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xyscm.sys.basic.dao.BasicCompanyMapper;
+import com.xyscm.sys.basic.model.BasicCompany;
+import com.xyscm.sys.basic.model.BasicCompanyAccounts;
+import com.xyscm.sys.basic.model.BasicCompanyLinkman;
+import com.xyscm.sys.basic.model.BasicCompanyProject;
+
+
+@Service
+public class BasicCompanyService {
+
+	@Autowired
+	BasicCompanyMapper basicCompanyMapper;
+	@Autowired
+	BasicCompanyLinkmanService basicCompanyLinkmanService;
+	@Autowired
+	BasicCompanyAccountsService basicCompanyAccountsService;
+	@Autowired
+	BasicCompanyProjectService basicCompanyProjectService;
+	
+	/**
+	 * 查询往来单位	
+	 * @param memberCode	0000
+	 * @param BasicCompany.orgCode		当前操作者的orgCode
+	 * @return	
+	 */
+	public List<BasicCompany> queryCompany(BasicCompany basicCompany){
+		return basicCompanyMapper.queryCompany(basicCompany);
+	}
+	
+	/**
+	 * 查询往来单位详情	
+	 * @param companyId		
+	 * @return	
+	 */
+	public BasicCompany getCompanyInfo(BigDecimal companyId){
+		return basicCompanyMapper.getCompanyInfo(companyId);
+	}
+	
+	/**
+	 * 新增往来单位
+	 * @param BasicCompany.MemberCode
+	 * @param BasicCompany.CompanyName
+	 * @return	-1：失败     1：成功
+	 */
+//	public int insertCompany(BasicCompany basicCompany,List<BasicCompanyLinkman> linkmans,List<BasicCompanyAccounts> accounts,List<BasicCompanyProject> project)
+	public int insertCompany(BasicCompany basicCompany){
+		return basicCompanyMapper.insertCompany(basicCompany);
+	} 
+	
+	
+	/**
+	 * 新增往来单位
+	 * @param BasicCompany.MemberCode
+	 * @param BasicCompany.CompanyName
+	 * @return	-1：失败     1：成功
+	 */
+//	public int insertCompany(BasicCompany basicCompany,List<BasicCompanyLinkman> linkmans,List<BasicCompanyAccounts> accounts,List<BasicCompanyProject> project)
+	public int insertCompanyS(BasicCompany basicCompany,String[] linkmans){
+		int i = 0;
+		//新增往来单位
+		i = basicCompanyMapper.insertCompany(basicCompany);
+		
+		if(i == 1){
+			List<BasicCompany> list = basicCompanyMapper.queryCompany(basicCompany);
+			String companyCode = list.get(0).getCompanyCode();
+			//新增联系人
+			basicCompanyLinkmanService.insertCompanyLinkman(linkmans,companyCode);
+		}
+		return 1;
+	} 
+	
+	/**
+	 * 修改往来单位	
+	 * @param BasicCompany.CompanyId
+	 * @param BasicCompany.CompanyAbbreviate	公司名
+	 * @return	-1：失败     1：成功
+	 */
+	public int updateCompany(BasicCompany basicCompany){
+		return basicCompanyMapper.updateCompany(basicCompany);
+	}
+	
+	/**
+	 * 删除往来单位
+	 * @param companyId
+	 * @return	-1：失败     1：成功
+	 */
+	public int deleteCompany(BigDecimal companyId){
+		return basicCompanyMapper.deleteCompany(companyId);
+	}
+	
+	
+	/**
+	 * 根据AreaCode查询往来单位	
+	 * @param memberCode	0000
+	 * @param areaCode		地区code
+	 * @return	
+	 */
+	public List<BasicCompany> queryCompanyByAreaCode(String memberCode,String areaCode,String orgCode){
+		return basicCompanyMapper.queryCompanyByAreaCode(memberCode,areaCode,orgCode);
+	}
+	
+	
+}

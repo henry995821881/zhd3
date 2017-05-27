@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicCompanyAccountsMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicCompanyAccounts" >
+    <id column="COMPANY_ACCOUNTS_ID" property="companyAccountsId" jdbcType="DECIMAL" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_ACCOUNTS_CODE" property="companyAccountsCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_ACCOUNTS_NAME" property="companyAccountsName" jdbcType="VARCHAR" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_ACCOUNTS_REMARK" property="companyAccountsRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COMPANY_ACCOUNTS_ID, COMPANY_CODE, COMPANY_ACCOUNTS_CODE, COMPANY_ACCOUNTS_NAME, 
+    MEMBER_CODE, COMPANY_ACCOUNTS_REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from BASIC_COMPANY_ACCOUNTS
+    where COMPANY_ACCOUNTS_ID = #{companyAccountsId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from BASIC_COMPANY_ACCOUNTS
+    where COMPANY_ACCOUNTS_ID = #{companyAccountsId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicCompanyAccounts" >
+    insert into BASIC_COMPANY_ACCOUNTS (COMPANY_ACCOUNTS_ID, COMPANY_CODE, COMPANY_ACCOUNTS_CODE, 
+      COMPANY_ACCOUNTS_NAME, MEMBER_CODE, COMPANY_ACCOUNTS_REMARK
+      )
+    values (#{companyAccountsId,jdbcType=DECIMAL}, #{companyCode,jdbcType=VARCHAR}, #{companyAccountsCode,jdbcType=VARCHAR}, 
+      #{companyAccountsName,jdbcType=VARCHAR}, #{memberCode,jdbcType=VARCHAR}, #{companyAccountsRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicCompanyAccounts" >
+    insert into BASIC_COMPANY_ACCOUNTS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyAccountsId != null" >
+        COMPANY_ACCOUNTS_ID,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="companyAccountsCode != null" >
+        COMPANY_ACCOUNTS_CODE,
+      </if>
+      <if test="companyAccountsName != null" >
+        COMPANY_ACCOUNTS_NAME,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="companyAccountsRemark != null" >
+        COMPANY_ACCOUNTS_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyAccountsId != null" >
+        #{companyAccountsId,jdbcType=DECIMAL},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsCode != null" >
+        #{companyAccountsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsName != null" >
+        #{companyAccountsName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsRemark != null" >
+        #{companyAccountsRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicCompanyAccounts" >
+    update BASIC_COMPANY_ACCOUNTS
+    <set >
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsCode != null" >
+        COMPANY_ACCOUNTS_CODE = #{companyAccountsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsName != null" >
+        COMPANY_ACCOUNTS_NAME = #{companyAccountsName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsRemark != null" >
+        COMPANY_ACCOUNTS_REMARK = #{companyAccountsRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COMPANY_ACCOUNTS_ID = #{companyAccountsId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicCompanyAccounts" >
+    update BASIC_COMPANY_ACCOUNTS
+    set COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      COMPANY_ACCOUNTS_CODE = #{companyAccountsCode,jdbcType=VARCHAR},
+      COMPANY_ACCOUNTS_NAME = #{companyAccountsName,jdbcType=VARCHAR},
+      MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      COMPANY_ACCOUNTS_REMARK = #{companyAccountsRemark,jdbcType=VARCHAR}
+    where COMPANY_ACCOUNTS_ID = #{companyAccountsId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  
+  <!-- 根据compangcode查询公司账号 -->
+  <select id="queryCompanyAccounts" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from BASIC_COMPANY_ACCOUNTS
+    where company_Code = #{companyCode,jdbcType=DECIMAL}
+  </select>
+  
+  
+  <!-- 新增公司账号 -->
+    <insert id="insertCompanyAccount" parameterType="com.xyscm.sys.basic.model.BasicCompanyAccounts" >
+    insert into BASIC_COMPANY_ACCOUNTS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        COMPANY_ACCOUNTS_ID,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="companyAccountsCode != null" >
+        COMPANY_ACCOUNTS_CODE,
+      </if>
+      <if test="companyAccountsName != null" >
+        COMPANY_ACCOUNTS_NAME,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="companyAccountsRemark != null" >
+        COMPANY_ACCOUNTS_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+     	BASIC_COMPANY_ACCOUNTS_SEQ.NEXTVAL,
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsCode != null" >
+        #{companyAccountsCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsName != null" >
+        #{companyAccountsName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAccountsRemark != null" >
+        #{companyAccountsRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 删除公司账号 -->
+  <delete id="deltCompanyAccountByCode" parameterType="java.lang.String" >
+    delete from BASIC_COMPANY_ACCOUNTS
+    where company_Code = #{companyCode,jdbcType=DECIMAL}
+  </delete>
+  
+  
+   <!-- 更新 -->
+  <update id="updateAccountByCompanyCode" parameterType="java.lang.String" >
+    update  BASIC_COMPANY_ACCOUNTS 
+    set company_Code = #{newCompanyCode,jdbcType=VARCHAR}
+    where  company_Code = #{oldCompanyCode,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

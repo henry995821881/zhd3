@@ -1,0 +1,20 @@
+package com.xyscm.sys.basic.dao;
+
+import com.xyscm.sys.basic.model.systemIndustry;
+import java.math.BigDecimal;
+
+import org.springframework.stereotype.Repository;
+@Repository
+public interface systemIndustryMapper {
+    int deleteByPrimaryKey(BigDecimal columnId);
+
+    int insert(systemIndustry record);
+
+    int insertSelective(systemIndustry record);
+
+    systemIndustry selectByPrimaryKey(BigDecimal columnId);
+
+    int updateByPrimaryKeySelective(systemIndustry record);
+
+    int updateByPrimaryKey(systemIndustry record);
+}

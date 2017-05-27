@@ -1,0 +1,88 @@
+/**
+ * 
+ */
+package com.xyscm.sys.basic.common.constant;
+
+/**
+ * 基础数据管理系统错误代码
+ * 
+ * @author xielf
+ *
+ */
+public enum ErrorCode {
+	
+	/** 国际化消息key
+	 * 
+	 * 变量命名规范：
+	 * 统一以 E_开头
+	 */
+
+	/** 业务模块错误码：
+	 * 变量命名规范：以E_[系统名]_[模块名]_[错误]
+	 */
+	
+	/** 组织机构部门管理：E_SYS_ORG_开头,编码从 100001~100199*/
+	E_SYSB_ORG_ADD("100001","basic.org.add.error"), // 机构添加失败
+	E_SYSB_ORG_UPDATE("100002","basic.org.update.error"), // 机构修改失败
+	E_SYSB_ORG_DELETE("100003","basic.org.delete.error"), // 机构删除失败
+	
+	E_SYSB_DEPT_ADD("100051","basic.dept.add.error"), // 部门添加失败
+	E_SYSB_DEPT_UPDATE("100052","basic.dept.update.error"), // 部门修改失败
+	E_SYSB_DEPT_DELETE("100053","basic.dept.delete.error"), // 部门删除失败
+	
+	E_SYSB_EMPLOYEE_ADD("100101","basic.employee.add.error"), // 员工添加失败
+	E_SYSB_EMPLOYEE_UPDATE("100102","basic.employee.update.error"), // 员工修改失败
+	E_SYSB_EMPLOYEE_DELETE("100103","basic.employee.delete.error"), // 员工删除失败
+	
+	
+	/** 地区管理：E_SYS_AREA_开头,编码从 100200~100399*/
+	E_SYSB_AREA_ADD("100200","basic.area.add.error"),
+	
+	
+	/** 往来单位管理：E_SYS_PARTS_开头,编码从 100400~100599*/
+	E_SYSB_PARTS_ADD("100400","basic.parts.add.error"),
+	
+	
+	/** 仓储物资管理：E_SYS_WH_开头,编码从 101000~101999*/
+	E_SYSB_WH_ADD("101000","basic.wh.add.error"),
+	E_SYSB_WH_SELECT("101001","basic.wh.select.error"),
+	E_SYSB_WH_DELETE("101002","basic.wh.delete.error"),
+	E_SYSB_WH_UPDATE("101003","basic.wh.update.error"),
+	
+	
+	
+	/** 基础common错误码：C开头*/
+	E_SERVER_ERROR("C000001","common.server.error"),
+	E_DB_ERROR("C000002","common.db.error");
+	
+	private String errCode;
+	private String text;
+	
+	
+	ErrorCode(String errCode, String text) {
+		this.errCode = errCode;
+		this.text = text;
+	}
+
+	public String getErrCode() {
+		return this.errCode;
+	}
+
+	public String getText() {
+		return this.text;
+	}
+
+	public static ErrorCode get(int errCode) {
+		ErrorCode[] elements = ErrorCode.values();
+
+		for (int i = 0; i < elements.length; i++) {
+			if (elements[i].getErrCode().equals(errCode)) {
+				return elements[i];
+			}
+		}
+		return null;
+	}
+	
+	
+
+}

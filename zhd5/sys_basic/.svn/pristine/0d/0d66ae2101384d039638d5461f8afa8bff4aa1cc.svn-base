@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+		<script id="DeptManage" type="text/html">
+			<div class="main_content_left">
+				<h4 class="title">部门组织</h4>
+				<ul class="crud_menu">
+					<li class="fl_l add_group_icon"><i class="icon iconfont icon-tianjia"></i>增加</li>
+					<li class="fl_l modify_group_icon"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+					<li class="fl_l delete_group_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+				</ul>
+				<ul class="menu_content">
+					<li class="menu_content_group">
+						<ul class="nav_list_toggle menu_content_group_node">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+								<span>集团部门</span>
+							</li>
+						</ul>
+						<ul class="pl_10 hidden">
+							<li class="nav_list_toggle menu_content_group_node"><i class="icon iconfont icon-wenjianjia-shouqi"></i>
+								<span>江苏智恒达</span>
+							</li>
+						</ul>
+					</li>
+					<li class="menu_content_group">
+						<ul class="nav_list_toggle menu_content_group_node">
+							<li>
+								<i class="icon iconfont icon-wenjianjia-shouqi"></i>
+								<span>集团部门</span>
+							</li>
+						</ul>
+						<ul class="pl_10 hidden">
+							<li class="nav_list_toggle menu_content_group_node"><i class="icon iconfont icon-wenjianjia-shouqi"></i>
+								<span>江苏智恒达</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="main_content_right">
+				<div class="crud_menu">
+					<ul class="">
+						<li class="fl_l add_table_icon"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li class="fl_l modify_table_icon"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+						<li class="fl_l delete_table_icon"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+					</ul>
+				</div>
+				<div class="main_content_right_table">
+					<table id="" class="table" cellspacing="1">
+						<tr class="table_title">
+							<td>部门名称</td>
+							<td>部门代码</td>
+							<td>上级组织</td>
+							<td>负责人</td>
+						</tr>
+						<tr class="table_detail">
+							<td>内容A</td>
+							<td>内容B</td>
+							<td>内容C</td>
+							<td>内容D</td>
+						</tr>
+						<tr class="table_detail">
+							<td>内容A</td>
+							<td>内容B</td>
+							<td>内容C</td>
+							<td>内容D</td>
+						</tr>
+					</table>
+				</div>
+				
+				<div id="page" class="main_content_right_page">
+					<div class="pagination">
+						<a href="#" class="first" data-action="first">&laquo;</a>
+						<a href="#" class="previous" data-action="previous">&lsaquo;</a>
+						<input type="text" readonly="readonly" data-max-page="<%= num %>" />
+						<a href="#" class="next" data-action="next">&rsaquo;</a>
+						<a href="#" class="last" data-action="last">&raquo;</a>
+					</div>
+				</div>
+				<div class="add_table" id="add_table">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>部门设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li class="fl_l">
+								<span>部门名称：</span>
+								<input type="text" name="Department" id="Department" value="" class="table_detail_empty" />
+							</li>
+							<li class="fl_l">
+								<span>上级组织：</span>
+								<select name="Organization" id="Organization" class="table_detail_empty">
+									<option value="内容a">内容a</option>
+									<option value="内容b">内容b</option>
+									<option value="内容c">内容c</option>
+									<option value="内容d">内容d</option>
+									<option value="内容D">内容D</option>
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>负责人：</span>
+								<input type="text" name="Principal" id="Principal" value="" class="table_detail_empty" />
+							</li>
+							<li class="cl remark">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks table_detail_empty"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+				<div class="add_table" id="add_jt">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_group_close"></i>
+						<span>公司组织</span>
+					</h4>
+					<ul class="add_table_content">
+						<form action="" method="post">
+							<li>
+								<span>组织名称：</span>
+								<input type="text" name="GroupName" id="GroupName" value="" />
+							</li>
+							<li class="remark">
+								<span>备注：</span>
+								<textarea name="Remark" id="Remark" class="remarks"></textarea>
+							</li>
+							<li class="text_r">
+								<input type="submit" class="add_table_submit" value="保存" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+				<!--</div>-->
+
+			</div>
+		</script>
+		<script src="../../js/orgManage/DeptManage.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			var DeptManageData = {
+				isAdmin: false
+			};
+			var DeptManagehtml = template('DeptManage', DeptManageData);
+			document.getElementById('content').innerHTML = DeptManagehtml;
+		</script>
+	</body>
+
+</html>

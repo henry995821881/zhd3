@@ -1,0 +1,55 @@
+/*var Verification_Disabled = function() {
+	if($('#Abbreviation').val() === '' || $('#Institution').val() === '' || $('#Organization') === null) {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}*/
+var TableDetail = function(table_details) {
+	$('#Institution').val(table_details.eq(0).text());
+	$('#Abbreviation').val(table_details.eq(2).text());
+	$('#Organization').val(table_details.eq(3).text());
+	$('#Legal').val(table_details.eq(4).text());
+	$('#Tel').val(table_details.eq(5).text());
+	$('#Fax').val(table_details.eq(6).text());
+	$('#Account').val(table_details.eq(7).text());
+	$('#Bank').val(table_details.eq(8).text());
+	$('#TaxNum').val(table_details.eq(9).text());
+	$('#Add').val(table_details.eq(10).text());
+	$('#Remark').val(table_details.eq(11).text());
+}
+/*$('#Institution').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Organization').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Abbreviation').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});*/
+
+/*var menu_content = '<% for (var i = 0; i < list.length; i ++) { %>' +
+	'<li class="menu_content_group"><ul class="nav_list_toggle menu_content_group_node"><li><i class="icon iconfont icon-wenjianjia-shouqi"></i><span><%= list[i] %></span></li></ul></li>' +
+	'<% } %>';
+var Menu_content = template.compile(menu_content);
+var Menu_content = Menu_content({
+	list: ['集团', '集团1']
+});
+document.getElementById('menu_content').innerHTML = Menu_content;*/
+/*
+var main_content_right_table_data = {
+	list: ['机构名称', '机构代码', '机构简称', '上级组织', '法人代表', '电话', '传真', '账号', '开会银行', '税号', '地址', '备注'],
+	contents: [{
+			"item": ['内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A']
+		},
+		{
+			"item": ['内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A', '内容A']
+		}
+	]
+}*/

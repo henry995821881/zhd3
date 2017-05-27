@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicArea" >
+    <id column="AREA_ID" property="areaId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR" />
+    <result column="AREA_MNEMCODE" property="areaMnemcode" jdbcType="VARCHAR" />
+    <result column="AREA_PARENT" property="areaParent" jdbcType="VARCHAR" />
+    <result column="AREA_REMARK" property="areaRemark" jdbcType="VARCHAR" />
+    <result column="AREA_NODECODE" property="areaNodecode" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    AREA_ID, MEMBER_CODE, AREA_CODE, AREA_NAME, AREA_MNEMCODE, AREA_PARENT, AREA_REMARK, 
+    AREA_NODECODE, BASIC_SHARE
+  </sql>
+  <!-- 地址详情 -->
+  <select id="getAreaDetail" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  BASIC_AREA
+    where AREA_ID = #{areaId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_AREA
+    where AREA_ID = #{areaId,jdbcType=DECIMAL}
+  </delete>
+ 
+  <!-- 新增 -->
+  <insert id="insertArea" parameterType="com.xyscm.sys.basic.model.BasicArea" >
+    insert into  BASIC_AREA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        AREA_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="true" >
+        AREA_CODE,
+      </if>
+      <if test="areaName != null" >
+        AREA_NAME,
+      </if>
+      <if test="areaMnemcode != null" >
+        AREA_MNEMCODE,
+      </if>
+      <if test="areaParent != null" >
+        AREA_PARENT,
+      </if>
+      <if test="areaRemark != null" >
+        AREA_REMARK,
+      </if>
+      <if test="areaNodecode != null" >
+        AREA_NODECODE,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        BASIC_AREA_SEQ.NEXTVAL,
+      </if>
+      <if test="memberCode != null">
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="true" >
+      	(select to_char(Max(area_code)+1) from BASIC_AREA),
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaMnemcode != null" >
+        #{areaMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaParent != null" >
+        #{areaParent,jdbcType=VARCHAR},
+      </if>
+      <if test="areaRemark != null" >
+        #{areaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNodecode != null" >
+        #{areaNodecode,jdbcType=VARCHAR} || (select to_char(Max(area_code)+1) from BASIC_AREA),
+      </if>
+      <if test="areaNodecode == null" >
+       (select to_char(Max(area_code)+1) from BASIC_AREA),
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 编辑地区 -->
+  <update id="updateArea" parameterType="com.xyscm.sys.basic.model.BasicArea" >
+    update  BASIC_AREA
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        AREA_NAME = #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaMnemcode != null" >
+        AREA_MNEMCODE = #{areaMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaParent != null" >
+        AREA_PARENT = #{areaParent,jdbcType=VARCHAR},
+      </if>
+      <if test="areaRemark != null" >
+        AREA_REMARK = #{areaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="areaNodecode != null" >
+        AREA_NODECODE = #{areaNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where AREA_ID = #{areaId,jdbcType=DECIMAL}
+  </update>
+   <!-- 编辑地区 -->
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicArea" >
+    update  BASIC_AREA
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      AREA_NAME = #{areaName,jdbcType=VARCHAR},
+      AREA_MNEMCODE = #{areaMnemcode,jdbcType=VARCHAR},
+      AREA_PARENT = #{areaParent,jdbcType=VARCHAR},
+      AREA_REMARK = #{areaRemark,jdbcType=VARCHAR},
+      AREA_NODECODE = #{areaNodecode,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL}
+    where AREA_ID = #{areaId,jdbcType=DECIMAL}
+  </update>
+  
+  <!-- 所有地区 -->
+   <select id="queryAllArea" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * 
+	from Basic_Area a where a.member_Code=#{memberCode,jdbcType=VARCHAR} order by a.area_code asc
+  </select>
+  
+  <!-- 一级地区    -->
+  <select id="queryBasicArea" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * 
+	from Basic_Area a where a.member_Code=#{memberCode,jdbcType=VARCHAR} and a.area_Parent=-1 order by a.area_code asc
+  </select>
+  
+  <!-- 二级地区    -->
+  <select id="query2BasicArea" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * 
+	from Basic_Area a where a.member_Code=#{memberCode,jdbcType=VARCHAR}
+	<if test="areaParent != null" >
+	 and a.area_parent =  #{areaParent,jdbcType=VARCHAR}
+    </if>
+	order by a.area_code asc
+  </select>
+  
+  <!-- 三级地区    -->
+  <select id="query3BasicArea" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * 
+	from Basic_Area a where a.member_Code=#{memberCode,jdbcType=VARCHAR}
+	<if test="areaNodecode != null" >
+	 and a.area_nodecode like  ''||#{areaNodecode,jdbcType=VARCHAR}||'%' 
+    </if>
+	order by a.area_parent asc
+  </select>
+  
+  <!--  删除地区  -->
+  <delete id="deleteBasicArea" parameterType="java.lang.String" >
+    delete from Basic_Area a where a.area_Code=#{areaCode,jdbcType=VARCHAR}
+  </delete>
+  
+  <!--  增加地区  -->
+  <insert id="insertArea2" parameterType="com.xyscm.sys.basic.model.BasicArea" >
+    insert into  BASIC_AREA (AREA_ID, MEMBER_CODE, AREA_CODE, 
+      AREA_NAME, AREA_MNEMCODE, AREA_PARENT, 
+      AREA_REMARK, AREA_NODECODE, BASIC_SHARE
+      )
+    values (BASIC_AREA_SEQ.NEXTVAL, #{memberCode,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, 
+      #{areaName,jdbcType=VARCHAR}, #{areaMnemcode,jdbcType=VARCHAR}, #{areaParent,jdbcType=VARCHAR}, 
+      #{areaRemark,jdbcType=VARCHAR}, #{areaNodecode,jdbcType=VARCHAR}, #{basicShare,jdbcType=DECIMAL}
+      )
+  </insert>
+  
+  <!-- 查询seq -->
+  <select  id="getSeq" resultType="java.lang.Long">
+	SELECT BASIC_AREA_SEQ.NEXTVAL FROM DUAL
+  </select >
+  
+  <!-- 查询下个area_code -->
+  <select  id="getNextAreaCode" resultType="java.lang.Long">
+	  select to_char(Max(area_code)+1) as areaCode from BASIC_AREA
+  </select >
+</mapper>

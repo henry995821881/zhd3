@@ -1,0 +1,48 @@
+
+
+//地区列表
+$.post("area/queryAllArea",
+  {
+    memeber_code:'0000'
+  },
+  function(d,status){
+	  	var content= eval("("+d+")");
+		var areaTree = template('areaTree', content);
+		$("#areaTreeLeft").html(areaTree);
+		//地区列表点击事件
+		$(".nav_list_toggle").on('click', function(item) {
+			var areaNodecode = $(this).attr("id");
+			
+			getdata(areaNodecode);	
+		});
+		aTable();
+  });
+
+//获取列表数据
+function getdata(areaNodecode){
+		$.post("area/query2BasicArea", 
+			{
+			areaNodecode:areaNodecode
+			}, 
+			function(d) {
+				var content= eval("("+d+")");
+				var content_area = template('AreaSetting', content);
+				$("#content_area").html(content_area);
+			});
+}
+
+
+var Verification_Disabled = function() {
+	if($('#AreaName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+
+var TableDetail = function(table_details) {
+	$('#AreaName').val(table_details.eq(0).text());
+	$('#AssistantCode').val(table_details.eq(2).text());
+	$('#Remark').val(table_details.eq(3).text());
+}
+

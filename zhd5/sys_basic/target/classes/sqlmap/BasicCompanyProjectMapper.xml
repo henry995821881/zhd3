@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicCompanyProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicCompanyProject" >
+    <id column="COMPANY_PROJECT_ID" property="companyProjectId" jdbcType="DECIMAL" />
+    <result column="COMPANY_PROJECT_CODE" property="companyProjectCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_PROJECT_NAME" property="companyProjectName" jdbcType="VARCHAR" />
+    <result column="COMPANY_PROJECT_TYPE" property="companyProjectType" jdbcType="DECIMAL" />
+    <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="COMPANY_PROJECT_DATE" property="companyProjectDate" jdbcType="TIMESTAMP" />
+    <result column="COMPANY_PROJECT_REMARK" property="companyProjectRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COMPANY_PROJECT_ID, COMPANY_PROJECT_CODE, COMPANY_PROJECT_NAME, COMPANY_PROJECT_TYPE, 
+    COMPANY_CODE, MEMBER_CODE, COMPANY_PROJECT_DATE, COMPANY_PROJECT_REMARK
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  BASIC_COMPANY_PROJECT
+    where COMPANY_PROJECT_ID = #{companyProjectId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_COMPANY_PROJECT
+    where COMPANY_PROJECT_ID = #{companyProjectId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicCompanyProject" >
+    insert into  BASIC_COMPANY_PROJECT (COMPANY_PROJECT_ID, COMPANY_PROJECT_CODE, 
+      COMPANY_PROJECT_NAME, COMPANY_PROJECT_TYPE, 
+      COMPANY_CODE, MEMBER_CODE, COMPANY_PROJECT_DATE, 
+      COMPANY_PROJECT_REMARK)
+    values (#{companyProjectId,jdbcType=DECIMAL}, #{companyProjectCode,jdbcType=VARCHAR}, 
+      #{companyProjectName,jdbcType=VARCHAR}, #{companyProjectType,jdbcType=DECIMAL}, 
+      #{companyCode,jdbcType=VARCHAR}, #{memberCode,jdbcType=VARCHAR}, #{companyProjectDate,jdbcType=TIMESTAMP}, 
+      #{companyProjectRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicCompanyProject" >
+    insert into  BASIC_COMPANY_PROJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyProjectId != null" >
+        COMPANY_PROJECT_ID,
+      </if>
+      <if test="companyProjectCode != null" >
+        COMPANY_PROJECT_CODE,
+      </if>
+      <if test="companyProjectName != null" >
+        COMPANY_PROJECT_NAME,
+      </if>
+      <if test="companyProjectType != null" >
+        COMPANY_PROJECT_TYPE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="companyProjectDate != null" >
+        COMPANY_PROJECT_DATE,
+      </if>
+      <if test="companyProjectRemark != null" >
+        COMPANY_PROJECT_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyProjectId != null" >
+        #{companyProjectId,jdbcType=DECIMAL},
+      </if>
+      <if test="companyProjectCode != null" >
+        #{companyProjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProjectName != null" >
+        #{companyProjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProjectType != null" >
+        #{companyProjectType,jdbcType=DECIMAL},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProjectDate != null" >
+        #{companyProjectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyProjectRemark != null" >
+        #{companyProjectRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicCompanyProject" >
+    update  BASIC_COMPANY_PROJECT
+    <set >
+      <if test="companyProjectCode != null" >
+        COMPANY_PROJECT_CODE = #{companyProjectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProjectName != null" >
+        COMPANY_PROJECT_NAME = #{companyProjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProjectType != null" >
+        COMPANY_PROJECT_TYPE = #{companyProjectType,jdbcType=DECIMAL},
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProjectDate != null" >
+        COMPANY_PROJECT_DATE = #{companyProjectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyProjectRemark != null" >
+        COMPANY_PROJECT_REMARK = #{companyProjectRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COMPANY_PROJECT_ID = #{companyProjectId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicCompanyProject" >
+    update  BASIC_COMPANY_PROJECT
+    set COMPANY_PROJECT_CODE = #{companyProjectCode,jdbcType=VARCHAR},
+      COMPANY_PROJECT_NAME = #{companyProjectName,jdbcType=VARCHAR},
+      COMPANY_PROJECT_TYPE = #{companyProjectType,jdbcType=DECIMAL},
+      COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      COMPANY_PROJECT_DATE = #{companyProjectDate,jdbcType=TIMESTAMP},
+      COMPANY_PROJECT_REMARK = #{companyProjectRemark,jdbcType=VARCHAR}
+    where COMPANY_PROJECT_ID = #{companyProjectId,jdbcType=DECIMAL}
+  </update>
+  
+  
+  <!--  根据compangcode查询公司项目 -->
+  <select id="queryCompanyProject" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from BASIC_COMPANY_PROJECT
+    where company_Code  = #{companyCode,jdbcType=DECIMAL}
+  </select>
+  
+  <!--  新增公司项目 -->
+  <insert id="insertCompanyProject" parameterType="com.xyscm.sys.basic.model.BasicCompanyProject" >
+    insert into  BASIC_COMPANY_PROJECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        COMPANY_PROJECT_ID,
+      </if>
+      <if test="true" >
+        COMPANY_PROJECT_CODE,
+      </if>
+      <if test="companyProjectName != null" >
+        COMPANY_PROJECT_NAME,
+      </if>
+      <if test="companyProjectType != null" >
+        COMPANY_PROJECT_TYPE,
+      </if>
+      <if test="companyCode != null" >
+        COMPANY_CODE,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="companyProjectDate != null" >
+        COMPANY_PROJECT_DATE,
+      </if>
+      <if test="companyProjectRemark != null" >
+        COMPANY_PROJECT_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        BASIC_COMPANY_PROJECT_SEQ.NEXTVAL,
+      </if>
+      <if test="true" >
+      	(select to_char(Max(company_project_code)+1) from BASIC_COMPANY_PROJECT),
+      </if>
+      <if test="companyProjectName != null" >
+        #{companyProjectName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProjectType != null" >
+        #{companyProjectType,jdbcType=DECIMAL},
+      </if>
+      <if test="companyCode != null" >
+        #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="companyProjectDate != null" >
+        #{companyProjectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyProjectRemark != null" >
+        #{companyProjectRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+   <!-- 删除公司项目-->
+  <delete id="deltCompanyProjectByCode" parameterType="java.lang.String" >
+    delete from  BASIC_COMPANY_PROJECT
+    where company_Code = #{companyCode,jdbcType=DECIMAL}
+  </delete>
+  
+    
+  <!-- 更新 -->
+  <update id="updateProjectByCompanyCode" parameterType="java.lang.String"  >
+    update  BASIC_COMPANY_PROJECT 
+    set company_Code = #{newCompanyCode,jdbcType=VARCHAR}
+    where  company_Code = #{oldCompanyCode,jdbcType=VARCHAR}
+  </update>
+  
+</mapper>

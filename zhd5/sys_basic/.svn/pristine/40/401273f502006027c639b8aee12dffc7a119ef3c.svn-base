@@ -1,0 +1,139 @@
+
+pageHtml();//初始化分页元素
+
+
+var page_size = 23;
+var current_page=1;
+
+
+
+
+function page_init(max_page_){
+		
+//分页
+	$('.pagination').jqPagination({
+		link_string : '/?page={page_number}',
+		//current_page: current_page, //设置当前页 默认为1
+		max_page : max_page_, //设置最大页 默认为1
+		page_string : '当前第{current_page}页,共{max_page}页',
+		paged : function(current_page_) {
+			//回发事件。。。
+			current_page = current_page_;
+			init_partsname(current_node);
+		}
+	});
+	
+}
+
+aTable();
+
+
+function init_tree(){
+	
+	$.post("pntree/query",
+			  {
+			    memeber_code:'0000',
+			   
+			  },
+			 
+			  function(d,status){
+				var content=eval("("+d+")");
+			
+					var html = template('partnameclass_tpl_1', content);
+					
+					$("#class_ul_1").html(html);
+					
+					$("li.event_tree").on('click', function(){
+						
+						var pntreeNodecode = $(this).attr("pntreeNodecode");
+						current_node =pntreeNodecode;
+						//init_partsname(pntreeNodecode);
+						
+					});
+					
+					aGroup();
+				
+						
+					});
+	
+}
+
+
+init_tree();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Verification_Disabled = function() {
+	if($('#Name').val() === ''||$('#Material').val() === ''||$('#Specification').val() === ''||$('#Origin').val() === null) {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	$('#Name').val(table_details.eq(2).text());
+	$('#Material').val(table_details.eq(3).text());
+	$('#Specification').val(table_details.eq(4).text());
+	$('#Origin').val(table_details.eq(5).text());
+	$('#TaxRate').val(table_details.eq(6).text());
+	$('#QuantityUnits').val(table_details.eq(7).text());
+	$('#WeightUnit').val(table_details.eq(8).text());
+	$('#AssistantCode').val(table_details.eq(9).text());
+	$('#PieceMode').val(table_details.eq(10).text());
+	$('#WeightMode').val(table_details.eq(11).text());
+	$('#MeasurementMode').val(table_details.eq(12).text());
+	$('#PricingMethod').val(table_details.eq(13).text());
+	$('#Remarks').val(table_details.eq(14).text());
+}
+
+$('#Name').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Material').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Specification').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Origin').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});

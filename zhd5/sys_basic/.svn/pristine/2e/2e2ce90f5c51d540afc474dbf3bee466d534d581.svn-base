@@ -1,0 +1,385 @@
+
+mainContentLeft();
+
+function init_data(){
+	
+	$.post("company/queryCompany",
+	  {
+	    memeber_code:'0000'
+	  },
+	  function(d,status){
+		  	var content= eval("("+d+")");
+			var SetCompany = template('SetCompany', content);
+			$("#content_SetCompany").html(SetCompany);
+			
+			//编辑和删除时用到的companyId
+			$(".table_detail").on('click', function(item) {
+				var companyId = $(this).attr("companyId");
+				$("#companyId").val(companyId);
+			});
+			aTable();
+	  });
+	
+	areaLoad();
+}
+init_data();
+
+/*$(".areaPart").on("click",function(){
+		
+	$.post("area/queryAllArea",
+	  {
+	    memeber_code:'0000'
+	  },
+	  function(d,status){
+		  	var content= eval("("+d+")");
+			var areaTree = template('areaTree', content);
+			$("#areaTreeLeft").html(areaTree);
+			aGroup();
+			
+	  });
+})*/
+
+//加载上级单位
+function companyLoad(){
+	var url = "company/queryUpCompany";
+	
+	$.post(url, {}, function(d,status){
+		var content= eval("("+d+")");	
+		var select = $("#companyParent");  
+		$.each(content.data,function(index,item){
+			var option = $("<option value="+item.companyCode+"></option>").text(item.companyName);  
+			select.append(option);  
+		})
+			
+	  });
+}
+
+//加载分管部门
+function deptLoad(){
+	var url = "company/queryDept";
+	
+	$.post(url, {}, function(d,status){
+		var content= eval("("+d+")");	
+		var select = $("#deptCode");  
+		$.each(content.data,function(index,item){
+			var option = $("<option value="+item.deptCode+"></option>").text(item.deptName);  
+			select.append(option);  
+		})
+			
+	  });
+}
+
+//加载单位类型
+function companyClassLoad(){
+	var url = "company/queryByClass";
+	var datas = {ddtypeClass:"companyClass"};
+	$.post(url, datas, function(d,status){
+		var content= eval("("+d+")");	
+		var select = $("#companyClass");  
+		$.each(content.data,function(index,item){
+			var option = $("<option value="+item.ddId+"></option>").text(item.ddName);  
+			select.append(option);  
+		})
+			
+	  });
+}
+
+
+//客户来源
+function companySourceLoad(){
+	var url = "company/queryByClass";
+	var datas = {ddtypeClass:"companySource"};
+	$.post(url, datas, function(d,status){
+		var content= eval("("+d+")");	
+		var select = $("#companySource");  
+		$.each(content.data,function(index,item){
+			var option = $("<option value="+item.ddId+"></option>").text(item.ddName);  
+			select.append(option);  
+		})
+			
+	  });
+}
+
+//所属行业
+function companyIndustryLoad(){
+	var url = "company/queryByClass";
+	var datas = {ddtypeClass:"companyIndustry"};
+	$.post(url, datas, function(d,status){
+		var content= eval("("+d+")");	
+		var select = $("#companyIndustry");  
+		$.each(content.data,function(index,item){
+			var option = $("<option value="+item.ddId+"></option>").text(item.ddName);  
+			select.append(option);  
+		})
+			
+	  });
+}
+
+//查询
+function query(){
+	var $form = $("#query_company");
+	
+	var data = $form.serialize();
+	var url = "company/queryCompany";
+	$.post(url, data, function(d,status){
+		var content= eval("("+d+")");
+		var SetCompany = template('SetCompany', content);
+		$("#content_SetCompany").html(SetCompany);
+		
+		//删除时用到的companyId
+		$(".table_detail").on('click', function(item) {
+			var companyId = $(this).attr("companyId");
+			$("#companyId").val(companyId);
+		});
+		aTable();
+	})
+};
+
+//操作-------表格
+var opt_status = "";
+$(".opt_").on('click',function(){
+	
+	//先删除所有select上一次加载的option
+	//$("#companyParent").find("option").remove(); 
+	$("#deptCode").find("option").remove(); 
+	$("#companyClass").find("option").remove(); 
+	$("#companySource").find("option").remove(); 
+	$("#companyIndustry").find("option").remove(); 
+	$("#search").find("option").remove(); 
+	opt_status = $(this).attr("opt");
+	if(opt_status == 'add' || opt_status == 'update'){
+		companyClassLoad();
+		companySourceLoad();
+		companyIndustryLoad();
+		//areaLoad();
+		//companyLoad();
+		deptLoad();
+	}
+	if(opt_status == 'del'){
+		init_data();
+		del_company();
+	}
+	
+})
+
+//保存
+function save(){
+	if(opt_status == 'add'){
+		add_company();
+	}
+	if(opt_status == 'update'){
+		update_company();
+	}
+	
+}
+
+//新增
+function add_company(){
+	var $form = $('#add_company');
+	
+	var data = $form.serialize();
+	var url ="company/addCompany";
+	$.post(url, data, function(d) {
+		init_data();
+		close_window();
+	});
+}
+
+//编辑
+function update_company(){
+	var $form = $('#add_company');
+	
+	var data = $form.serialize();
+	var url ="company/updateCompany";
+	$.post(url, data, function(d) {
+		init_data();
+		close_window();
+	});
+}
+
+//删除
+function del_company(){
+	var companyId = $("#companyId").val();
+	var data = {companyId:companyId};
+	var url ="company/deleteCompany";
+	$.post(url, data, function(d) {
+		init_data();
+		close_window();
+	});
+}
+var areaNameArr = [];//地区名字
+var areaCodeArr = [];//地区代号
+
+//地区下拉框加载
+function areaLoad(){
+//	$("#select_areaCode").css({"display":""});  
+	$.post("area/queryAllArea",
+			  {
+			    memeber_code:'0000'
+			  },
+			  function(d,status){
+				  	var content= eval("("+d+")");
+					var areaTree = template('areaTree', content);
+					$("#areaTreeLeft").html(areaTree);
+					
+					//地区列表点击事件
+					$(".nav_list_toggle").off('click');
+					$(".nav_list_toggle").on('click', function(item) {
+						var areaNodecode = $(this).attr("id");
+						var type = $(this).attr("value");
+						var areaId = $(this).attr("areaId");	//地区id
+						var areaParent = $(this).attr("areaCode");
+						uploadByArea2table(areaParent);
+						getdata(areaNodecode,type,areaId,areaParent,item);
+					});
+				aGroup();
+			  });
+  
+}
+
+//获取列表数据
+function getdata(areaNodecode,type,areaId,areaParent,item){
+	
+		$.ajaxSetup({
+		  async: false
+		 });
+		
+		$.post("area/query2BasicArea",  
+			{
+			areaNodecode:areaNodecode,
+			type:type,
+			areaId:areaId,
+			areaParent:areaParent
+			}, 
+			function(d) {
+				
+				var content= eval("("+d+")");
+		
+				var nextTree = template('nextTree', content);
+				$("ul[next="+areaId+"]").html(nextTree);
+				$(".nextTree").on('click', function(item) {
+				$(".nav_list_toggle").off('click');		
+				aGroup();
+							
+				var areaParent = $(this).attr("areaCode");
+				var type = $(this).attr("value");
+				var areaId = $(this).attr("areaId");	//地区id
+					
+				$.post("area/query2BasicArea",  
+						{
+						areaParent:areaParent,
+						type:type,
+						areaId:areaId
+						}, 	function(d) {
+							
+							var content= eval("("+d+")");
+							var nextTree = template('nextTree', content);
+							$("ul[next="+areaId+"]").html(nextTree);
+
+							$(".nav_list_toggle").off('click');
+							$(".nav_list_toggle").on('click', function(item) {
+								var areaNodecode = $(this).attr("id");
+								var type = $(this).attr("value");
+								var areaId = $(this).attr("areaId");	//地区id
+								var areaParent = $(this).attr("areaCode");
+								uploadByArea2table(areaParent);
+								getdata(areaNodecode,type,areaId,areaParent,item);
+							});
+						
+							aGroup();
+						});
+				})
+			});
+		
+	}
+
+//点击地区时加载表数据
+function uploadByArea2table(areaCode){
+	
+	$.post("company/queryCompanyByAreaCode",  
+			{
+				areaCode:areaCode
+			}, 	function(d) {
+				var content= eval("("+d+")");
+				var SetCompany = template('SetCompany', content);
+				$("#content_SetCompany").html(SetCompany);
+				
+				aTable();
+			
+			});
+}
+
+/*
+//选择地区后隐藏select 并副职到input
+function selectArea(item){
+	$(item).prev("input[name='areaCode']").val($(item).find("option:selected").text());  
+//	$(item).prev("input[name='areaCode']").val($(item).find("option:selected").val());  
+	$("#select_areaCode").css({"display":"none"});  
+}
+
+//地区下拉框模糊查询
+function vague(item){
+	var select = $("#select_areaCode");  
+    select.html("");  
+    for(i=0;i<areaNameArr.length;i++){  
+        //若找到以txt的内容开头的，添option  
+        if(areaNameArr[i].substring(0,item.value.length).indexOf(item.value)==0){ 
+            var option = $("<option value="+areaCodeArr[i]+"></option>").text(areaNameArr[i]);  
+            select.append(option);  
+        }  
+    }  
+
+}*/
+
+var Verification_Disabled = function() {
+	if($('#AreaName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+
+var TableDetail = function(table_details) {
+	$('#companyCode_table').val(table_details.eq(0).text());		//代码
+	$('#companyName_table').val(table_details.eq(1).text());		//名称
+	$('#companyAbbreviate_table').val(table_details.eq(3).text());	//简称
+	$('#companyMnemcode').val(table_details.eq(18).text());			//助记码
+
+	$('#select_areaCode').val(table_details.eq(17).text());			//地区
+	$('#companyAddr').val(table_details.eq(16).text());				//联系地址
+	$('#companyLinkman').val(table_details.eq(19).text());			//联系人
+	$('#companyCorporation').val(table_details.eq(12).text());		//法人代表
+
+	$('#companyBank').val(table_details.eq(14).text());				//开户行
+	$('#companyInvoiceaddr').val(table_details.eq(21).text());		//开票地址
+	$('#companyBankaccounts').val(table_details.eq(13).text());		//账号
+	$('#companyTanu').val(table_details.eq(15).text());				//税号
+	
+	$('#companyPhone').val(table_details.eq(10).text());			//电话
+	$('#companyFax').val(table_details.eq(11).text());				//传真
+	$('#companyPostcode').val(table_details.eq(20).text());			//邮政编码
+	$('#employeeCode').val(table_details.eq(22).text());			//业务员
+	
+	$('#deptCode').val(table_details.eq(23).text());				//分管部门
+	$('#companyAssessType').val(table_details.eq(24).text());		//业务关系
+	$('#companyClass').val(table_details.eq(34).text());				//单位类型
+	$('#companyAssessCredit').val(table_details.eq(5).text());		//信誉额度
+	
+	$('#companyAssessGrade').val(table_details.eq(29).text());		//资信等级
+	$('#companyAssessState').val(table_details.eq(30).text());		//客户状态
+	$('#companyProperty').val(table_details.eq(31).text());			//单位性质
+	$('#companySource').val(table_details.eq(7).text());			//客户来源
+
+	$('#companyType').val(table_details.eq(6).text());				//客户类别
+//	$('#companyParent').val("0001");			//上级单位	
+	$('#companyIndustry').val(table_details.eq(9).text());			//所属行业
+	$('#companyRemark').val(table_details.eq(28).text());			//经营范围
+	
+	$('input[name="allowquery"]').eq(table_details.eq(32).text()).click();//是否允许对其他货主显示信息
+	$('input[name="companyState"]').val(table_details.eq(33).text()).click();			//状态
+}
+
+
+
+
+//@ sourceURL=product.js  

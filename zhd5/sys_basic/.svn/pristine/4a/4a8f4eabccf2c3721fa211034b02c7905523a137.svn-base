@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>登录页</title>
+</head>
+<body>
+
+登录页
+ <form name="f1" id="f1" method="post" action="checkLogin">
+	    	
+	<div >
+	   <label>用户名</label>
+	   <p ><input name="userId" type="text"  ></p>
+	   <label>密码</label>
+	   <p ><input name="password" type="password" ></p>
+	   <p><input name="captcha" type="text"  placeholder="验证码"> <img id="randomCode" src="../validateCodeServlet" border="0" onclick="reloadCode();"/>
+			   	  <span><a href="javascript:reloadCode();">看不清换一张</a></span></p>
+	   <p ><input name="btnlogin" type="submit" >登录</p>
+	</div>
+</form>
+
+
+</body>
+</html>
+
+<script>
+function reloadCode(){
+	var form=document.getElementById("f1");
+	form.captcha.focus();
+    form.captcha.value="";
+	var verify = document.getElementById('randomCode');
+    verify.setAttribute('src', '../validateCodeServlet?dt=' + Math.random());
+};
+</script>

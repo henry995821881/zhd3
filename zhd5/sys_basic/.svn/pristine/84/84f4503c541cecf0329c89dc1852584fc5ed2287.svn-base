@@ -1,0 +1,269 @@
+package com.xyscm.sys.basic.vo;
+
+import java.io.Serializable;
+
+public class EmployeeBeanVo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	
+	private String memberCode;
+	/**员工名称*/
+	private String employeeName;
+	/**员工代码*/
+	private String employeeCode;
+	/**员工备注*/
+	private String employeeRemark;
+	/**员工职位*/
+	private String employeeJob;
+	/**员工身份*/
+	private String employeeClass;
+	/**员工民族*/
+	private String employeeNation;
+	/**机构编码*/
+	private String orgNodecode;
+	/**机构代码*/
+	private String orgCode;
+	/**部门编码*/
+	private String deptNodecode;
+	/**部门代码*/
+	private String deptCode;
+	/** 邮箱 */
+	private String employeeEmail;
+	/** 手机 */
+	private String employeeMobile;
+	/** 电话 */
+	private String employeePhone;
+	/** 是否启用 */
+	private Long employeeState;
+	/** 工种 */
+	private String worktypeName;
+	/**助记码 */
+	private String employeeMnemcode;
+	
+	private String employeeSex;
+
+	private String employeeIdcard;
+
+	private String employeeNative;
+
+	private String employeeSpecialty;
+
+	private String employeeParty;
+
+	private String employeeTechnical;
+
+	private String employeeMarriage;
+
+	private String employeeDegree;
+
+	private String employeeAddr;
+
+	public String getMemberCode() {
+		return memberCode;
+	}
+
+	public void setMemberCode(String memberCode) {
+		this.memberCode = memberCode;
+	}
+
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
+
+	public String getEmployeeCode() {
+		return employeeCode;
+	}
+
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
+	}
+
+	public String getEmployeeRemark() {
+		return employeeRemark;
+	}
+
+	public void setEmployeeRemark(String employeeRemark) {
+		this.employeeRemark = employeeRemark;
+	}
+
+	public String getEmployeeJob() {
+		return employeeJob;
+	}
+
+	public void setEmployeeJob(String employeeJob) {
+		this.employeeJob = employeeJob;
+	}
+
+	public String getEmployeeClass() {
+		return employeeClass;
+	}
+
+	public void setEmployeeClass(String employeeClass) {
+		this.employeeClass = employeeClass;
+	}
+
+	public String getEmployeeNation() {
+		return employeeNation;
+	}
+
+	public void setEmployeeNation(String employeeNation) {
+		this.employeeNation = employeeNation;
+	}
+
+	public String getOrgNodecode() {
+		return orgNodecode;
+	}
+
+	public void setOrgNodecode(String orgNodecode) {
+		this.orgNodecode = orgNodecode;
+	}
+
+	public String getOrgCode() {
+		return orgCode;
+	}
+
+	public void setOrgCode(String orgCode) {
+		this.orgCode = orgCode;
+	}
+
+	public String getDeptNodecode() {
+		return deptNodecode;
+	}
+
+	public void setDeptNodecode(String deptNodecode) {
+		this.deptNodecode = deptNodecode;
+	}
+
+	public String getDeptCode() {
+		return deptCode;
+	}
+
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
+	}
+
+	public String getEmployeeEmail() {
+		return employeeEmail;
+	}
+
+	public void setEmployeeEmail(String employeeEmail) {
+		this.employeeEmail = employeeEmail;
+	}
+
+	public String getEmployeeMobile() {
+		return employeeMobile;
+	}
+
+	public void setEmployeeMobile(String employeeMobile) {
+		this.employeeMobile = employeeMobile;
+	}
+
+	public String getEmployeePhone() {
+		return employeePhone;
+	}
+
+	public void setEmployeePhone(String employeePhone) {
+		this.employeePhone = employeePhone;
+	}
+
+	public Long getEmployeeState() {
+		return employeeState;
+	}
+
+	public void setEmployeeState(Long employeeState) {
+		this.employeeState = employeeState;
+	}
+
+	public String getWorktypeName() {
+		return worktypeName;
+	}
+
+	public void setWorktypeName(String worktypeName) {
+		this.worktypeName = worktypeName;
+	}
+
+	public String getEmployeeMnemcode() {
+		return employeeMnemcode;
+	}
+
+	public void setEmployeeMnemcode(String employeeMnemcode) {
+		this.employeeMnemcode = employeeMnemcode;
+	}
+
+	public String getEmployeeSex() {
+		return employeeSex;
+	}
+
+	public void setEmployeeSex(String employeeSex) {
+		this.employeeSex = employeeSex;
+	}
+
+	public String getEmployeeIdcard() {
+		return employeeIdcard;
+	}
+
+	public void setEmployeeIdcard(String employeeIdcard) {
+		this.employeeIdcard = employeeIdcard;
+	}
+
+	public String getEmployeeNative() {
+		return employeeNative;
+	}
+
+	public void setEmployeeNative(String employeeNative) {
+		this.employeeNative = employeeNative;
+	}
+
+	public String getEmployeeSpecialty() {
+		return employeeSpecialty;
+	}
+
+	public void setEmployeeSpecialty(String employeeSpecialty) {
+		this.employeeSpecialty = employeeSpecialty;
+	}
+
+	public String getEmployeeParty() {
+		return employeeParty;
+	}
+
+	public void setEmployeeParty(String employeeParty) {
+		this.employeeParty = employeeParty;
+	}
+
+	public String getEmployeeTechnical() {
+		return employeeTechnical;
+	}
+
+	public void setEmployeeTechnical(String employeeTechnical) {
+		this.employeeTechnical = employeeTechnical;
+	}
+
+	public String getEmployeeMarriage() {
+		return employeeMarriage;
+	}
+
+	public void setEmployeeMarriage(String employeeMarriage) {
+		this.employeeMarriage = employeeMarriage;
+	}
+
+	public String getEmployeeDegree() {
+		return employeeDegree;
+	}
+
+	public void setEmployeeDegree(String employeeDegree) {
+		this.employeeDegree = employeeDegree;
+	}
+
+	public String getEmployeeAddr() {
+		return employeeAddr;
+	}
+
+	public void setEmployeeAddr(String employeeAddr) {
+		this.employeeAddr = employeeAddr;
+	}
+
+}

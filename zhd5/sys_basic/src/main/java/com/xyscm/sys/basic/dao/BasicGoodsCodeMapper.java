@@ -1,0 +1,33 @@
+package com.xyscm.sys.basic.dao;
+
+import com.xyscm.sys.basic.model.BasicGoodsCode;
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+@Repository
+public interface BasicGoodsCodeMapper {
+    int deleteByPrimaryKey(BigDecimal goodscodeId);
+
+    int insert(BasicGoodsCode record);
+
+    int insertSelective(BasicGoodsCode record);
+
+    BasicGoodsCode selectByPrimaryKey(BigDecimal goodscodeId);
+
+    int updateByPrimaryKeySelective(BasicGoodsCode record);
+
+    int updateByPrimaryKey(BasicGoodsCode record);
+
+	List<BasicGoodsCode> queryList(BasicGoodsCode record);
+
+	void updateGoodsCode(BasicGoodsCode record);
+
+	void deleteGoodsCode(BasicGoodsCode record);
+
+	List<BasicGoodsCode> queryGoodsSpec(BasicGoodsCode record);
+
+	List<BasicGoodsCode> queryGoodsMaterial(BasicGoodsCode record);
+
+	
+}

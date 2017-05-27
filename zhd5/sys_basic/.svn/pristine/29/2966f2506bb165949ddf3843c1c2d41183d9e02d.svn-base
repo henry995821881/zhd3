@@ -1,0 +1,23 @@
+# common error message
+common.server.error=common error message
+
+# DB error message
+common.db.error=DB error message
+
+
+
+# \u7ec4\u7ec7\u673a\u6784\u90e8\u95e8\u7ba1\u7406\u9519\u8bef\u4fe1\u606f
+basic.org.add.error=basic.org.add.error
+
+# \u5730\u533a\u7ba1\u7406
+basic.area.add.error=basic.area.add.error
+
+# \u5f80\u6765\u5355\u4f4d\u7ba1\u7406
+basic.parts.add.error=basic.parts.add.error
+
+# \u4ed3\u50a8\u7269\u8d44\u7ba1\u7406
+basic.wh.add.error=basic.wh.add.error
+
+
+
+

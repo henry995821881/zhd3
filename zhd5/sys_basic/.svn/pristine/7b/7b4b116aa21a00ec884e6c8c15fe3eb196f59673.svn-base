@@ -1,0 +1,121 @@
+package com.xyscm.sys.basic.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicWarePlaceMapper;
+import com.xyscm.sys.basic.model.BasicWarePlace;
+
+/**
+ * 
+ * 库位设置
+ * 
+ * @author Administrator
+ * 
+ */
+@Service
+public class BasicWarePlaceService {
+
+	@Autowired
+	BasicWarePlaceMapper basicWarePlaceMapper;
+
+	/**
+	 * 
+	 * 
+	 * 查询库位
+	 * 
+	 * @param record
+	 *            .warehouseCode record.memeberCode
+	 * @return
+	 */
+	public List<BasicWarePlace> queryList(BasicWarePlace record) {
+
+		List<BasicWarePlace> list = null;
+		try {
+			list = basicWarePlaceMapper.queryList(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "查询库位失败！");
+		}
+
+		return list;
+
+	}
+
+	/**
+	 * 更新
+	 * 
+	 * @param record
+	 * @return
+	 */
+	public int updateWarePlace(BasicWarePlace record) {
+
+		int i = 0;
+		try {
+			i = basicWarePlaceMapper.updateByPrimaryKeySelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "更新库位失败！");
+		}
+
+		return i;
+	}
+	
+	/**
+	 * 
+	 * @param record WAREPLACE_CODE MEMBER_CODE
+	 */
+	public void updateWarePlaceByCode(BasicWarePlace record){
+		
+		try {
+			basicWarePlaceMapper.updateWarePlaceByCode(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "更新库位失败！");
+		}
+	}
+
+	/**
+	 * 
+	 * @param record
+	 *            .WAREPLACE_CODE record.memeberCode
+	 * @return
+	 */
+	public void deleteWarePlace(BasicWarePlace record) {
+
+		try {
+			 basicWarePlaceMapper.deleteWarePlace(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "删除库位失败！");
+		}
+	}
+
+	/**
+	 * 新增
+	 * 
+	 * @param
+	 * @return
+	 * 
+	 */
+	public int saveWarePlace(BasicWarePlace record) {
+		int i = 0;
+		try {
+			i = basicWarePlaceMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001", "新增库位失败！");
+		}
+
+		return i;
+	}
+
+}

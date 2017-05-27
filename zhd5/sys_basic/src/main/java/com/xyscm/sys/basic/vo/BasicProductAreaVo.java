@@ -1,0 +1,100 @@
+package com.xyscm.sys.basic.vo;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.xyscm.sys.basic.common.validatedGroup.DeleteGroup;
+import com.xyscm.sys.basic.common.validatedGroup.SaveGroup;
+import com.xyscm.sys.basic.common.validatedGroup.UpdateGroup;
+
+public class BasicProductAreaVo implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+
+	@Override
+	public String toString() {
+		return "BasicProductArea [productareaId=" + productareaId
+				+ ", memberCode=" + memberCode + ", productareaCode="
+				+ productareaCode + ", productareaName=" + productareaName
+				+ ", productareaMnemcode=" + productareaMnemcode
+				+ ", productareaRemark=" + productareaRemark + ", basicShare="
+				+ basicShare + "]";
+	}
+
+	private BigDecimal productareaId;
+
+    private String memberCode;
+
+    @NotEmpty(message="产地代码不能空",groups={UpdateGroup.class,DeleteGroup.class})
+    private String productareaCode;
+
+    @NotEmpty(message="产地名不能空！",groups={SaveGroup.class})
+    private String productareaName;
+
+    private String productareaMnemcode;
+
+    private String productareaRemark;
+
+    private BigDecimal basicShare;
+
+    public BigDecimal getProductareaId() {
+        return productareaId;
+    }
+
+    public void setProductareaId(BigDecimal productareaId) {
+        this.productareaId = productareaId;
+    }
+
+    public String getMemberCode() {
+        return memberCode;
+    }
+
+    public void setMemberCode(String memberCode) {
+        this.memberCode = memberCode == null ? null : memberCode.trim();
+    }
+
+    public String getProductareaCode() {
+        return productareaCode;
+    }
+
+    public void setProductareaCode(String productareaCode) {
+        this.productareaCode = productareaCode == null ? null : productareaCode.trim();
+    }
+
+    public String getProductareaName() {
+        return productareaName;
+    }
+
+    public void setProductareaName(String productareaName) {
+        this.productareaName = productareaName == null ? null : productareaName.trim();
+    }
+
+    public String getProductareaMnemcode() {
+        return productareaMnemcode;
+    }
+
+    public void setProductareaMnemcode(String productareaMnemcode) {
+        this.productareaMnemcode = productareaMnemcode == null ? null : productareaMnemcode.trim();
+    }
+
+    public String getProductareaRemark() {
+        return productareaRemark;
+    }
+
+    public void setProductareaRemark(String productareaRemark) {
+        this.productareaRemark = productareaRemark == null ? null : productareaRemark.trim();
+    }
+
+    public BigDecimal getBasicShare() {
+        return basicShare;
+    }
+
+    public void setBasicShare(BigDecimal basicShare) {
+        this.basicShare = basicShare;
+    }
+}

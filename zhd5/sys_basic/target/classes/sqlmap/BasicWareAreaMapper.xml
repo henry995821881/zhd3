@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicWareAreaMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicWareArea" >
+    <id column="WAREAREA_ID" property="wareareaId" jdbcType="DECIMAL" />
+    <result column="WAREAREA_CODE" property="wareareaCode" jdbcType="VARCHAR" />
+    <result column="WAREAREA_NAME" property="wareareaName" jdbcType="VARCHAR" />
+    <result column="WAREAREA_GREGION" property="wareareaGregion" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_CODE" property="warehouseCode" jdbcType="VARCHAR" />
+    <result column="WAREAREA_MINNUM" property="wareareaMinnum" jdbcType="DECIMAL" />
+    <result column="WAREAREA_MAXNUM" property="wareareaMaxnum" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="WAREAREA_REMARK" property="wareareaRemark" jdbcType="VARCHAR" />
+    <result column="WAREAREA_X" property="wareareaX" jdbcType="DECIMAL" />
+    <result column="WAREAREA_Y" property="wareareaY" jdbcType="DECIMAL" />
+    <result column="WAREAREA_HEIGHT" property="wareareaHeight" jdbcType="DECIMAL" />
+    <result column="WAREAREA_WIDTH" property="wareareaWidth" jdbcType="DECIMAL" />
+    <result column="WAREAREA_CTYPE" property="wareareaCtype" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap id="BaseResultMap1" type="com.xyscm.sys.basic.model.BasicWareAreaEx" >
+    <id column="WAREAREA_ID" property="wareareaId" jdbcType="DECIMAL" />
+    <result column="WAREAREA_CODE" property="wareareaCode" jdbcType="VARCHAR" />
+    <result column="WAREAREA_NAME" property="wareareaName" jdbcType="VARCHAR" />
+    <result column="WAREAREA_GREGION" property="wareareaGregion" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_CODE" property="warehouseCode" jdbcType="VARCHAR" />
+    <result column="WAREAREA_MINNUM" property="wareareaMinnum" jdbcType="DECIMAL" />
+    <result column="WAREAREA_MAXNUM" property="wareareaMaxnum" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="WAREAREA_REMARK" property="wareareaRemark" jdbcType="VARCHAR" />
+    <result column="WAREAREA_X" property="wareareaX" jdbcType="DECIMAL" />
+    <result column="WAREAREA_Y" property="wareareaY" jdbcType="DECIMAL" />
+    <result column="WAREAREA_HEIGHT" property="wareareaHeight" jdbcType="DECIMAL" />
+    <result column="WAREAREA_WIDTH" property="wareareaWidth" jdbcType="DECIMAL" />
+    <result column="WAREAREA_CTYPE" property="wareareaCtype" jdbcType="VARCHAR" />
+    
+  
+    <result column="WAREHOUSE_NAME" property="warehouseName" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    WAREAREA_ID, WAREAREA_CODE, WAREAREA_NAME, WAREAREA_GREGION, WAREHOUSE_CODE, WAREAREA_MINNUM, 
+    WAREAREA_MAXNUM, MEMBER_CODE, WAREAREA_REMARK, WAREAREA_X, WAREAREA_Y, WAREAREA_HEIGHT, 
+    WAREAREA_WIDTH, WAREAREA_CTYPE
+  </sql>
+   <sql id="Base_Column_List1" >
+    t.WAREAREA_ID, t.WAREAREA_CODE, t.WAREAREA_NAME, t.WAREAREA_GREGION, t.WAREHOUSE_CODE, t.WAREAREA_MINNUM, 
+    t.WAREAREA_MAXNUM, t.MEMBER_CODE, t.WAREAREA_REMARK, t.WAREAREA_X, t.WAREAREA_Y, t.WAREAREA_HEIGHT, 
+    t.WAREAREA_WIDTH, t.WAREAREA_CTYPE,t2.warehouse_name
+  </sql>
+  
+  <sql id="orderby">
+  order by WAREAREA_CODE desc
+  </sql>
+  <select id="queryList"  resultMap="BaseResultMap"  parameterType="com.xyscm.sys.basic.model.BasicWareArea" >
+   select 
+    <include refid="Base_Column_List" />
+    from  BASIC_WAREAREA
+    where MEMBER_CODE = #{memberCode,jdbcType=DECIMAL}
+   
+    <if test="warehouseCode != null and warehouseCode != ''" >
+       and WAREHOUSE_CODE=#{warehouseCode}
+      </if> 
+     <if test="wareareaName != null and wareareaName != ''" >
+        and WAREAREA_NAME like '%'||#{wareareaName}||'%'
+      </if>
+      <if test="wareareaGregion != null and wareareaGregion != ''" >
+       and  WAREAREA_GREGION like '%'||#{wareareaGregion}||'%'
+      </if>
+      
+    
+    
+    <include refid="orderby"/>
+  </select>
+  
+  <select id="queryListWithWarehouse"  resultMap="BaseResultMap1" parameterType="com.xyscm.sys.basic.model.BasicWareArea">
+  
+  
+  
+  
+  
+    select 
+    <include refid="Base_Column_List1" />
+    from  BASIC_WAREAREA t left join  basic_warehouse t2 on t.warehouse_code =t2.warehouse_code
+    where t.MEMBER_CODE = #{memberCode,jdbcType=DECIMAL}
+   
+    <if test="warehouseCode != null and warehouseCode != ''" >
+       and t.WAREHOUSE_CODE=#{warehouseCode}
+      </if> 
+     <if test="wareareaName != null and wareareaName != ''" >
+        and t.WAREAREA_NAME like '%'||#{wareareaName}||'%'
+      </if>
+      <if test="wareareaGregion != null and wareareaGregion != ''" >
+       and  t.WAREAREA_GREGION like '%'||#{wareareaGregion}||'%'
+      </if>
+      
+    
+    
+    <include refid="orderby"/>
+  
+  
+  
+  
+  </select>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  BASIC_WAREAREA
+    where WAREAREA_ID = #{wareareaId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_WAREAREA
+    where WAREAREA_ID = #{wareareaId,jdbcType=DECIMAL}
+  </delete>
+  
+  <delete id="deleteWareArea" parameterType="com.xyscm.sys.basic.model.BasicWareArea">
+   delete from  BASIC_WAREAREA
+    where WAREAREA_CODE = #{wareareaCode}
+    and MEMBER_CODE=#{memberCode}
+  </delete>
+  
+ 
+  
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicWareArea" >
+    insert into  BASIC_WAREAREA (WAREAREA_ID, WAREAREA_CODE, WAREAREA_NAME, 
+      WAREAREA_GREGION, WAREHOUSE_CODE, WAREAREA_MINNUM, 
+      WAREAREA_MAXNUM, MEMBER_CODE, WAREAREA_REMARK, 
+      WAREAREA_X, WAREAREA_Y, WAREAREA_HEIGHT, 
+      WAREAREA_WIDTH, WAREAREA_CTYPE)
+    values (#{wareareaId,jdbcType=DECIMAL}, #{wareareaCode,jdbcType=VARCHAR}, #{wareareaName,jdbcType=VARCHAR}, 
+      #{wareareaGregion,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, #{wareareaMinnum,jdbcType=DECIMAL}, 
+      #{wareareaMaxnum,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{wareareaRemark,jdbcType=VARCHAR}, 
+      #{wareareaX,jdbcType=DECIMAL}, #{wareareaY,jdbcType=DECIMAL}, #{wareareaHeight,jdbcType=DECIMAL}, 
+      #{wareareaWidth,jdbcType=DECIMAL}, #{wareareaCtype,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicWareArea" >
+    insert into  BASIC_WAREAREA
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        WAREAREA_ID,
+      </if>
+      <if test="true" >
+        WAREAREA_CODE,
+      </if>
+      <if test="wareareaName != null" >
+        WAREAREA_NAME,
+      </if>
+      <if test="wareareaGregion != null" >
+        WAREAREA_GREGION,
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE,
+      </if>
+      <if test="wareareaMinnum != null" >
+        WAREAREA_MINNUM,
+      </if>
+      <if test="wareareaMaxnum != null" >
+        WAREAREA_MAXNUM,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="wareareaRemark != null" >
+        WAREAREA_REMARK,
+      </if>
+      <if test="wareareaX != null" >
+        WAREAREA_X,
+      </if>
+      <if test="wareareaY != null" >
+        WAREAREA_Y,
+      </if>
+      <if test="wareareaHeight != null" >
+        WAREAREA_HEIGHT,
+      </if>
+      <if test="wareareaWidth != null" >
+        WAREAREA_WIDTH,
+      </if>
+      <if test="wareareaCtype != null" >
+        WAREAREA_CTYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        BASIC_WAREAREA_SEQ.nextval,
+      </if>
+      <if test="true" >
+       (select  lpad((max(bb.warearea_code)+1),6,'0')as code from basic_warearea bb),
+      </if>
+      <if test="wareareaName != null" >
+        #{wareareaName,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaGregion != null" >
+        #{wareareaGregion,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaMinnum != null" >
+        #{wareareaMinnum,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaMaxnum != null" >
+        #{wareareaMaxnum,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaRemark != null" >
+        #{wareareaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaX != null" >
+        #{wareareaX,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaY != null" >
+        #{wareareaY,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaHeight != null" >
+        #{wareareaHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaWidth != null" >
+        #{wareareaWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaCtype != null" >
+        #{wareareaCtype,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateWareAreaByCode" parameterType="com.xyscm.sys.basic.model.BasicWareArea" >
+  update  BASIC_WAREAREA
+    <set >
+      <if test="wareareaCode != null" >
+        WAREAREA_CODE = #{wareareaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaName != null" >
+        WAREAREA_NAME = #{wareareaName,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaGregion != null" >
+        WAREAREA_GREGION = #{wareareaGregion,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaMinnum != null" >
+        WAREAREA_MINNUM = #{wareareaMinnum,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaMaxnum != null" >
+        WAREAREA_MAXNUM = #{wareareaMaxnum,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaRemark != null" >
+        WAREAREA_REMARK = #{wareareaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaX != null" >
+        WAREAREA_X = #{wareareaX,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaY != null" >
+        WAREAREA_Y = #{wareareaY,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaHeight != null" >
+        WAREAREA_HEIGHT = #{wareareaHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaWidth != null" >
+        WAREAREA_WIDTH = #{wareareaWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaCtype != null" >
+        WAREAREA_CTYPE = #{wareareaCtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WAREAREA_CODE = #{wareareaCode,jdbcType=VARCHAR}
+    and  MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicWareArea" >
+    update  BASIC_WAREAREA
+    <set >
+      <if test="wareareaCode != null" >
+        WAREAREA_CODE = #{wareareaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaName != null" >
+        WAREAREA_NAME = #{wareareaName,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaGregion != null" >
+        WAREAREA_GREGION = #{wareareaGregion,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaMinnum != null" >
+        WAREAREA_MINNUM = #{wareareaMinnum,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaMaxnum != null" >
+        WAREAREA_MAXNUM = #{wareareaMaxnum,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaRemark != null" >
+        WAREAREA_REMARK = #{wareareaRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wareareaX != null" >
+        WAREAREA_X = #{wareareaX,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaY != null" >
+        WAREAREA_Y = #{wareareaY,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaHeight != null" >
+        WAREAREA_HEIGHT = #{wareareaHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaWidth != null" >
+        WAREAREA_WIDTH = #{wareareaWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="wareareaCtype != null" >
+        WAREAREA_CTYPE = #{wareareaCtype,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WAREAREA_ID = #{wareareaId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicWareArea" >
+    update  BASIC_WAREAREA
+    set WAREAREA_CODE = #{wareareaCode,jdbcType=VARCHAR},
+      WAREAREA_NAME = #{wareareaName,jdbcType=VARCHAR},
+      WAREAREA_GREGION = #{wareareaGregion,jdbcType=VARCHAR},
+      WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      WAREAREA_MINNUM = #{wareareaMinnum,jdbcType=DECIMAL},
+      WAREAREA_MAXNUM = #{wareareaMaxnum,jdbcType=DECIMAL},
+      MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      WAREAREA_REMARK = #{wareareaRemark,jdbcType=VARCHAR},
+      WAREAREA_X = #{wareareaX,jdbcType=DECIMAL},
+      WAREAREA_Y = #{wareareaY,jdbcType=DECIMAL},
+      WAREAREA_HEIGHT = #{wareareaHeight,jdbcType=DECIMAL},
+      WAREAREA_WIDTH = #{wareareaWidth,jdbcType=DECIMAL},
+      WAREAREA_CTYPE = #{wareareaCtype,jdbcType=VARCHAR}
+    where WAREAREA_ID = #{wareareaId,jdbcType=DECIMAL}
+  </update>
+</mapper>

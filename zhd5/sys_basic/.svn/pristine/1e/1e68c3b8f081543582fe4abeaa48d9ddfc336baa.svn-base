@@ -1,0 +1,141 @@
+
+
+			
+function init_product_area(){
+	
+	$.post("productArea/query",
+			  {
+			    memeber_code:'0000'
+			  },
+			 
+			  function(d,status){
+				var content= eval("("+d+")");
+			
+					var html = template('product_area_tpl', content);
+					
+					$("#content_product_area").html(html);
+					
+					
+					
+					aTable();
+					
+					
+				
+			  });
+	
+	
+}			
+			
+			
+init_product_area();		
+
+
+
+//判断是增加还是修改
+var flag = "";
+$("li.oper_").on('click', function() {
+	
+	flag = $(this).attr("data");
+	if(flag=='del'){
+		
+		//删除
+	  
+	   
+	   
+	var productareaCode= $('.table_detail.active').find('td').eq(0).text();
+		
+		var data={'productareaCode':productareaCode};
+		 var url ="productArea/delete";
+		$.post(url, data, function(d) {
+
+		
+			close_window();
+			init_product_area();
+
+		});
+		
+	}
+});
+
+
+
+
+
+function product_area_oper(){
+	
+    if(flag =="add"){
+		 
+		 save_product_area();
+	 }else if(flag =="update"){
+		 update_product_area();
+	 }
+	
+	
+	
+}
+
+
+function save_product_area(){
+	
+	
+
+	
+	
+	var $form = $('#form_product_area');
+	var data = $form.serialize();
+	
+	var url ="productArea/add";
+	$.post(url, data, function(d) {
+
+	
+		
+		close_window();
+		init_product_area();
+			
+		
+
+	});
+	
+	
+}
+function update_product_area(){
+	
+	var $form = $('#form_product_area');
+	var data = $form.serialize();
+	
+	var url ="productArea/update";
+	$.post(url, data, function(d) {
+
+	
+		
+		close_window();
+		init_product_area();
+			
+		
+
+	});
+}
+
+
+
+
+var Verification_Disabled = function() {
+	if($('#Origin').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+
+	$('input[name="productareaCode"]').val(table_details.eq(0).text());
+	$('#Origin').val(table_details.eq(1).text());
+	$('#Assistant').val(table_details.eq(2).text());
+	$('#Remark').val(table_details.eq(3).text());
+}
+
+$('#Origin').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});

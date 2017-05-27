@@ -1,0 +1,34 @@
+var Verification_Disabled = function() {
+	if($('#Department').val() === '' || $('#Principal').val() === '' || $('#Organization') === null) {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	$('#Department').val(table_details.eq(0).text());
+	$('#Principal').val(table_details.eq(1).text());
+	$('#Organization').val(table_details.eq(2).text());
+	$('#Remark').val(table_details.eq(3).text());
+}
+/*var table_detail_empty = function() {
+	$('#Department').val('');
+	$('#Principal').val('');
+	$('#Organization').val('');
+	$('#Remark').val('');
+}*/
+$('#Department').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Principal').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Organization').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});

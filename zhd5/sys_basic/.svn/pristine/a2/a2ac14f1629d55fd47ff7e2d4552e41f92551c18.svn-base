@@ -1,0 +1,18 @@
+//var Verification_Disabled = function() {
+//	if($('#AreaName').val() === '') {
+//		add_table_submit.attr("disabled", "disabled");
+//	} else {
+//		add_table_submit.attr("disabled", false);
+//	}
+//}
+var TableDetail = function(table_details) {
+	$('#AreaName').val(table_details.eq(0).text());
+	$('#AssistantCode').val(table_details.eq(2).text());
+	$('#Remark').val(table_details.eq(3).text());
+}
+
+//$('#AreaName').on('blur', function() {
+//	var a = $(this);
+//	Verification(a);
+//	Verification_Disabled();
+//});

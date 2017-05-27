@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.cas.dao.VPermissionAllotMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.cas.model.VPermissionAllot" >
+    <result column="V_ID" property="vId" jdbcType="VARCHAR" />
+    <result column="PERMISSION_CODE" property="permissionCode" jdbcType="VARCHAR" />
+    <result column="PERMISSION_NAME" property="permissionName" jdbcType="VARCHAR" />
+    <result column="APPLICATION_CODE" property="applicationCode" jdbcType="VARCHAR" />
+    <result column="MENU_CODE" property="menuCode" jdbcType="VARCHAR" />
+    <result column="MENU_MODULE" property="menuModule" jdbcType="VARCHAR" />
+    <result column="PERMISSION_SORT" property="permissionSort" jdbcType="DECIMAL" />
+    <result column="PERMISSION_SHOWINMENU" property="permissionShowinmenu" jdbcType="DECIMAL" />
+    <result column="PERMISSION_STATE" property="permissionState" jdbcType="DECIMAL" />
+    <result column="PERMISSION_ORDER" property="permissionOrder" jdbcType="DECIMAL" />
+    <result column="PERMISSION_REMARK" property="permissionRemark" jdbcType="VARCHAR" />
+    <result column="MENU_NODECODE" property="menuNodecode" jdbcType="VARCHAR" />
+    <result column="PERMISSION_TYPE" property="permissionType" jdbcType="DECIMAL" />
+    <result column="BILLTYPE_CODE" property="billtypeCode" jdbcType="VARCHAR" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_CODE" property="operatorCode" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_USER" property="operatorUser" jdbcType="VARCHAR" />
+    <result column="ROLE_CODELIST" property="roleCodelist" jdbcType="VARCHAR" />
+    <result column="OPERATOR_STATE" property="operatorState" jdbcType="DECIMAL" />
+    <result column="OPERATOR_IDENTITY" property="operatorIdentity" jdbcType="DECIMAL" />
+    <result column="OP_PERMISSION_ALLOT" property="opPermissionAllot" jdbcType="DECIMAL" />
+    <result column="RO_PERMISSION_ALLOT" property="roPermissionAllot" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <select id="queryPermission" resultMap="BaseResultMap" >
+    select 
+    	*
+    from 
+    	v_permission_allot
+    where 
+    	MEMBER_CODE = #{0} AND
+    	OPERATOR_CODE = #{1}
+    
+  </select>
+  
+</mapper>

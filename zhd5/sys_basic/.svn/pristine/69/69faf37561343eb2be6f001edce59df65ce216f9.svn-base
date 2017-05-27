@@ -1,0 +1,53 @@
+package com.xyscm.sys.basic.dao;
+
+import com.xyscm.sys.basic.model.BasicCompanyAccounts;
+import com.xyscm.sys.basic.model.BasicCompanyLinkman;
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface BasicCompanyLinkmanMapper {
+    
+    /**
+     * 根据compangcode查询公司联系人
+     * @param companyCode
+     * @return
+     *
+     * List<BasicCompanyLinkman>
+     */
+    public List<BasicCompanyLinkman> queryCompanyLinkman (@Param("companyCode")String companyCode);
+    
+    
+	/**
+	 * 新增公司联系人
+	 * @param companyCode
+     * @return
+     *
+     * basicCompanyAccounts
+	 */
+	public int insertCompanyLinkman(BasicCompanyLinkman basicCompanyLinkman);
+	
+	
+	/**
+	 * 根据id删除公司联系人
+	 * @param basicCompanyAccounts
+	 * @return
+	 *
+	 * int
+	 */
+	public int deltCompanyLinkmanByCode(@Param("companyCode")String companyCode);
+
+	
+	/**
+	 * 根据companyCode更新公司联系人
+	 * @param basicCompanyAccounts
+	 * @return
+	 *
+	 * int
+	 */
+	public int updateLinkmanByCompanyCode(@Param("newCompanyCode")String newCompanyCode,@Param("oldCompanyCode")String oldCompanyCode);
+
+}

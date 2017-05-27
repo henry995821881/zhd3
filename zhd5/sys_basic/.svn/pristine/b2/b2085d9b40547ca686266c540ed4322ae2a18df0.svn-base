@@ -1,0 +1,178 @@
+<#assign base=request.contextPath />
+
+
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+
+	<body>
+<div class="main_content">
+
+			<div class="main_content_left">
+				<h4 class="title">查询</h4>
+				<ul class="menu_content Inquire">
+					<form id="form_query">
+						<li class="menu_content_list">
+							<span>仓库：</span>
+							<input type="text" name="warehouseCode" id="CodeInquire" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>仓库名称：</span>
+							<input type="text" name="warehouseName" id="NameInquire" value="" />
+						</li>
+						<li class="menu_content_list">
+							<span>地区：</span>
+							<input type="text" name="areaCode" id="NameInquire" value="" />
+						</li>
+						<li class="menu_content_list">
+							<input type="button" name="Inquire" onclick="query_();" id="Inquire" value="查询" class="InquireButton bg_1199c4" />
+							<input type="reset" value="重置" class="InquireButton" />
+						</li>
+					</form>
+				</ul>
+			</div>
+			<div class="main_content_right">
+				<div class="crud_menu">
+					<ul class="">
+						<li data="add" class="fl_l add_table_icon oper_"><i class="icon iconfont icon-tianjia "></i>增加</li>
+						<li data="update" class="fl_l modify_table_icon oper_"><i class="icon iconfont icon-zhibiaopeizhi"></i>修改</li>
+						<li data="del"  class="fl_l delete_table_icon oper_"><i class="icon iconfont icon-shanchu1"></i>删除</li>
+					</ul>
+				</div>
+				<div id="content_warehouse">
+				
+				</div>
+				<!-- 分页定位 -->
+				<div id="pageHtml" class="main_content_right_page">
+				
+				</div>
+				<div class="add_table" id="add_table" data-flag="">
+					<h4 class="add_table_title">
+						<i class="icon iconfont icon-shibai-yin add_table_close"></i>
+						<span>仓库设置</span>
+					</h4>
+					<ul class="add_table_content">
+						<form id="add_warehouse">
+							<li class="fl_l">
+								<span>仓库名称：</span>
+								<input type="text" name="warehouseName" id="WarehouseName" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>助记码：</span>
+								<input type="text" name="warehouseMnemcode" id="Assistant" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>仓库类型：</span>
+								<select name="warehouseCtype" id="WarehouseType" class="table_detail_empty">
+									<option value="室内">室内</option>
+									<option value="室外">室外</option>
+									<option value="综合">综合</option>
+								
+								</select>
+							</li>
+							<li class="fl_l">
+								<span>地区：</span>
+								<input type="text" name="areaCode" id="Area" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>联系人：</span>
+								<input type="text" name="warehouseLinkman" id="Contact" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>电话：</span>
+								<input type="text" name="warehouseMobile" id="Phone" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>手机：</span>
+								<input type="text" name="warehousePhone" id="Tel" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>地址：</span>
+								<input type="text" name="warehouseAddr" id="Add" value="" class="table_detail_empty"/>
+							</li>
+							<li class="fl_l">
+								<span>库位：</span>
+								<input type="checkbox" name="warehouseWareplace1"  id="Location" value="启用" class="table_detail_empty"/>
+								<input type="hidden" name="warehouseWareplace">
+								<label >启用</label>
+							</li>
+							<li class="fl_l">
+								<span>自有监管：</span>
+								<input type="checkbox" name="warehouseOwnSupervise1"  id="Supervision" value="是" class="table_detail_empty"/>
+								<input type="hidden" name="warehouseOwnSupervise">
+								<label >是</label>
+							</li>
+							<li class="cl remark">
+								<span>备注：</span>
+								<textarea name="warehouseRemark" id="Remark" class="remarks table_detail_empty" ></textarea>
+							</li>
+							<li class="text_r">
+							   
+								<input type="button"  onclick="oper_warehouse();" class="add_table_submit" value="保存" />
+								<input type="hidden" id="warehouseCode_1" name="warehouseCode" />
+								<input type="reset" name="" id="" class="add_table_reset" value="重置" />
+							</li>
+						</form>
+					</ul>
+				</div>
+
+			</div>
+				
+		<script id="WarehouseSetting" type="text/html">
+			
+				
+				
+
+
+
+<div  class="main_content_right_table">	
+				
+					<table id="tbl" class="table" cellspacing="1">
+						<tr class="table_title">
+							<td>仓库名称</td>
+							<td>仓库代码</td>
+							<td>助记码</td>
+							<td>仓库类型</td>
+							<td>自有监管库</td>
+							<td>库位</td>
+							<td>地区</td>
+							<td>联系人</td>
+							<td>电话</td>
+							<td>手机</td>
+							<td>地址</td>
+							<td>备注</td>
+						</tr>
+
+<%for(var i = 0;i<data.length;i++){%>
+						<tr class="table_detail">
+							<td warehouse_code='<%=data[i].warehouseCode%>' ><%=data[i].warehouseName%></td>
+							<td><%=data[i].warehouseCode%></td>
+							<td><%=data[i].warehouseMnemcode%></td>
+							<td><%=data[i].warehouseCtype%></td>
+							<td><%=data[i].warehouseOwnSupervise%></td>
+						
+                            <td><%=data[i].warehouseWareplace%></td>
+							<td><%=data[i].areaCode%></td>
+							<td><%=data[i].warehouseLinkman%></td>
+							<td><%=data[i].warehousePhone%></td>
+							<td><%=data[i].warehouseMobile%></td>
+							<td><%=data[i].warehouseAddr%></td>
+							<td><%=data[i].warehouseRemark%></td>
+						</tr>
+<%}%>
+					</table>
+				</div>
+				
+
+
+		</script>
+		<script type="text/javascript" src="${base}/js/goodsManage/warehouseManage.js"></script>
+		
+		
+	</body>
+
+</html>

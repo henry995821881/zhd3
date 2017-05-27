@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicWarePlaceMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicWarePlace" >
+    <id column="WAREPLACE_ID" property="wareplaceId" jdbcType="DECIMAL" />
+    <result column="WAREPLACE_CODE" property="wareplaceCode" jdbcType="VARCHAR" />
+    <result column="WAREPLACE_NAME" property="wareplaceName" jdbcType="VARCHAR" />
+    <result column="WAREPLACE_WREGION" property="wareplaceWregion" jdbcType="VARCHAR" />
+    <result column="WAREPLACE_GREGION" property="wareplaceGregion" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_CODE" property="warehouseCode" jdbcType="VARCHAR" />
+    <result column="WAREPLACE_MINNUM" property="wareplaceMinnum" jdbcType="DECIMAL" />
+    <result column="WAREPLACE_MAXNUM" property="wareplaceMaxnum" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="WAREPLACE_CTYPE" property="wareplaceCtype" jdbcType="VARCHAR" />
+    <result column="WAREPLACE_REMARK" property="wareplaceRemark" jdbcType="VARCHAR" />
+    <result column="WAREPLACE_X" property="wareplaceX" jdbcType="DECIMAL" />
+    <result column="WAREPLACE_Y" property="wareplaceY" jdbcType="DECIMAL" />
+    <result column="WAREPLACE_HEIGHT" property="wareplaceHeight" jdbcType="DECIMAL" />
+    <result column="WAREPLACE_WIDTH" property="wareplaceWidth" jdbcType="DECIMAL" />
+    <result column="DEVICE_ID" property="deviceId" jdbcType="DECIMAL" />
+    <result column="DEVICE_NAME" property="deviceName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="orderby">
+   order by WAREPLACE_CODE desc
+  </sql>
+  <sql id="Base_Column_List" >
+    WAREPLACE_ID, WAREPLACE_CODE, WAREPLACE_NAME, WAREPLACE_WREGION, WAREPLACE_GREGION, 
+    WAREHOUSE_CODE, WAREPLACE_MINNUM, WAREPLACE_MAXNUM, MEMBER_CODE, WAREPLACE_CTYPE, 
+    WAREPLACE_REMARK, WAREPLACE_X, WAREPLACE_Y, WAREPLACE_HEIGHT, WAREPLACE_WIDTH, DEVICE_ID, 
+    DEVICE_NAME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from   BASIC_WAREPLACE
+    where WAREPLACE_ID = #{wareplaceId,jdbcType=DECIMAL}
+  </select>
+  <select id="queryList" resultMap="BaseResultMap" parameterType="com.xyscm.sys.basic.model.BasicWarePlace">
+  select 
+    <include refid="Base_Column_List" />
+    from   BASIC_WAREPLACE
+    where  MEMBER_CODE =#{memberCode}
+     <if test="warehouseCode != null and warehouseCode != ''" >
+       and   WAREHOUSE_CODE = #{warehouseCode,jdbcType=DECIMAL}
+      </if>
+    <if test="wareplaceWregion != null and wareplaceWregion != ''" >
+        and WAREPLACE_WREGION like '%'||#{wareplaceWregion}||'%'
+      </if>
+      <if test="wareplaceGregion != null and wareplaceGregion != ''" >
+       and  WAREPLACE_GREGION like '%'||#{wareplaceGregion}||'%'
+      </if> 
+    <include refid="orderby" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from   BASIC_WAREPLACE
+    where WAREPLACE_ID = #{wareplaceId,jdbcType=DECIMAL}
+  </delete>
+  
+  <delete id="deleteWarePlace" parameterType="com.xyscm.sys.basic.model.BasicWarePlace">
+   delete from   BASIC_WAREPLACE
+    where WAREPLACE_CODE = #{wareplaceCode,jdbcType=DECIMAL}
+    and MEMBER_CODE =#{memberCode}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicWarePlace" >
+    insert into   BASIC_WAREPLACE (WAREPLACE_ID, WAREPLACE_CODE, WAREPLACE_NAME, 
+      WAREPLACE_WREGION, WAREPLACE_GREGION, WAREHOUSE_CODE, 
+      WAREPLACE_MINNUM, WAREPLACE_MAXNUM, MEMBER_CODE, 
+      WAREPLACE_CTYPE, WAREPLACE_REMARK, WAREPLACE_X, 
+      WAREPLACE_Y, WAREPLACE_HEIGHT, WAREPLACE_WIDTH, 
+      DEVICE_ID, DEVICE_NAME)
+    values (#{wareplaceId,jdbcType=DECIMAL}, #{wareplaceCode,jdbcType=VARCHAR}, #{wareplaceName,jdbcType=VARCHAR}, 
+      #{wareplaceWregion,jdbcType=VARCHAR}, #{wareplaceGregion,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, 
+      #{wareplaceMinnum,jdbcType=DECIMAL}, #{wareplaceMaxnum,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, 
+      #{wareplaceCtype,jdbcType=VARCHAR}, #{wareplaceRemark,jdbcType=VARCHAR}, #{wareplaceX,jdbcType=DECIMAL}, 
+      #{wareplaceY,jdbcType=DECIMAL}, #{wareplaceHeight,jdbcType=DECIMAL}, #{wareplaceWidth,jdbcType=DECIMAL}, 
+      #{deviceId,jdbcType=DECIMAL}, #{deviceName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicWarePlace" >
+    insert into   BASIC_WAREPLACE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        WAREPLACE_ID,
+      </if>
+      <if test="true" >
+        WAREPLACE_CODE,
+      </if>
+      <if test="wareplaceName != null" >
+        WAREPLACE_NAME,
+      </if>
+      <if test="wareplaceWregion != null" >
+        WAREPLACE_WREGION,
+      </if>
+      <if test="wareplaceGregion != null" >
+        WAREPLACE_GREGION,
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE,
+      </if>
+      <if test="wareplaceMinnum != null" >
+        WAREPLACE_MINNUM,
+      </if>
+      <if test="wareplaceMaxnum != null" >
+        WAREPLACE_MAXNUM,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="wareplaceCtype != null" >
+        WAREPLACE_CTYPE,
+      </if>
+      <if test="wareplaceRemark != null" >
+        WAREPLACE_REMARK,
+      </if>
+      <if test="wareplaceX != null" >
+        WAREPLACE_X,
+      </if>
+      <if test="wareplaceY != null" >
+        WAREPLACE_Y,
+      </if>
+      <if test="wareplaceHeight != null" >
+        WAREPLACE_HEIGHT,
+      </if>
+      <if test="wareplaceWidth != null" >
+        WAREPLACE_WIDTH,
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID,
+      </if>
+      <if test="deviceName != null" >
+        DEVICE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        BASIC_WAREPLACE_SEQ.nextval,
+      </if>
+      <if test="true" >
+        (select  lpad((max(bb.wareplace_code)+1),6,'0')as code from basic_wareplace bb),
+      </if>
+      <if test="wareplaceName != null" >
+        #{wareplaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceWregion != null" >
+        #{wareplaceWregion,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceGregion != null" >
+        #{wareplaceGregion,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceMinnum != null" >
+        #{wareplaceMinnum,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceMaxnum != null" >
+        #{wareplaceMaxnum,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceCtype != null" >
+        #{wareplaceCtype,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceRemark != null" >
+        #{wareplaceRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceX != null" >
+        #{wareplaceX,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceY != null" >
+        #{wareplaceY,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceHeight != null" >
+        #{wareplaceHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceWidth != null" >
+        #{wareplaceWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicWarePlace" >
+    update   BASIC_WAREPLACE
+    <set >
+      <if test="wareplaceCode != null" >
+        WAREPLACE_CODE = #{wareplaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceName != null" >
+        WAREPLACE_NAME = #{wareplaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceWregion != null" >
+        WAREPLACE_WREGION = #{wareplaceWregion,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceGregion != null" >
+        WAREPLACE_GREGION = #{wareplaceGregion,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceMinnum != null" >
+        WAREPLACE_MINNUM = #{wareplaceMinnum,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceMaxnum != null" >
+        WAREPLACE_MAXNUM = #{wareplaceMaxnum,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceCtype != null" >
+        WAREPLACE_CTYPE = #{wareplaceCtype,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceRemark != null" >
+        WAREPLACE_REMARK = #{wareplaceRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceX != null" >
+        WAREPLACE_X = #{wareplaceX,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceY != null" >
+        WAREPLACE_Y = #{wareplaceY,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceHeight != null" >
+        WAREPLACE_HEIGHT = #{wareplaceHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceWidth != null" >
+        WAREPLACE_WIDTH = #{wareplaceWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID = #{deviceId,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceName != null" >
+        DEVICE_NAME = #{deviceName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where WAREPLACE_ID = #{wareplaceId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateWarePlaceByCode" parameterType="com.xyscm.sys.basic.model.BasicWarePlace">
+  
+   update   BASIC_WAREPLACE
+    <set >
+      <if test="wareplaceCode != null" >
+        WAREPLACE_CODE = #{wareplaceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceName != null" >
+        WAREPLACE_NAME = #{wareplaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceWregion != null" >
+        WAREPLACE_WREGION = #{wareplaceWregion,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceGregion != null" >
+        WAREPLACE_GREGION = #{wareplaceGregion,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceMinnum != null" >
+        WAREPLACE_MINNUM = #{wareplaceMinnum,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceMaxnum != null" >
+        WAREPLACE_MAXNUM = #{wareplaceMaxnum,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceCtype != null" >
+        WAREPLACE_CTYPE = #{wareplaceCtype,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceRemark != null" >
+        WAREPLACE_REMARK = #{wareplaceRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="wareplaceX != null" >
+        WAREPLACE_X = #{wareplaceX,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceY != null" >
+        WAREPLACE_Y = #{wareplaceY,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceHeight != null" >
+        WAREPLACE_HEIGHT = #{wareplaceHeight,jdbcType=DECIMAL},
+      </if>
+      <if test="wareplaceWidth != null" >
+        WAREPLACE_WIDTH = #{wareplaceWidth,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceId != null" >
+        DEVICE_ID = #{deviceId,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceName != null" >
+        DEVICE_NAME = #{deviceName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where  WAREPLACE_CODE = #{wareplaceCode,jdbcType=VARCHAR}
+    and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+    
+  
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicWarePlace" >
+    update   BASIC_WAREPLACE
+    set WAREPLACE_CODE = #{wareplaceCode,jdbcType=VARCHAR},
+      WAREPLACE_NAME = #{wareplaceName,jdbcType=VARCHAR},
+      WAREPLACE_WREGION = #{wareplaceWregion,jdbcType=VARCHAR},
+      WAREPLACE_GREGION = #{wareplaceGregion,jdbcType=VARCHAR},
+      WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      WAREPLACE_MINNUM = #{wareplaceMinnum,jdbcType=DECIMAL},
+      WAREPLACE_MAXNUM = #{wareplaceMaxnum,jdbcType=DECIMAL},
+      MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      WAREPLACE_CTYPE = #{wareplaceCtype,jdbcType=VARCHAR},
+      WAREPLACE_REMARK = #{wareplaceRemark,jdbcType=VARCHAR},
+      WAREPLACE_X = #{wareplaceX,jdbcType=DECIMAL},
+      WAREPLACE_Y = #{wareplaceY,jdbcType=DECIMAL},
+      WAREPLACE_HEIGHT = #{wareplaceHeight,jdbcType=DECIMAL},
+      WAREPLACE_WIDTH = #{wareplaceWidth,jdbcType=DECIMAL},
+      DEVICE_ID = #{deviceId,jdbcType=DECIMAL},
+      DEVICE_NAME = #{deviceName,jdbcType=VARCHAR}
+    where WAREPLACE_ID = #{wareplaceId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicWarehouseMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicWarehouse" >
+    <id column="WAREHOUSE_ID" property="warehouseId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_CODE" property="warehouseCode" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_NAME" property="warehouseName" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_MNEMCODE" property="warehouseMnemcode" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_CTYPE" property="warehouseCtype" jdbcType="VARCHAR" />
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_PHONE" property="warehousePhone" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_ADDR" property="warehouseAddr" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_MOBILE" property="warehouseMobile" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_REMARK" property="warehouseRemark" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_WAREPLACE" property="warehouseWareplace" jdbcType="DECIMAL" />
+    <result column="WAREHOUSE_STATE" property="warehouseState" jdbcType="DECIMAL" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+    <result column="WAREHOUSE_LINKMAN" property="warehouseLinkman" jdbcType="VARCHAR" />
+    <result column="WAREHOUSE_OWN_SUPERVISE" property="warehouseOwnSupervise" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    WAREHOUSE_ID, MEMBER_CODE, WAREHOUSE_CODE, WAREHOUSE_NAME, WAREHOUSE_MNEMCODE, WAREHOUSE_CTYPE, 
+    AREA_CODE, WAREHOUSE_PHONE, WAREHOUSE_ADDR, WAREHOUSE_MOBILE, WAREHOUSE_REMARK, WAREHOUSE_WAREPLACE, 
+    WAREHOUSE_STATE, BASIC_SHARE, WAREHOUSE_LINKMAN, WAREHOUSE_OWN_SUPERVISE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  BASIC_WAREHOUSE
+    where WAREHOUSE_ID = #{warehouseId,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="queryAllByMemberCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from  BASIC_WAREHOUSE
+    where  MEMBER_CODE= #{memberCode}
+  
+  </select>
+  
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  BASIC_WAREHOUSE
+    where WAREHOUSE_ID = #{warehouseId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteWarehouseByCode" parameterType="com.xyscm.sys.basic.model.BasicWarehouse">
+  delete from  BASIC_WAREHOUSE
+    where MEMBER_CODE= #{memberCode}
+    and WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteWarehouse" parameterType="com.xyscm.sys.basic.model.BasicWarehouse">
+   delete from  BASIC_WAREHOUSE
+    where WAREHOUSE_ID = #{warehouseId,jdbcType=DECIMAL}
+    and MEMBER_CODE =#{memberCode}
+  </delete>
+  
+  
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicWarehouse" >
+    insert into  BASIC_WAREHOUSE (WAREHOUSE_ID, MEMBER_CODE, WAREHOUSE_CODE, 
+      WAREHOUSE_NAME, WAREHOUSE_MNEMCODE, WAREHOUSE_CTYPE, 
+      AREA_CODE, WAREHOUSE_PHONE, WAREHOUSE_ADDR, 
+      WAREHOUSE_MOBILE, WAREHOUSE_REMARK, WAREHOUSE_WAREPLACE, 
+      WAREHOUSE_STATE, BASIC_SHARE, WAREHOUSE_LINKMAN, 
+      WAREHOUSE_OWN_SUPERVISE)
+    values (#{warehouseId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{warehouseCode,jdbcType=VARCHAR}, 
+      #{warehouseName,jdbcType=VARCHAR}, #{warehouseMnemcode,jdbcType=VARCHAR}, #{warehouseCtype,jdbcType=VARCHAR}, 
+      #{areaCode,jdbcType=VARCHAR}, #{warehousePhone,jdbcType=VARCHAR}, #{warehouseAddr,jdbcType=VARCHAR}, 
+      #{warehouseMobile,jdbcType=VARCHAR}, #{warehouseRemark,jdbcType=VARCHAR}, #{warehouseWareplace,jdbcType=DECIMAL}, 
+      #{warehouseState,jdbcType=DECIMAL}, #{basicShare,jdbcType=DECIMAL}, #{warehouseLinkman,jdbcType=VARCHAR}, 
+      #{warehouseOwnSupervise,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicWarehouse" >
+  
+    
+    insert into  BASIC_WAREHOUSE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    <if test="true" > 
+        WAREHOUSE_ID,
+       </if> 
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="true" >
+        WAREHOUSE_CODE,
+      </if>
+      <if test="warehouseName != null" >
+        WAREHOUSE_NAME,
+      </if>
+      <if test="warehouseMnemcode != null" >
+        WAREHOUSE_MNEMCODE,
+      </if>
+      <if test="warehouseCtype != null" >
+        WAREHOUSE_CTYPE,
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="warehousePhone != null" >
+        WAREHOUSE_PHONE,
+      </if>
+      <if test="warehouseAddr != null" >
+        WAREHOUSE_ADDR,
+      </if>
+      <if test="warehouseMobile != null" >
+        WAREHOUSE_MOBILE,
+      </if>
+      <if test="warehouseRemark != null" >
+        WAREHOUSE_REMARK,
+      </if>
+      <if test="warehouseWareplace != null" >
+        WAREHOUSE_WAREPLACE,
+      </if>
+      <if test="warehouseState != null" >
+        WAREHOUSE_STATE,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+      <if test="warehouseLinkman != null" >
+        WAREHOUSE_LINKMAN,
+      </if>
+      <if test="warehouseOwnSupervise != null" >
+        WAREHOUSE_OWN_SUPERVISE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+      BASIC_WAREHOUSE_SEQ.nextval,
+     </if> 
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="true" >
+       (select  lpad((max(bb.warehouse_code)+1),4,'0')as code from basic_warehouse bb),
+      </if>
+      <if test="warehouseName != null" >
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseMnemcode != null" >
+        #{warehouseMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCtype != null" >
+        #{warehouseCtype,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousePhone != null" >
+        #{warehousePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseAddr != null" >
+        #{warehouseAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseMobile != null" >
+        #{warehouseMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseRemark != null" >
+        #{warehouseRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseWareplace != null" >
+        #{warehouseWareplace,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseState != null" >
+        #{warehouseState,jdbcType=DECIMAL},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseLinkman != null" >
+        #{warehouseLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseOwnSupervise != null" >
+        #{warehouseOwnSupervise,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateWarehouse" parameterType="com.xyscm.sys.basic.model.BasicWarehouse">
+   update  BASIC_WAREHOUSE
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null" >
+        WAREHOUSE_NAME = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseMnemcode != null" >
+        WAREHOUSE_MNEMCODE = #{warehouseMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCtype != null" >
+        WAREHOUSE_CTYPE = #{warehouseCtype,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousePhone != null" >
+        WAREHOUSE_PHONE = #{warehousePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseAddr != null" >
+        WAREHOUSE_ADDR = #{warehouseAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseMobile != null" >
+        WAREHOUSE_MOBILE = #{warehouseMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseRemark != null" >
+        WAREHOUSE_REMARK = #{warehouseRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseWareplace != null" >
+        WAREHOUSE_WAREPLACE = #{warehouseWareplace,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseState != null" >
+        WAREHOUSE_STATE = #{warehouseState,jdbcType=DECIMAL},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseLinkman != null" >
+        WAREHOUSE_LINKMAN = #{warehouseLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseOwnSupervise != null" >
+        WAREHOUSE_OWN_SUPERVISE = #{warehouseOwnSupervise,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR} and 
+    MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicWarehouse" >
+    update  BASIC_WAREHOUSE
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCode != null" >
+        WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null" >
+        WAREHOUSE_NAME = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseMnemcode != null" >
+        WAREHOUSE_MNEMCODE = #{warehouseMnemcode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseCtype != null" >
+        WAREHOUSE_CTYPE = #{warehouseCtype,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehousePhone != null" >
+        WAREHOUSE_PHONE = #{warehousePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseAddr != null" >
+        WAREHOUSE_ADDR = #{warehouseAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseMobile != null" >
+        WAREHOUSE_MOBILE = #{warehouseMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseRemark != null" >
+        WAREHOUSE_REMARK = #{warehouseRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseWareplace != null" >
+        WAREHOUSE_WAREPLACE = #{warehouseWareplace,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseState != null" >
+        WAREHOUSE_STATE = #{warehouseState,jdbcType=DECIMAL},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+      <if test="warehouseLinkman != null" >
+        WAREHOUSE_LINKMAN = #{warehouseLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseOwnSupervise != null" >
+        WAREHOUSE_OWN_SUPERVISE = #{warehouseOwnSupervise,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where WAREHOUSE_ID = #{warehouseId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicWarehouse" >
+    update  BASIC_WAREHOUSE
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      WAREHOUSE_CODE = #{warehouseCode,jdbcType=VARCHAR},
+      WAREHOUSE_NAME = #{warehouseName,jdbcType=VARCHAR},
+      WAREHOUSE_MNEMCODE = #{warehouseMnemcode,jdbcType=VARCHAR},
+      WAREHOUSE_CTYPE = #{warehouseCtype,jdbcType=VARCHAR},
+      AREA_CODE = #{areaCode,jdbcType=VARCHAR},
+      WAREHOUSE_PHONE = #{warehousePhone,jdbcType=VARCHAR},
+      WAREHOUSE_ADDR = #{warehouseAddr,jdbcType=VARCHAR},
+      WAREHOUSE_MOBILE = #{warehouseMobile,jdbcType=VARCHAR},
+      WAREHOUSE_REMARK = #{warehouseRemark,jdbcType=VARCHAR},
+      WAREHOUSE_WAREPLACE = #{warehouseWareplace,jdbcType=DECIMAL},
+      WAREHOUSE_STATE = #{warehouseState,jdbcType=DECIMAL},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      WAREHOUSE_LINKMAN = #{warehouseLinkman,jdbcType=VARCHAR},
+      WAREHOUSE_OWN_SUPERVISE = #{warehouseOwnSupervise,jdbcType=DECIMAL}
+    where WAREHOUSE_ID = #{warehouseId,jdbcType=DECIMAL}
+  </update>
+</mapper>

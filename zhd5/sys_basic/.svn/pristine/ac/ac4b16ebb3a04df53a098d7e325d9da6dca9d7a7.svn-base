@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.BasicDeptMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.BasicDept" >
+    <id column="DEPT_ID" property="deptId" jdbcType="DECIMAL" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR" />
+    <result column="DEPT_NAME" property="deptName" jdbcType="VARCHAR" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="DEPT_MANAGER" property="deptManager" jdbcType="VARCHAR" />
+    <result column="DEPT_REMARK" property="deptRemark" jdbcType="VARCHAR" />
+    <result column="DEPT_ISLEAF" property="deptIsleaf" jdbcType="DECIMAL" />
+    <result column="DEPT_PARENT" property="deptParent" jdbcType="VARCHAR" />
+    <result column="DEPT_NODECODE" property="deptNodecode" jdbcType="VARCHAR" />
+    <result column="BASIC_SHARE" property="basicShare" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEPT_ID, MEMBER_CODE, DEPT_CODE, DEPT_NAME, ORG_CODE, DEPT_MANAGER, DEPT_REMARK, 
+    DEPT_ISLEAF, DEPT_PARENT, DEPT_NODECODE, BASIC_SHARE
+  </sql>
+  
+  <select id="getByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select  
+  	<include refid="Base_Column_List" />
+  	from BASIC_DEPT
+  	where DEPT_PARENT = #{deptParent,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getDeptByCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select  
+  	<include refid="Base_Column_List" />
+  	from BASIC_DEPT
+  	where DEPT_CODE = #{deptCode,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="queryByParent" resultMap="BaseResultMap">
+  	select  
+  	<include refid="Base_Column_List" />
+  	from BASIC_DEPT
+  	where DEPT_PARENT = #{deptParent,jdbcType=VARCHAR} and DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL}
+  	and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR} ORDER BY DEPT_CODE DESC
+  </select>
+  
+  
+  <!-- 部门下拉框列表    -->
+  	<select id="queryDeptCombo" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+	from BASIC_DEPT a where a.member_Code=#{memberCode,jdbcType=VARCHAR} and a.dept_Isleaf=#{deptIsleaf,jdbcType=DECIMAL}
+  </select>
+  
+  <!-- 一级部门    -->
+  <select id="queryBasicDept" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * 
+	from Basic_Dept a where a.member_Code=#{memberCode,jdbcType=VARCHAR} and a.dept_Parent='-1' order by a.dept_code asc
+  </select>
+  
+  <!-- 二级部门   -->
+  <select id="query2BasicDept" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select * 
+	from Basic_Dept a where a.member_Code=#{memberCode,jdbcType=VARCHAR}
+	<if test="deptParent != null" >
+	 and a.dept_parent =  #{deptParent,jdbcType=VARCHAR} and a.dept_isleaf = '0'
+    </if>
+	order by a.dept_code asc
+  </select>
+  
+  
+  
+   <select id="getCountByParentCode" resultType="java.lang.Integer" parameterType="java.lang.String">
+  	select  
+  	count(*)
+  	from BASIC_DEPT
+  	where DEPT_PARENT = #{deptParent,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  	and DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL}
+  </select>
+  
+  <select id="getByName" resultMap="BaseResultMap" parameterType="java.lang.String">
+  	select  
+  	<include refid="Base_Column_List" />
+  	from BASIC_DEPT
+  	where DEPT_NAME = #{deptName,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getMaxOrgCode" resultType="java.lang.Integer">
+  		select MAX(DEPT_ID) from BASIC_DEPT
+  	</select>
+  
+  <select id="queryAll" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from BASIC_DEPT ORDER　BY DEPT_CODE DESC
+  	</select>
+  	
+  	<select id="query" resultMap="BaseResultMap">
+  	select 
+  	<include refid="Base_Column_List" /> 
+  	from BASIC_DEPT where 1 = 1 
+  	<if test="deptCode !=null" >
+      and DEPT_CODE = #{deptCode,jdbcType=VARCHAR}
+    </if>
+    <if test="deptName !=null" >
+      and DEPT_NAME = #{deptName,jdbcType=VARCHAR}
+    </if>
+    <if test="deptRemark !=null" >
+      and DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR}
+    </if>
+    
+  	</select>
+  	
+   <insert id="save" parameterType="com.xyscm.sys.basic.model.BasicDept" >
+    insert into BASIC_DEPT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        DEPT_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="true" >
+        DEPT_CODE,
+      </if>
+      <if test="deptName != null" >
+        DEPT_NAME,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="deptManager != null" >
+        DEPT_MANAGER,
+      </if>
+      <if test="deptRemark != null" >
+        DEPT_REMARK,
+      </if>
+      <if test="deptIsleaf != null" >
+        DEPT_ISLEAF,
+      </if>
+      <if test="deptParent != null" >
+        DEPT_PARENT,
+      </if>
+      <if test="deptNodecode != null" >
+        DEPT_NODECODE,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="true" >
+        BASIC_DEPT_SEQ.nextval,
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="true" >
+        (select  lpad((max(bb.DEPT_CODE)+1),4,'0')as code from BASIC_DEPT bb),
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptManager != null" >
+        #{deptManager,jdbcType=VARCHAR},
+      </if>
+      <if test="deptRemark != null" >
+        #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptIsleaf != null" >
+        #{deptIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="deptParent != null" >
+        #{deptParent,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNodecode != null" >
+         #{deptParent,jdbcType=VARCHAR}||'.'||(select  lpad((max(bb.DEPT_CODE)+1),4,'0')as code from BASIC_DEPT bb),
+      </if>
+      <if test="deptNodecode == null" >
+        #{deptParent,jdbcType=VARCHAR}||'.'||(select  lpad((max(bb.DEPT_CODE)+1),4,'0')as code from BASIC_DEPT bb),
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="update" parameterType="com.xyscm.sys.basic.model.BasicDept" >
+    update BASIC_DEPT
+    <set >
+      <if test="deptName != null" >
+        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptManager != null" >
+        DEPT_MANAGER = #{deptManager,jdbcType=VARCHAR},
+      </if>
+      <if test="deptRemark != null" >
+        DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptIsleaf != null" >
+        DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="deptParent != null" >
+        DEPT_PARENT = #{deptParent,jdbcType=VARCHAR},
+      </if>
+      <!-- <if test="deptNodecode != null" >
+        DEPT_NODECODE = #{deptNodecode,jdbcType=VARCHAR},
+      </if> -->
+      <if test="deptNodecode != null" >
+        DEPT_NODECODE = #{deptParent,jdbcType=VARCHAR}||'.'||(select  lpad((max(bb.DEPT_CODE)+1),4,'0')as code from BASIC_DEPT bb),
+      </if>
+      <if test="deptNodecode == null" >
+        DEPT_NODECODE = #{deptParent,jdbcType=VARCHAR}||'.'||(select  lpad((max(bb.DEPT_CODE)+1),4,'0')as code from BASIC_DEPT bb),
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DEPT_CODE = #{deptCode,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </update>
+  
+  <delete id="delete" parameterType="java.lang.String" >
+    delete from BASIC_DEPT
+    where DEPT_CODE = #{deptCode,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteDeptByParent" parameterType="java.lang.String" >
+    delete from BASIC_DEPT
+    where DEPT_PARENT = #{deptParent,jdbcType=VARCHAR} and DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </delete>
+  
+   <update id="updateDeptParentCode" parameterType="java.lang.String" >
+    update BASIC_DEPT
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptManager != null" >
+        DEPT_MANAGER = #{deptManager,jdbcType=VARCHAR},
+      </if>
+      <if test="deptRemark != null" >
+        DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptIsleaf != null" >
+        DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="deptParent != null" >
+        DEPT_PARENT = #{deptParent,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNodecode != null" >
+        DEPT_NODECODE = #{newDeptNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DEPT_CODE = #{deptCode,jdbcType=VARCHAR} and DEPT_PARENT = #{deptParent,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateDeptNodecode" parameterType="java.lang.String" >
+    update BASIC_DEPT
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptManager != null" >
+        DEPT_MANAGER = #{deptManager,jdbcType=VARCHAR},
+      </if>
+      <if test="deptRemark != null" >
+        DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptIsleaf != null" >
+        DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="deptParent != null" >
+        DEPT_PARENT = #{deptParent,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNodecode != null" >
+        DEPT_NODECODE = #{newDeptNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DEPT_NODE_CODE = #{deptNodeCode,jdbcType=VARCHAR} and MEMBER_CODE = #{memberCode,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!-- <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicDept" >
+    update CZZHD2.BASIC_DEPT
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      DEPT_MANAGER = #{deptManager,jdbcType=VARCHAR},
+      DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL},
+      DEPT_PARENT = #{deptParent,jdbcType=VARCHAR},
+      DEPT_NODECODE = #{deptNodecode,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL}
+    where DEPT_ID = #{deptId,jdbcType=DECIMAL}
+  </update> -->
+  
+  
+  <!-- <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from CZZHD2.BASIC_DEPT
+    where DEPT_ID = #{deptId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from CZZHD2.BASIC_DEPT
+    where DEPT_ID = #{deptId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.BasicDept" >
+    insert into CZZHD2.BASIC_DEPT (DEPT_ID, MEMBER_CODE, DEPT_CODE, 
+      DEPT_NAME, ORG_CODE, DEPT_MANAGER, 
+      DEPT_REMARK, DEPT_ISLEAF, DEPT_PARENT, 
+      DEPT_NODECODE, BASIC_SHARE)
+    values (#{deptId,jdbcType=DECIMAL}, #{memberCode,jdbcType=VARCHAR}, #{deptCode,jdbcType=VARCHAR}, 
+      #{deptName,jdbcType=VARCHAR}, #{orgCode,jdbcType=VARCHAR}, #{deptManager,jdbcType=VARCHAR}, 
+      #{deptRemark,jdbcType=VARCHAR}, #{deptIsleaf,jdbcType=DECIMAL}, #{deptParent,jdbcType=VARCHAR}, 
+      #{deptNodecode,jdbcType=VARCHAR}, #{basicShare,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.BasicDept" >
+    insert into CZZHD2.BASIC_DEPT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deptId != null" >
+        DEPT_ID,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE,
+      </if>
+      <if test="deptName != null" >
+        DEPT_NAME,
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE,
+      </if>
+      <if test="deptManager != null" >
+        DEPT_MANAGER,
+      </if>
+      <if test="deptRemark != null" >
+        DEPT_REMARK,
+      </if>
+      <if test="deptIsleaf != null" >
+        DEPT_ISLEAF,
+      </if>
+      <if test="deptParent != null" >
+        DEPT_PARENT,
+      </if>
+      <if test="deptNodecode != null" >
+        DEPT_NODECODE,
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deptId != null" >
+        #{deptId,jdbcType=DECIMAL},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptManager != null" >
+        #{deptManager,jdbcType=VARCHAR},
+      </if>
+      <if test="deptRemark != null" >
+        #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptIsleaf != null" >
+        #{deptIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="deptParent != null" >
+        #{deptParent,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNodecode != null" >
+        #{deptNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.BasicDept" >
+    update CZZHD2.BASIC_DEPT
+    <set >
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptCode != null" >
+        DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptName != null" >
+        DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="orgCode != null" >
+        ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deptManager != null" >
+        DEPT_MANAGER = #{deptManager,jdbcType=VARCHAR},
+      </if>
+      <if test="deptRemark != null" >
+        DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deptIsleaf != null" >
+        DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL},
+      </if>
+      <if test="deptParent != null" >
+        DEPT_PARENT = #{deptParent,jdbcType=VARCHAR},
+      </if>
+      <if test="deptNodecode != null" >
+        DEPT_NODECODE = #{deptNodecode,jdbcType=VARCHAR},
+      </if>
+      <if test="basicShare != null" >
+        BASIC_SHARE = #{basicShare,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where DEPT_ID = #{deptId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.BasicDept" >
+    update CZZHD2.BASIC_DEPT
+    set MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      DEPT_CODE = #{deptCode,jdbcType=VARCHAR},
+      DEPT_NAME = #{deptName,jdbcType=VARCHAR},
+      ORG_CODE = #{orgCode,jdbcType=VARCHAR},
+      DEPT_MANAGER = #{deptManager,jdbcType=VARCHAR},
+      DEPT_REMARK = #{deptRemark,jdbcType=VARCHAR},
+      DEPT_ISLEAF = #{deptIsleaf,jdbcType=DECIMAL},
+      DEPT_PARENT = #{deptParent,jdbcType=VARCHAR},
+      DEPT_NODECODE = #{deptNodecode,jdbcType=VARCHAR},
+      BASIC_SHARE = #{basicShare,jdbcType=DECIMAL}
+    where DEPT_ID = #{deptId,jdbcType=DECIMAL}
+  </update> -->
+</mapper>

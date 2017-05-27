@@ -1,0 +1,160 @@
+package com.xyscm.sys.basic.controller;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.xyscm.sys.basic.common.constant.ErrorCode;
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.common.util.BasicResult;
+import com.xyscm.sys.basic.common.util.MessageSourceUtil;
+import com.xyscm.sys.basic.model.BasicDept;
+import com.xyscm.sys.basic.model.BasicOrg;
+import com.xyscm.sys.basic.service.BasicDeptService;
+import com.xyscm.sys.basic.vo.BasicDeptVo;
+import com.xyscm.sys.basic.vo.BasicOrgVo;
+
+
+
+@Controller
+public class BasicDeptController {
+
+	@Autowired
+	private BasicDeptService basicDeptService;
+	
+	private static final Logger logger = LoggerFactory.getLogger(BasicEmployeeController.class.getName());
+	
+	@RequestMapping("/deptManage")
+	public String DeptManage(ServletRequest request,ServletResponse response){
+		return "orgManage/deptManage";
+	}
+	
+	
+	/**
+	 * 新增部门
+	 * @return
+	 */
+	@RequestMapping("/deptManage/add")
+	@ResponseBody
+	public  Map<String,Object> add(BasicDeptVo basicDeptVo) {
+		Map<String,Object> map = new HashMap<>();
+		try {
+			//表单验证
+			logger.debug(basicDeptVo.toString());
+			BasicDept basicDept = new BasicDept();
+			BeanUtils.copyProperties(basicDeptVo, basicDept);
+			basicDept.setMemberCode("0000");
+			basicDept.setDeptNodecode("node");
+			logger.debug(basicDept.toString());
+			try {
+				basicDeptService.save(basicDept);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("11111111");
+			}
+			map.put("msg", "ok");
+		} catch (Exception e) {
+			map.put("msg", "error");
+			e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_DEPT_ADD.getErrCode(),MessageSourceUtil.getMessage(ErrorCode.E_SYSB_DEPT_ADD.getErrCode()));
+		}
+		return map;
+	}
+	
+	/**
+	 * 修改部门
+	 */
+	@RequestMapping("/deptManage/update")
+	@ResponseBody
+	public  Map<String,Object> update(BasicDeptVo basicDeptVo) {
+		Map<String,Object> map = new HashMap<>();
+		try {
+			logger.debug(basicDeptVo.toString());
+			BasicDept basicDept = new BasicDept();
+			BeanUtils.copyProperties(basicDeptVo, basicDept);
+			basicDept.setMemberCode("0000");
+			logger.debug(basicDept.toString());
+			try {
+				int update = basicDeptService.update(basicDept);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("11111111");
+			}
+			map.put("msg", "ok");
+		} catch (Exception e) {
+			map.put("msg", "error");
+			e.printStackTrace();
+			throw new BaseException(ErrorCode.E_SYSB_DEPT_UPDATE.getErrCode(),MessageSourceUtil.getMessage(ErrorCode.E_SYSB_DEPT_UPDATE.getErrCode()));
+		}
+		return map;
+	}
+	/*@RequestMapping("/deptManage/update")
+	public @ResponseBody BasicResult update(BasicDept basicDept) {
+		try {
+			int update = basicDeptService.update(basicDept);
+		} catch (Exception e) {
+			throw new BaseException(ErrorCode.E_SYSB_DEPT_UPDATE.getErrCode(),MessageSourceUtil.getMessage(ErrorCode.E_SYSB_DEPT_UPDATE.getErrCode()));
+		}
+		return BasicResult.ok();
+	}*/
+	
+	/**
+	 * 删除部门
+	 */
+	@RequestMapping("/deptManage/delete")
+	@ResponseBody
+	public  Map<String,Object> delete(String dept_code) {
+		Map<String,Object> map = new HashMap<>();
+		try {
+			BasicDept basicDept = new BasicDept();
+			basicDept.setMemberCode("0000");
+			int delete = basicDeptService.delete(dept_code,basicDept.getMemberCode());
+			map.put("msg", "ok");
+		} catch (Exception e) {
+			map.put("msg", "error");
+			throw new BaseException(ErrorCode.E_SYSB_DEPT_DELETE.getErrCode(),MessageSourceUtil.getMessage(ErrorCode.E_SYSB_DEPT_DELETE.getErrCode()));
+		}
+		return map;
+	}
+	/**
+	 * 查询所有部门
+	 */
+	@RequestMapping("/deptManage/query")
+	@ResponseBody
+	public  Map<String,Object> query(){
+		Map<String,Object> map = new HashMap<>();
+		List<BasicDept> basicDeptList = basicDeptService.queryAll();
+		
+		//查询上级组织
+		
+		map.put("msg", "ok");
+		map.put("data", basicDeptList);
+		return map;
+	}
+	
+	
+	/**
+	 * 查询分页(分页)
+	 */
+	/*@RequestMapping("/dept/query")
+	public @ResponseBody PageJson query(DeptBeanVo bean, @RequestParam(defaultValue="1") Integer page,
+			@RequestParam(defaultValue="15") Integer rows){
+		//调用Service接口代理对象，查询商品
+		PageJson pageJson = basicDeptService.query(bean,page,rows);
+		return null;
+	}*/
+	
+}

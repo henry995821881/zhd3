@@ -1,0 +1,36 @@
+var Verification_Disabled = function() {
+	if($('#Location').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	$('#ReservoirArea').val(table_details.eq(1).text());
+	$('#CargoArea').val(table_details.eq(2).text());
+	$('#Location').val(table_details.eq(3).text());	
+	$('#Types').val(table_details.eq(4).text());
+	$('#Minimum').val(table_details.eq(5).text());
+	$('#Maximum').val(table_details.eq(6).text());
+	$('#GraphicLines').val(table_details.eq(7).text());
+	$('#GraphicColumns').val(table_details.eq(8).text());
+	$('#VideoEquipment').val(table_details.eq(9).text());
+	$('#Remark').val(table_details.eq(10).text());
+}
+/*var table_detail_empty = function() {
+	$('#ReservoirArea').val('');
+	$('#CargoArea').val('');
+	$('#Location').val('');
+	$('#Minimum').val('');
+	$('#Maximum').val('');
+	$('#GraphicLines').val('');
+	$('#GraphicColumns').val('');
+	$('#VideoEquipment').val('');
+	$('#Types').val('');
+	$('#Remark').val('');
+}*/
+$('#Location').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});

@@ -1,0 +1,113 @@
+package com.xyscm.sys.basic.service;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.xyscm.sys.basic.common.constant.ErrorCode;
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicPnTreeMapper;
+import com.xyscm.sys.basic.model.BasicPnTree;
+/**
+ * 品名大类查询
+ * @author Administrator
+ *
+ */
+@Service
+public class BasicPnTreeService {
+	Logger logger = LoggerFactory.getLogger(BasicPnTreeService.class);
+	@Autowired
+	BasicPnTreeMapper basicPnTreeMapper;
+  
+  /**
+   * 
+   * @param record PNTREE_PARENTCODE  MEMBER_CODE
+   * @return
+   */
+	public List<BasicPnTree> queryList(BasicPnTree record){
+		
+		List<BasicPnTree> list = null;
+		try {
+			list = basicPnTreeMapper.queryList(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PT_SELECT.getErrCode());
+		}
+		
+		return list;
+	}
+	
+	
+	/**
+	 * 
+	 * @param record  PntreeParentcode PNTREE_NAME memeber_code
+	 *
+	 * void
+	 */
+	public void saveTree(BasicPnTree record){
+		
+		
+		
+		try {
+			basicPnTreeMapper.insertSelective(record);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PT_ADD.getErrCode());
+
+		}
+		
+		
+	}
+	
+	
+	/**
+	 * 
+	 * @param record   PNTREE_CODE  memeber_code
+	 *
+	 * void
+	 */
+	public void updateTree(BasicPnTree record){
+		
+		
+		
+		try {
+			basicPnTreeMapper.updataTree(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PT_UPDATE.getErrCode());
+		}
+		
+		
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @param record   PNTREE_CODE  memeber_code
+	 *
+	 * void
+	 */
+	public void deleteTree(BasicPnTree record){
+		
+		
+		
+		try {
+			basicPnTreeMapper.deleteTree(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			logger.info(e.getMessage());
+			throw new BaseException(ErrorCode.E_SYSB_PT_DELETE.getErrCode());
+		}
+		
+		
+	}
+	
+	
+	
+}

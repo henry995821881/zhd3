@@ -1,0 +1,253 @@
+pageHtml();//初始化分页元素
+mainContentLeft();
+
+var page_size = 23;
+var current_page=1;
+
+query_();
+	
+
+
+function page_init(max_page_){
+		
+//分页
+	$('.pagination').jqPagination({
+		link_string : '/?page={page_number}',
+		//current_page: current_page, //设置当前页 默认为1
+		max_page : max_page_, //设置最大页 默认为1
+		page_string : '当前第{current_page}页,共{max_page}页',
+		paged : function(current_page_) {
+			//回发事件。。。
+			current_page = current_page_;
+			query_();
+		}
+	});
+	
+}
+
+
+/**
+ * 模糊查询
+ */
+function query_(){
+	
+	
+	
+	var $form = $('#form_query');
+
+	var data = $form.serialize();
+	data = data+"&current_page=" +current_page;
+	data = data+"&page_size=" +page_size;
+	
+	$.post("warehouseManage/query/page",
+			  data,
+			  function(d,status){
+		var content= eval("("+d+")");
+		//验证返回数据
+	
+					var WarehouseSettinghtml = template('WarehouseSetting', content);
+				
+					
+					$("#content_warehouse").html(WarehouseSettinghtml);
+				
+					aTable();
+					
+					page_init(content.max_page);
+					
+				 
+			  });
+	
+	
+}
+
+
+
+
+/**
+ * 
+ * 
+ * 
+ */
+
+var Verification_Disabled = function() {
+	if($('#WarehouseName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+var TableDetail = function(table_details) {
+	
+	$('#WarehouseName').val(table_details.eq(0).text());
+	//
+	$("#warehouseCode_1").val(table_details.eq(0).attr("warehouse_code"));
+	 
+	$('#Assistant').val(table_details.eq(2).text());
+	$('#WarehouseType').val(table_details.eq(3).text());	
+	if($('#Supervision').val() === table_details.eq(4).text()) {
+		$('#Supervision').attr("checked", "checked");
+	}
+	if($('#Location').val() === table_details.eq(5).text()) {
+		$('#Location').attr("checked", "checked");
+	}
+	$('#Area').val(table_details.eq(6).text());
+	$('#Contact').val(table_details.eq(7).text());
+	$('#Phone').val(table_details.eq(8).text());
+	$('#Tel').val(table_details.eq(9).text());
+	$('#Add').val(table_details.eq(10).text());
+	$('#Remark').val(table_details.eq(11).text());
+}
+/*
+ * var table_detail_empty = function() { $('#WarehouseName').val('');
+ * $('#Assistant').val(''); $('#WarehouseType').val(''); $('#Area').val('');
+ * $('#Contact').val(''); $('#Phone').val(''); $('#Tel').val('');
+ * $('#Add').val(''); $('#Remark').val('');
+ * $('#Location').removeAttr('checked');
+ * $('#Supervision').removeAttr('checked'); }
+ */
+/*
+ * $('#WarehouseName').on('blur', function() { var a = $(this); Verification(a);
+ * Verification_Disabled();
+ * 
+ * 
+ * 
+ * 
+ * });
+ */
+
+//判断是增加还是修改
+var flag = "";
+$("li.oper_").on('click', function() {
+	
+	flag = $(this).attr("data");
+	if(flag=='del'){
+		
+		//删除
+		
+		var warehouse_code= $('.table_detail.active').find('td').eq(0).attr("warehouse_code");
+		
+		var data={'warehouse_code':warehouse_code};
+		var url = "warehouseManage/delete";
+		$.post(url, data, function(d) {
+			var content= eval("("+d+")");
+			//验证返回数据
+			if(!validated_return_data(content)){
+				
+				alert(content.msg);
+				return;
+			}
+			query_();
+			close_window();
+
+		});
+		
+	}
+});
+
+
+
+
+
+function oper_warehouse(){
+
+	
+	 if($("#Location").is(':checked')){
+			
+			$("input[name='warehouseWareplace']").val(1);
+		}else{
+			
+			$("input[name='warehouseWareplace']").val(0);
+			
+		}
+		
+	   if($("#Supervision").is(':checked')){
+			
+			$("input[name='warehouseOwnSupervise']").val(1);
+		}else{
+			
+			$("input[name='warehouseOwnSupervise']").val(0);
+			
+		}
+	
+	
+	
+	 if(flag =="add"){
+		 
+		 save_warehouse();
+	 }else if(flag =="update"){
+		 update_warehouse();
+	 }
+	
+
+	
+	
+}
+
+
+function update_warehouse(){
+	
+	//表单验证
+	var $form = $('#add_warehouse');
+
+
+   
+   
+   
+	var data = $form.serialize();
+	var url ="warehouseManage/update";
+	$.post(url, data, function(d) {
+		var content= eval("("+d+")");
+		//验证返回数据
+		if(!validated_return_data(content)){
+			
+			alert(content.msg);
+			return;
+		}
+	
+		query_();
+		close_window();
+			
+		
+
+	});
+	
+}
+
+
+
+
+
+function save_warehouse(){
+	
+	
+	//表单验证
+	var $form = $('#add_warehouse');
+
+	
+   
+   //
+	
+	var data = $form.serialize();
+	var url ="warehouseManage/add";
+	$.post(url, data, function(d) {
+		var content= eval("("+d+")");
+		//验证返回数据
+		if(!validated_return_data(content)){
+			
+			alert(content.msg);
+			return;
+		}
+	
+		query_();
+		close_window();
+			
+		
+
+	});
+	
+	
+}
+
+
+//@ sourceURL=product.js  
+

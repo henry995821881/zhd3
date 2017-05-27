@@ -1,0 +1,114 @@
+
+mainContentLeft();
+//地区列表
+function init_data(){
+	
+	$.post("area/queryAllArea",
+	  {
+	    memeber_code:'0000'
+	  },
+	  function(d,status){
+		  	var content= eval("("+d+")");
+			var areaTree = template('areaTree', content);
+			$("#areaTreeLeft").html(areaTree);
+			//地区列表点击事件
+			$(".nav_list_toggle").on('click', function(item) {
+				var areaNodecode = $(this).attr("id");
+				var type = $(this).attr("value");
+				var areaId = $(this).attr("areaId");
+				getdata(areaNodecode,type,areaId);	
+			});
+			aGroup();
+			
+	  });
+}
+init_data();
+//获取列表数据
+function getdata(areaNodecode,type,areaId){
+		$.post("area/query2BasicArea", 
+			{
+			areaNodecode:areaNodecode,
+			type:type,
+			areaId:areaId
+			}, 
+			function(d) {
+				
+				var content= eval("("+d+")");
+				var content_area = template('AreaSetting', content);
+				$("#content_area").html(content_area);
+			
+				if(type == 0){//增加一级地区
+					$("#AreaParent").val(-1);	
+				}
+				if(type == 1){//增加二级地区
+					$("#AreaParent").val(content.basicArea.areaNodecode);	//上级地区的areaNodecode
+					$("#AreaNodecode").val(content.basicArea.areaNodecode+".");	
+				}
+				if(type == 2){
+					$("#AreaParent").val(content.basicArea.areaCode);	//上级地区的areaNodecode
+					$("#AreaNodecode").val(content.basicArea.areaNodecode+".");	
+				}
+				aTable();
+			});
+	}
+
+//操作-------表格
+var opt_table_status = "";
+$(".opt_").on('click',function(){
+	opt_table_status = $(this).attr("opt");
+})
+
+function save_table(){
+	alert(opt_table_status);
+	if(opt_table_status == 'add_table'){
+		add_table_area();
+	}
+	if(opt_table_status == 'update_table'){
+		update_table_area();
+	}
+	if(opt_table_status == 'del_table'){
+		del_table_area();
+	}
+}
+
+//新增------表格
+function add_table_area(){
+	var $form = $('#add_area_table');
+	
+	var data = $form.serialize();
+	var url ="area/insertArea";
+	$.post(url, data, function(d) {
+		init_data();
+		close_window();
+	});
+}
+
+//修改------表格
+function update_table_area(){
+	var $form = $('#add_area_table');
+	
+	var data = $form.serialize();
+	var url ="area/insertArea";
+	$.post(url, data, function(d) {
+		init_data();
+		close_window();
+	});
+}
+
+
+
+
+var Verification_Disabled = function() {
+	if($('#AreaName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+
+var TableDetail = function(table_details) {
+	$('#AreaName').val(table_details.eq(0).text());
+	$('#AssistantCode').val(table_details.eq(2).text());
+	$('#Remark').val(table_details.eq(3).text());
+}
+

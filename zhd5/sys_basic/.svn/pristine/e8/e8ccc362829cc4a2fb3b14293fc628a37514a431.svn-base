@@ -1,0 +1,33 @@
+package com.xyscm.sys.basic.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class GoodsManage {
+
+	
+	
+	@RequestMapping("/warehouseManage")
+	public void Warehouse(ServletRequest request,ServletResponse response){
+		
+		
+		try {
+			request.getRequestDispatcher("/page/goodsManage/warehouseManage.html").forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+}

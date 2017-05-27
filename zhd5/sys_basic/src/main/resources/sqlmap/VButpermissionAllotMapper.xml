@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.cas.dao.VButpermissionAllotMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.cas.model.VButpermissionAllot" >
+    <result column="V_ID" property="vId" jdbcType="VARCHAR" />
+    <result column="PERMISSION_CODE" property="permissionCode" jdbcType="VARCHAR" />
+    <result column="BUTTON_CODE" property="buttonCode" jdbcType="VARCHAR" />
+    <result column="BUTTON_NAME" property="buttonName" jdbcType="VARCHAR" />
+    <result column="BUTTON_ACTION" property="buttonAction" jdbcType="VARCHAR" />
+    <result column="BUTTON_METHOD" property="buttonMethod" jdbcType="VARCHAR" />
+    <result column="BUTTON_REMARK" property="buttonRemark" jdbcType="VARCHAR" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_CODE" property="operatorCode" jdbcType="VARCHAR" />
+    <result column="OPERATOR_USER" property="operatorUser" jdbcType="VARCHAR" />
+    <result column="ROLE_CODELIST" property="roleCodelist" jdbcType="VARCHAR" />
+    <result column="OPERATOR_STATE" property="operatorState" jdbcType="DECIMAL" />
+    <result column="OPERATOR_IDENTITY" property="operatorIdentity" jdbcType="DECIMAL" />
+    <result column="ORG_CODE" property="orgCode" jdbcType="VARCHAR" />
+    <result column="DEPT_CODE" property="deptCode" jdbcType="VARCHAR" />
+    <result column="OP_PERMISSION_ALLOT" property="opPermissionAllot" jdbcType="DECIMAL" />
+    <result column="RO_PERMISSION_ALLOT" property="roPermissionAllot" jdbcType="DECIMAL" />
+  </resultMap>
+   <select id="queryButPermission" resultMap="BaseResultMap" >
+    select 
+    	*
+    from 
+    	v_permission_allot
+    where 
+    	MEMBER_CODE = #{0} AND
+    	OPERATOR_CODE = #{1}
+    
+  </select>
+</mapper>

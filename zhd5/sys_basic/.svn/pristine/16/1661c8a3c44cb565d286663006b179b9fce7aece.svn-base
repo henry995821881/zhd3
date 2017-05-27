@@ -1,0 +1,96 @@
+
+mainContentLeft();
+
+function init_data(){
+	
+	$.post("company/queryCompany",
+	  {
+	    memeber_code:'0000'
+	  },
+	  function(d,status){
+		  	var content= eval("("+d+")");
+			var SetCompany = template('SetCompany', content);
+			$("#content_SetCompany").html(SetCompany);
+			
+			//删除时用到的companyId
+			$(".table_detail").on('click', function(item) {
+				var companyId = $(this).attr("companyId");
+				$("#companyId").val(companyId);
+			});
+			aTable();
+			
+	  });
+}
+init_data();
+
+//查询
+function query(){
+	var $form = $("#query_company");
+	
+	var data = $form.serialize();
+	var url = "company/queryCompany";
+	$.post(url, data, function(d,status){
+		var content= eval("("+d+")");
+		var SetCompany = template('SetCompany', content);
+		$("#content_SetCompany").html(SetCompany);
+		
+		//删除时用到的companyId
+		$(".table_detail").on('click', function(item) {
+			var companyId = $(this).attr("companyId");
+			$("#companyId").val(companyId);
+		});
+		aTable();
+	})
+};
+
+//操作-------表格
+var opt_status = "";
+$(".opt_").on('click',function(){
+	
+	opt_status = $(this).attr("opt");
+	alert(opt_status);
+	if(opt_status == 'del'){
+		del_company();
+	}
+})
+
+function save_table(){
+	if(opt_table_status == 'add'){
+
+	}
+	if(opt_table_status == 'update'){
+	
+	}
+	
+}
+
+
+//删除
+function del_company(){
+	var companyId = $("#companyId").val();
+	var data = {companyId:companyId};
+	var url ="company/deleteCompany";
+	$.post(url, data, function(d) {
+		close_window();
+	});
+}
+
+
+var Verification_Disabled = function() {
+	if($('#AreaName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+
+var TableDetail = function(table_details) {
+	$('#AreaName').val(table_details.eq(0).text());
+	$('#AssistantCode').val(table_details.eq(2).text());
+	$('#Remark').val(table_details.eq(3).text());
+}
+
+
+
+
+//@ sourceURL=product.js  

@@ -1,0 +1,115 @@
+package com.xyscm.sys.basic.controller;
+
+import java.math.BigDecimal;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xyscm.sys.basic.model.BasicArea;
+import com.xyscm.sys.basic.model.BasicCompany;
+import com.xyscm.sys.basic.service.BasicCompanyService;
+
+@Controller
+public class CompanyManageController {
+
+	@Autowired
+	private BasicCompanyService basicCompanyService;
+	
+	/**
+	 * 跳转往来单位设置页面
+	 * @param request
+	 * @param response
+	 * @return
+	 *
+	 * String
+	 */
+	@RequestMapping("/to_company")
+	public String to_company(ServletRequest request,ServletResponse response){
+			
+		
+		return "/page/companyManage/companyManage";
+	}
+	
+	
+	/**
+	 * 查询往来单位
+	 * @param request
+	 * @param response
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	@RequestMapping("/queryCompany")
+	public PageInfo queryCompany(ServletRequest request,ServletResponse response){
+	
+		String memberCode = "0000";
+		String orgCode = "";
+		PageHelper.startPage(1, 10);  // 开启分页，必须
+		BasicCompany basicCompany = new BasicCompany();
+		basicCompany.setMemberCode(memberCode);
+		basicCompany.setOrgCode(orgCode);
+		Page page  = (Page)basicCompanyService.queryCompany(basicCompany);
+		PageInfo<BasicCompany> pageInfo = new PageInfo<BasicCompany>(page); // 对page对象包了一层，里面有一些翻页需要的信息
+		
+		return pageInfo;
+	}
+	
+	
+	/**
+	 * 查询往来单位的详情
+	 * @param request
+	 * @param response
+	 * @return
+	 *
+	 * BasicCompany
+	 */
+	@RequestMapping("/getCompanyInfo")
+	public BasicCompany get(ServletRequest request,ServletResponse response){
+		BigDecimal companyId = new BigDecimal(1234);
+		BasicCompany basicCompany = basicCompanyService.getCompanyInfo(companyId);
+		return basicCompany;
+	}
+	
+	
+	/**
+	 * 新增往来单位
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	public void insertCompany(ServletRequest request,ServletResponse response){
+		
+		String memberCode = "";
+		String companyName = "";
+		BasicCompany basicCompany = new BasicCompany();
+		basicCompany.setMemberCode(memberCode);
+		basicCompany.setCompanyName(companyName);
+		basicCompanyService.insertCompany(basicCompany);
+		
+	}
+	
+	/**
+	 * 编辑往来单位
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	public void update(ServletRequest request,ServletResponse response){
+		
+		BasicCompany basicCompany = new BasicCompany();
+		basicCompany.setCompanyId(new BigDecimal(21499));
+		basicCompany.setCompanyAbbreviate("adc");
+		basicCompanyService.updateCompany(basicCompany);
+	}
+	
+	
+}

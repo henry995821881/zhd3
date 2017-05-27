@@ -1,0 +1,156 @@
+package com.xyscm.sys.basic.controller;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xyscm.sys.basic.model.BasicArea;
+import com.xyscm.sys.basic.model.BasicOrg;
+import com.xyscm.sys.basic.service.BasicAreaService;
+
+@Controller
+public class AreaManageController {
+	
+	@Autowired
+	private BasicAreaService areaService;
+
+	/**
+	 * 跳转的地区设置页面
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws ServletException
+	 * @throws IOException
+	 *
+	 * String
+	 */
+	@RequestMapping("/to_area")
+	public String to_area(ServletRequest request,ServletResponse response) {
+		
+		
+		return "/areaManage/areaManage";
+	}
+	
+	/**
+	 * 查询所有地区
+	 * @param request
+	 * @param response
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	@RequestMapping("/queryAllArea")
+	public PageInfo queryAllArea(ServletRequest request,ServletResponse response){
+		
+		String memberCode = "0000";
+		PageHelper.startPage(1, 10);  // 开启分页，必须
+		Page page  = (Page)areaService.queryAllArea(memberCode);
+		PageInfo<BasicArea> pageInfo = new PageInfo<BasicArea>(page); // 对page对象包了一层，里面有一些翻页需要的信息
+		
+		return pageInfo;
+	}
+	
+	
+	/**
+	 * 查看一级地区所对应的二级地区
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	@RequestMapping("/query2BasicArea")
+	public void query2BasicArea(ServletRequest request,ServletResponse response){
+		String memberCode = "0000";
+		String areaNodecode = "0039.0171";
+		areaService.query2BasicArea(memberCode, areaNodecode);
+	}
+	
+	
+	/**
+	 * 查询地区详情
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	@RequestMapping("/getAreaDetail")
+	public BasicArea getAreaDetail(ServletRequest request,ServletResponse response){
+		BigDecimal areaId = new BigDecimal(1234);
+		BasicArea basicArea = areaService.getAreaDetail(areaId);
+		return basicArea;
+	}
+	
+	
+	
+	/**
+	 * 新增地区
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	@RequestMapping("/insertArea")
+	public void insertArea(ServletRequest request,ServletResponse response){
+		String areaMnemcode = "";
+		String areaName = "";
+		String areaParent = "";
+		String areaNodecode = "";
+		BasicArea basicArea = new BasicArea();
+		basicArea.setAreaMnemcode(areaMnemcode);
+		basicArea.setAreaName(areaName);
+		basicArea.setAreaParent(areaParent);
+		basicArea.setAreaNodecode(areaNodecode);
+		areaService.insertArea(basicArea);
+	}
+	
+	
+	
+	
+	/**
+	 * 编辑地区
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	@RequestMapping("/updateArea")
+	public void updateArea(ServletRequest request,ServletResponse response){
+		BasicArea basicArea = new BasicArea();
+		BigDecimal areaId = new BigDecimal(1234);
+		basicArea.setAreaId(areaId);
+		areaService.updateArea(basicArea);
+		
+	}
+	
+	
+	/**
+	 * 删除地区
+	 * @param request
+	 * @param response
+	 *
+	 * void
+	 */
+	@RequestMapping("/deleteArea")
+	public void deleteArea(ServletRequest request,ServletResponse response){
+		String memberCode = "0000";
+		String areaNodecode = "";
+		areaService.deleteArea(memberCode, areaNodecode);
+	}
+	
+	
+	
+	
+	
+	
+}

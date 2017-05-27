@@ -1,0 +1,47 @@
+package com.xyscm.sys.basic.cas.util;
+
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
+
+import com.xyscm.sys.basic.cas.User;
+
+public class SessionUtils {
+
+	public SessionUtils() {
+	}
+
+	public static String getUerName() {
+		return ((User) SecurityUtils.getSubject().getPrincipal())
+				.getUserId();
+	}
+
+	public static Subject getSubject() {
+		return SecurityUtils.getSubject();
+	}
+
+	public static boolean isLogin() {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject == null)
+			return false;
+		else
+			return subject.isAuthenticated();
+	}
+
+	public static String getUserId() {
+		return ((User) SecurityUtils.getSubject().getPrincipal())
+				.getUserId();
+	}
+
+	public static User getUserInfo() {
+		return (User) SecurityUtils.getSubject().getPrincipal();
+	}
+
+	public static Session getSession() {
+		return SecurityUtils.getSubject().getSession();
+	}
+
+	public static Session getSession(boolean create) {
+		return SecurityUtils.getSubject().getSession(create);
+	}
+}

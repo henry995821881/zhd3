@@ -1,0 +1,158 @@
+
+mainContentLeft();
+//地区列表
+function init_data(){
+	
+	$.post("area/queryAllArea",
+	  {
+	    memeber_code:'0000'
+	  },
+	  function(d,status){
+		  	var content= eval("("+d+")");
+			var areaTree = template('areaTree', content);
+			$("#areaTreeLeft").html(areaTree);
+			//地区列表点击事件
+			$(".nav_list_toggle").on('click', function(item) {
+				var areaNodecode = $(this).attr("id");
+				var type = $(this).attr("value");
+				var areaId = $(this).attr("areaId");	//地区id
+				if(areaId != null){
+					$("#areaId").val(areaId);
+				}
+				getdata(areaNodecode,type,areaId);
+				aTable();
+			});
+			aGroup();
+			
+	  });
+}
+init_data();
+//获取列表数据
+function getdata(areaNodecode,type,areaId){
+		$.ajaxSetup({
+		  async: false
+		 });
+		
+		$.post("area/query2BasicArea",  
+			{
+			areaNodecode:areaNodecode,
+			type:type,
+			areaId:areaId
+			}, 
+			function(d) {
+				
+				var content= eval("("+d+")");
+				var content_area = template('AreaSetting', content);
+				$("#content_area").html(content_area);
+				
+				if(type == 0){//增加一级地区
+					$("#AreaParent").val(-1);	
+					$("#AreaNodecode").val("");	
+				}
+				if(type == 1){//增加二级地区
+					$("#AreaParent").val(content.basicArea.areaNodecode);	//上级地区的areaNodecode
+					$("#AreaNodecode").val(content.basicArea.areaNodecode+".");	
+				}
+				if(type == 2) {
+					$("#AreaParent").val(content.basicArea.areaCode);	//上级地区的areaNodecode
+					$("#AreaNodecode").val(content.basicArea.areaNodecode+".");	
+				}
+				//提示位置不对
+				if(type == 3) {
+					//alert("已是最低层，无法新增下级地区，请重新选择");
+				}
+				
+				//修改时用到的areaId
+				$(".table_detail").on('click', function(item) {
+					var areaId = $(this).attr("areaId");
+					$("#areaId").val(areaId);
+					var areaNodecode = $(this).attr("areaNodecode");
+					$("#AreaNodecode").val(areaNodecode);
+				});
+				
+			});
+		
+	}
+
+//操作-------表格
+var opt_table_status = "";
+$(".opt_").on('click',function(){
+	
+	opt_table_status = $(this).attr("opt");
+	if(opt_table_status == 'del_table'){
+		del_table_area();
+	}
+})
+
+function save_table(){
+	if(opt_table_status == 'add_table'){
+		add_table_area();
+	}
+	if(opt_table_status == 'update_table'){
+		$("#AreaParent").val("");	
+		$("#AreaNodecode").val("");	
+		update_table_area();
+	}
+	
+}
+
+//新增------表格
+function add_table_area(){
+	var $form = $('#add_area_table');
+	
+	var data = $form.serialize();
+	var url ="area/insertArea";
+	$.post(url, data, function(d) {
+		init_data();
+		close_window();
+	});
+}
+
+//修改------表格
+function update_table_area(){
+	var $form = $('#add_area_table');
+	
+	var data = $form.serialize();
+	var url ="area/updateArea";
+	$.post(url, data, function(d) {
+		close_window();
+		var AreaName = $("#AreaName").val();
+		var areaMnemcode = $("#AssistantCode").val();
+		var Remark = $("#Remark").val();
+		var areaId = $("#tab_areaId").val();
+		$("tr[tab_areaId="+areaId+"]>td").eq(0).html(AreaName);
+		$("tr[tab_areaId="+areaId+"]>td").eq(2).html(areaMnemcode);
+		$("tr[tab_areaId="+areaId+"]>td").eq(3).html(Remark);
+	});
+}
+
+
+//删除------表格
+function del_table_area(){
+	var areaNodecode = $("#AreaNodecode").val();
+	var data = {areaNodecode:areaNodecode};
+	var url ="area/deleteArea";
+	$.post(url, data, function(d) {
+		close_window();
+	});
+}
+
+
+var Verification_Disabled = function() {
+	if($('#AreaName').val() === '') {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}
+
+var TableDetail = function(table_details) {
+	$('#AreaName').val(table_details.eq(0).text());
+	$('#AssistantCode').val(table_details.eq(2).text());
+	$('#Remark').val(table_details.eq(3).text());
+}
+
+
+
+
+//@ sourceURL=product.js  

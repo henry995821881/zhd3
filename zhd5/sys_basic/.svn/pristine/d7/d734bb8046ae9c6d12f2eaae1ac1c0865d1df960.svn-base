@@ -1,0 +1,118 @@
+package com.xyscm.sys.basic.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.xyscm.sys.basic.common.exception.BaseException;
+import com.xyscm.sys.basic.dao.BasicGoodsCodeMapper;
+import com.xyscm.sys.basic.model.BasicGoodsCode;
+import com.xyscm.sys.basic.model.BasicOrg;
+import com.xyscm.sys.basic.model.BasicPartsName;
+
+/**
+ * 物资代码设置
+ * @author Administrator
+ *
+ */
+@Service
+public class BasicGoodsCodeService {
+	
+	
+	@Autowired
+	BasicGoodsCodeMapper basicGoodsCodeMapper;
+	
+	/**
+	 * 
+	 * @param   memeberCode    like   GOODS_NODECODE 模糊查询条件
+	 * @return
+	 */
+	public List<BasicGoodsCode> queryList(BasicGoodsCode record){
+		
+		List<BasicGoodsCode> list= null;
+		try {
+			list = basicGoodsCodeMapper.queryList(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001","物资代码查询出错！");
+		}
+		
+		return list;
+	}
+	
+	
+	
+	/**
+	 * 分页查询
+	 * @param pageNum
+	 * @param pageSize
+	 * @param record
+	 * @return
+	 *
+	 * PageInfo
+	 */
+	public PageInfo getPage(int pageNum,int pageSize,BasicGoodsCode record){
+		
+         PageHelper.startPage(pageNum, pageSize);  // 开启分页，必须
+		
+		
+	      // 对原来的查询方法不需要任何修改
+	      Page page = (Page)basicGoodsCodeMapper.queryList(record);
+		PageInfo<BasicOrg> pageInfo = new PageInfo<BasicOrg>(page); // 对page对象包了一层，里面有一些翻页需要的信息
+		
+		return pageInfo;
+	}
+	
+	
+	/**
+	 * 
+	 * @param  GOODSCODE_CODE MEMBER_CODE
+	 */
+	public void updateGoodsCode(BasicGoodsCode record){
+		
+		try {
+			basicGoodsCodeMapper.updateGoodsCode(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001","物资代码更新出错！");
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * @param  GOODSCODE_CODE MEMBER_CODE
+	 */
+	public void deleteGoodsCode(BasicGoodsCode record){
+		
+		try {
+			basicGoodsCodeMapper.deleteGoodsCode(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+            throw new BaseException("001","物资代码删除出错！");
+		}
+	}
+	
+	
+	/**
+	 * 
+	 * @param record
+	 */
+	public void saveGoodsCode(BasicGoodsCode record){
+		try {
+			basicGoodsCodeMapper.insertSelective(record);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new BaseException("001","物资代码保存出错！");
+		}
+	}
+
+}

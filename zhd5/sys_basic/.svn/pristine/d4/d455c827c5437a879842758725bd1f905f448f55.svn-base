@@ -1,0 +1,101 @@
+
+$.post("employeeManage/query",
+		  {
+		    memeber_code:'0000'
+		  },
+		 
+		  function(d,status){
+			var content= eval("("+d+")");
+		
+				var EmployeeManagehtml = template('EmployeeManage', content);
+			
+				
+				$("#content_employee").html(EmployeeManagehtml);
+			
+				aTable();
+
+			 
+		  });
+/*var Verification_Disabled = function() {
+	if($('#Name').val() === '' || $('#Department').val() === null || $('#Organization') === null) {
+		add_table_submit.attr("disabled", "disabled");
+	} else {
+		add_table_submit.attr("disabled", false);
+	}
+}*/
+var TableDetail = function(table_details) {
+	$('#Name').val(table_details.eq(0).text());
+	$('#Organization').val(table_details.eq(2).text());
+	$('#Department').val(table_details.eq(3).text());
+	$('#Assistant').val(table_details.eq(4).text());
+	$('#EmployeeCategory').val(table_details.eq(5).text());
+	$('#Office').val(table_details.eq(6).text());
+	$('#Profession').val(table_details.eq(7).text());
+	$('#JobTitle').val(table_details.eq(8).text());
+	if($('#SexGirl').val() === table_details.eq(9).text()) {
+		$('#SexGirl').attr("checked", "checked");
+	} else {
+		$('#SexMan').attr("checked", "checked");
+	}
+	$('#Education').val(table_details.eq(10).text());
+	$('#PoliticalStatus').val(table_details.eq(11).text());
+	$('#Nation').val(table_details.eq(12).text());
+	$('#NativePlace').val(table_details.eq(13).text());
+	$('#Birthday').val(table_details.eq(16).text());
+	if($('#Unmarried').val() === table_details.eq(14).text()) {
+		$('#Unmarried').attr("checked", "checked");
+	} else {
+		$('#Married').attr("checked", "checked");
+	}
+	$('#EntryTime').val(table_details.eq(17).text());
+	$('#Email').val(table_details.eq(22).text());
+	$('#Phone').val(table_details.eq(20).text());
+	$('#Tel').val(table_details.eq(21).text());
+	$('#IdNum').val(table_details.eq(18).text());
+	$('#NameJobs').val(table_details.eq(19).text());
+	if($('#StatusDisabled').val() === table_details.eq(15).text()) {
+		$('#StatusDisabled').attr("checked", "checked");
+	} else {
+		$('#StatusOpen').attr("checked", "checked");
+	}
+	$('#Address').val(table_details.eq(23).text());
+	$('#Remark').val(table_details.eq(24).text());
+}
+/*var table_detail_empty = function() {
+	$('#Name').val('');
+	$('#Organization').val('');
+	$('#Department').val('');
+	$('#Assistant').val('');
+	$('#EmployeeCategory').val('');
+	$('#Office').val('');
+	$('#Profession').val('');
+	$('#JobTitle').val('');
+	$('#Education').val('');
+	$('#PoliticalStatus').val('');
+	$('#Nation').val('');
+	$('#NativePlace').val('');
+	$('#Birthday').val('');
+	$('#EntryTime').val('');
+	$('#Email').val('');
+	$('#Phone').val('');
+	$('#Tel').val('');
+	$('#IdNum').val('');
+	$('#NameJobs').val('');
+	$('#Address').val('');
+	$('#Remark').val('');
+}*/
+/*$('#Name').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Organization').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});
+$('#Department').on('blur', function() {
+	var a = $(this);
+	Verification(a);
+	Verification_Disabled();
+});*/

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xyscm.sys.basic.dao.MonitoringDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.xyscm.sys.basic.model.MonitoringDevice" >
+    <id column="DEVICE_ID" property="deviceId" jdbcType="DECIMAL" />
+    <result column="DEVICE_NAME" property="deviceName" jdbcType="VARCHAR" />
+    <result column="DEVICE_IP" property="deviceIp" jdbcType="VARCHAR" />
+    <result column="DEVICE_PORT" property="devicePort" jdbcType="VARCHAR" />
+    <result column="DEVICE_USER" property="deviceUser" jdbcType="VARCHAR" />
+    <result column="DEVICE_PASSWORD" property="devicePassword" jdbcType="VARCHAR" />
+    <result column="DEVICE_DATE" property="deviceDate" jdbcType="TIMESTAMP" />
+    <result column="MEMBER_CODE" property="memberCode" jdbcType="VARCHAR" />
+    <result column="DEVICE_STATE_REMARK" property="deviceStateRemark" jdbcType="VARCHAR" />
+    <result column="DEVICE_MAKER" property="deviceMaker" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    DEVICE_ID, DEVICE_NAME, DEVICE_IP, DEVICE_PORT, DEVICE_USER, DEVICE_PASSWORD, DEVICE_DATE, 
+    MEMBER_CODE, DEVICE_STATE_REMARK, DEVICE_MAKER
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from  MONITORING_DEVICE
+    where DEVICE_ID = #{deviceId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from  MONITORING_DEVICE
+    where DEVICE_ID = #{deviceId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.xyscm.sys.basic.model.MonitoringDevice" >
+    insert into  MONITORING_DEVICE (DEVICE_ID, DEVICE_NAME, DEVICE_IP, 
+      DEVICE_PORT, DEVICE_USER, DEVICE_PASSWORD, 
+      DEVICE_DATE, MEMBER_CODE, DEVICE_STATE_REMARK, 
+      DEVICE_MAKER)
+    values (#{deviceId,jdbcType=DECIMAL}, #{deviceName,jdbcType=VARCHAR}, #{deviceIp,jdbcType=VARCHAR}, 
+      #{devicePort,jdbcType=VARCHAR}, #{deviceUser,jdbcType=VARCHAR}, #{devicePassword,jdbcType=VARCHAR}, 
+      #{deviceDate,jdbcType=TIMESTAMP}, #{memberCode,jdbcType=VARCHAR}, #{deviceStateRemark,jdbcType=VARCHAR}, 
+      #{deviceMaker,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xyscm.sys.basic.model.MonitoringDevice" >
+    insert into  MONITORING_DEVICE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        DEVICE_ID,
+      </if>
+      <if test="deviceName != null" >
+        DEVICE_NAME,
+      </if>
+      <if test="deviceIp != null" >
+        DEVICE_IP,
+      </if>
+      <if test="devicePort != null" >
+        DEVICE_PORT,
+      </if>
+      <if test="deviceUser != null" >
+        DEVICE_USER,
+      </if>
+      <if test="devicePassword != null" >
+        DEVICE_PASSWORD,
+      </if>
+      <if test="deviceDate != null" >
+        DEVICE_DATE,
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE,
+      </if>
+      <if test="deviceStateRemark != null" >
+        DEVICE_STATE_REMARK,
+      </if>
+      <if test="deviceMaker != null" >
+        DEVICE_MAKER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=DECIMAL},
+      </if>
+      <if test="deviceName != null" >
+        #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceIp != null" >
+        #{deviceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePort != null" >
+        #{devicePort,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceUser != null" >
+        #{deviceUser,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePassword != null" >
+        #{devicePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceDate != null" >
+        #{deviceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberCode != null" >
+        #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStateRemark != null" >
+        #{deviceStateRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMaker != null" >
+        #{deviceMaker,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xyscm.sys.basic.model.MonitoringDevice" >
+    update  MONITORING_DEVICE
+    <set >
+      <if test="deviceName != null" >
+        DEVICE_NAME = #{deviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceIp != null" >
+        DEVICE_IP = #{deviceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePort != null" >
+        DEVICE_PORT = #{devicePort,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceUser != null" >
+        DEVICE_USER = #{deviceUser,jdbcType=VARCHAR},
+      </if>
+      <if test="devicePassword != null" >
+        DEVICE_PASSWORD = #{devicePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceDate != null" >
+        DEVICE_DATE = #{deviceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberCode != null" >
+        MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceStateRemark != null" >
+        DEVICE_STATE_REMARK = #{deviceStateRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceMaker != null" >
+        DEVICE_MAKER = #{deviceMaker,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where DEVICE_ID = #{deviceId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xyscm.sys.basic.model.MonitoringDevice" >
+    update  MONITORING_DEVICE
+    set DEVICE_NAME = #{deviceName,jdbcType=VARCHAR},
+      DEVICE_IP = #{deviceIp,jdbcType=VARCHAR},
+      DEVICE_PORT = #{devicePort,jdbcType=VARCHAR},
+      DEVICE_USER = #{deviceUser,jdbcType=VARCHAR},
+      DEVICE_PASSWORD = #{devicePassword,jdbcType=VARCHAR},
+      DEVICE_DATE = #{deviceDate,jdbcType=TIMESTAMP},
+      MEMBER_CODE = #{memberCode,jdbcType=VARCHAR},
+      DEVICE_STATE_REMARK = #{deviceStateRemark,jdbcType=VARCHAR},
+      DEVICE_MAKER = #{deviceMaker,jdbcType=VARCHAR}
+    where DEVICE_ID = #{deviceId,jdbcType=DECIMAL}
+  </update>
+</mapper>
